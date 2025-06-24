@@ -1,4 +1,10 @@
-part of '../../t.dart';
+
+import 'dart:typed_data';
+
+import 'package:t/src/core.dart';
+import 'package:t/src/g/base.dart';
+import 'package:t/src/g/schema.dart';
+import 'package:t/src/result.dart';
 
 /// Base class for the client.
 abstract class Client {
@@ -114,7 +120,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke After Msgs.
@@ -134,7 +140,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Init Connection.
@@ -173,7 +179,7 @@ abstract class Client {
     );
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Layer.
@@ -193,7 +199,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke Without Updates.
@@ -211,7 +217,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Messages Range.
@@ -231,7 +237,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Takeout.
@@ -251,7 +257,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Business Connection.
@@ -271,7 +277,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Google Play Integrity.
@@ -293,7 +299,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 
   /// Invoke With Apns Secret.
@@ -315,7 +321,7 @@ abstract class Client {
     final response = await invoke(request);
 
     // Return the result.
-    return response._to<T>();
+    return response.to<T>();
   }
 }
 
@@ -346,7 +352,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Sign Up.
@@ -372,7 +378,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Sign In.
@@ -396,7 +402,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Log Out.
@@ -410,7 +416,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthLoggedOutBase>();
+    return response.to<AuthLoggedOutBase>();
   }
 
   /// Reset Authorizations.
@@ -424,7 +430,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Export Authorization.
@@ -442,7 +448,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthExportedAuthorizationBase>();
+    return response.to<AuthExportedAuthorizationBase>();
   }
 
   /// Import Authorization.
@@ -462,7 +468,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Bind Temp Auth Key.
@@ -486,7 +492,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Import Bot Authorization.
@@ -510,7 +516,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Check Password.
@@ -528,7 +534,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Request Password Recovery.
@@ -542,7 +548,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthPasswordRecoveryBase>();
+    return response.to<AuthPasswordRecoveryBase>();
   }
 
   /// Recover Password.
@@ -562,7 +568,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Resend Code.
@@ -584,7 +590,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Cancel Code.
@@ -604,7 +610,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Drop Temp Auth Keys.
@@ -622,7 +628,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Export Login Token.
@@ -644,7 +650,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthLoginTokenBase>();
+    return response.to<AuthLoginTokenBase>();
   }
 
   /// Import Login Token.
@@ -662,7 +668,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthLoginTokenBase>();
+    return response.to<AuthLoginTokenBase>();
   }
 
   /// Accept Login Token.
@@ -680,7 +686,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthorizationBase>();
+    return response.to<AuthorizationBase>();
   }
 
   /// Check Recovery Password.
@@ -698,7 +704,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Import Web Token Authorization.
@@ -720,7 +726,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthAuthorizationBase>();
+    return response.to<AuthAuthorizationBase>();
   }
 
   /// Request Firebase Sms.
@@ -746,7 +752,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Login Email.
@@ -766,7 +772,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Report Missing Code.
@@ -788,7 +794,7 @@ class ClientAuth {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 }
 
@@ -823,7 +829,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Unregister Device.
@@ -845,7 +851,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Notify Settings.
@@ -865,7 +871,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Notify Settings.
@@ -883,7 +889,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PeerNotifySettingsBase>();
+    return response.to<PeerNotifySettingsBase>();
   }
 
   /// Reset Notify Settings.
@@ -897,7 +903,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Profile.
@@ -919,7 +925,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UserBase>();
+    return response.to<UserBase>();
   }
 
   /// Update Status.
@@ -937,7 +943,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Wall Papers.
@@ -955,7 +961,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountWallPapersBase>();
+    return response.to<AccountWallPapersBase>();
   }
 
   /// Report Peer.
@@ -977,7 +983,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Check Username.
@@ -995,7 +1001,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Username.
@@ -1013,7 +1019,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UserBase>();
+    return response.to<UserBase>();
   }
 
   /// Get Privacy.
@@ -1031,7 +1037,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountPrivacyRulesBase>();
+    return response.to<AccountPrivacyRulesBase>();
   }
 
   /// Set Privacy.
@@ -1051,7 +1057,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountPrivacyRulesBase>();
+    return response.to<AccountPrivacyRulesBase>();
   }
 
   /// Delete Account.
@@ -1071,7 +1077,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Account T T L.
@@ -1085,7 +1091,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountDaysTTLBase>();
+    return response.to<AccountDaysTTLBase>();
   }
 
   /// Set Account T T L.
@@ -1103,7 +1109,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Change Phone Code.
@@ -1123,7 +1129,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Change Phone.
@@ -1145,7 +1151,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UserBase>();
+    return response.to<UserBase>();
   }
 
   /// Update Device Locked.
@@ -1163,7 +1169,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Authorizations.
@@ -1177,7 +1183,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountAuthorizationsBase>();
+    return response.to<AccountAuthorizationsBase>();
   }
 
   /// Reset Authorization.
@@ -1195,7 +1201,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Password.
@@ -1209,7 +1215,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountPasswordBase>();
+    return response.to<AccountPasswordBase>();
   }
 
   /// Get Password Settings.
@@ -1227,7 +1233,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountPasswordSettingsBase>();
+    return response.to<AccountPasswordSettingsBase>();
   }
 
   /// Update Password Settings.
@@ -1247,7 +1253,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Confirm Phone Code.
@@ -1267,7 +1273,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Confirm Phone.
@@ -1287,7 +1293,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Tmp Password.
@@ -1307,7 +1313,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountTmpPasswordBase>();
+    return response.to<AccountTmpPasswordBase>();
   }
 
   /// Get Web Authorizations.
@@ -1321,7 +1327,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountWebAuthorizationsBase>();
+    return response.to<AccountWebAuthorizationsBase>();
   }
 
   /// Reset Web Authorization.
@@ -1339,7 +1345,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Web Authorizations.
@@ -1353,7 +1359,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get All Secure Values.
@@ -1367,7 +1373,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<SecureValueBase>();
+    return response.toVector<SecureValueBase>();
   }
 
   /// Get Secure Value.
@@ -1385,7 +1391,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<SecureValueBase>();
+    return response.toVector<SecureValueBase>();
   }
 
   /// Save Secure Value.
@@ -1405,7 +1411,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<SecureValueBase>();
+    return response.to<SecureValueBase>();
   }
 
   /// Delete Secure Value.
@@ -1423,7 +1429,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Authorization Form.
@@ -1445,7 +1451,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountAuthorizationFormBase>();
+    return response.to<AccountAuthorizationFormBase>();
   }
 
   /// Accept Authorization.
@@ -1471,7 +1477,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Verify Phone Code.
@@ -1491,7 +1497,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AuthSentCodeBase>();
+    return response.to<AuthSentCodeBase>();
   }
 
   /// Verify Phone.
@@ -1513,7 +1519,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Verify Email Code.
@@ -1533,7 +1539,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountSentEmailCodeBase>();
+    return response.to<AccountSentEmailCodeBase>();
   }
 
   /// Verify Email.
@@ -1553,7 +1559,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountEmailVerifiedBase>();
+    return response.to<AccountEmailVerifiedBase>();
   }
 
   /// Init Takeout Session.
@@ -1583,7 +1589,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountTakeoutBase>();
+    return response.to<AccountTakeoutBase>();
   }
 
   /// Finish Takeout Session.
@@ -1601,7 +1607,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Confirm Password Email.
@@ -1619,7 +1625,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Resend Password Email.
@@ -1633,7 +1639,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Cancel Password Email.
@@ -1647,7 +1653,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Contact Sign Up Notification.
@@ -1661,7 +1667,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Contact Sign Up Notification.
@@ -1679,7 +1685,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Notify Exceptions.
@@ -1701,7 +1707,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Wall Paper.
@@ -1719,7 +1725,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WallPaperBase>();
+    return response.to<WallPaperBase>();
   }
 
   /// Upload Wall Paper.
@@ -1743,7 +1749,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WallPaperBase>();
+    return response.to<WallPaperBase>();
   }
 
   /// Save Wall Paper.
@@ -1765,7 +1771,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Install Wall Paper.
@@ -1785,7 +1791,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Wall Papers.
@@ -1799,7 +1805,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Auto Download Settings.
@@ -1814,7 +1820,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountAutoDownloadSettingsBase>();
+    return response.to<AccountAutoDownloadSettingsBase>();
   }
 
   /// Save Auto Download Settings.
@@ -1836,7 +1842,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Upload Theme.
@@ -1860,7 +1866,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DocumentBase>();
+    return response.to<DocumentBase>();
   }
 
   /// Create Theme.
@@ -1884,7 +1890,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ThemeBase>();
+    return response.to<ThemeBase>();
   }
 
   /// Update Theme.
@@ -1912,7 +1918,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ThemeBase>();
+    return response.to<ThemeBase>();
   }
 
   /// Save Theme.
@@ -1932,7 +1938,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Install Theme.
@@ -1956,7 +1962,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Theme.
@@ -1976,7 +1982,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ThemeBase>();
+    return response.to<ThemeBase>();
   }
 
   /// Get Themes.
@@ -1996,7 +2002,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountThemesBase>();
+    return response.to<AccountThemesBase>();
   }
 
   /// Set Content Settings.
@@ -2014,7 +2020,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Content Settings.
@@ -2028,7 +2034,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountContentSettingsBase>();
+    return response.to<AccountContentSettingsBase>();
   }
 
   /// Get Multi Wall Papers.
@@ -2046,7 +2052,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<WallPaperBase>();
+    return response.toVector<WallPaperBase>();
   }
 
   /// Get Global Privacy Settings.
@@ -2060,7 +2066,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<GlobalPrivacySettingsBase>();
+    return response.to<GlobalPrivacySettingsBase>();
   }
 
   /// Set Global Privacy Settings.
@@ -2078,7 +2084,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<GlobalPrivacySettingsBase>();
+    return response.to<GlobalPrivacySettingsBase>();
   }
 
   /// Report Profile Photo.
@@ -2102,7 +2108,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Password.
@@ -2116,7 +2122,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountResetPasswordResultBase>();
+    return response.to<AccountResetPasswordResultBase>();
   }
 
   /// Decline Password Reset.
@@ -2130,7 +2136,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Chat Themes.
@@ -2148,7 +2154,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountThemesBase>();
+    return response.to<AccountThemesBase>();
   }
 
   /// Set Authorization T T L.
@@ -2166,7 +2172,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Change Authorization Settings.
@@ -2190,7 +2196,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Saved Ringtones.
@@ -2208,7 +2214,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountSavedRingtonesBase>();
+    return response.to<AccountSavedRingtonesBase>();
   }
 
   /// Save Ringtone.
@@ -2228,7 +2234,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountSavedRingtoneBase>();
+    return response.to<AccountSavedRingtoneBase>();
   }
 
   /// Upload Ringtone.
@@ -2250,7 +2256,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DocumentBase>();
+    return response.to<DocumentBase>();
   }
 
   /// Update Emoji Status.
@@ -2268,7 +2274,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Default Emoji Statuses.
@@ -2286,7 +2292,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountEmojiStatusesBase>();
+    return response.to<AccountEmojiStatusesBase>();
   }
 
   /// Get Recent Emoji Statuses.
@@ -2304,7 +2310,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountEmojiStatusesBase>();
+    return response.to<AccountEmojiStatusesBase>();
   }
 
   /// Clear Recent Emoji Statuses.
@@ -2318,7 +2324,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reorder Usernames.
@@ -2336,7 +2342,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Username.
@@ -2356,7 +2362,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Default Profile Photo Emojis.
@@ -2374,7 +2380,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiListBase>();
+    return response.to<EmojiListBase>();
   }
 
   /// Get Default Group Photo Emojis.
@@ -2392,7 +2398,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiListBase>();
+    return response.to<EmojiListBase>();
   }
 
   /// Get Auto Save Settings.
@@ -2406,7 +2412,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountAutoSaveSettingsBase>();
+    return response.to<AccountAutoSaveSettingsBase>();
   }
 
   /// Save Auto Save Settings.
@@ -2432,7 +2438,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete Auto Save Exceptions.
@@ -2446,7 +2452,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Invalidate Sign In Codes.
@@ -2464,7 +2470,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Color.
@@ -2486,7 +2492,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Default Background Emojis.
@@ -2504,7 +2510,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiListBase>();
+    return response.to<EmojiListBase>();
   }
 
   /// Get Channel Default Emoji Statuses.
@@ -2522,7 +2528,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountEmojiStatusesBase>();
+    return response.to<AccountEmojiStatusesBase>();
   }
 
   /// Get Channel Restricted Status Emojis.
@@ -2540,7 +2546,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiListBase>();
+    return response.to<EmojiListBase>();
   }
 
   /// Update Business Work Hours.
@@ -2558,7 +2564,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Business Location.
@@ -2578,7 +2584,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Business Greeting Message.
@@ -2596,7 +2602,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Business Away Message.
@@ -2614,7 +2620,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Connected Bot.
@@ -2638,7 +2644,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Connected Bots.
@@ -2652,7 +2658,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountConnectedBotsBase>();
+    return response.to<AccountConnectedBotsBase>();
   }
 
   /// Get Bot Business Connection.
@@ -2670,7 +2676,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Update Business Intro.
@@ -2688,7 +2694,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Connected Bot Paused.
@@ -2708,7 +2714,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Disable Peer Connected Bot.
@@ -2726,7 +2732,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Birthday.
@@ -2744,7 +2750,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Create Business Chat Link.
@@ -2762,7 +2768,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BusinessChatLinkBase>();
+    return response.to<BusinessChatLinkBase>();
   }
 
   /// Edit Business Chat Link.
@@ -2782,7 +2788,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BusinessChatLinkBase>();
+    return response.to<BusinessChatLinkBase>();
   }
 
   /// Delete Business Chat Link.
@@ -2800,7 +2806,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Business Chat Links.
@@ -2814,7 +2820,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountBusinessChatLinksBase>();
+    return response.to<AccountBusinessChatLinksBase>();
   }
 
   /// Resolve Business Chat Link.
@@ -2832,7 +2838,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AccountResolvedBusinessChatLinksBase>();
+    return response.to<AccountResolvedBusinessChatLinksBase>();
   }
 
   /// Update Personal Channel.
@@ -2850,7 +2856,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Sponsored Messages.
@@ -2868,7 +2874,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Reactions Notify Settings.
@@ -2883,7 +2889,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ReactionsNotifySettingsBase>();
+    return response.to<ReactionsNotifySettingsBase>();
   }
 
   /// Set Reactions Notify Settings.
@@ -2901,7 +2907,7 @@ class ClientAccount {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ReactionsNotifySettingsBase>();
+    return response.to<ReactionsNotifySettingsBase>();
   }
 }
 
@@ -2926,7 +2932,7 @@ class ClientUsers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<UserBase>();
+    return response.toVector<UserBase>();
   }
 
   /// Get Full User.
@@ -2944,7 +2950,7 @@ class ClientUsers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UsersUserFullBase>();
+    return response.to<UsersUserFullBase>();
   }
 
   /// Set Secure Value Errors.
@@ -2964,7 +2970,7 @@ class ClientUsers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Is Premium Required To Contact.
@@ -2982,7 +2988,7 @@ class ClientUsers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<bool>();
+    return response.toVector<bool>();
   }
 }
 
@@ -3007,7 +3013,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Get Statuses.
@@ -3021,7 +3027,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<ContactStatusBase>();
+    return response.toVector<ContactStatusBase>();
   }
 
   /// Get Contacts.
@@ -3039,7 +3045,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsContactsBase>();
+    return response.to<ContactsContactsBase>();
   }
 
   /// Import Contacts.
@@ -3057,7 +3063,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsImportedContactsBase>();
+    return response.to<ContactsImportedContactsBase>();
   }
 
   /// Delete Contacts.
@@ -3075,7 +3081,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete By Phones.
@@ -3093,7 +3099,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Block.
@@ -3113,7 +3119,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Unblock.
@@ -3133,7 +3139,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Blocked.
@@ -3155,7 +3161,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsBlockedBase>();
+    return response.to<ContactsBlockedBase>();
   }
 
   /// Search.
@@ -3175,7 +3181,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsFoundBase>();
+    return response.to<ContactsFoundBase>();
   }
 
   /// Resolve Username.
@@ -3195,7 +3201,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsResolvedPeerBase>();
+    return response.to<ContactsResolvedPeerBase>();
   }
 
   /// Get Top Peers.
@@ -3235,7 +3241,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsTopPeersBase>();
+    return response.to<ContactsTopPeersBase>();
   }
 
   /// Reset Top Peer Rating.
@@ -3255,7 +3261,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Saved.
@@ -3269,7 +3275,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Saved.
@@ -3283,7 +3289,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<SavedContactBase>();
+    return response.toVector<SavedContactBase>();
   }
 
   /// Toggle Top Peers.
@@ -3301,7 +3307,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Add Contact.
@@ -3327,7 +3333,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Accept Contact.
@@ -3345,7 +3351,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Located.
@@ -3367,7 +3373,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Block From Replies.
@@ -3391,7 +3397,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Resolve Phone.
@@ -3409,7 +3415,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsResolvedPeerBase>();
+    return response.to<ContactsResolvedPeerBase>();
   }
 
   /// Export Contact Token.
@@ -3423,7 +3429,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ExportedContactTokenBase>();
+    return response.to<ExportedContactTokenBase>();
   }
 
   /// Import Contact Token.
@@ -3441,7 +3447,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UserBase>();
+    return response.to<UserBase>();
   }
 
   /// Edit Close Friends.
@@ -3459,7 +3465,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Blocked.
@@ -3481,7 +3487,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Birthdays.
@@ -3495,7 +3501,7 @@ class ClientContacts {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ContactsContactBirthdaysBase>();
+    return response.to<ContactsContactBirthdaysBase>();
   }
 }
 
@@ -3520,7 +3526,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Get Dialogs.
@@ -3550,7 +3556,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesDialogsBase>();
+    return response.to<MessagesDialogsBase>();
   }
 
   /// Get History.
@@ -3582,7 +3588,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Search.
@@ -3628,7 +3634,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Read History.
@@ -3648,7 +3654,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedMessagesBase>();
+    return response.to<MessagesAffectedMessagesBase>();
   }
 
   /// Delete History.
@@ -3676,7 +3682,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Delete Messages.
@@ -3696,7 +3702,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedMessagesBase>();
+    return response.to<MessagesAffectedMessagesBase>();
   }
 
   /// Received Messages.
@@ -3714,7 +3720,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<ReceivedNotifyMessageBase>();
+    return response.toVector<ReceivedNotifyMessageBase>();
   }
 
   /// Set Typing.
@@ -3736,7 +3742,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Message.
@@ -3788,7 +3794,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Send Media.
@@ -3840,7 +3846,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Forward Messages.
@@ -3886,7 +3892,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Report Spam.
@@ -3904,7 +3910,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Peer Settings.
@@ -3922,7 +3928,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesPeerSettingsBase>();
+    return response.to<MessagesPeerSettingsBase>();
   }
 
   /// Report.
@@ -3946,7 +3952,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ReportResultBase>();
+    return response.to<ReportResultBase>();
   }
 
   /// Get Chats.
@@ -3964,7 +3970,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Get Full Chat.
@@ -3982,7 +3988,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatFullBase>();
+    return response.to<MessagesChatFullBase>();
   }
 
   /// Edit Chat Title.
@@ -4002,7 +4008,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Chat Photo.
@@ -4022,7 +4028,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Add Chat User.
@@ -4044,7 +4050,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesInvitedUsersBase>();
+    return response.to<MessagesInvitedUsersBase>();
   }
 
   /// Delete Chat User.
@@ -4066,7 +4072,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Create Chat.
@@ -4088,7 +4094,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesInvitedUsersBase>();
+    return response.to<MessagesInvitedUsersBase>();
   }
 
   /// Get Dh Config.
@@ -4108,7 +4114,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesDhConfigBase>();
+    return response.to<MessagesDhConfigBase>();
   }
 
   /// Request Encryption.
@@ -4130,7 +4136,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EncryptedChatBase>();
+    return response.to<EncryptedChatBase>();
   }
 
   /// Accept Encryption.
@@ -4152,7 +4158,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EncryptedChatBase>();
+    return response.to<EncryptedChatBase>();
   }
 
   /// Discard Encryption.
@@ -4172,7 +4178,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Encrypted Typing.
@@ -4192,7 +4198,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Read Encrypted History.
@@ -4212,7 +4218,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Encrypted.
@@ -4236,7 +4242,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSentEncryptedMessageBase>();
+    return response.to<MessagesSentEncryptedMessageBase>();
   }
 
   /// Send Encrypted File.
@@ -4262,7 +4268,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSentEncryptedMessageBase>();
+    return response.to<MessagesSentEncryptedMessageBase>();
   }
 
   /// Send Encrypted Service.
@@ -4284,7 +4290,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSentEncryptedMessageBase>();
+    return response.to<MessagesSentEncryptedMessageBase>();
   }
 
   /// Received Queue.
@@ -4302,7 +4308,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Report Encrypted Spam.
@@ -4320,7 +4326,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Read Message Contents.
@@ -4338,7 +4344,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedMessagesBase>();
+    return response.to<MessagesAffectedMessagesBase>();
   }
 
   /// Get Stickers.
@@ -4358,7 +4364,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickersBase>();
+    return response.to<MessagesStickersBase>();
   }
 
   /// Get All Stickers.
@@ -4376,7 +4382,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAllStickersBase>();
+    return response.to<MessagesAllStickersBase>();
   }
 
   /// Get Web Page Preview.
@@ -4396,7 +4402,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessageMediaBase>();
+    return response.to<MessageMediaBase>();
   }
 
   /// Export Chat Invite.
@@ -4426,7 +4432,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ExportedChatInviteBase>();
+    return response.to<ExportedChatInviteBase>();
   }
 
   /// Check Chat Invite.
@@ -4444,7 +4450,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatInviteBase>();
+    return response.to<ChatInviteBase>();
   }
 
   /// Import Chat Invite.
@@ -4462,7 +4468,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Sticker Set.
@@ -4482,7 +4488,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Install Sticker Set.
@@ -4502,7 +4508,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetInstallResultBase>();
+    return response.to<MessagesStickerSetInstallResultBase>();
   }
 
   /// Uninstall Sticker Set.
@@ -4520,7 +4526,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Start Bot.
@@ -4544,7 +4550,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Messages Views.
@@ -4566,7 +4572,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessageViewsBase>();
+    return response.to<MessagesMessageViewsBase>();
   }
 
   /// Edit Chat Admin.
@@ -4588,7 +4594,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Migrate Chat.
@@ -4606,7 +4612,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Search Global.
@@ -4646,7 +4652,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Reorder Sticker Sets.
@@ -4668,7 +4674,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Document By Hash.
@@ -4690,7 +4696,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DocumentBase>();
+    return response.to<DocumentBase>();
   }
 
   /// Get Saved Gifs.
@@ -4708,7 +4714,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSavedGifsBase>();
+    return response.to<MessagesSavedGifsBase>();
   }
 
   /// Save Gif.
@@ -4728,7 +4734,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Inline Bot Results.
@@ -4754,7 +4760,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesBotResultsBase>();
+    return response.to<MessagesBotResultsBase>();
   }
 
   /// Set Inline Bot Results.
@@ -4786,7 +4792,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Inline Bot Result.
@@ -4826,7 +4832,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Message Edit Data.
@@ -4846,7 +4852,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessageEditDataBase>();
+    return response.to<MessagesMessageEditDataBase>();
   }
 
   /// Edit Message.
@@ -4882,7 +4888,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Inline Bot Message.
@@ -4912,7 +4918,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bot Callback Answer.
@@ -4938,7 +4944,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesBotCallbackAnswerBase>();
+    return response.to<MessagesBotCallbackAnswerBase>();
   }
 
   /// Set Bot Callback Answer.
@@ -4964,7 +4970,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Peer Dialogs.
@@ -4982,7 +4988,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesPeerDialogsBase>();
+    return response.to<MessagesPeerDialogsBase>();
   }
 
   /// Save Draft.
@@ -5014,7 +5020,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get All Drafts.
@@ -5028,7 +5034,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Featured Stickers.
@@ -5046,7 +5052,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFeaturedStickersBase>();
+    return response.to<MessagesFeaturedStickersBase>();
   }
 
   /// Read Featured Stickers.
@@ -5064,7 +5070,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Recent Stickers.
@@ -5084,7 +5090,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesRecentStickersBase>();
+    return response.to<MessagesRecentStickersBase>();
   }
 
   /// Save Recent Sticker.
@@ -5106,7 +5112,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Clear Recent Stickers.
@@ -5124,7 +5130,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Archived Stickers.
@@ -5148,7 +5154,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesArchivedStickersBase>();
+    return response.to<MessagesArchivedStickersBase>();
   }
 
   /// Get Mask Stickers.
@@ -5166,7 +5172,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAllStickersBase>();
+    return response.to<MessagesAllStickersBase>();
   }
 
   /// Get Attached Stickers.
@@ -5184,7 +5190,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<StickerSetCoveredBase>();
+    return response.toVector<StickerSetCoveredBase>();
   }
 
   /// Set Game Score.
@@ -5212,7 +5218,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Set Inline Game Score.
@@ -5238,7 +5244,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Game High Scores.
@@ -5260,7 +5266,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesHighScoresBase>();
+    return response.to<MessagesHighScoresBase>();
   }
 
   /// Get Inline Game High Scores.
@@ -5280,7 +5286,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesHighScoresBase>();
+    return response.to<MessagesHighScoresBase>();
   }
 
   /// Get Common Chats.
@@ -5302,7 +5308,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Get Web Page.
@@ -5322,7 +5328,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesWebPageBase>();
+    return response.to<MessagesWebPageBase>();
   }
 
   /// Toggle Dialog Pin.
@@ -5342,7 +5348,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reorder Pinned Dialogs.
@@ -5364,7 +5370,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Pinned Dialogs.
@@ -5382,7 +5388,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesPeerDialogsBase>();
+    return response.to<MessagesPeerDialogsBase>();
   }
 
   /// Set Bot Shipping Results.
@@ -5404,7 +5410,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Bot Precheckout Results.
@@ -5426,7 +5432,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Upload Media.
@@ -5448,7 +5454,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessageMediaBase>();
+    return response.to<MessageMediaBase>();
   }
 
   /// Send Screenshot Notification.
@@ -5470,7 +5476,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Faved Stickers.
@@ -5488,7 +5494,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFavedStickersBase>();
+    return response.to<MessagesFavedStickersBase>();
   }
 
   /// Fave Sticker.
@@ -5508,7 +5514,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Unread Mentions.
@@ -5538,7 +5544,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Read Mentions.
@@ -5558,7 +5564,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Get Recent Locations.
@@ -5580,7 +5586,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Send Multi Media.
@@ -5624,7 +5630,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Upload Encrypted File.
@@ -5644,7 +5650,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EncryptedFileBase>();
+    return response.to<EncryptedFileBase>();
   }
 
   /// Search Sticker Sets.
@@ -5666,7 +5672,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFoundStickerSetsBase>();
+    return response.to<MessagesFoundStickerSetsBase>();
   }
 
   /// Get Split Ranges.
@@ -5680,7 +5686,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<MessageRangeBase>();
+    return response.toVector<MessageRangeBase>();
   }
 
   /// Mark Dialog Unread.
@@ -5700,7 +5706,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Dialog Unread Marks.
@@ -5714,7 +5720,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<DialogPeerBase>();
+    return response.toVector<DialogPeerBase>();
   }
 
   /// Clear All Drafts.
@@ -5728,7 +5734,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Pinned Message.
@@ -5754,7 +5760,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Send Vote.
@@ -5776,7 +5782,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Poll Results.
@@ -5796,7 +5802,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Onlines.
@@ -5814,7 +5820,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatOnlinesBase>();
+    return response.to<ChatOnlinesBase>();
   }
 
   /// Edit Chat About.
@@ -5834,7 +5840,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Edit Chat Default Banned Rights.
@@ -5854,7 +5860,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Emoji Keywords.
@@ -5872,7 +5878,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiKeywordsDifferenceBase>();
+    return response.to<EmojiKeywordsDifferenceBase>();
   }
 
   /// Get Emoji Keywords Difference.
@@ -5892,7 +5898,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiKeywordsDifferenceBase>();
+    return response.to<EmojiKeywordsDifferenceBase>();
   }
 
   /// Get Emoji Keywords Languages.
@@ -5910,7 +5916,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<EmojiLanguageBase>();
+    return response.toVector<EmojiLanguageBase>();
   }
 
   /// Get Emoji U R L.
@@ -5928,7 +5934,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiURLBase>();
+    return response.to<EmojiURLBase>();
   }
 
   /// Get Search Counters.
@@ -5952,7 +5958,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<MessagesSearchCounterBase>();
+    return response.toVector<MessagesSearchCounterBase>();
   }
 
   /// Request Url Auth.
@@ -5976,7 +5982,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UrlAuthResultBase>();
+    return response.to<UrlAuthResultBase>();
   }
 
   /// Accept Url Auth.
@@ -6002,7 +6008,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UrlAuthResultBase>();
+    return response.to<UrlAuthResultBase>();
   }
 
   /// Hide Peer Settings Bar.
@@ -6020,7 +6026,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Scheduled History.
@@ -6040,7 +6046,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Get Scheduled Messages.
@@ -6060,7 +6066,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Send Scheduled Messages.
@@ -6080,7 +6086,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete Scheduled Messages.
@@ -6100,7 +6106,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Poll Votes.
@@ -6126,7 +6132,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesVotesListBase>();
+    return response.to<MessagesVotesListBase>();
   }
 
   /// Toggle Sticker Sets.
@@ -6150,7 +6156,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Dialog Filters.
@@ -6164,7 +6170,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesDialogFiltersBase>();
+    return response.to<MessagesDialogFiltersBase>();
   }
 
   /// Get Suggested Dialog Filters.
@@ -6179,7 +6185,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<DialogFilterSuggestedBase>();
+    return response.toVector<DialogFilterSuggestedBase>();
   }
 
   /// Update Dialog Filter.
@@ -6199,7 +6205,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Dialog Filters Order.
@@ -6217,7 +6223,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Old Featured Stickers.
@@ -6239,7 +6245,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFeaturedStickersBase>();
+    return response.to<MessagesFeaturedStickersBase>();
   }
 
   /// Get Replies.
@@ -6273,7 +6279,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Get Discussion Message.
@@ -6293,7 +6299,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesDiscussionMessageBase>();
+    return response.to<MessagesDiscussionMessageBase>();
   }
 
   /// Read Discussion.
@@ -6315,7 +6321,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Unpin All Messages.
@@ -6335,7 +6341,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Delete Chat.
@@ -6353,7 +6359,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete Phone Call History.
@@ -6371,7 +6377,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedFoundMessagesBase>();
+    return response.to<MessagesAffectedFoundMessagesBase>();
   }
 
   /// Check History Import.
@@ -6389,7 +6395,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesHistoryImportParsedBase>();
+    return response.to<MessagesHistoryImportParsedBase>();
   }
 
   /// Init History Import.
@@ -6411,7 +6417,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesHistoryImportBase>();
+    return response.to<MessagesHistoryImportBase>();
   }
 
   /// Upload Imported Media.
@@ -6435,7 +6441,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessageMediaBase>();
+    return response.to<MessageMediaBase>();
   }
 
   /// Start History Import.
@@ -6455,7 +6461,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Exported Chat Invites.
@@ -6483,7 +6489,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesExportedChatInvitesBase>();
+    return response.to<MessagesExportedChatInvitesBase>();
   }
 
   /// Get Exported Chat Invite.
@@ -6503,7 +6509,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesExportedChatInviteBase>();
+    return response.to<MessagesExportedChatInviteBase>();
   }
 
   /// Edit Exported Chat Invite.
@@ -6533,7 +6539,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesExportedChatInviteBase>();
+    return response.to<MessagesExportedChatInviteBase>();
   }
 
   /// Delete Revoked Exported Chat Invites.
@@ -6553,7 +6559,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete Exported Chat Invite.
@@ -6573,7 +6579,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Admins With Invites.
@@ -6591,7 +6597,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatAdminsWithInvitesBase>();
+    return response.to<MessagesChatAdminsWithInvitesBase>();
   }
 
   /// Get Chat Invite Importers.
@@ -6623,7 +6629,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatInviteImportersBase>();
+    return response.to<MessagesChatInviteImportersBase>();
   }
 
   /// Set History T T L.
@@ -6643,7 +6649,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Check History Import Peer.
@@ -6661,7 +6667,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesCheckedHistoryImportPeerBase>();
+    return response.to<MessagesCheckedHistoryImportPeerBase>();
   }
 
   /// Set Chat Theme.
@@ -6681,7 +6687,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Message Read Participants.
@@ -6701,7 +6707,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<ReadParticipantDateBase>();
+    return response.toVector<ReadParticipantDateBase>();
   }
 
   /// Get Search Results Calendar.
@@ -6727,7 +6733,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSearchResultsCalendarBase>();
+    return response.to<MessagesSearchResultsCalendarBase>();
   }
 
   /// Get Search Results Positions.
@@ -6753,7 +6759,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSearchResultsPositionsBase>();
+    return response.to<MessagesSearchResultsPositionsBase>();
   }
 
   /// Hide Chat Join Request.
@@ -6775,7 +6781,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Hide All Chat Join Requests.
@@ -6797,7 +6803,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle No Forwards.
@@ -6817,7 +6823,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Save Default Send As.
@@ -6837,7 +6843,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Reaction.
@@ -6863,7 +6869,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Messages Reactions.
@@ -6883,7 +6889,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Message Reactions List.
@@ -6909,7 +6915,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessageReactionsListBase>();
+    return response.to<MessagesMessageReactionsListBase>();
   }
 
   /// Set Chat Available Reactions.
@@ -6933,7 +6939,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Available Reactions.
@@ -6951,7 +6957,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAvailableReactionsBase>();
+    return response.to<MessagesAvailableReactionsBase>();
   }
 
   /// Set Default Reaction.
@@ -6969,7 +6975,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Translate Text.
@@ -6993,7 +6999,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesTranslatedTextBase>();
+    return response.to<MessagesTranslatedTextBase>();
   }
 
   /// Get Unread Reactions.
@@ -7023,7 +7029,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Read Reactions.
@@ -7043,7 +7049,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Search Sent Media.
@@ -7065,7 +7071,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Get Attach Menu Bots.
@@ -7083,7 +7089,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AttachMenuBotsBase>();
+    return response.to<AttachMenuBotsBase>();
   }
 
   /// Get Attach Menu Bot.
@@ -7101,7 +7107,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<AttachMenuBotsBotBase>();
+    return response.to<AttachMenuBotsBotBase>();
   }
 
   /// Toggle Bot In Attach Menu.
@@ -7123,7 +7129,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Request Web View.
@@ -7163,7 +7169,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WebViewResultBase>();
+    return response.to<WebViewResultBase>();
   }
 
   /// Prolong Web View.
@@ -7191,7 +7197,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Request Simple Web View.
@@ -7225,7 +7231,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WebViewResultBase>();
+    return response.to<WebViewResultBase>();
   }
 
   /// Send Web View Result Message.
@@ -7245,7 +7251,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WebViewMessageSentBase>();
+    return response.to<WebViewMessageSentBase>();
   }
 
   /// Send Web View Data.
@@ -7269,7 +7275,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Transcribe Audio.
@@ -7289,7 +7295,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesTranscribedAudioBase>();
+    return response.to<MessagesTranscribedAudioBase>();
   }
 
   /// Rate Transcribed Audio.
@@ -7313,7 +7319,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Custom Emoji Documents.
@@ -7331,7 +7337,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<DocumentBase>();
+    return response.toVector<DocumentBase>();
   }
 
   /// Get Emoji Stickers.
@@ -7349,7 +7355,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAllStickersBase>();
+    return response.to<MessagesAllStickersBase>();
   }
 
   /// Get Featured Emoji Stickers.
@@ -7367,7 +7373,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFeaturedStickersBase>();
+    return response.to<MessagesFeaturedStickersBase>();
   }
 
   /// Report Reaction.
@@ -7389,7 +7395,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Top Reactions.
@@ -7409,7 +7415,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesReactionsBase>();
+    return response.to<MessagesReactionsBase>();
   }
 
   /// Get Recent Reactions.
@@ -7429,7 +7435,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesReactionsBase>();
+    return response.to<MessagesReactionsBase>();
   }
 
   /// Clear Recent Reactions.
@@ -7443,7 +7449,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Extended Media.
@@ -7463,7 +7469,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Set Default History T T L.
@@ -7481,7 +7487,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Default History T T L.
@@ -7495,7 +7501,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DefaultHistoryTTLBase>();
+    return response.to<DefaultHistoryTTLBase>();
   }
 
   /// Send Bot Requested Peer.
@@ -7519,7 +7525,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Emoji Groups.
@@ -7537,7 +7543,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesEmojiGroupsBase>();
+    return response.to<MessagesEmojiGroupsBase>();
   }
 
   /// Get Emoji Status Groups.
@@ -7555,7 +7561,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesEmojiGroupsBase>();
+    return response.to<MessagesEmojiGroupsBase>();
   }
 
   /// Get Emoji Profile Photo Groups.
@@ -7573,7 +7579,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesEmojiGroupsBase>();
+    return response.to<MessagesEmojiGroupsBase>();
   }
 
   /// Search Custom Emoji.
@@ -7593,7 +7599,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<EmojiListBase>();
+    return response.to<EmojiListBase>();
   }
 
   /// Toggle Peer Translations.
@@ -7613,7 +7619,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bot App.
@@ -7633,7 +7639,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesBotAppBase>();
+    return response.to<MessagesBotAppBase>();
   }
 
   /// Request App Web View.
@@ -7665,7 +7671,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WebViewResultBase>();
+    return response.to<WebViewResultBase>();
   }
 
   /// Set Chat Wall Paper.
@@ -7693,7 +7699,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Search Emoji Sticker Sets.
@@ -7715,7 +7721,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFoundStickerSetsBase>();
+    return response.to<MessagesFoundStickerSetsBase>();
   }
 
   /// Get Saved Dialogs.
@@ -7743,7 +7749,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSavedDialogsBase>();
+    return response.to<MessagesSavedDialogsBase>();
   }
 
   /// Get Saved History.
@@ -7775,7 +7781,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Delete Saved History.
@@ -7799,7 +7805,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Get Pinned Saved Dialogs.
@@ -7813,7 +7819,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSavedDialogsBase>();
+    return response.to<MessagesSavedDialogsBase>();
   }
 
   /// Toggle Saved Dialog Pin.
@@ -7833,7 +7839,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reorder Pinned Saved Dialogs.
@@ -7853,7 +7859,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Saved Reaction Tags.
@@ -7873,7 +7879,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSavedReactionTagsBase>();
+    return response.to<MessagesSavedReactionTagsBase>();
   }
 
   /// Update Saved Reaction Tag.
@@ -7893,7 +7899,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Default Tag Reactions.
@@ -7911,7 +7917,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesReactionsBase>();
+    return response.to<MessagesReactionsBase>();
   }
 
   /// Get Outbox Read Date.
@@ -7931,7 +7937,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<OutboxReadDateBase>();
+    return response.to<OutboxReadDateBase>();
   }
 
   /// Get Quick Replies.
@@ -7949,7 +7955,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesQuickRepliesBase>();
+    return response.to<MessagesQuickRepliesBase>();
   }
 
   /// Reorder Quick Replies.
@@ -7967,7 +7973,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Check Quick Reply Shortcut.
@@ -7985,7 +7991,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Edit Quick Reply Shortcut.
@@ -8005,7 +8011,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete Quick Reply Shortcut.
@@ -8023,7 +8029,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Quick Reply Messages.
@@ -8045,7 +8051,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Send Quick Reply Messages.
@@ -8069,7 +8075,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete Quick Reply Messages.
@@ -8089,7 +8095,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Dialog Filter Tags.
@@ -8107,7 +8113,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get My Stickers.
@@ -8127,7 +8133,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMyStickersBase>();
+    return response.to<MessagesMyStickersBase>();
   }
 
   /// Get Emoji Sticker Groups.
@@ -8145,7 +8151,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesEmojiGroupsBase>();
+    return response.to<MessagesEmojiGroupsBase>();
   }
 
   /// Get Available Effects.
@@ -8163,7 +8169,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAvailableEffectsBase>();
+    return response.to<MessagesAvailableEffectsBase>();
   }
 
   /// Edit Fact Check.
@@ -8185,7 +8191,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete Fact Check.
@@ -8205,7 +8211,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Fact Check.
@@ -8225,7 +8231,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<FactCheckBase>();
+    return response.toVector<FactCheckBase>();
   }
 
   /// Request Main Web View.
@@ -8255,7 +8261,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<WebViewResultBase>();
+    return response.to<WebViewResultBase>();
   }
 
   /// Send Paid Reaction.
@@ -8281,7 +8287,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Paid Reaction Privacy.
@@ -8303,7 +8309,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Paid Reaction Privacy.
@@ -8317,7 +8323,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// View Sponsored Message.
@@ -8337,7 +8343,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Click Sponsored Message.
@@ -8361,7 +8367,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Report Sponsored Message.
@@ -8384,7 +8390,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChannelsSponsoredMessageReportResultBase>();
+    return response.to<ChannelsSponsoredMessageReportResultBase>();
   }
 
   /// Get Sponsored Messages.
@@ -8402,7 +8408,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesSponsoredMessagesBase>();
+    return response.to<MessagesSponsoredMessagesBase>();
   }
 
   /// Save Prepared Inline Message.
@@ -8425,7 +8431,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesBotPreparedInlineMessageBase>();
+    return response.to<MessagesBotPreparedInlineMessageBase>();
   }
 
   /// Get Prepared Inline Message.
@@ -8445,7 +8451,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesPreparedInlineMessageBase>();
+    return response.to<MessagesPreparedInlineMessageBase>();
   }
 
   /// Search Stickers.
@@ -8475,7 +8481,7 @@ class ClientMessages {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesFoundStickersBase>();
+    return response.to<MessagesFoundStickersBase>();
   }
 }
 
@@ -8496,7 +8502,7 @@ class ClientUpdates {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesStateBase>();
+    return response.to<UpdatesStateBase>();
   }
 
   /// Get Difference.
@@ -8524,7 +8530,7 @@ class ClientUpdates {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesDifferenceBase>();
+    return response.to<UpdatesDifferenceBase>();
   }
 
   /// Get Channel Difference.
@@ -8550,7 +8556,7 @@ class ClientUpdates {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesChannelDifferenceBase>();
+    return response.to<UpdatesChannelDifferenceBase>();
   }
 }
 
@@ -8579,7 +8585,7 @@ class ClientPhotos {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhotosPhotoBase>();
+    return response.to<PhotosPhotoBase>();
   }
 
   /// Upload Profile Photo.
@@ -8607,7 +8613,7 @@ class ClientPhotos {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhotosPhotoBase>();
+    return response.to<PhotosPhotoBase>();
   }
 
   /// Delete Photos.
@@ -8625,7 +8631,7 @@ class ClientPhotos {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Get User Photos.
@@ -8649,7 +8655,7 @@ class ClientPhotos {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhotosPhotosBase>();
+    return response.to<PhotosPhotosBase>();
   }
 
   /// Upload Contact Profile Photo.
@@ -8679,7 +8685,7 @@ class ClientPhotos {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhotosPhotoBase>();
+    return response.to<PhotosPhotoBase>();
   }
 }
 
@@ -8708,7 +8714,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get File.
@@ -8734,7 +8740,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UploadFileBase>();
+    return response.to<UploadFileBase>();
   }
 
   /// Save Big File Part.
@@ -8758,7 +8764,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Web File.
@@ -8780,7 +8786,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UploadWebFileBase>();
+    return response.to<UploadWebFileBase>();
   }
 
   /// Get Cdn File.
@@ -8802,7 +8808,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UploadCdnFileBase>();
+    return response.to<UploadCdnFileBase>();
   }
 
   /// Reupload Cdn File.
@@ -8822,7 +8828,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<FileHashBase>();
+    return response.toVector<FileHashBase>();
   }
 
   /// Get Cdn File Hashes.
@@ -8842,7 +8848,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<FileHashBase>();
+    return response.toVector<FileHashBase>();
   }
 
   /// Get File Hashes.
@@ -8862,7 +8868,7 @@ class ClientUpload {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<FileHashBase>();
+    return response.toVector<FileHashBase>();
   }
 }
 
@@ -8883,7 +8889,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ConfigBase>();
+    return response.to<ConfigBase>();
   }
 
   /// Get Nearest Dc.
@@ -8897,7 +8903,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<NearestDcBase>();
+    return response.to<NearestDcBase>();
   }
 
   /// Get App Update.
@@ -8915,7 +8921,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpAppUpdateBase>();
+    return response.to<HelpAppUpdateBase>();
   }
 
   /// Get Invite Text.
@@ -8929,7 +8935,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpInviteTextBase>();
+    return response.to<HelpInviteTextBase>();
   }
 
   /// Get Support.
@@ -8943,7 +8949,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpSupportBase>();
+    return response.to<HelpSupportBase>();
   }
 
   /// Set Bot Updates Status.
@@ -8963,7 +8969,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Cdn Config.
@@ -8977,7 +8983,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<CdnConfigBase>();
+    return response.to<CdnConfigBase>();
   }
 
   /// Get Recent Me Urls.
@@ -8995,7 +9001,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpRecentMeUrlsBase>();
+    return response.to<HelpRecentMeUrlsBase>();
   }
 
   /// Get Terms Of Service Update.
@@ -9009,7 +9015,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpTermsOfServiceUpdateBase>();
+    return response.to<HelpTermsOfServiceUpdateBase>();
   }
 
   /// Accept Terms Of Service.
@@ -9027,7 +9033,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Deep Link Info.
@@ -9045,7 +9051,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpDeepLinkInfoBase>();
+    return response.to<HelpDeepLinkInfoBase>();
   }
 
   /// Get App Config.
@@ -9063,7 +9069,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpAppConfigBase>();
+    return response.to<HelpAppConfigBase>();
   }
 
   /// Save App Log.
@@ -9081,7 +9087,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Passport Config.
@@ -9099,7 +9105,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpPassportConfigBase>();
+    return response.to<HelpPassportConfigBase>();
   }
 
   /// Get Support Name.
@@ -9113,7 +9119,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpSupportNameBase>();
+    return response.to<HelpSupportNameBase>();
   }
 
   /// Get User Info.
@@ -9131,7 +9137,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpUserInfoBase>();
+    return response.to<HelpUserInfoBase>();
   }
 
   /// Edit User Info.
@@ -9153,7 +9159,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpUserInfoBase>();
+    return response.to<HelpUserInfoBase>();
   }
 
   /// Get Promo Data.
@@ -9167,7 +9173,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpPromoDataBase>();
+    return response.to<HelpPromoDataBase>();
   }
 
   /// Hide Promo Data.
@@ -9185,7 +9191,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Dismiss Suggestion.
@@ -9205,7 +9211,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Countries List.
@@ -9225,7 +9231,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpCountriesListBase>();
+    return response.to<HelpCountriesListBase>();
   }
 
   /// Get Premium Promo.
@@ -9239,7 +9245,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpPremiumPromoBase>();
+    return response.to<HelpPremiumPromoBase>();
   }
 
   /// Get Peer Colors.
@@ -9257,7 +9263,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpPeerColorsBase>();
+    return response.to<HelpPeerColorsBase>();
   }
 
   /// Get Peer Profile Colors.
@@ -9275,7 +9281,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpPeerColorsBase>();
+    return response.to<HelpPeerColorsBase>();
   }
 
   /// Get Timezones List.
@@ -9293,7 +9299,7 @@ class ClientHelp {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<HelpTimezonesListBase>();
+    return response.to<HelpTimezonesListBase>();
   }
 }
 
@@ -9320,7 +9326,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete Messages.
@@ -9340,7 +9346,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedMessagesBase>();
+    return response.to<MessagesAffectedMessagesBase>();
   }
 
   /// Report Spam.
@@ -9362,7 +9368,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Messages.
@@ -9382,7 +9388,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 
   /// Get Participants.
@@ -9408,7 +9414,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChannelsChannelParticipantsBase>();
+    return response.to<ChannelsChannelParticipantsBase>();
   }
 
   /// Get Participant.
@@ -9428,7 +9434,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChannelsChannelParticipantBase>();
+    return response.to<ChannelsChannelParticipantBase>();
   }
 
   /// Get Channels.
@@ -9446,7 +9452,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Get Full Channel.
@@ -9464,7 +9470,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatFullBase>();
+    return response.to<MessagesChatFullBase>();
   }
 
   /// Create Channel.
@@ -9498,7 +9504,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Admin.
@@ -9522,7 +9528,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Title.
@@ -9542,7 +9548,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Photo.
@@ -9562,7 +9568,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Check Username.
@@ -9582,7 +9588,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Username.
@@ -9602,7 +9608,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Join Channel.
@@ -9620,7 +9626,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Leave Channel.
@@ -9638,7 +9644,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Invite To Channel.
@@ -9658,7 +9664,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesInvitedUsersBase>();
+    return response.to<MessagesInvitedUsersBase>();
   }
 
   /// Delete Channel.
@@ -9676,7 +9682,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Export Message Link.
@@ -9700,7 +9706,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ExportedMessageLinkBase>();
+    return response.to<ExportedMessageLinkBase>();
   }
 
   /// Toggle Signatures.
@@ -9722,7 +9728,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Admined Public Channels.
@@ -9744,7 +9750,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Edit Banned.
@@ -9766,7 +9772,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Admin Log.
@@ -9796,7 +9802,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChannelsAdminLogResultsBase>();
+    return response.to<ChannelsAdminLogResultsBase>();
   }
 
   /// Set Stickers.
@@ -9816,7 +9822,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Read Message Contents.
@@ -9836,7 +9842,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Delete History.
@@ -9858,7 +9864,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Pre History Hidden.
@@ -9878,7 +9884,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Left Channels.
@@ -9896,7 +9902,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Get Groups For Discussion.
@@ -9910,7 +9916,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Set Discussion Group.
@@ -9930,7 +9936,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Edit Creator.
@@ -9952,7 +9958,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Location.
@@ -9974,7 +9980,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Slow Mode.
@@ -9994,7 +10000,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Inactive Channels.
@@ -10008,7 +10014,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesInactiveChatsBase>();
+    return response.to<MessagesInactiveChatsBase>();
   }
 
   /// Convert To Gigagroup.
@@ -10026,7 +10032,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Send As.
@@ -10044,7 +10050,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChannelsSendAsPeersBase>();
+    return response.to<ChannelsSendAsPeersBase>();
   }
 
   /// Delete Participant History.
@@ -10064,7 +10070,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Toggle Join To Send.
@@ -10084,7 +10090,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Join Request.
@@ -10104,7 +10110,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Reorder Usernames.
@@ -10124,7 +10130,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Username.
@@ -10146,7 +10152,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Deactivate All Usernames.
@@ -10164,7 +10170,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Forum.
@@ -10184,7 +10190,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Create Forum Topic.
@@ -10212,7 +10218,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Forum Topics.
@@ -10240,7 +10246,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesForumTopicsBase>();
+    return response.to<MessagesForumTopicsBase>();
   }
 
   /// Get Forum Topics By I D.
@@ -10260,7 +10266,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesForumTopicsBase>();
+    return response.to<MessagesForumTopicsBase>();
   }
 
   /// Edit Forum Topic.
@@ -10288,7 +10294,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Update Pinned Forum Topic.
@@ -10310,7 +10316,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete Topic History.
@@ -10330,7 +10336,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesAffectedHistoryBase>();
+    return response.to<MessagesAffectedHistoryBase>();
   }
 
   /// Reorder Pinned Forum Topics.
@@ -10352,7 +10358,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Anti Spam.
@@ -10372,7 +10378,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Report Anti Spam False Positive.
@@ -10392,7 +10398,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Participants Hidden.
@@ -10412,7 +10418,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Update Color.
@@ -10436,7 +10442,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle View Forum As Messages.
@@ -10456,7 +10462,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Channel Recommendations.
@@ -10474,7 +10480,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Update Emoji Status.
@@ -10494,7 +10500,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Set Boosts To Unblock Restrictions.
@@ -10514,7 +10520,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Set Emoji Stickers.
@@ -10534,7 +10540,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Restrict Sponsored Messages.
@@ -10554,7 +10560,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Search Posts.
@@ -10580,7 +10586,7 @@ class ClientChannels {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesMessagesBase>();
+    return response.to<MessagesMessagesBase>();
   }
 }
 
@@ -10607,7 +10613,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DataJSONBase>();
+    return response.to<DataJSONBase>();
   }
 
   /// Answer Webhook J S O N Query.
@@ -10627,7 +10633,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Bot Commands.
@@ -10649,7 +10655,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reset Bot Commands.
@@ -10669,7 +10675,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bot Commands.
@@ -10689,7 +10695,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<BotCommandBase>();
+    return response.toVector<BotCommandBase>();
   }
 
   /// Set Bot Menu Button.
@@ -10709,7 +10715,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bot Menu Button.
@@ -10727,7 +10733,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotMenuButtonBase>();
+    return response.to<BotMenuButtonBase>();
   }
 
   /// Set Bot Broadcast Default Admin Rights.
@@ -10745,7 +10751,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Bot Group Default Admin Rights.
@@ -10763,7 +10769,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Set Bot Info.
@@ -10789,7 +10795,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bot Info.
@@ -10809,7 +10815,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotsBotInfoBase>();
+    return response.to<BotsBotInfoBase>();
   }
 
   /// Reorder Usernames.
@@ -10829,7 +10835,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle Username.
@@ -10851,7 +10857,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Can Send Message.
@@ -10869,7 +10875,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Allow Send Message.
@@ -10887,7 +10893,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Invoke Web View Custom Method.
@@ -10909,7 +10915,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DataJSONBase>();
+    return response.to<DataJSONBase>();
   }
 
   /// Get Popular App Bots.
@@ -10929,7 +10935,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotsPopularAppBotsBase>();
+    return response.to<BotsPopularAppBotsBase>();
   }
 
   /// Add Preview Media.
@@ -10951,7 +10957,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotPreviewMediaBase>();
+    return response.to<BotPreviewMediaBase>();
   }
 
   /// Edit Preview Media.
@@ -10975,7 +10981,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotPreviewMediaBase>();
+    return response.to<BotPreviewMediaBase>();
   }
 
   /// Delete Preview Media.
@@ -10997,7 +11003,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Reorder Preview Medias.
@@ -11019,7 +11025,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Preview Info.
@@ -11039,7 +11045,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<BotsPreviewInfoBase>();
+    return response.to<BotsPreviewInfoBase>();
   }
 
   /// Get Preview Medias.
@@ -11057,7 +11063,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<BotPreviewMediaBase>();
+    return response.toVector<BotPreviewMediaBase>();
   }
 
   /// Update User Emoji Status.
@@ -11077,7 +11083,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Toggle User Emoji Status Permission.
@@ -11097,7 +11103,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Check Download File Params.
@@ -11119,7 +11125,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Admined Bots.
@@ -11133,7 +11139,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<UserBase>();
+    return response.toVector<UserBase>();
   }
 
   /// Update Star Ref Program.
@@ -11155,7 +11161,7 @@ class ClientBots {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StarRefProgramBase>();
+    return response.to<StarRefProgramBase>();
   }
 }
 
@@ -11182,7 +11188,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsPaymentFormBase>();
+    return response.to<PaymentsPaymentFormBase>();
   }
 
   /// Get Payment Receipt.
@@ -11202,7 +11208,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsPaymentReceiptBase>();
+    return response.to<PaymentsPaymentReceiptBase>();
   }
 
   /// Validate Requested Info.
@@ -11224,7 +11230,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsValidatedRequestedInfoBase>();
+    return response.to<PaymentsValidatedRequestedInfoBase>();
   }
 
   /// Send Payment Form.
@@ -11252,7 +11258,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsPaymentResultBase>();
+    return response.to<PaymentsPaymentResultBase>();
   }
 
   /// Get Saved Info.
@@ -11266,7 +11272,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsSavedInfoBase>();
+    return response.to<PaymentsSavedInfoBase>();
   }
 
   /// Clear Saved Info.
@@ -11286,7 +11292,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Bank Card Data.
@@ -11304,7 +11310,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsBankCardDataBase>();
+    return response.to<PaymentsBankCardDataBase>();
   }
 
   /// Export Invoice.
@@ -11322,7 +11328,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsExportedInvoiceBase>();
+    return response.to<PaymentsExportedInvoiceBase>();
   }
 
   /// Assign App Store Transaction.
@@ -11342,7 +11348,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Assign Play Market Transaction.
@@ -11362,7 +11368,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Can Purchase Premium.
@@ -11380,7 +11386,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Premium Gift Code Options.
@@ -11398,7 +11404,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<PremiumGiftCodeOptionBase>();
+    return response.toVector<PremiumGiftCodeOptionBase>();
   }
 
   /// Check Gift Code.
@@ -11416,7 +11422,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsCheckedGiftCodeBase>();
+    return response.to<PaymentsCheckedGiftCodeBase>();
   }
 
   /// Apply Gift Code.
@@ -11434,7 +11440,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Giveaway Info.
@@ -11454,7 +11460,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsGiveawayInfoBase>();
+    return response.to<PaymentsGiveawayInfoBase>();
   }
 
   /// Launch Prepaid Giveaway.
@@ -11476,7 +11482,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Stars Topup Options.
@@ -11490,7 +11496,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<StarsTopupOptionBase>();
+    return response.toVector<StarsTopupOptionBase>();
   }
 
   /// Get Stars Status.
@@ -11508,7 +11514,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsStatusBase>();
+    return response.to<PaymentsStarsStatusBase>();
   }
 
   /// Get Stars Transactions.
@@ -11538,7 +11544,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsStatusBase>();
+    return response.to<PaymentsStarsStatusBase>();
   }
 
   /// Send Stars Form.
@@ -11558,7 +11564,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsPaymentResultBase>();
+    return response.to<PaymentsPaymentResultBase>();
   }
 
   /// Refund Stars Charge.
@@ -11578,7 +11584,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Stars Revenue Stats.
@@ -11598,7 +11604,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsRevenueStatsBase>();
+    return response.to<PaymentsStarsRevenueStatsBase>();
   }
 
   /// Get Stars Revenue Withdrawal Url.
@@ -11621,7 +11627,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsRevenueWithdrawalUrlBase>();
+    return response.to<PaymentsStarsRevenueWithdrawalUrlBase>();
   }
 
   /// Get Stars Revenue Ads Account Url.
@@ -11640,7 +11646,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsRevenueAdsAccountUrlBase>();
+    return response.to<PaymentsStarsRevenueAdsAccountUrlBase>();
   }
 
   /// Get Stars Transactions By I D.
@@ -11660,7 +11666,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsStatusBase>();
+    return response.to<PaymentsStarsStatusBase>();
   }
 
   /// Get Stars Gift Options.
@@ -11678,7 +11684,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<StarsGiftOptionBase>();
+    return response.toVector<StarsGiftOptionBase>();
   }
 
   /// Get Stars Subscriptions.
@@ -11700,7 +11706,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarsStatusBase>();
+    return response.to<PaymentsStarsStatusBase>();
   }
 
   /// Change Stars Subscription.
@@ -11722,7 +11728,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Fulfill Stars Subscription.
@@ -11742,7 +11748,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Stars Giveaway Options.
@@ -11757,7 +11763,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<StarsGiveawayOptionBase>();
+    return response.toVector<StarsGiveawayOptionBase>();
   }
 
   /// Get Star Gifts.
@@ -11775,7 +11781,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsStarGiftsBase>();
+    return response.to<PaymentsStarGiftsBase>();
   }
 
   /// Get User Star Gifts.
@@ -11797,7 +11803,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsUserStarGiftsBase>();
+    return response.to<PaymentsUserStarGiftsBase>();
   }
 
   /// Save Star Gift.
@@ -11819,7 +11825,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Convert Star Gift.
@@ -11839,7 +11845,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Bot Cancel Stars Subscription.
@@ -11861,7 +11867,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Connected Star Ref Bots.
@@ -11885,7 +11891,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsConnectedStarRefBotsBase>();
+    return response.to<PaymentsConnectedStarRefBotsBase>();
   }
 
   /// Get Connected Star Ref Bot.
@@ -11905,7 +11911,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsConnectedStarRefBotsBase>();
+    return response.to<PaymentsConnectedStarRefBotsBase>();
   }
 
   /// Get Suggested Star Ref Bots.
@@ -11931,7 +11937,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsSuggestedStarRefBotsBase>();
+    return response.to<PaymentsSuggestedStarRefBotsBase>();
   }
 
   /// Connect Star Ref Bot.
@@ -11951,7 +11957,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsConnectedStarRefBotsBase>();
+    return response.to<PaymentsConnectedStarRefBotsBase>();
   }
 
   /// Edit Connected Star Ref Bot.
@@ -11973,7 +11979,7 @@ class ClientPayments {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PaymentsConnectedStarRefBotsBase>();
+    return response.to<PaymentsConnectedStarRefBotsBase>();
   }
 }
 
@@ -12014,7 +12020,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Remove Sticker From Set.
@@ -12032,7 +12038,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Change Sticker Position.
@@ -12052,7 +12058,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Add Sticker To Set.
@@ -12072,7 +12078,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Set Sticker Set Thumb.
@@ -12094,7 +12100,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Check Short Name.
@@ -12112,7 +12118,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Suggest Short Name.
@@ -12130,7 +12136,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StickersSuggestedShortNameBase>();
+    return response.to<StickersSuggestedShortNameBase>();
   }
 
   /// Change Sticker.
@@ -12154,7 +12160,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Rename Sticker Set.
@@ -12174,7 +12180,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 
   /// Delete Sticker Set.
@@ -12192,7 +12198,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Replace Sticker.
@@ -12212,7 +12218,7 @@ class ClientStickers {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesStickerSetBase>();
+    return response.to<MessagesStickerSetBase>();
   }
 }
 
@@ -12233,7 +12239,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<DataJSONBase>();
+    return response.to<DataJSONBase>();
   }
 
   /// Request Call.
@@ -12259,7 +12265,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhonePhoneCallBase>();
+    return response.to<PhonePhoneCallBase>();
   }
 
   /// Accept Call.
@@ -12281,7 +12287,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhonePhoneCallBase>();
+    return response.to<PhonePhoneCallBase>();
   }
 
   /// Confirm Call.
@@ -12305,7 +12311,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhonePhoneCallBase>();
+    return response.to<PhonePhoneCallBase>();
   }
 
   /// Received Call.
@@ -12323,7 +12329,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Discard Call.
@@ -12349,7 +12355,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Set Call Rating.
@@ -12373,7 +12379,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Save Call Debug.
@@ -12393,7 +12399,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Signaling Data.
@@ -12413,7 +12419,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Create Group Call.
@@ -12439,7 +12445,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Join Group Call.
@@ -12467,7 +12473,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Leave Group Call.
@@ -12487,7 +12493,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Invite To Group Call.
@@ -12507,7 +12513,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Discard Group Call.
@@ -12525,7 +12531,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Toggle Group Call Settings.
@@ -12547,7 +12553,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Group Call.
@@ -12567,7 +12573,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneGroupCallBase>();
+    return response.to<PhoneGroupCallBase>();
   }
 
   /// Get Group Participants.
@@ -12593,7 +12599,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneGroupParticipantsBase>();
+    return response.to<PhoneGroupParticipantsBase>();
   }
 
   /// Check Group Call.
@@ -12613,7 +12619,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Toggle Group Call Record.
@@ -12639,7 +12645,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Group Call Participant.
@@ -12671,7 +12677,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Group Call Title.
@@ -12691,7 +12697,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Group Call Join As.
@@ -12709,7 +12715,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneJoinAsPeersBase>();
+    return response.to<PhoneJoinAsPeersBase>();
   }
 
   /// Export Group Call Invite.
@@ -12729,7 +12735,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneExportedGroupCallInviteBase>();
+    return response.to<PhoneExportedGroupCallInviteBase>();
   }
 
   /// Toggle Group Call Start Subscription.
@@ -12749,7 +12755,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Start Scheduled Group Call.
@@ -12767,7 +12773,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Save Default Group Call Join As.
@@ -12787,7 +12793,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Join Group Call Presentation.
@@ -12807,7 +12813,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Leave Group Call Presentation.
@@ -12825,7 +12831,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Group Call Stream Channels.
@@ -12843,7 +12849,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneGroupCallStreamChannelsBase>();
+    return response.to<PhoneGroupCallStreamChannelsBase>();
   }
 
   /// Get Group Call Stream Rtmp Url.
@@ -12863,7 +12869,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PhoneGroupCallStreamRtmpUrlBase>();
+    return response.to<PhoneGroupCallStreamRtmpUrlBase>();
   }
 
   /// Save Call Log.
@@ -12883,7 +12889,7 @@ class ClientPhone {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 }
 
@@ -12910,7 +12916,7 @@ class ClientLangpack {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<LangPackDifferenceBase>();
+    return response.to<LangPackDifferenceBase>();
   }
 
   /// Get Strings.
@@ -12932,7 +12938,7 @@ class ClientLangpack {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<LangPackStringBase>();
+    return response.toVector<LangPackStringBase>();
   }
 
   /// Get Difference.
@@ -12954,7 +12960,7 @@ class ClientLangpack {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<LangPackDifferenceBase>();
+    return response.to<LangPackDifferenceBase>();
   }
 
   /// Get Languages.
@@ -12972,7 +12978,7 @@ class ClientLangpack {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<LangPackLanguageBase>();
+    return response.toVector<LangPackLanguageBase>();
   }
 
   /// Get Language.
@@ -12992,7 +12998,7 @@ class ClientLangpack {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<LangPackLanguageBase>();
+    return response.to<LangPackLanguageBase>();
   }
 }
 
@@ -13017,7 +13023,7 @@ class ClientFolders {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 }
 
@@ -13044,7 +13050,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsBroadcastStatsBase>();
+    return response.to<StatsBroadcastStatsBase>();
   }
 
   /// Load Async Graph.
@@ -13064,7 +13070,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsGraphBase>();
+    return response.to<StatsGraphBase>();
   }
 
   /// Get Megagroup Stats.
@@ -13084,7 +13090,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsMegagroupStatsBase>();
+    return response.to<StatsMegagroupStatsBase>();
   }
 
   /// Get Message Public Forwards.
@@ -13108,7 +13114,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsPublicForwardsBase>();
+    return response.to<StatsPublicForwardsBase>();
   }
 
   /// Get Message Stats.
@@ -13130,7 +13136,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsMessageStatsBase>();
+    return response.to<StatsMessageStatsBase>();
   }
 
   /// Get Story Stats.
@@ -13152,7 +13158,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsStoryStatsBase>();
+    return response.to<StatsStoryStatsBase>();
   }
 
   /// Get Story Public Forwards.
@@ -13176,7 +13182,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsPublicForwardsBase>();
+    return response.to<StatsPublicForwardsBase>();
   }
 
   /// Get Broadcast Revenue Stats.
@@ -13196,7 +13202,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsBroadcastRevenueStatsBase>();
+    return response.to<StatsBroadcastRevenueStatsBase>();
   }
 
   /// Get Broadcast Revenue Withdrawal Url.
@@ -13217,7 +13223,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsBroadcastRevenueWithdrawalUrlBase>();
+    return response.to<StatsBroadcastRevenueWithdrawalUrlBase>();
   }
 
   /// Get Broadcast Revenue Transactions.
@@ -13240,7 +13246,7 @@ class ClientStats {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StatsBroadcastRevenueTransactionsBase>();
+    return response.to<StatsBroadcastRevenueTransactionsBase>();
   }
 }
 
@@ -13269,7 +13275,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatlistsExportedChatlistInviteBase>();
+    return response.to<ChatlistsExportedChatlistInviteBase>();
   }
 
   /// Delete Exported Invite.
@@ -13289,7 +13295,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Edit Exported Invite.
@@ -13313,7 +13319,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ExportedChatlistInviteBase>();
+    return response.to<ExportedChatlistInviteBase>();
   }
 
   /// Get Exported Invites.
@@ -13331,7 +13337,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatlistsExportedInvitesBase>();
+    return response.to<ChatlistsExportedInvitesBase>();
   }
 
   /// Check Chatlist Invite.
@@ -13349,7 +13355,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatlistsChatlistInviteBase>();
+    return response.to<ChatlistsChatlistInviteBase>();
   }
 
   /// Join Chatlist Invite.
@@ -13369,7 +13375,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Chatlist Updates.
@@ -13387,7 +13393,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ChatlistsChatlistUpdatesBase>();
+    return response.to<ChatlistsChatlistUpdatesBase>();
   }
 
   /// Join Chatlist Updates.
@@ -13407,7 +13413,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Hide Chatlist Updates.
@@ -13425,7 +13431,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Leave Chatlist Suggestions.
@@ -13443,7 +13449,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<PeerBase>();
+    return response.toVector<PeerBase>();
   }
 
   /// Leave Chatlist.
@@ -13463,7 +13469,7 @@ class ClientChatlists {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 }
 
@@ -13488,7 +13494,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Send Story.
@@ -13530,7 +13536,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Edit Story.
@@ -13560,7 +13566,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Delete Stories.
@@ -13580,7 +13586,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Toggle Pinned.
@@ -13602,7 +13608,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Get All Stories.
@@ -13624,7 +13630,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesAllStoriesBase>();
+    return response.to<StoriesAllStoriesBase>();
   }
 
   /// Get Pinned Stories.
@@ -13646,7 +13652,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoriesBase>();
+    return response.to<StoriesStoriesBase>();
   }
 
   /// Get Stories Archive.
@@ -13668,7 +13674,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoriesBase>();
+    return response.to<StoriesStoriesBase>();
   }
 
   /// Get Stories By I D.
@@ -13688,7 +13694,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoriesBase>();
+    return response.to<StoriesStoriesBase>();
   }
 
   /// Toggle All Stories Hidden.
@@ -13706,7 +13712,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Read Stories.
@@ -13726,7 +13732,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Increment Story Views.
@@ -13746,7 +13752,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Story Views List.
@@ -13778,7 +13784,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoryViewsListBase>();
+    return response.to<StoriesStoryViewsListBase>();
   }
 
   /// Get Stories Views.
@@ -13798,7 +13804,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoryViewsBase>();
+    return response.to<StoriesStoryViewsBase>();
   }
 
   /// Export Story Link.
@@ -13818,7 +13824,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ExportedStoryLinkBase>();
+    return response.to<ExportedStoryLinkBase>();
   }
 
   /// Report.
@@ -13842,7 +13848,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<ReportResultBase>();
+    return response.to<ReportResultBase>();
   }
 
   /// Activate Stealth Mode.
@@ -13862,7 +13868,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Send Reaction.
@@ -13886,7 +13892,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Peer Stories.
@@ -13904,7 +13910,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesPeerStoriesBase>();
+    return response.to<StoriesPeerStoriesBase>();
   }
 
   /// Get All Read Peer Stories.
@@ -13918,7 +13924,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<UpdatesBase>();
+    return response.to<UpdatesBase>();
   }
 
   /// Get Peer Max I Ds.
@@ -13936,7 +13942,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._toVector<int>();
+    return response.toVector<int>();
   }
 
   /// Get Chats To Send.
@@ -13950,7 +13956,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<MessagesChatsBase>();
+    return response.to<MessagesChatsBase>();
   }
 
   /// Toggle Peer Stories Hidden.
@@ -13970,7 +13976,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Story Reactions List.
@@ -13998,7 +14004,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesStoryReactionsListBase>();
+    return response.to<StoriesStoryReactionsListBase>();
   }
 
   /// Toggle Pinned To Top.
@@ -14018,7 +14024,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Search Posts.
@@ -14044,7 +14050,7 @@ class ClientStories {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<StoriesFoundStoriesBase>();
+    return response.to<StoriesFoundStoriesBase>();
   }
 }
 
@@ -14075,7 +14081,7 @@ class ClientPremium {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PremiumBoostsListBase>();
+    return response.to<PremiumBoostsListBase>();
   }
 
   /// Get My Boosts.
@@ -14089,7 +14095,7 @@ class ClientPremium {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PremiumMyBoostsBase>();
+    return response.to<PremiumMyBoostsBase>();
   }
 
   /// Apply Boost.
@@ -14109,7 +14115,7 @@ class ClientPremium {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PremiumMyBoostsBase>();
+    return response.to<PremiumMyBoostsBase>();
   }
 
   /// Get Boosts Status.
@@ -14127,7 +14133,7 @@ class ClientPremium {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PremiumBoostsStatusBase>();
+    return response.to<PremiumBoostsStatusBase>();
   }
 
   /// Get User Boosts.
@@ -14147,7 +14153,7 @@ class ClientPremium {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<PremiumBoostsListBase>();
+    return response.to<PremiumBoostsListBase>();
   }
 }
 
@@ -14168,7 +14174,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<SmsjobsEligibilityToJoinBase>();
+    return response.to<SmsjobsEligibilityToJoinBase>();
   }
 
   /// Join.
@@ -14182,7 +14188,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Leave.
@@ -14196,7 +14202,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Update Settings.
@@ -14214,7 +14220,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 
   /// Get Status.
@@ -14228,7 +14234,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<SmsjobsStatusBase>();
+    return response.to<SmsjobsStatusBase>();
   }
 
   /// Get Sms Job.
@@ -14246,7 +14252,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<SmsJobBase>();
+    return response.to<SmsJobBase>();
   }
 
   /// Finish Job.
@@ -14266,7 +14272,7 @@ class ClientSmsjobs {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<Boolean>();
+    return response.to<Boolean>();
   }
 }
 
@@ -14291,6 +14297,6 @@ class ClientFragment {
     final response = await _c.invoke(request);
 
     // Return the result.
-    return response._to<FragmentCollectibleInfoBase>();
+    return response.to<FragmentCollectibleInfoBase>();
   }
 }

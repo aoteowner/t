@@ -1,8 +1,9 @@
-part of '../t.dart';
+import 'dart:math';
+import 'dart:typed_data';
 
 final _rnd = Random.secure();
 
-Uint8List _randomUint8List(int length) {
+Uint8List randomUint8List(int length) {
   final result = Uint8List(length);
 
   for (int i = 0; i < length; i++) {
@@ -12,7 +13,7 @@ Uint8List _randomUint8List(int length) {
   return result;
 }
 
-Uint8List _fromHexToUint8List(String value) {
+Uint8List fromHexToUint8List(String value) {
   if (value.toLowerCase().startsWith('0x')) {
     value = value.substring(2);
   }
@@ -31,7 +32,7 @@ Uint8List _fromHexToUint8List(String value) {
   return r;
 }
 
-String _hex(Iterable<int> v) {
+String hexStr(Iterable<int> v) {
   final h = v
       .map((vv) => vv.toRadixString(16).padLeft(2, '0'))
       .join('')

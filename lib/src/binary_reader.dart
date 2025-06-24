@@ -1,4 +1,8 @@
-part of '../t.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:t/src/core.dart';
+import 'package:t/src/g/binary_reader_object.dart';
 
 /// Read binary data and advance the position.
 class BinaryReader {
@@ -12,61 +16,59 @@ class BinaryReader {
   /// Gets the position.
   int get position => _position;
 
+  Uint8List _next(int size) {
+    final start = position;
+    _position += size;
+    return buffer.sublist(start, _position);
+  }
+
   /// Read Int16.
   int readInt16([bool bigEndian = false]) {
-    final b = Uint8List.fromList(buffer.skip(_position).take(2).toList());
+    final b = _next(2);
 
     final endian = bigEndian ? Endian.big : Endian.little;
     final x = b.buffer.asByteData().getUint16(0, endian);
 
-    _position += 2;
     return x;
   }
 
   /// Read Int32.
   int readInt32([bool bigEndian = false]) {
-    final b = Uint8List.fromList(buffer.skip(_position).take(4).toList());
+    final b = _next(4);
 
     final endian = bigEndian ? Endian.big : Endian.little;
     final x = b.buffer.asByteData().getUint32(0, endian);
 
-    _position += 4;
     return x;
   }
 
   /// Read Int64.
   int readInt64([bool bigEndian = false]) {
-    final b = Uint8List.fromList(buffer.skip(_position).take(8).toList());
+    final b = _next(8);
 
     final endian = bigEndian ? Endian.big : Endian.little;
     final x = b.buffer.asByteData().getUint64(0, endian);
 
-    _position += 8;
     return x;
   }
 
   /// Read Int128.
   Int128 readInt128() {
-    final b = Uint8List.fromList(buffer.skip(_position).take(16).toList());
-
-    _position += 16;
+    final b = _next(16);
     return Int128(b);
   }
 
   /// Read Int256.
   Int256 readInt256() {
-    final b = Uint8List.fromList(buffer.skip(_position).take(32).toList());
-
-    _position += 32;
+    final b = _next(32);
     return Int256(b);
   }
 
   /// Read double.
   double readFloat64() {
-    final b = Uint8List.fromList(buffer.skip(_position).take(8).toList());
+    final b = _next(8);
     final x = b.buffer.asFloat64List(0, 1);
 
-    _position += 8;
     return x.first;
   }
 
@@ -94,13 +96,13 @@ class BinaryReader {
   /// Read List&lt;TlObject&gt;.
   Vector<T> readVectorObject<T extends TlObject>() {
     final ctor = readInt32();
-    assert(ctor == _vectorCtor, 'Invalid type.');
+    assert(ctor == vectorCtor, 'Invalid type.');
 
-    return _readVectorObjectNoCtor<T>();
+    return readVectorObjectNoCtor<T>();
   }
 
   /// Read List&lt;TlObject&gt;.
-  Vector<T> _readVectorObjectNoCtor<T extends TlObject>() {
+  Vector<T> readVectorObjectNoCtor<T extends TlObject>() {
     final count = readInt32();
     final items = <T>[];
 
@@ -108,13 +110,13 @@ class BinaryReader {
       items.add(readObject() as T);
     }
 
-    return Vector._(items);
+    return Vector(items);
   }
 
   /// Read List&lt;int32&gt;.
   Vector<int> readVectorInt32() {
     final ctor = readInt32();
-    assert(ctor == _vectorCtor, 'Invalid type.');
+    assert(ctor == vectorCtor, 'Invalid type.');
 
     final count = readInt32();
     final items = <int>[];
@@ -123,13 +125,13 @@ class BinaryReader {
       items.add(readInt32());
     }
 
-    return Vector._(items);
+    return Vector(items);
   }
 
   /// Read List&lt;int64&gt;.
   Vector<int> readVectorInt64() {
     final ctor = readInt32();
-    assert(ctor == _vectorCtor, 'Invalid type.');
+    assert(ctor == vectorCtor, 'Invalid type.');
 
     final count = readInt32();
     final items = <int>[];
@@ -138,13 +140,13 @@ class BinaryReader {
       items.add(readInt64());
     }
 
-    return Vector._(items);
+    return Vector(items);
   }
 
   /// Read List&lt;Uint8List&gt;.
   Vector<Uint8List> readVectorBytes() {
     final ctor = readInt32();
-    assert(ctor == _vectorCtor, 'Invalid type.');
+    assert(ctor == vectorCtor, 'Invalid type.');
 
     final count = readInt32();
     final items = <Uint8List>[];
@@ -153,13 +155,13 @@ class BinaryReader {
       items.add(Uint8List.fromList(readBytes()));
     }
 
-    return Vector._(items);
+    return Vector(items);
   }
 
   /// Read List&lt;String&gt;.
   Vector<String> readVectorString() {
     final ctor = readInt32();
-    assert(ctor == _vectorCtor, 'Invalid type.');
+    assert(ctor == vectorCtor, 'Invalid type.');
 
     final count = readInt32();
     final items = <String>[];
@@ -168,7 +170,7 @@ class BinaryReader {
       items.add(readString());
     }
 
-    return Vector._(items);
+    return Vector(items);
   }
 
   /// Read Uint8List.
@@ -182,8 +184,7 @@ class BinaryReader {
       length = readInt16() + (buffer[_position++] << 16);
     }
 
-    final tmp = buffer.skip(_position).take(length).toList();
-    _position += length;
+    final tmp = _next(length);
 
     if (add3) {
       length += 3;
@@ -198,9 +199,8 @@ class BinaryReader {
 
   /// Read raw Uint8List.
   Uint8List readRawBytes(int length) {
-    final b = Uint8List.fromList(buffer.skip(_position).take(length).toList());
+    final b = _next(length);
 
-    _position += length;
     return b;
   }
 
@@ -215,7 +215,7 @@ class BinaryReader {
 
   /// Read TlObject.
   TlObject readObject() {
-    final obj = _readObject(this);
+    final obj = readTlObject(this);
     return obj;
   }
 }

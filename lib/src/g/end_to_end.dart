@@ -1,4 +1,9 @@
-part of '../../t.dart';
+import 'dart:typed_data';
+
+import 'package:t/src/binary_reader.dart';
+import 'package:t/src/binary_writer.dart';
+import 'package:t/src/core.dart';
+import 'package:t/src/g/base.dart';
 
 /// Decrypted Message.
 ///
@@ -11,7 +16,7 @@ class DecryptedMessage008 extends DecryptedMessageBase {
     required this.randomBytes,
     required this.message,
     required this.media,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessage008.deserialize(BinaryReader reader) {
@@ -89,7 +94,7 @@ class DecryptedMessage017 extends DecryptedMessageBase {
     required this.ttl,
     required this.message,
     required this.media,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessage017.deserialize(BinaryReader reader) {
@@ -172,7 +177,7 @@ class DecryptedMessage045 extends DecryptedMessageBase {
     this.entities,
     this.viaBotName,
     this.replyToRandomId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessage045.deserialize(BinaryReader reader) {
@@ -209,7 +214,7 @@ class DecryptedMessage045 extends DecryptedMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b09: media != null,
       b07: entities != null,
       b11: viaBotName != null,
@@ -310,7 +315,7 @@ class DecryptedMessage073 extends DecryptedMessageBase {
     this.viaBotName,
     this.replyToRandomId,
     this.groupedId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessage073.deserialize(BinaryReader reader) {
@@ -350,7 +355,7 @@ class DecryptedMessage073 extends DecryptedMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b09: media != null,
       b07: entities != null,
       b11: viaBotName != null,
@@ -455,7 +460,7 @@ class DecryptedMessageService008 extends DecryptedMessageBase {
     required this.randomId,
     required this.randomBytes,
     required this.action,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageService008.deserialize(BinaryReader reader) {
@@ -524,7 +529,7 @@ class DecryptedMessageService017 extends DecryptedMessageBase {
   const DecryptedMessageService017({
     required this.randomId,
     required this.action,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageService017.deserialize(BinaryReader reader) {
@@ -583,7 +588,7 @@ class DecryptedMessageService017 extends DecryptedMessageBase {
 /// ID: `089f5c4a`.
 class DecryptedMessageMediaEmpty008 extends DecryptedMessageMediaBase {
   /// Decrypted Message Media Empty constructor.
-  const DecryptedMessageMediaEmpty008() : super._();
+  const DecryptedMessageMediaEmpty008();
 
   /// Deserialize.
   factory DecryptedMessageMediaEmpty008.deserialize(BinaryReader reader) {
@@ -630,7 +635,7 @@ class DecryptedMessageMediaPhoto008 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaPhoto008.deserialize(BinaryReader reader) {
@@ -749,7 +754,7 @@ class DecryptedMessageMediaPhoto045 extends DecryptedMessageMediaBase {
     required this.key,
     required this.iv,
     required this.caption,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaPhoto045.deserialize(BinaryReader reader) {
@@ -875,7 +880,7 @@ class DecryptedMessageMediaVideo008 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaVideo008.deserialize(BinaryReader reader) {
@@ -1004,7 +1009,7 @@ class DecryptedMessageMediaVideo017 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaVideo017.deserialize(BinaryReader reader) {
@@ -1141,7 +1146,7 @@ class DecryptedMessageMediaVideo045 extends DecryptedMessageMediaBase {
     required this.key,
     required this.iv,
     required this.caption,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaVideo045.deserialize(BinaryReader reader) {
@@ -1276,7 +1281,7 @@ class DecryptedMessageMediaGeoPoint008 extends DecryptedMessageMediaBase {
   const DecryptedMessageMediaGeoPoint008({
     required this.lat,
     required this.long,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaGeoPoint008.deserialize(BinaryReader reader) {
@@ -1338,7 +1343,7 @@ class DecryptedMessageMediaContact008 extends DecryptedMessageMediaBase {
     required this.firstName,
     required this.lastName,
     required this.userId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaContact008.deserialize(BinaryReader reader) {
@@ -1420,7 +1425,7 @@ class DecryptedMessageMediaDocument008 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaDocument008.deserialize(BinaryReader reader) {
@@ -1535,7 +1540,7 @@ class DecryptedMessageMediaDocument045 extends DecryptedMessageMediaBase {
     required this.iv,
     required this.attributes,
     required this.caption,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaDocument045.deserialize(BinaryReader reader) {
@@ -1657,7 +1662,7 @@ class DecryptedMessageMediaDocument143 extends DecryptedMessageMediaBase {
     required this.iv,
     required this.attributes,
     required this.caption,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaDocument143.deserialize(BinaryReader reader) {
@@ -1774,7 +1779,7 @@ class DecryptedMessageMediaAudio008 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaAudio008.deserialize(BinaryReader reader) {
@@ -1855,7 +1860,7 @@ class DecryptedMessageMediaAudio017 extends DecryptedMessageMediaBase {
     required this.size,
     required this.key,
     required this.iv,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaAudio017.deserialize(BinaryReader reader) {
@@ -1947,7 +1952,7 @@ class DecryptedMessageMediaExternalDocument023
     required this.thumb,
     required this.dcId,
     required this.attributes,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaExternalDocument023.deserialize(
@@ -2062,7 +2067,7 @@ class DecryptedMessageMediaVenue045 extends DecryptedMessageMediaBase {
     required this.address,
     required this.provider,
     required this.venueId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaVenue045.deserialize(BinaryReader reader) {
@@ -2149,7 +2154,7 @@ class DecryptedMessageMediaWebPage045 extends DecryptedMessageMediaBase {
   /// Decrypted Message Media Web Page constructor.
   const DecryptedMessageMediaWebPage045({
     required this.url,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageMediaWebPage045.deserialize(BinaryReader reader) {
@@ -2202,7 +2207,7 @@ class DecryptedMessageActionSetMessageTTL008
   /// Decrypted Message Action Set Message T T L constructor.
   const DecryptedMessageActionSetMessageTTL008({
     required this.ttlSeconds,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionSetMessageTTL008.deserialize(
@@ -2257,7 +2262,7 @@ class DecryptedMessageActionReadMessages008 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Read Messages constructor.
   const DecryptedMessageActionReadMessages008({
     required this.randomIds,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionReadMessages008.deserialize(
@@ -2311,7 +2316,7 @@ class DecryptedMessageActionDeleteMessages008
   /// Decrypted Message Action Delete Messages constructor.
   const DecryptedMessageActionDeleteMessages008({
     required this.randomIds,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionDeleteMessages008.deserialize(
@@ -2365,7 +2370,7 @@ class DecryptedMessageActionScreenshotMessages008
   /// Decrypted Message Action Screenshot Messages constructor.
   const DecryptedMessageActionScreenshotMessages008({
     required this.randomIds,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionScreenshotMessages008.deserialize(
@@ -2416,7 +2421,7 @@ class DecryptedMessageActionScreenshotMessages008
 /// ID: `6719e45c`.
 class DecryptedMessageActionFlushHistory008 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Flush History constructor.
-  const DecryptedMessageActionFlushHistory008() : super._();
+  const DecryptedMessageActionFlushHistory008();
 
   /// Deserialize.
   factory DecryptedMessageActionFlushHistory008.deserialize(
@@ -2458,7 +2463,7 @@ class DecryptedMessageActionResend017 extends DecryptedMessageActionBase {
   const DecryptedMessageActionResend017({
     required this.startSeqNo,
     required this.endSeqNo,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionResend017.deserialize(BinaryReader reader) {
@@ -2521,7 +2526,7 @@ class DecryptedMessageActionNotifyLayer017 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Notify Layer constructor.
   const DecryptedMessageActionNotifyLayer017({
     required this.layer,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionNotifyLayer017.deserialize(
@@ -2576,7 +2581,7 @@ class DecryptedMessageActionTyping017 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Typing constructor.
   const DecryptedMessageActionTyping017({
     required this.action,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionTyping017.deserialize(BinaryReader reader) {
@@ -2629,7 +2634,7 @@ class DecryptedMessageActionRequestKey020 extends DecryptedMessageActionBase {
   const DecryptedMessageActionRequestKey020({
     required this.exchangeId,
     required this.gA,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionRequestKey020.deserialize(BinaryReader reader) {
@@ -2692,7 +2697,7 @@ class DecryptedMessageActionAcceptKey020 extends DecryptedMessageActionBase {
     required this.exchangeId,
     required this.gB,
     required this.keyFingerprint,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionAcceptKey020.deserialize(BinaryReader reader) {
@@ -2762,7 +2767,7 @@ class DecryptedMessageActionAbortKey020 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Abort Key constructor.
   const DecryptedMessageActionAbortKey020({
     required this.exchangeId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionAbortKey020.deserialize(BinaryReader reader) {
@@ -2817,7 +2822,7 @@ class DecryptedMessageActionCommitKey020 extends DecryptedMessageActionBase {
   const DecryptedMessageActionCommitKey020({
     required this.exchangeId,
     required this.keyFingerprint,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageActionCommitKey020.deserialize(BinaryReader reader) {
@@ -2878,7 +2883,7 @@ class DecryptedMessageActionCommitKey020 extends DecryptedMessageActionBase {
 /// ID: `a82fdd63`.
 class DecryptedMessageActionNoop020 extends DecryptedMessageActionBase {
   /// Decrypted Message Action Noop constructor.
-  const DecryptedMessageActionNoop020() : super._();
+  const DecryptedMessageActionNoop020();
 
   /// Deserialize.
   factory DecryptedMessageActionNoop020.deserialize(BinaryReader reader) {
@@ -2922,7 +2927,7 @@ class DecryptedMessageLayer017 extends DecryptedMessageLayerBase {
     required this.inSeqNo,
     required this.outSeqNo,
     required this.message,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DecryptedMessageLayer017.deserialize(BinaryReader reader) {
@@ -3006,7 +3011,7 @@ class DecryptedMessageLayer017 extends DecryptedMessageLayerBase {
 /// ID: `16bf744e`.
 class SendMessageTypingAction017 extends SendMessageActionBase {
   /// Send Message Typing Action constructor.
-  const SendMessageTypingAction017() : super._();
+  const SendMessageTypingAction017();
 
   /// Deserialize.
   factory SendMessageTypingAction017.deserialize(BinaryReader reader) {
@@ -3044,7 +3049,7 @@ class SendMessageTypingAction017 extends SendMessageActionBase {
 /// ID: `fd5ec8f5`.
 class SendMessageCancelAction017 extends SendMessageActionBase {
   /// Send Message Cancel Action constructor.
-  const SendMessageCancelAction017() : super._();
+  const SendMessageCancelAction017();
 
   /// Deserialize.
   factory SendMessageCancelAction017.deserialize(BinaryReader reader) {
@@ -3082,7 +3087,7 @@ class SendMessageCancelAction017 extends SendMessageActionBase {
 /// ID: `a187d66f`.
 class SendMessageRecordVideoAction017 extends SendMessageActionBase {
   /// Send Message Record Video Action constructor.
-  const SendMessageRecordVideoAction017() : super._();
+  const SendMessageRecordVideoAction017();
 
   /// Deserialize.
   factory SendMessageRecordVideoAction017.deserialize(BinaryReader reader) {
@@ -3120,7 +3125,7 @@ class SendMessageRecordVideoAction017 extends SendMessageActionBase {
 /// ID: `92042ff7`.
 class SendMessageUploadVideoAction017 extends SendMessageActionBase {
   /// Send Message Upload Video Action constructor.
-  const SendMessageUploadVideoAction017() : super._();
+  const SendMessageUploadVideoAction017();
 
   /// Deserialize.
   factory SendMessageUploadVideoAction017.deserialize(BinaryReader reader) {
@@ -3158,7 +3163,7 @@ class SendMessageUploadVideoAction017 extends SendMessageActionBase {
 /// ID: `d52f73f7`.
 class SendMessageRecordAudioAction017 extends SendMessageActionBase {
   /// Send Message Record Audio Action constructor.
-  const SendMessageRecordAudioAction017() : super._();
+  const SendMessageRecordAudioAction017();
 
   /// Deserialize.
   factory SendMessageRecordAudioAction017.deserialize(BinaryReader reader) {
@@ -3196,7 +3201,7 @@ class SendMessageRecordAudioAction017 extends SendMessageActionBase {
 /// ID: `e6ac8a6f`.
 class SendMessageUploadAudioAction017 extends SendMessageActionBase {
   /// Send Message Upload Audio Action constructor.
-  const SendMessageUploadAudioAction017() : super._();
+  const SendMessageUploadAudioAction017();
 
   /// Deserialize.
   factory SendMessageUploadAudioAction017.deserialize(BinaryReader reader) {
@@ -3234,7 +3239,7 @@ class SendMessageUploadAudioAction017 extends SendMessageActionBase {
 /// ID: `990a3c1a`.
 class SendMessageUploadPhotoAction017 extends SendMessageActionBase {
   /// Send Message Upload Photo Action constructor.
-  const SendMessageUploadPhotoAction017() : super._();
+  const SendMessageUploadPhotoAction017();
 
   /// Deserialize.
   factory SendMessageUploadPhotoAction017.deserialize(BinaryReader reader) {
@@ -3272,7 +3277,7 @@ class SendMessageUploadPhotoAction017 extends SendMessageActionBase {
 /// ID: `8faee98e`.
 class SendMessageUploadDocumentAction017 extends SendMessageActionBase {
   /// Send Message Upload Document Action constructor.
-  const SendMessageUploadDocumentAction017() : super._();
+  const SendMessageUploadDocumentAction017();
 
   /// Deserialize.
   factory SendMessageUploadDocumentAction017.deserialize(BinaryReader reader) {
@@ -3310,7 +3315,7 @@ class SendMessageUploadDocumentAction017 extends SendMessageActionBase {
 /// ID: `176f8ba1`.
 class SendMessageGeoLocationAction017 extends SendMessageActionBase {
   /// Send Message Geo Location Action constructor.
-  const SendMessageGeoLocationAction017() : super._();
+  const SendMessageGeoLocationAction017();
 
   /// Deserialize.
   factory SendMessageGeoLocationAction017.deserialize(BinaryReader reader) {
@@ -3348,7 +3353,7 @@ class SendMessageGeoLocationAction017 extends SendMessageActionBase {
 /// ID: `628cbc6f`.
 class SendMessageChooseContactAction017 extends SendMessageActionBase {
   /// Send Message Choose Contact Action constructor.
-  const SendMessageChooseContactAction017() : super._();
+  const SendMessageChooseContactAction017();
 
   /// Deserialize.
   factory SendMessageChooseContactAction017.deserialize(BinaryReader reader) {
@@ -3386,7 +3391,7 @@ class SendMessageChooseContactAction017 extends SendMessageActionBase {
 /// ID: `88f27fbc`.
 class SendMessageRecordRoundAction066 extends SendMessageActionBase {
   /// Send Message Record Round Action constructor.
-  const SendMessageRecordRoundAction066() : super._();
+  const SendMessageRecordRoundAction066();
 
   /// Deserialize.
   factory SendMessageRecordRoundAction066.deserialize(BinaryReader reader) {
@@ -3424,7 +3429,7 @@ class SendMessageRecordRoundAction066 extends SendMessageActionBase {
 /// ID: `bb718624`.
 class SendMessageUploadRoundAction066 extends SendMessageActionBase {
   /// Send Message Upload Round Action constructor.
-  const SendMessageUploadRoundAction066() : super._();
+  const SendMessageUploadRoundAction066();
 
   /// Deserialize.
   factory SendMessageUploadRoundAction066.deserialize(BinaryReader reader) {
@@ -3465,7 +3470,7 @@ class DocumentAttributeImageSize023 extends DocumentAttributeBase {
   const DocumentAttributeImageSize023({
     required this.w,
     required this.h,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeImageSize023.deserialize(BinaryReader reader) {
@@ -3526,7 +3531,7 @@ class DocumentAttributeImageSize023 extends DocumentAttributeBase {
 /// ID: `11b58939`.
 class DocumentAttributeAnimated023 extends DocumentAttributeBase {
   /// Document Attribute Animated constructor.
-  const DocumentAttributeAnimated023() : super._();
+  const DocumentAttributeAnimated023();
 
   /// Deserialize.
   factory DocumentAttributeAnimated023.deserialize(BinaryReader reader) {
@@ -3564,7 +3569,7 @@ class DocumentAttributeAnimated023 extends DocumentAttributeBase {
 /// ID: `fb0a5727`.
 class DocumentAttributeSticker023 extends DocumentAttributeBase {
   /// Document Attribute Sticker constructor.
-  const DocumentAttributeSticker023() : super._();
+  const DocumentAttributeSticker023();
 
   /// Deserialize.
   factory DocumentAttributeSticker023.deserialize(BinaryReader reader) {
@@ -3605,7 +3610,7 @@ class DocumentAttributeSticker045 extends DocumentAttributeBase {
   const DocumentAttributeSticker045({
     required this.alt,
     required this.stickerset,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeSticker045.deserialize(BinaryReader reader) {
@@ -3666,7 +3671,7 @@ class DocumentAttributeVideo023 extends DocumentAttributeBase {
     required this.duration,
     required this.w,
     required this.h,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeVideo023.deserialize(BinaryReader reader) {
@@ -3740,7 +3745,7 @@ class DocumentAttributeVideo066 extends DocumentAttributeBase {
     required this.duration,
     required this.w,
     required this.h,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeVideo066.deserialize(BinaryReader reader) {
@@ -3763,7 +3768,7 @@ class DocumentAttributeVideo066 extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag();
+    final v = toFlag();
 
     return v;
   }
@@ -3822,7 +3827,7 @@ class DocumentAttributeAudio023 extends DocumentAttributeBase {
   /// Document Attribute Audio constructor.
   const DocumentAttributeAudio023({
     required this.duration,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeAudio023.deserialize(BinaryReader reader) {
@@ -3878,7 +3883,7 @@ class DocumentAttributeAudio045 extends DocumentAttributeBase {
     required this.duration,
     required this.title,
     required this.performer,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeAudio045.deserialize(BinaryReader reader) {
@@ -3949,7 +3954,7 @@ class DocumentAttributeAudio046 extends DocumentAttributeBase {
     this.title,
     this.performer,
     this.waveform,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeAudio046.deserialize(BinaryReader reader) {
@@ -3977,7 +3982,7 @@ class DocumentAttributeAudio046 extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b01: performer != null,
       b02: waveform != null,
@@ -4050,7 +4055,7 @@ class DocumentAttributeFilename023 extends DocumentAttributeBase {
   /// Document Attribute Filename constructor.
   const DocumentAttributeFilename023({
     required this.fileName,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory DocumentAttributeFilename023.deserialize(BinaryReader reader) {
@@ -4102,7 +4107,7 @@ class PhotoSizeEmpty023 extends PhotoSizeBase {
   /// Photo Size Empty constructor.
   const PhotoSizeEmpty023({
     required this.type,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory PhotoSizeEmpty023.deserialize(BinaryReader reader) {
@@ -4158,7 +4163,7 @@ class PhotoSize023 extends PhotoSizeBase {
     required this.w,
     required this.h,
     required this.size,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory PhotoSize023.deserialize(BinaryReader reader) {
@@ -4248,7 +4253,7 @@ class PhotoCachedSize023 extends PhotoSizeBase {
     required this.w,
     required this.h,
     required this.bytes,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory PhotoCachedSize023.deserialize(BinaryReader reader) {
@@ -4334,7 +4339,7 @@ class FileLocationUnavailable023 extends FileLocationBase {
     required this.volumeId,
     required this.localId,
     required this.secret,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory FileLocationUnavailable023.deserialize(BinaryReader reader) {
@@ -4409,7 +4414,7 @@ class FileLocation023 extends FileLocationBase {
     required this.volumeId,
     required this.localId,
     required this.secret,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory FileLocation023.deserialize(BinaryReader reader) {
@@ -4491,7 +4496,7 @@ class MessageEntityUnknown045 extends MessageEntityBase {
   const MessageEntityUnknown045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityUnknown045.deserialize(BinaryReader reader) {
@@ -4555,7 +4560,7 @@ class MessageEntityMention045 extends MessageEntityBase {
   const MessageEntityMention045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityMention045.deserialize(BinaryReader reader) {
@@ -4619,7 +4624,7 @@ class MessageEntityHashtag045 extends MessageEntityBase {
   const MessageEntityHashtag045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityHashtag045.deserialize(BinaryReader reader) {
@@ -4683,7 +4688,7 @@ class MessageEntityBotCommand045 extends MessageEntityBase {
   const MessageEntityBotCommand045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityBotCommand045.deserialize(BinaryReader reader) {
@@ -4747,7 +4752,7 @@ class MessageEntityUrl045 extends MessageEntityBase {
   const MessageEntityUrl045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityUrl045.deserialize(BinaryReader reader) {
@@ -4811,7 +4816,7 @@ class MessageEntityEmail045 extends MessageEntityBase {
   const MessageEntityEmail045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityEmail045.deserialize(BinaryReader reader) {
@@ -4875,7 +4880,7 @@ class MessageEntityBold045 extends MessageEntityBase {
   const MessageEntityBold045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityBold045.deserialize(BinaryReader reader) {
@@ -4939,7 +4944,7 @@ class MessageEntityItalic045 extends MessageEntityBase {
   const MessageEntityItalic045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityItalic045.deserialize(BinaryReader reader) {
@@ -5003,7 +5008,7 @@ class MessageEntityCode045 extends MessageEntityBase {
   const MessageEntityCode045({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityCode045.deserialize(BinaryReader reader) {
@@ -5068,7 +5073,7 @@ class MessageEntityPre045 extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.language,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityPre045.deserialize(BinaryReader reader) {
@@ -5140,7 +5145,7 @@ class MessageEntityTextUrl045 extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.url,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityTextUrl045.deserialize(BinaryReader reader) {
@@ -5211,7 +5216,7 @@ class MessageEntityUnderline101 extends MessageEntityBase {
   const MessageEntityUnderline101({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityUnderline101.deserialize(BinaryReader reader) {
@@ -5275,7 +5280,7 @@ class MessageEntityStrike101 extends MessageEntityBase {
   const MessageEntityStrike101({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityStrike101.deserialize(BinaryReader reader) {
@@ -5339,7 +5344,7 @@ class MessageEntityBlockquote101 extends MessageEntityBase {
   const MessageEntityBlockquote101({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityBlockquote101.deserialize(BinaryReader reader) {
@@ -5403,7 +5408,7 @@ class MessageEntitySpoiler144 extends MessageEntityBase {
   const MessageEntitySpoiler144({
     required this.offset,
     required this.length,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntitySpoiler144.deserialize(BinaryReader reader) {
@@ -5468,7 +5473,7 @@ class MessageEntityCustomEmoji144 extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.documentId,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory MessageEntityCustomEmoji144.deserialize(BinaryReader reader) {
@@ -5540,7 +5545,7 @@ class InputStickerSetShortName045 extends InputStickerSetBase {
   /// Input Sticker Set Short Name constructor.
   const InputStickerSetShortName045({
     required this.shortName,
-  }) : super._();
+  });
 
   /// Deserialize.
   factory InputStickerSetShortName045.deserialize(BinaryReader reader) {
@@ -5590,7 +5595,7 @@ class InputStickerSetShortName045 extends InputStickerSetBase {
 /// ID: `ffb62b95`.
 class InputStickerSetEmpty045 extends InputStickerSetBase {
   /// Input Sticker Set Empty constructor.
-  const InputStickerSetEmpty045() : super._();
+  const InputStickerSetEmpty045();
 
   /// Deserialize.
   factory InputStickerSetEmpty045.deserialize(BinaryReader reader) {

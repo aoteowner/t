@@ -1,6 +1,11 @@
-part of '../t.dart';
 
-extension _BinaryWriter on List<int> {
+
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:t/src/core.dart';
+
+extension BinaryWriter on List<int> {
   void writeInt32(int v) {
     final b = Uint8List(4);
     b.buffer.asUint32List(0, 1)[0] = v;
@@ -66,7 +71,7 @@ extension _BinaryWriter on List<int> {
   }
 
   void writeVectorObject<T extends TlObject>(Iterable<T> v) {
-    writeInt32(_vectorCtor);
+    writeInt32(vectorCtor);
     writeInt32(v.length);
 
     for (final item in v) {
@@ -75,7 +80,7 @@ extension _BinaryWriter on List<int> {
   }
 
   void writeVectorInt32(Iterable<int> v) {
-    writeInt32(_vectorCtor);
+    writeInt32(vectorCtor);
     writeInt32(v.length);
 
     for (final item in v) {
@@ -84,7 +89,7 @@ extension _BinaryWriter on List<int> {
   }
 
   void writeVectorInt64(Iterable<int> v) {
-    writeInt32(_vectorCtor);
+    writeInt32(vectorCtor);
     writeInt32(v.length);
 
     for (final item in v) {
@@ -93,7 +98,7 @@ extension _BinaryWriter on List<int> {
   }
 
   void writeVectorString(Iterable<String> v) {
-    writeInt32(_vectorCtor);
+    writeInt32(vectorCtor);
     writeInt32(v.length);
 
     for (final item in v) {
@@ -102,7 +107,7 @@ extension _BinaryWriter on List<int> {
   }
 
   void writeVectorBytes(Iterable<Uint8List> v) {
-    writeInt32(_vectorCtor);
+    writeInt32(vectorCtor);
     writeInt32(v.length);
 
     for (final item in v) {

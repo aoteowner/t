@@ -1,9 +1,15 @@
-part of '../t.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:t/src/binary_reader.dart';
+import 'package:t/src/binary_writer.dart';
+import 'package:t/src/private.dart';
+part 'constants.dart';
+part 'flag_builder.dart';
 
 /// Telegram object class.
 abstract class TlObject {
-  /// Constructor.
-  const TlObject._();
+  const TlObject();
 
   /// Serialize to MTProto binary.
   void serialize(List<int> buffer);
@@ -13,27 +19,25 @@ abstract class TlObject {
 
   @override
   String toString() {
-    return JsonEncoder.withIndent(' ').convert(toJson());
+    return const JsonEncoder.withIndent(' ').convert(toJson());
   }
 }
 
 /// Base Constructor class.
 abstract class TlConstructor extends TlObject {
-  /// Constructor.
-  const TlConstructor._() : super._();
+  const TlConstructor();
 }
 
 /// Base Method class.
 abstract class TlMethod extends TlObject {
-  /// Constructor.
-  const TlMethod._() : super._();
+  const TlMethod();
 }
 
 /// True value.
 ///
 /// ID: `3fedd339`.
 class True extends TlObject {
-  True._() : super._();
+  const True._();
 
   /// Factory.
   factory True() => _instance;
@@ -62,14 +66,14 @@ class True extends TlObject {
 /// Vector of values.
 class Vector<T> extends TlObject {
   /// Constructor.
-  const Vector._(this.items) : super._();
+  const Vector(this.items);
 
   /// Items in the vector.
   final List<T> items;
 
   @override
   void serialize(List<int> buffer) {
-    buffer.writeInt32(_vectorCtor);
+    buffer.writeInt32(vectorCtor);
   }
 
   @override
@@ -85,7 +89,7 @@ class Vector<T> extends TlObject {
 ///
 /// ID: `56730bcc`.
 class Null extends TlObject {
-  Null._() : super._();
+  const Null._();
 
   /// Factory.
   factory Null() => _instance;
@@ -113,7 +117,7 @@ class Null extends TlObject {
 
 /// Unknown object.
 class Unknown extends TlObject {
-  Unknown._(this.id) : super._();
+  const Unknown._(this.id);
 
   /// Id of the unknown object.
   final int id;
@@ -154,7 +158,7 @@ class Unknown extends TlObject {
 /// Boolean value.
 class Boolean extends TlObject {
   /// Constructor.
-  Boolean(this.value) : super._();
+  const Boolean(this.value);
 
   /// Value.
   final bool value;
@@ -184,10 +188,10 @@ class Int128 {
   Int128(this.data);
 
   /// Random.
-  Int128.random() : this(_randomUint8List(16));
+  Int128.random() : this(randomUint8List(16));
 
   /// Parse.
-  Int128.parse(String hex) : this(_fromHexToUint8List(hex));
+  Int128.parse(String hex) : this(fromHexToUint8List(hex));
 
   /// Buffer.
   final Uint8List data;
@@ -204,10 +208,10 @@ class Int256 {
   Int256(this.data);
 
   /// Random.
-  Int256.random() : this(_randomUint8List(32));
+  Int256.random() : this(randomUint8List(32));
 
   /// Parse.
-  Int256.parse(String hex) : this(_fromHexToUint8List(hex));
+  Int256.parse(String hex) : this(fromHexToUint8List(hex));
 
   /// Buffer.
   final Uint8List data;
@@ -221,7 +225,7 @@ class Int256 {
 /// RSA Public Key.
 class RSAPublicKey extends TlConstructor {
   /// Constructor.
-  const RSAPublicKey({required this.n, required this.e}) : super._();
+  const RSAPublicKey({required this.n, required this.e});
 
   /// Modulus
   final Uint8List n;
@@ -240,14 +244,14 @@ class RSAPublicKey extends TlConstructor {
   Map<String, dynamic> toJson() {
     return {
       '\$': '0x7a19cb76',
-      'n': _hex(n),
-      'e': _hex(e),
+      'n': hexStr(n),
+      'e': hexStr(e),
     };
   }
 }
 
 /// Extention methods.
-extension on TlObject {
+extension TlObjectExt on TlObject {
   Uint8List asUint8List() {
     final buffer = <int>[];
     serialize(buffer);

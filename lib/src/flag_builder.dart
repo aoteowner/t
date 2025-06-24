@@ -1,6 +1,6 @@
-part of '../t.dart';
+part of 'core.dart';
 
-int _flag({
+int toFlag({
   bool b00 = false,
   bool b01 = false,
   bool b02 = false,

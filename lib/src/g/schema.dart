@@ -1,4 +1,11 @@
-part of '../../t.dart';
+
+
+import 'dart:typed_data';
+
+import 'package:t/src/binary_reader.dart';
+import 'package:t/src/binary_writer.dart';
+import 'package:t/src/core.dart';
+import 'package:t/src/g/base.dart';
 
 /// Error.
 ///
@@ -8,7 +15,7 @@ class Error extends ErrorBase {
   const Error({
     required this.code,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Error.deserialize(BinaryReader reader) {
@@ -66,7 +73,7 @@ class Error extends ErrorBase {
 /// ID: `7f3b18ea`.
 class InputPeerEmpty extends InputPeerBase {
   /// Input Peer Empty constructor.
-  const InputPeerEmpty() : super._();
+  const InputPeerEmpty() ;
 
   /// Deserialize.
   factory InputPeerEmpty.deserialize(BinaryReader reader) {
@@ -103,7 +110,7 @@ class InputPeerEmpty extends InputPeerBase {
 /// ID: `7da07ec9`.
 class InputPeerSelf extends InputPeerBase {
   /// Input Peer Self constructor.
-  const InputPeerSelf() : super._();
+  const InputPeerSelf() ;
 
   /// Deserialize.
   factory InputPeerSelf.deserialize(BinaryReader reader) {
@@ -142,7 +149,7 @@ class InputPeerChat extends InputPeerBase {
   /// Input Peer Chat constructor.
   const InputPeerChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerChat.deserialize(BinaryReader reader) {
@@ -196,7 +203,7 @@ class InputPeerUser extends InputPeerBase {
   const InputPeerUser({
     required this.userId,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerUser.deserialize(BinaryReader reader) {
@@ -259,7 +266,7 @@ class InputPeerChannel extends InputPeerBase {
   const InputPeerChannel({
     required this.channelId,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerChannel.deserialize(BinaryReader reader) {
@@ -323,7 +330,7 @@ class InputPeerUserFromMessage extends InputPeerBase {
     required this.peer,
     required this.msgId,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerUserFromMessage.deserialize(BinaryReader reader) {
@@ -394,7 +401,7 @@ class InputPeerChannelFromMessage extends InputPeerBase {
     required this.peer,
     required this.msgId,
     required this.channelId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerChannelFromMessage.deserialize(BinaryReader reader) {
@@ -461,7 +468,7 @@ class InputPeerChannelFromMessage extends InputPeerBase {
 /// ID: `b98886cf`.
 class InputUserEmpty extends InputUserBase {
   /// Input User Empty constructor.
-  const InputUserEmpty() : super._();
+  const InputUserEmpty() ;
 
   /// Deserialize.
   factory InputUserEmpty.deserialize(BinaryReader reader) {
@@ -498,7 +505,7 @@ class InputUserEmpty extends InputUserBase {
 /// ID: `f7c1b13f`.
 class InputUserSelf extends InputUserBase {
   /// Input User Self constructor.
-  const InputUserSelf() : super._();
+  const InputUserSelf() ;
 
   /// Deserialize.
   factory InputUserSelf.deserialize(BinaryReader reader) {
@@ -538,7 +545,7 @@ class InputUser extends InputUserBase {
   const InputUser({
     required this.userId,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputUser.deserialize(BinaryReader reader) {
@@ -602,7 +609,7 @@ class InputUserFromMessage extends InputUserBase {
     required this.peer,
     required this.msgId,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputUserFromMessage.deserialize(BinaryReader reader) {
@@ -674,7 +681,7 @@ class InputPhoneContact extends InputContactBase {
     required this.phone,
     required this.firstName,
     required this.lastName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPhoneContact.deserialize(BinaryReader reader) {
@@ -751,7 +758,7 @@ class InputFile extends InputFileBase {
     required this.parts,
     required this.name,
     required this.md5Checksum,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputFile.deserialize(BinaryReader reader) {
@@ -829,7 +836,7 @@ class InputFileBig extends InputFileBase {
     required this.id,
     required this.parts,
     required this.name,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputFileBig.deserialize(BinaryReader reader) {
@@ -898,7 +905,7 @@ class InputFileStoryDocument extends InputFileBase {
   /// Input File Story Document constructor.
   const InputFileStoryDocument({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputFileStoryDocument.deserialize(BinaryReader reader) {
@@ -947,7 +954,7 @@ class InputFileStoryDocument extends InputFileBase {
 /// ID: `9664f57f`.
 class InputMediaEmpty extends InputMediaBase {
   /// Input Media Empty constructor.
-  const InputMediaEmpty() : super._();
+  const InputMediaEmpty() ;
 
   /// Deserialize.
   factory InputMediaEmpty.deserialize(BinaryReader reader) {
@@ -989,7 +996,7 @@ class InputMediaUploadedPhoto extends InputMediaBase {
     required this.file,
     this.stickers,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaUploadedPhoto.deserialize(BinaryReader reader) {
@@ -1017,7 +1024,7 @@ class InputMediaUploadedPhoto extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: spoiler,
       b00: stickers != null,
       b01: ttlSeconds != null,
@@ -1085,7 +1092,7 @@ class InputMediaPhoto extends InputMediaBase {
     required this.spoiler,
     required this.id,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaPhoto.deserialize(BinaryReader reader) {
@@ -1109,7 +1116,7 @@ class InputMediaPhoto extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: spoiler,
       b00: ttlSeconds != null,
     );
@@ -1166,7 +1173,7 @@ class InputMediaGeoPoint extends InputMediaBase {
   /// Input Media Geo Point constructor.
   const InputMediaGeoPoint({
     required this.geoPoint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaGeoPoint.deserialize(BinaryReader reader) {
@@ -1220,7 +1227,7 @@ class InputMediaContact extends InputMediaBase {
     required this.firstName,
     required this.lastName,
     required this.vcard,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaContact.deserialize(BinaryReader reader) {
@@ -1300,7 +1307,7 @@ class InputMediaUploadedDocument extends InputMediaBase {
     required this.attributes,
     this.stickers,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaUploadedDocument.deserialize(BinaryReader reader) {
@@ -1339,7 +1346,7 @@ class InputMediaUploadedDocument extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: nosoundVideo,
       b04: forceFile,
       b05: spoiler,
@@ -1437,7 +1444,7 @@ class InputMediaDocument extends InputMediaBase {
     required this.id,
     this.ttlSeconds,
     this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaDocument.deserialize(BinaryReader reader) {
@@ -1464,7 +1471,7 @@ class InputMediaDocument extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: spoiler,
       b00: ttlSeconds != null,
       b01: query != null,
@@ -1535,7 +1542,7 @@ class InputMediaVenue extends InputMediaBase {
     required this.provider,
     required this.venueId,
     required this.venueType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaVenue.deserialize(BinaryReader reader) {
@@ -1623,7 +1630,7 @@ class InputMediaPhotoExternal extends InputMediaBase {
     required this.spoiler,
     required this.url,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaPhotoExternal.deserialize(BinaryReader reader) {
@@ -1647,7 +1654,7 @@ class InputMediaPhotoExternal extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: spoiler,
       b00: ttlSeconds != null,
     );
@@ -1706,7 +1713,7 @@ class InputMediaDocumentExternal extends InputMediaBase {
     required this.spoiler,
     required this.url,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaDocumentExternal.deserialize(BinaryReader reader) {
@@ -1730,7 +1737,7 @@ class InputMediaDocumentExternal extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: spoiler,
       b00: ttlSeconds != null,
     );
@@ -1787,7 +1794,7 @@ class InputMediaGame extends InputMediaBase {
   /// Input Media Game constructor.
   const InputMediaGame({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaGame.deserialize(BinaryReader reader) {
@@ -1846,7 +1853,7 @@ class InputMediaInvoice extends InputMediaBase {
     required this.providerData,
     this.startParam,
     this.extendedMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaInvoice.deserialize(BinaryReader reader) {
@@ -1887,7 +1894,7 @@ class InputMediaInvoice extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: photo != null,
       b03: provider != null,
       b01: startParam != null,
@@ -1990,7 +1997,7 @@ class InputMediaGeoLive extends InputMediaBase {
     this.heading,
     this.period,
     this.proximityNotificationRadius,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaGeoLive.deserialize(BinaryReader reader) {
@@ -2021,7 +2028,7 @@ class InputMediaGeoLive extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: stopped,
       b02: heading != null,
       b01: period != null,
@@ -2099,7 +2106,7 @@ class InputMediaPoll extends InputMediaBase {
     this.correctAnswers,
     this.solution,
     this.solutionEntities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaPoll.deserialize(BinaryReader reader) {
@@ -2130,7 +2137,7 @@ class InputMediaPoll extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: correctAnswers != null,
       b01: solution != null || solutionEntities != null,
     );
@@ -2199,7 +2206,7 @@ class InputMediaDice extends InputMediaBase {
   /// Input Media Dice constructor.
   const InputMediaDice({
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaDice.deserialize(BinaryReader reader) {
@@ -2251,7 +2258,7 @@ class InputMediaStory extends InputMediaBase {
   const InputMediaStory({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaStory.deserialize(BinaryReader reader) {
@@ -2314,7 +2321,7 @@ class InputMediaWebPage extends InputMediaBase {
     required this.forceSmallMedia,
     required this.optional,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaWebPage.deserialize(BinaryReader reader) {
@@ -2339,7 +2346,7 @@ class InputMediaWebPage extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: forceLargeMedia,
       b01: forceSmallMedia,
       b02: optional,
@@ -2399,7 +2406,7 @@ class InputMediaPaidMedia extends InputMediaBase {
     required this.starsAmount,
     required this.extendedMedia,
     this.payload,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaPaidMedia.deserialize(BinaryReader reader) {
@@ -2423,7 +2430,7 @@ class InputMediaPaidMedia extends InputMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: payload != null,
     );
 
@@ -2480,7 +2487,7 @@ class InputMediaPaidMedia extends InputMediaBase {
 /// ID: `1ca48f57`.
 class InputChatPhotoEmpty extends InputChatPhotoBase {
   /// Input Chat Photo Empty constructor.
-  const InputChatPhotoEmpty() : super._();
+  const InputChatPhotoEmpty() ;
 
   /// Deserialize.
   factory InputChatPhotoEmpty.deserialize(BinaryReader reader) {
@@ -2522,7 +2529,7 @@ class InputChatUploadedPhoto extends InputChatPhotoBase {
     this.video,
     this.videoStartTs,
     this.videoEmojiMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputChatUploadedPhoto.deserialize(BinaryReader reader) {
@@ -2552,7 +2559,7 @@ class InputChatUploadedPhoto extends InputChatPhotoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: file != null,
       b01: video != null,
       b02: videoStartTs != null,
@@ -2626,7 +2633,7 @@ class InputChatPhoto extends InputChatPhotoBase {
   /// Input Chat Photo constructor.
   const InputChatPhoto({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputChatPhoto.deserialize(BinaryReader reader) {
@@ -2675,7 +2682,7 @@ class InputChatPhoto extends InputChatPhotoBase {
 /// ID: `e4c123d6`.
 class InputGeoPointEmpty extends InputGeoPointBase {
   /// Input Geo Point Empty constructor.
-  const InputGeoPointEmpty() : super._();
+  const InputGeoPointEmpty() ;
 
   /// Deserialize.
   factory InputGeoPointEmpty.deserialize(BinaryReader reader) {
@@ -2716,7 +2723,7 @@ class InputGeoPoint extends InputGeoPointBase {
     required this.lat,
     required this.long,
     this.accuracyRadius,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputGeoPoint.deserialize(BinaryReader reader) {
@@ -2740,7 +2747,7 @@ class InputGeoPoint extends InputGeoPointBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: accuracyRadius != null,
     );
 
@@ -2795,7 +2802,7 @@ class InputGeoPoint extends InputGeoPointBase {
 /// ID: `1cd7bf0d`.
 class InputPhotoEmpty extends InputPhotoBase {
   /// Input Photo Empty constructor.
-  const InputPhotoEmpty() : super._();
+  const InputPhotoEmpty() ;
 
   /// Deserialize.
   factory InputPhotoEmpty.deserialize(BinaryReader reader) {
@@ -2836,7 +2843,7 @@ class InputPhoto extends InputPhotoBase {
     required this.id,
     required this.accessHash,
     required this.fileReference,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPhoto.deserialize(BinaryReader reader) {
@@ -2908,7 +2915,7 @@ class InputFileLocation extends InputFileLocationBase {
     required this.localId,
     required this.secret,
     required this.fileReference,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputFileLocation.deserialize(BinaryReader reader) {
@@ -2987,7 +2994,7 @@ class InputEncryptedFileLocation extends InputFileLocationBase {
   const InputEncryptedFileLocation({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputEncryptedFileLocation.deserialize(BinaryReader reader) {
@@ -3052,7 +3059,7 @@ class InputDocumentFileLocation extends InputFileLocationBase {
     required this.accessHash,
     required this.fileReference,
     required this.thumbSize,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputDocumentFileLocation.deserialize(BinaryReader reader) {
@@ -3129,7 +3136,7 @@ class InputSecureFileLocation extends InputFileLocationBase {
   const InputSecureFileLocation({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputSecureFileLocation.deserialize(BinaryReader reader) {
@@ -3189,7 +3196,7 @@ class InputSecureFileLocation extends InputFileLocationBase {
 /// ID: `29be5899`.
 class InputTakeoutFileLocation extends InputFileLocationBase {
   /// Input Takeout File Location constructor.
-  const InputTakeoutFileLocation() : super._();
+  const InputTakeoutFileLocation() ;
 
   /// Deserialize.
   factory InputTakeoutFileLocation.deserialize(BinaryReader reader) {
@@ -3231,7 +3238,7 @@ class InputPhotoFileLocation extends InputFileLocationBase {
     required this.accessHash,
     required this.fileReference,
     required this.thumbSize,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPhotoFileLocation.deserialize(BinaryReader reader) {
@@ -3312,7 +3319,7 @@ class InputPhotoLegacyFileLocation extends InputFileLocationBase {
     required this.volumeId,
     required this.localId,
     required this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPhotoLegacyFileLocation.deserialize(BinaryReader reader) {
@@ -3410,7 +3417,7 @@ class InputPeerPhotoFileLocation extends InputFileLocationBase {
     required this.big,
     required this.peer,
     required this.photoId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerPhotoFileLocation.deserialize(BinaryReader reader) {
@@ -3433,7 +3440,7 @@ class InputPeerPhotoFileLocation extends InputFileLocationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: big,
     );
 
@@ -3489,7 +3496,7 @@ class InputStickerSetThumb extends InputFileLocationBase {
   const InputStickerSetThumb({
     required this.stickerset,
     required this.thumbVersion,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickerSetThumb.deserialize(BinaryReader reader) {
@@ -3553,7 +3560,7 @@ class InputGroupCallStream extends InputFileLocationBase {
     required this.scale,
     this.videoChannel,
     this.videoQuality,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputGroupCallStream.deserialize(BinaryReader reader) {
@@ -3582,7 +3589,7 @@ class InputGroupCallStream extends InputFileLocationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: videoChannel != null || videoQuality != null,
     );
 
@@ -3656,7 +3663,7 @@ class PeerUser extends PeerBase {
   /// Peer User constructor.
   const PeerUser({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerUser.deserialize(BinaryReader reader) {
@@ -3709,7 +3716,7 @@ class PeerChat extends PeerBase {
   /// Peer Chat constructor.
   const PeerChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerChat.deserialize(BinaryReader reader) {
@@ -3762,7 +3769,7 @@ class PeerChannel extends PeerBase {
   /// Peer Channel constructor.
   const PeerChannel({
     required this.channelId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerChannel.deserialize(BinaryReader reader) {
@@ -3813,7 +3820,7 @@ class PeerChannel extends PeerBase {
 /// ID: `aa963b05`.
 class StorageFileUnknown extends StorageFileTypeBase {
   /// Storage File Unknown constructor.
-  const StorageFileUnknown() : super._();
+  const StorageFileUnknown() ;
 
   /// Deserialize.
   factory StorageFileUnknown.deserialize(BinaryReader reader) {
@@ -3850,7 +3857,7 @@ class StorageFileUnknown extends StorageFileTypeBase {
 /// ID: `40bc6f52`.
 class StorageFilePartial extends StorageFileTypeBase {
   /// Storage File Partial constructor.
-  const StorageFilePartial() : super._();
+  const StorageFilePartial() ;
 
   /// Deserialize.
   factory StorageFilePartial.deserialize(BinaryReader reader) {
@@ -3887,7 +3894,7 @@ class StorageFilePartial extends StorageFileTypeBase {
 /// ID: `007efe0e`.
 class StorageFileJpeg extends StorageFileTypeBase {
   /// Storage File Jpeg constructor.
-  const StorageFileJpeg() : super._();
+  const StorageFileJpeg() ;
 
   /// Deserialize.
   factory StorageFileJpeg.deserialize(BinaryReader reader) {
@@ -3924,7 +3931,7 @@ class StorageFileJpeg extends StorageFileTypeBase {
 /// ID: `cae1aadf`.
 class StorageFileGif extends StorageFileTypeBase {
   /// Storage File Gif constructor.
-  const StorageFileGif() : super._();
+  const StorageFileGif() ;
 
   /// Deserialize.
   factory StorageFileGif.deserialize(BinaryReader reader) {
@@ -3961,7 +3968,7 @@ class StorageFileGif extends StorageFileTypeBase {
 /// ID: `0a4f63c0`.
 class StorageFilePng extends StorageFileTypeBase {
   /// Storage File Png constructor.
-  const StorageFilePng() : super._();
+  const StorageFilePng() ;
 
   /// Deserialize.
   factory StorageFilePng.deserialize(BinaryReader reader) {
@@ -3998,7 +4005,7 @@ class StorageFilePng extends StorageFileTypeBase {
 /// ID: `ae1e508d`.
 class StorageFilePdf extends StorageFileTypeBase {
   /// Storage File Pdf constructor.
-  const StorageFilePdf() : super._();
+  const StorageFilePdf() ;
 
   /// Deserialize.
   factory StorageFilePdf.deserialize(BinaryReader reader) {
@@ -4035,7 +4042,7 @@ class StorageFilePdf extends StorageFileTypeBase {
 /// ID: `528a0677`.
 class StorageFileMp3 extends StorageFileTypeBase {
   /// Storage File Mp3 constructor.
-  const StorageFileMp3() : super._();
+  const StorageFileMp3() ;
 
   /// Deserialize.
   factory StorageFileMp3.deserialize(BinaryReader reader) {
@@ -4072,7 +4079,7 @@ class StorageFileMp3 extends StorageFileTypeBase {
 /// ID: `4b09ebbc`.
 class StorageFileMov extends StorageFileTypeBase {
   /// Storage File Mov constructor.
-  const StorageFileMov() : super._();
+  const StorageFileMov() ;
 
   /// Deserialize.
   factory StorageFileMov.deserialize(BinaryReader reader) {
@@ -4109,7 +4116,7 @@ class StorageFileMov extends StorageFileTypeBase {
 /// ID: `b3cea0e4`.
 class StorageFileMp4 extends StorageFileTypeBase {
   /// Storage File Mp4 constructor.
-  const StorageFileMp4() : super._();
+  const StorageFileMp4() ;
 
   /// Deserialize.
   factory StorageFileMp4.deserialize(BinaryReader reader) {
@@ -4146,7 +4153,7 @@ class StorageFileMp4 extends StorageFileTypeBase {
 /// ID: `1081464c`.
 class StorageFileWebp extends StorageFileTypeBase {
   /// Storage File Webp constructor.
-  const StorageFileWebp() : super._();
+  const StorageFileWebp() ;
 
   /// Deserialize.
   factory StorageFileWebp.deserialize(BinaryReader reader) {
@@ -4185,7 +4192,7 @@ class UserEmpty extends UserBase {
   /// User Empty constructor.
   const UserEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserEmpty.deserialize(BinaryReader reader) {
@@ -4280,7 +4287,7 @@ class User extends UserBase {
     this.color,
     this.profileColor,
     this.botActiveUsers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory User.deserialize(BinaryReader reader) {
@@ -4409,7 +4416,7 @@ class User extends UserBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b10: self,
       b11: contact,
       b12: mutualContact,
@@ -4445,7 +4452,7 @@ class User extends UserBase {
 
   /// Flags2.
   int get flags2 {
-    final v = _flag(
+    final v = toFlag(
       b01: botCanEdit,
       b02: closeFriend,
       b03: storiesHidden,
@@ -4738,7 +4745,7 @@ class User extends UserBase {
 /// ID: `4f11bae1`.
 class UserProfilePhotoEmpty extends UserProfilePhotoBase {
   /// User Profile Photo Empty constructor.
-  const UserProfilePhotoEmpty() : super._();
+  const UserProfilePhotoEmpty() ;
 
   /// Deserialize.
   factory UserProfilePhotoEmpty.deserialize(BinaryReader reader) {
@@ -4781,7 +4788,7 @@ class UserProfilePhoto extends UserProfilePhotoBase {
     required this.photoId,
     this.strippedThumb,
     required this.dcId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserProfilePhoto.deserialize(BinaryReader reader) {
@@ -4809,7 +4816,7 @@ class UserProfilePhoto extends UserProfilePhotoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hasVideo,
       b02: personal,
       b01: strippedThumb != null,
@@ -4878,7 +4885,7 @@ class UserProfilePhoto extends UserProfilePhotoBase {
 /// ID: `09d05049`.
 class UserStatusEmpty extends UserStatusBase {
   /// User Status Empty constructor.
-  const UserStatusEmpty() : super._();
+  const UserStatusEmpty() ;
 
   /// Deserialize.
   factory UserStatusEmpty.deserialize(BinaryReader reader) {
@@ -4917,7 +4924,7 @@ class UserStatusOnline extends UserStatusBase {
   /// User Status Online constructor.
   const UserStatusOnline({
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStatusOnline.deserialize(BinaryReader reader) {
@@ -4968,7 +4975,7 @@ class UserStatusOffline extends UserStatusBase {
   /// User Status Offline constructor.
   const UserStatusOffline({
     required this.wasOnline,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStatusOffline.deserialize(BinaryReader reader) {
@@ -5019,7 +5026,7 @@ class UserStatusRecently extends UserStatusBase {
   /// User Status Recently constructor.
   const UserStatusRecently({
     required this.byMe,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStatusRecently.deserialize(BinaryReader reader) {
@@ -5038,7 +5045,7 @@ class UserStatusRecently extends UserStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: byMe,
     );
 
@@ -5081,7 +5088,7 @@ class UserStatusLastWeek extends UserStatusBase {
   /// User Status Last Week constructor.
   const UserStatusLastWeek({
     required this.byMe,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStatusLastWeek.deserialize(BinaryReader reader) {
@@ -5100,7 +5107,7 @@ class UserStatusLastWeek extends UserStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: byMe,
     );
 
@@ -5143,7 +5150,7 @@ class UserStatusLastMonth extends UserStatusBase {
   /// User Status Last Month constructor.
   const UserStatusLastMonth({
     required this.byMe,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStatusLastMonth.deserialize(BinaryReader reader) {
@@ -5162,7 +5169,7 @@ class UserStatusLastMonth extends UserStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: byMe,
     );
 
@@ -5205,7 +5212,7 @@ class ChatEmpty extends ChatBase {
   /// Chat Empty constructor.
   const ChatEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatEmpty.deserialize(BinaryReader reader) {
@@ -5272,7 +5279,7 @@ class Chat extends ChatBase {
     this.migratedTo,
     this.adminRights,
     this.defaultBannedRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Chat.deserialize(BinaryReader reader) {
@@ -5326,7 +5333,7 @@ class Chat extends ChatBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b02: left,
       b05: deactivated,
@@ -5458,7 +5465,7 @@ class ChatForbidden extends ChatBase {
   const ChatForbidden({
     required this.id,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatForbidden.deserialize(BinaryReader reader) {
@@ -5559,7 +5566,7 @@ class Channel extends ChatBase {
     this.emojiStatus,
     this.level,
     this.subscriptionUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Channel.deserialize(BinaryReader reader) {
@@ -5687,7 +5694,7 @@ class Channel extends ChatBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b02: left,
       b05: broadcast,
@@ -5721,7 +5728,7 @@ class Channel extends ChatBase {
 
   /// Flags2.
   int get flags2 {
-    final v = _flag(
+    final v = toFlag(
       b01: storiesHidden,
       b02: storiesHiddenMin,
       b03: storiesUnavailable,
@@ -5789,7 +5796,7 @@ class Channel extends ChatBase {
   /// noforwards: bit 27 of flags.27?true
   final bool noforwards;
 
-  /// join_to_send: bit 28 of flags.28?true
+  /// jointo_send: bit 28 of flags.28?true
   final bool joinToSend;
 
   /// join_request: bit 29 of flags.29?true
@@ -6007,7 +6014,7 @@ class ChannelForbidden extends ChatBase {
     required this.accessHash,
     required this.title,
     this.untilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelForbidden.deserialize(BinaryReader reader) {
@@ -6037,7 +6044,7 @@ class ChannelForbidden extends ChatBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: broadcast,
       b08: megagroup,
       b16: untilDate != null,
@@ -6132,7 +6139,7 @@ class ChatFull extends ChatFullBase {
     this.recentRequesters,
     this.availableReactions,
     this.reactionsLimit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatFull.deserialize(BinaryReader reader) {
@@ -6211,7 +6218,7 @@ class ChatFull extends ChatFullBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b07: canSetUsername,
       b08: hasScheduled,
       b19: translationsDisabled,
@@ -6461,7 +6468,7 @@ class ChannelFull extends ChatFullBase {
     this.boostsApplied,
     this.boostsUnrestrict,
     this.emojiset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelFull.deserialize(BinaryReader reader) {
@@ -6650,7 +6657,7 @@ class ChannelFull extends ChatFullBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: canViewParticipants,
       b06: canSetUsername,
       b07: canSetStickers,
@@ -6689,7 +6696,7 @@ class ChannelFull extends ChatFullBase {
 
   /// Flags2.
   int get flags2 {
-    final v = _flag(
+    final v = toFlag(
       b00: canDeleteChannel,
       b01: antispam,
       b02: participantsHidden,
@@ -7135,7 +7142,7 @@ class ChatParticipant extends ChatParticipantBase {
     required this.userId,
     required this.inviterId,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatParticipant.deserialize(BinaryReader reader) {
@@ -7204,7 +7211,7 @@ class ChatParticipantCreator extends ChatParticipantBase {
   /// Chat Participant Creator constructor.
   const ChatParticipantCreator({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatParticipantCreator.deserialize(BinaryReader reader) {
@@ -7259,7 +7266,7 @@ class ChatParticipantAdmin extends ChatParticipantBase {
     required this.userId,
     required this.inviterId,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatParticipantAdmin.deserialize(BinaryReader reader) {
@@ -7329,7 +7336,7 @@ class ChatParticipantsForbidden extends ChatParticipantsBase {
   const ChatParticipantsForbidden({
     required this.chatId,
     this.selfParticipant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatParticipantsForbidden.deserialize(BinaryReader reader) {
@@ -7353,7 +7360,7 @@ class ChatParticipantsForbidden extends ChatParticipantsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: selfParticipant != null,
     );
 
@@ -7409,7 +7416,7 @@ class ChatParticipants extends ChatParticipantsBase {
     required this.chatId,
     required this.participants,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatParticipants.deserialize(BinaryReader reader) {
@@ -7476,7 +7483,7 @@ class ChatParticipants extends ChatParticipantsBase {
 /// ID: `37c1011c`.
 class ChatPhotoEmpty extends ChatPhotoBase {
   /// Chat Photo Empty constructor.
-  const ChatPhotoEmpty() : super._();
+  const ChatPhotoEmpty() ;
 
   /// Deserialize.
   factory ChatPhotoEmpty.deserialize(BinaryReader reader) {
@@ -7518,7 +7525,7 @@ class ChatPhoto extends ChatPhotoBase {
     required this.photoId,
     this.strippedThumb,
     required this.dcId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatPhoto.deserialize(BinaryReader reader) {
@@ -7544,7 +7551,7 @@ class ChatPhoto extends ChatPhotoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hasVideo,
       b01: strippedThumb != null,
     );
@@ -7611,7 +7618,7 @@ class MessageEmpty extends MessageBase {
   const MessageEmpty({
     required this.id,
     this.peerId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEmpty.deserialize(BinaryReader reader) {
@@ -7633,7 +7640,7 @@ class MessageEmpty extends MessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: peerId != null,
     );
 
@@ -7725,7 +7732,7 @@ class Message extends MessageBase {
     this.quickReplyShortcutId,
     this.effect,
     this.factcheck,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Message.deserialize(BinaryReader reader) {
@@ -7857,7 +7864,7 @@ class Message extends MessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: out,
       b04: mentioned,
       b05: mediaUnread,
@@ -7894,7 +7901,7 @@ class Message extends MessageBase {
 
   /// Flags2.
   int get flags2 {
-    final v = _flag(
+    final v = toFlag(
       b01: offline,
       b04: videoProcessingPending,
       b00: viaBusinessBotId != null,
@@ -8201,7 +8208,7 @@ class MessageService extends MessageBase {
     required this.date,
     required this.action,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageService.deserialize(BinaryReader reader) {
@@ -8248,7 +8255,7 @@ class MessageService extends MessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: out,
       b04: mentioned,
       b05: mediaUnread,
@@ -8363,7 +8370,7 @@ class MessageService extends MessageBase {
 /// ID: `3ded6320`.
 class MessageMediaEmpty extends MessageMediaBase {
   /// Message Media Empty constructor.
-  const MessageMediaEmpty() : super._();
+  const MessageMediaEmpty() ;
 
   /// Deserialize.
   factory MessageMediaEmpty.deserialize(BinaryReader reader) {
@@ -8404,7 +8411,7 @@ class MessageMediaPhoto extends MessageMediaBase {
     required this.spoiler,
     this.photo,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaPhoto.deserialize(BinaryReader reader) {
@@ -8429,7 +8436,7 @@ class MessageMediaPhoto extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: spoiler,
       b00: photo != null,
       b02: ttlSeconds != null,
@@ -8490,7 +8497,7 @@ class MessageMediaGeo extends MessageMediaBase {
   /// Message Media Geo constructor.
   const MessageMediaGeo({
     required this.geo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaGeo.deserialize(BinaryReader reader) {
@@ -8545,7 +8552,7 @@ class MessageMediaContact extends MessageMediaBase {
     required this.lastName,
     required this.vcard,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaContact.deserialize(BinaryReader reader) {
@@ -8624,7 +8631,7 @@ class MessageMediaContact extends MessageMediaBase {
 /// ID: `9f84f49e`.
 class MessageMediaUnsupported extends MessageMediaBase {
   /// Message Media Unsupported constructor.
-  const MessageMediaUnsupported() : super._();
+  const MessageMediaUnsupported() ;
 
   /// Deserialize.
   factory MessageMediaUnsupported.deserialize(BinaryReader reader) {
@@ -8670,7 +8677,7 @@ class MessageMediaDocument extends MessageMediaBase {
     this.document,
     this.altDocuments,
     this.ttlSeconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaDocument.deserialize(BinaryReader reader) {
@@ -8708,7 +8715,7 @@ class MessageMediaDocument extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: nopremium,
       b04: spoiler,
       b06: video,
@@ -8802,7 +8809,7 @@ class MessageMediaWebPage extends MessageMediaBase {
     required this.manual,
     required this.safe,
     required this.webpage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaWebPage.deserialize(BinaryReader reader) {
@@ -8829,7 +8836,7 @@ class MessageMediaWebPage extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: forceLargeMedia,
       b01: forceSmallMedia,
       b03: manual,
@@ -8897,7 +8904,7 @@ class MessageMediaVenue extends MessageMediaBase {
     required this.provider,
     required this.venueId,
     required this.venueType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaVenue.deserialize(BinaryReader reader) {
@@ -8983,7 +8990,7 @@ class MessageMediaGame extends MessageMediaBase {
   /// Message Media Game constructor.
   const MessageMediaGame({
     required this.game,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaGame.deserialize(BinaryReader reader) {
@@ -9043,7 +9050,7 @@ class MessageMediaInvoice extends MessageMediaBase {
     required this.totalAmount,
     required this.startParam,
     this.extendedMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaInvoice.deserialize(BinaryReader reader) {
@@ -9085,7 +9092,7 @@ class MessageMediaInvoice extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: shippingAddressRequested,
       b03: test,
       b00: photo != null,
@@ -9190,7 +9197,7 @@ class MessageMediaGeoLive extends MessageMediaBase {
     this.heading,
     required this.period,
     this.proximityNotificationRadius,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaGeoLive.deserialize(BinaryReader reader) {
@@ -9218,7 +9225,7 @@ class MessageMediaGeoLive extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: heading != null,
       b01: proximityNotificationRadius != null,
     );
@@ -9287,7 +9294,7 @@ class MessageMediaPoll extends MessageMediaBase {
   const MessageMediaPoll({
     required this.poll,
     required this.results,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaPoll.deserialize(BinaryReader reader) {
@@ -9346,7 +9353,7 @@ class MessageMediaDice extends MessageMediaBase {
   const MessageMediaDice({
     required this.value,
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaDice.deserialize(BinaryReader reader) {
@@ -9409,7 +9416,7 @@ class MessageMediaStory extends MessageMediaBase {
     required this.peer,
     required this.id,
     this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaStory.deserialize(BinaryReader reader) {
@@ -9435,7 +9442,7 @@ class MessageMediaStory extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: viaMention,
       b00: story != null,
     );
@@ -9507,7 +9514,7 @@ class MessageMediaGiveaway extends MessageMediaBase {
     this.months,
     this.stars,
     required this.untilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaGiveaway.deserialize(BinaryReader reader) {
@@ -9548,7 +9555,7 @@ class MessageMediaGiveaway extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: onlyNewSubscribers,
       b02: winnersAreVisible,
       b01: countriesIso2 != null,
@@ -9660,7 +9667,7 @@ class MessageMediaGiveawayResults extends MessageMediaBase {
     this.stars,
     this.prizeDescription,
     required this.untilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaGiveawayResults.deserialize(BinaryReader reader) {
@@ -9707,7 +9714,7 @@ class MessageMediaGiveawayResults extends MessageMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: onlyNewSubscribers,
       b02: refunded,
       b03: additionalPeersCount != null,
@@ -9830,7 +9837,7 @@ class MessageMediaPaidMedia extends MessageMediaBase {
   const MessageMediaPaidMedia({
     required this.starsAmount,
     required this.extendedMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageMediaPaidMedia.deserialize(BinaryReader reader) {
@@ -9888,7 +9895,7 @@ class MessageMediaPaidMedia extends MessageMediaBase {
 /// ID: `b6aef7b0`.
 class MessageActionEmpty extends MessageActionBase {
   /// Message Action Empty constructor.
-  const MessageActionEmpty() : super._();
+  const MessageActionEmpty() ;
 
   /// Deserialize.
   factory MessageActionEmpty.deserialize(BinaryReader reader) {
@@ -9928,7 +9935,7 @@ class MessageActionChatCreate extends MessageActionBase {
   const MessageActionChatCreate({
     required this.title,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatCreate.deserialize(BinaryReader reader) {
@@ -9986,7 +9993,7 @@ class MessageActionChatEditTitle extends MessageActionBase {
   /// Message Action Chat Edit Title constructor.
   const MessageActionChatEditTitle({
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatEditTitle.deserialize(BinaryReader reader) {
@@ -10037,7 +10044,7 @@ class MessageActionChatEditPhoto extends MessageActionBase {
   /// Message Action Chat Edit Photo constructor.
   const MessageActionChatEditPhoto({
     required this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatEditPhoto.deserialize(BinaryReader reader) {
@@ -10086,7 +10093,7 @@ class MessageActionChatEditPhoto extends MessageActionBase {
 /// ID: `95e3fbef`.
 class MessageActionChatDeletePhoto extends MessageActionBase {
   /// Message Action Chat Delete Photo constructor.
-  const MessageActionChatDeletePhoto() : super._();
+  const MessageActionChatDeletePhoto() ;
 
   /// Deserialize.
   factory MessageActionChatDeletePhoto.deserialize(BinaryReader reader) {
@@ -10125,7 +10132,7 @@ class MessageActionChatAddUser extends MessageActionBase {
   /// Message Action Chat Add User constructor.
   const MessageActionChatAddUser({
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatAddUser.deserialize(BinaryReader reader) {
@@ -10176,7 +10183,7 @@ class MessageActionChatDeleteUser extends MessageActionBase {
   /// Message Action Chat Delete User constructor.
   const MessageActionChatDeleteUser({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatDeleteUser.deserialize(BinaryReader reader) {
@@ -10229,7 +10236,7 @@ class MessageActionChatJoinedByLink extends MessageActionBase {
   /// Message Action Chat Joined By Link constructor.
   const MessageActionChatJoinedByLink({
     required this.inviterId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatJoinedByLink.deserialize(BinaryReader reader) {
@@ -10282,7 +10289,7 @@ class MessageActionChannelCreate extends MessageActionBase {
   /// Message Action Channel Create constructor.
   const MessageActionChannelCreate({
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChannelCreate.deserialize(BinaryReader reader) {
@@ -10333,7 +10340,7 @@ class MessageActionChatMigrateTo extends MessageActionBase {
   /// Message Action Chat Migrate To constructor.
   const MessageActionChatMigrateTo({
     required this.channelId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChatMigrateTo.deserialize(BinaryReader reader) {
@@ -10387,7 +10394,7 @@ class MessageActionChannelMigrateFrom extends MessageActionBase {
   const MessageActionChannelMigrateFrom({
     required this.title,
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionChannelMigrateFrom.deserialize(BinaryReader reader) {
@@ -10445,7 +10452,7 @@ class MessageActionChannelMigrateFrom extends MessageActionBase {
 /// ID: `94bd38ed`.
 class MessageActionPinMessage extends MessageActionBase {
   /// Message Action Pin Message constructor.
-  const MessageActionPinMessage() : super._();
+  const MessageActionPinMessage() ;
 
   /// Deserialize.
   factory MessageActionPinMessage.deserialize(BinaryReader reader) {
@@ -10482,7 +10489,7 @@ class MessageActionPinMessage extends MessageActionBase {
 /// ID: `9fbab604`.
 class MessageActionHistoryClear extends MessageActionBase {
   /// Message Action History Clear constructor.
-  const MessageActionHistoryClear() : super._();
+  const MessageActionHistoryClear() ;
 
   /// Deserialize.
   factory MessageActionHistoryClear.deserialize(BinaryReader reader) {
@@ -10522,7 +10529,7 @@ class MessageActionGameScore extends MessageActionBase {
   const MessageActionGameScore({
     required this.gameId,
     required this.score,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGameScore.deserialize(BinaryReader reader) {
@@ -10592,7 +10599,7 @@ class MessageActionPaymentSentMe extends MessageActionBase {
     this.shippingOptionId,
     required this.charge,
     this.subscriptionUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionPaymentSentMe.deserialize(BinaryReader reader) {
@@ -10633,7 +10640,7 @@ class MessageActionPaymentSentMe extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: recurringInit,
       b03: recurringUsed,
       b00: info != null,
@@ -10735,7 +10742,7 @@ class MessageActionPaymentSent extends MessageActionBase {
     required this.totalAmount,
     this.invoiceSlug,
     this.subscriptionUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionPaymentSent.deserialize(BinaryReader reader) {
@@ -10767,7 +10774,7 @@ class MessageActionPaymentSent extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: recurringInit,
       b03: recurringUsed,
       b00: invoiceSlug != null,
@@ -10848,7 +10855,7 @@ class MessageActionPhoneCall extends MessageActionBase {
     required this.callId,
     this.reason,
     this.duration,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionPhoneCall.deserialize(BinaryReader reader) {
@@ -10877,7 +10884,7 @@ class MessageActionPhoneCall extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: video,
       b00: reason != null,
       b01: duration != null,
@@ -10943,7 +10950,7 @@ class MessageActionPhoneCall extends MessageActionBase {
 /// ID: `4792929b`.
 class MessageActionScreenshotTaken extends MessageActionBase {
   /// Message Action Screenshot Taken constructor.
-  const MessageActionScreenshotTaken() : super._();
+  const MessageActionScreenshotTaken() ;
 
   /// Deserialize.
   factory MessageActionScreenshotTaken.deserialize(BinaryReader reader) {
@@ -10982,7 +10989,7 @@ class MessageActionCustomAction extends MessageActionBase {
   /// Message Action Custom Action constructor.
   const MessageActionCustomAction({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionCustomAction.deserialize(BinaryReader reader) {
@@ -11036,7 +11043,7 @@ class MessageActionBotAllowed extends MessageActionBase {
     required this.fromRequest,
     this.domain,
     this.app,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionBotAllowed.deserialize(BinaryReader reader) {
@@ -11063,7 +11070,7 @@ class MessageActionBotAllowed extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: attachMenu,
       b03: fromRequest,
       b00: domain != null,
@@ -11130,7 +11137,7 @@ class MessageActionSecureValuesSentMe extends MessageActionBase {
   const MessageActionSecureValuesSentMe({
     required this.values,
     required this.credentials,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSecureValuesSentMe.deserialize(BinaryReader reader) {
@@ -11188,7 +11195,7 @@ class MessageActionSecureValuesSent extends MessageActionBase {
   /// Message Action Secure Values Sent constructor.
   const MessageActionSecureValuesSent({
     required this.types,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSecureValuesSent.deserialize(BinaryReader reader) {
@@ -11237,7 +11244,7 @@ class MessageActionSecureValuesSent extends MessageActionBase {
 /// ID: `f3f25f76`.
 class MessageActionContactSignUp extends MessageActionBase {
   /// Message Action Contact Sign Up constructor.
-  const MessageActionContactSignUp() : super._();
+  const MessageActionContactSignUp() ;
 
   /// Deserialize.
   factory MessageActionContactSignUp.deserialize(BinaryReader reader) {
@@ -11278,7 +11285,7 @@ class MessageActionGeoProximityReached extends MessageActionBase {
     required this.fromId,
     required this.toId,
     required this.distance,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGeoProximityReached.deserialize(BinaryReader reader) {
@@ -11346,7 +11353,7 @@ class MessageActionGroupCall extends MessageActionBase {
   const MessageActionGroupCall({
     required this.call,
     this.duration,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGroupCall.deserialize(BinaryReader reader) {
@@ -11368,7 +11375,7 @@ class MessageActionGroupCall extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: duration != null,
     );
 
@@ -11421,7 +11428,7 @@ class MessageActionInviteToGroupCall extends MessageActionBase {
   const MessageActionInviteToGroupCall({
     required this.call,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionInviteToGroupCall.deserialize(BinaryReader reader) {
@@ -11480,7 +11487,7 @@ class MessageActionSetMessagesTTL extends MessageActionBase {
   const MessageActionSetMessagesTTL({
     required this.period,
     this.autoSettingFrom,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSetMessagesTTL.deserialize(BinaryReader reader) {
@@ -11502,7 +11509,7 @@ class MessageActionSetMessagesTTL extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: autoSettingFrom != null,
     );
 
@@ -11557,7 +11564,7 @@ class MessageActionGroupCallScheduled extends MessageActionBase {
   const MessageActionGroupCallScheduled({
     required this.call,
     required this.scheduleDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGroupCallScheduled.deserialize(BinaryReader reader) {
@@ -11615,7 +11622,7 @@ class MessageActionSetChatTheme extends MessageActionBase {
   /// Message Action Set Chat Theme constructor.
   const MessageActionSetChatTheme({
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSetChatTheme.deserialize(BinaryReader reader) {
@@ -11664,7 +11671,7 @@ class MessageActionSetChatTheme extends MessageActionBase {
 /// ID: `ebbca3cb`.
 class MessageActionChatJoinedByRequest extends MessageActionBase {
   /// Message Action Chat Joined By Request constructor.
-  const MessageActionChatJoinedByRequest() : super._();
+  const MessageActionChatJoinedByRequest() ;
 
   /// Deserialize.
   factory MessageActionChatJoinedByRequest.deserialize(BinaryReader reader) {
@@ -11704,7 +11711,7 @@ class MessageActionWebViewDataSentMe extends MessageActionBase {
   const MessageActionWebViewDataSentMe({
     required this.text,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionWebViewDataSentMe.deserialize(BinaryReader reader) {
@@ -11762,7 +11769,7 @@ class MessageActionWebViewDataSent extends MessageActionBase {
   /// Message Action Web View Data Sent constructor.
   const MessageActionWebViewDataSent({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionWebViewDataSent.deserialize(BinaryReader reader) {
@@ -11818,7 +11825,7 @@ class MessageActionGiftPremium extends MessageActionBase {
     this.cryptoCurrency,
     this.cryptoAmount,
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGiftPremium.deserialize(BinaryReader reader) {
@@ -11851,7 +11858,7 @@ class MessageActionGiftPremium extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: cryptoCurrency != null || cryptoAmount != null,
       b01: message != null,
     );
@@ -11936,7 +11943,7 @@ class MessageActionTopicCreate extends MessageActionBase {
     required this.title,
     required this.iconColor,
     this.iconEmojiId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionTopicCreate.deserialize(BinaryReader reader) {
@@ -11960,7 +11967,7 @@ class MessageActionTopicCreate extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: iconEmojiId != null,
     );
 
@@ -12022,7 +12029,7 @@ class MessageActionTopicEdit extends MessageActionBase {
     this.iconEmojiId,
     this.closed,
     this.hidden,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionTopicEdit.deserialize(BinaryReader reader) {
@@ -12049,7 +12056,7 @@ class MessageActionTopicEdit extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b01: iconEmojiId != null,
       b02: (closed != null),
@@ -12123,7 +12130,7 @@ class MessageActionSuggestProfilePhoto extends MessageActionBase {
   /// Message Action Suggest Profile Photo constructor.
   const MessageActionSuggestProfilePhoto({
     required this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSuggestProfilePhoto.deserialize(BinaryReader reader) {
@@ -12175,7 +12182,7 @@ class MessageActionRequestedPeer extends MessageActionBase {
   const MessageActionRequestedPeer({
     required this.buttonId,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionRequestedPeer.deserialize(BinaryReader reader) {
@@ -12237,7 +12244,7 @@ class MessageActionSetChatWallPaper extends MessageActionBase {
     required this.same,
     required this.forBoth,
     required this.wallpaper,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionSetChatWallPaper.deserialize(BinaryReader reader) {
@@ -12260,7 +12267,7 @@ class MessageActionSetChatWallPaper extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: same,
       b01: forBoth,
     );
@@ -12322,7 +12329,7 @@ class MessageActionGiftCode extends MessageActionBase {
     this.cryptoCurrency,
     this.cryptoAmount,
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGiftCode.deserialize(BinaryReader reader) {
@@ -12367,7 +12374,7 @@ class MessageActionGiftCode extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: viaGiveaway,
       b05: unclaimed,
       b01: boostPeer != null,
@@ -12479,7 +12486,7 @@ class MessageActionGiveawayLaunch extends MessageActionBase {
   /// Message Action Giveaway Launch constructor.
   const MessageActionGiveawayLaunch({
     this.stars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGiveawayLaunch.deserialize(BinaryReader reader) {
@@ -12499,7 +12506,7 @@ class MessageActionGiveawayLaunch extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: stars != null,
     );
 
@@ -12548,7 +12555,7 @@ class MessageActionGiveawayResults extends MessageActionBase {
     required this.stars,
     required this.winnersCount,
     required this.unclaimedCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGiveawayResults.deserialize(BinaryReader reader) {
@@ -12571,7 +12578,7 @@ class MessageActionGiveawayResults extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: stars,
     );
 
@@ -12628,7 +12635,7 @@ class MessageActionBoostApply extends MessageActionBase {
   /// Message Action Boost Apply constructor.
   const MessageActionBoostApply({
     required this.boosts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionBoostApply.deserialize(BinaryReader reader) {
@@ -12682,7 +12689,7 @@ class MessageActionRequestedPeerSentMe extends MessageActionBase {
   const MessageActionRequestedPeerSentMe({
     required this.buttonId,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionRequestedPeerSentMe.deserialize(BinaryReader reader) {
@@ -12746,7 +12753,7 @@ class MessageActionPaymentRefunded extends MessageActionBase {
     required this.totalAmount,
     this.payload,
     required this.charge,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionPaymentRefunded.deserialize(BinaryReader reader) {
@@ -12774,7 +12781,7 @@ class MessageActionPaymentRefunded extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: payload != null,
     );
 
@@ -12848,7 +12855,7 @@ class MessageActionGiftStars extends MessageActionBase {
     this.cryptoCurrency,
     this.cryptoAmount,
     this.transactionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionGiftStars.deserialize(BinaryReader reader) {
@@ -12880,7 +12887,7 @@ class MessageActionGiftStars extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: cryptoCurrency != null || cryptoAmount != null,
       b01: transactionId != null,
     );
@@ -12967,7 +12974,7 @@ class MessageActionPrizeStars extends MessageActionBase {
     required this.transactionId,
     required this.boostPeer,
     required this.giveawayMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionPrizeStars.deserialize(BinaryReader reader) {
@@ -12994,7 +13001,7 @@ class MessageActionPrizeStars extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: unclaimed,
     );
 
@@ -13066,7 +13073,7 @@ class MessageActionStarGift extends MessageActionBase {
     required this.gift,
     this.message,
     this.convertStars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageActionStarGift.deserialize(BinaryReader reader) {
@@ -13098,7 +13105,7 @@ class MessageActionStarGift extends MessageActionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nameHidden,
       b02: saved,
       b03: converted,
@@ -13188,7 +13195,7 @@ class Dialog extends DialogBase {
     this.draft,
     this.folderId,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Dialog.deserialize(BinaryReader reader) {
@@ -13240,7 +13247,7 @@ class Dialog extends DialogBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: pinned,
       b03: unreadMark,
       b06: viewForumAsMessages,
@@ -13388,7 +13395,7 @@ class DialogFolder extends DialogBase {
     required this.unreadUnmutedPeersCount,
     required this.unreadMutedMessagesCount,
     required this.unreadUnmutedMessagesCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogFolder.deserialize(BinaryReader reader) {
@@ -13421,7 +13428,7 @@ class DialogFolder extends DialogBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: pinned,
     );
 
@@ -13509,7 +13516,7 @@ class PhotoEmpty extends PhotoBase {
   /// Photo Empty constructor.
   const PhotoEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoEmpty.deserialize(BinaryReader reader) {
@@ -13569,7 +13576,7 @@ class Photo extends PhotoBase {
     required this.sizes,
     this.videoSizes,
     required this.dcId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Photo.deserialize(BinaryReader reader) {
@@ -13604,7 +13611,7 @@ class Photo extends PhotoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hasStickers,
       b01: videoSizes != null,
     );
@@ -13692,7 +13699,7 @@ class PhotoSizeEmpty extends PhotoSizeBase {
   /// Photo Size Empty constructor.
   const PhotoSizeEmpty({
     required this.type,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoSizeEmpty.deserialize(BinaryReader reader) {
@@ -13746,7 +13753,7 @@ class PhotoSize extends PhotoSizeBase {
     required this.w,
     required this.h,
     required this.size,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoSize.deserialize(BinaryReader reader) {
@@ -13827,7 +13834,7 @@ class PhotoCachedSize extends PhotoSizeBase {
     required this.w,
     required this.h,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoCachedSize.deserialize(BinaryReader reader) {
@@ -13904,7 +13911,7 @@ class PhotoStrippedSize extends PhotoSizeBase {
   const PhotoStrippedSize({
     required this.type,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoStrippedSize.deserialize(BinaryReader reader) {
@@ -13965,7 +13972,7 @@ class PhotoSizeProgressive extends PhotoSizeBase {
     required this.w,
     required this.h,
     required this.sizes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoSizeProgressive.deserialize(BinaryReader reader) {
@@ -14042,7 +14049,7 @@ class PhotoPathSize extends PhotoSizeBase {
   const PhotoPathSize({
     required this.type,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotoPathSize.deserialize(BinaryReader reader) {
@@ -14098,7 +14105,7 @@ class PhotoPathSize extends PhotoSizeBase {
 /// ID: `1117dd5f`.
 class GeoPointEmpty extends GeoPointBase {
   /// Geo Point Empty constructor.
-  const GeoPointEmpty() : super._();
+  const GeoPointEmpty() ;
 
   /// Deserialize.
   factory GeoPointEmpty.deserialize(BinaryReader reader) {
@@ -14140,7 +14147,7 @@ class GeoPoint extends GeoPointBase {
     required this.lat,
     required this.accessHash,
     this.accuracyRadius,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GeoPoint.deserialize(BinaryReader reader) {
@@ -14166,7 +14173,7 @@ class GeoPoint extends GeoPointBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: accuracyRadius != null,
     );
 
@@ -14233,7 +14240,7 @@ class AuthSentCode extends AuthSentCodeBase {
     required this.phoneCodeHash,
     this.nextType,
     this.timeout,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCode.deserialize(BinaryReader reader) {
@@ -14261,7 +14268,7 @@ class AuthSentCode extends AuthSentCodeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: nextType != null,
       b02: timeout != null,
     );
@@ -14327,7 +14334,7 @@ class AuthSentCodeSuccess extends AuthSentCodeBase {
   /// Auth Sent Code Success constructor.
   const AuthSentCodeSuccess({
     required this.authorization,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeSuccess.deserialize(BinaryReader reader) {
@@ -14382,7 +14389,7 @@ class AuthAuthorization extends AuthAuthorizationBase {
     this.tmpSessions,
     this.futureAuthToken,
     required this.user,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthAuthorization.deserialize(BinaryReader reader) {
@@ -14413,7 +14420,7 @@ class AuthAuthorization extends AuthAuthorizationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: setupPasswordRequired || otherwiseReloginDays != null,
       b00: tmpSessions != null,
       b02: futureAuthToken != null,
@@ -14487,7 +14494,7 @@ class AuthAuthorizationSignUpRequired extends AuthAuthorizationBase {
   /// Auth Authorization Sign Up Required constructor.
   const AuthAuthorizationSignUpRequired({
     this.termsOfService,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthAuthorizationSignUpRequired.deserialize(BinaryReader reader) {
@@ -14509,7 +14516,7 @@ class AuthAuthorizationSignUpRequired extends AuthAuthorizationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: termsOfService != null,
     );
 
@@ -14557,7 +14564,7 @@ class AuthExportedAuthorization extends AuthExportedAuthorizationBase {
   const AuthExportedAuthorization({
     required this.id,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthExportedAuthorization.deserialize(BinaryReader reader) {
@@ -14617,7 +14624,7 @@ class InputNotifyPeer extends InputNotifyPeerBase {
   /// Input Notify Peer constructor.
   const InputNotifyPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputNotifyPeer.deserialize(BinaryReader reader) {
@@ -14666,7 +14673,7 @@ class InputNotifyPeer extends InputNotifyPeerBase {
 /// ID: `193b4417`.
 class InputNotifyUsers extends InputNotifyPeerBase {
   /// Input Notify Users constructor.
-  const InputNotifyUsers() : super._();
+  const InputNotifyUsers() ;
 
   /// Deserialize.
   factory InputNotifyUsers.deserialize(BinaryReader reader) {
@@ -14703,7 +14710,7 @@ class InputNotifyUsers extends InputNotifyPeerBase {
 /// ID: `4a95e84e`.
 class InputNotifyChats extends InputNotifyPeerBase {
   /// Input Notify Chats constructor.
-  const InputNotifyChats() : super._();
+  const InputNotifyChats() ;
 
   /// Deserialize.
   factory InputNotifyChats.deserialize(BinaryReader reader) {
@@ -14740,7 +14747,7 @@ class InputNotifyChats extends InputNotifyPeerBase {
 /// ID: `b1db7c7e`.
 class InputNotifyBroadcasts extends InputNotifyPeerBase {
   /// Input Notify Broadcasts constructor.
-  const InputNotifyBroadcasts() : super._();
+  const InputNotifyBroadcasts() ;
 
   /// Deserialize.
   factory InputNotifyBroadcasts.deserialize(BinaryReader reader) {
@@ -14780,7 +14787,7 @@ class InputNotifyForumTopic extends InputNotifyPeerBase {
   const InputNotifyForumTopic({
     required this.peer,
     required this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputNotifyForumTopic.deserialize(BinaryReader reader) {
@@ -14846,7 +14853,7 @@ class InputPeerNotifySettings extends InputPeerNotifySettingsBase {
     this.storiesMuted,
     this.storiesHideSender,
     this.storiesSound,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPeerNotifySettings.deserialize(BinaryReader reader) {
@@ -14883,7 +14890,7 @@ class InputPeerNotifySettings extends InputPeerNotifySettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (showPreviews != null),
       b01: (silent != null),
       b02: muteUntil != null,
@@ -14994,7 +15001,7 @@ class PeerNotifySettings extends PeerNotifySettingsBase {
     this.storiesIosSound,
     this.storiesAndroidSound,
     this.storiesOtherSound,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerNotifySettings.deserialize(BinaryReader reader) {
@@ -15051,7 +15058,7 @@ class PeerNotifySettings extends PeerNotifySettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (showPreviews != null),
       b01: (silent != null),
       b02: muteUntil != null,
@@ -15203,7 +15210,7 @@ class PeerSettings extends PeerSettingsBase {
     this.requestChatDate,
     this.businessBotId,
     this.businessBotManageUrl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerSettings.deserialize(BinaryReader reader) {
@@ -15260,7 +15267,7 @@ class PeerSettings extends PeerSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: reportSpam,
       b01: addContact,
       b02: blockContact,
@@ -15404,7 +15411,7 @@ class WallPaper extends WallPaperBase {
     required this.slug,
     required this.document,
     this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WallPaper.deserialize(BinaryReader reader) {
@@ -15441,7 +15448,7 @@ class WallPaper extends WallPaperBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b01: ddefault,
       b03: pattern,
@@ -15535,7 +15542,7 @@ class WallPaperNoFile extends WallPaperBase {
     required this.ddefault,
     required this.dark,
     this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WallPaperNoFile.deserialize(BinaryReader reader) {
@@ -15562,7 +15569,7 @@ class WallPaperNoFile extends WallPaperBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: ddefault,
       b04: dark,
       b02: settings != null,
@@ -15624,7 +15631,7 @@ class WallPaperNoFile extends WallPaperBase {
 /// ID: `58dbcab8`.
 class InputReportReasonSpam extends ReportReasonBase {
   /// Input Report Reason Spam constructor.
-  const InputReportReasonSpam() : super._();
+  const InputReportReasonSpam() ;
 
   /// Deserialize.
   factory InputReportReasonSpam.deserialize(BinaryReader reader) {
@@ -15661,7 +15668,7 @@ class InputReportReasonSpam extends ReportReasonBase {
 /// ID: `1e22c78d`.
 class InputReportReasonViolence extends ReportReasonBase {
   /// Input Report Reason Violence constructor.
-  const InputReportReasonViolence() : super._();
+  const InputReportReasonViolence() ;
 
   /// Deserialize.
   factory InputReportReasonViolence.deserialize(BinaryReader reader) {
@@ -15698,7 +15705,7 @@ class InputReportReasonViolence extends ReportReasonBase {
 /// ID: `2e59d922`.
 class InputReportReasonPornography extends ReportReasonBase {
   /// Input Report Reason Pornography constructor.
-  const InputReportReasonPornography() : super._();
+  const InputReportReasonPornography() ;
 
   /// Deserialize.
   factory InputReportReasonPornography.deserialize(BinaryReader reader) {
@@ -15735,7 +15742,7 @@ class InputReportReasonPornography extends ReportReasonBase {
 /// ID: `adf44ee3`.
 class InputReportReasonChildAbuse extends ReportReasonBase {
   /// Input Report Reason Child Abuse constructor.
-  const InputReportReasonChildAbuse() : super._();
+  const InputReportReasonChildAbuse() ;
 
   /// Deserialize.
   factory InputReportReasonChildAbuse.deserialize(BinaryReader reader) {
@@ -15772,7 +15779,7 @@ class InputReportReasonChildAbuse extends ReportReasonBase {
 /// ID: `c1e4a2b1`.
 class InputReportReasonOther extends ReportReasonBase {
   /// Input Report Reason Other constructor.
-  const InputReportReasonOther() : super._();
+  const InputReportReasonOther() ;
 
   /// Deserialize.
   factory InputReportReasonOther.deserialize(BinaryReader reader) {
@@ -15809,7 +15816,7 @@ class InputReportReasonOther extends ReportReasonBase {
 /// ID: `9b89f93a`.
 class InputReportReasonCopyright extends ReportReasonBase {
   /// Input Report Reason Copyright constructor.
-  const InputReportReasonCopyright() : super._();
+  const InputReportReasonCopyright() ;
 
   /// Deserialize.
   factory InputReportReasonCopyright.deserialize(BinaryReader reader) {
@@ -15846,7 +15853,7 @@ class InputReportReasonCopyright extends ReportReasonBase {
 /// ID: `dbd4feed`.
 class InputReportReasonGeoIrrelevant extends ReportReasonBase {
   /// Input Report Reason Geo Irrelevant constructor.
-  const InputReportReasonGeoIrrelevant() : super._();
+  const InputReportReasonGeoIrrelevant() ;
 
   /// Deserialize.
   factory InputReportReasonGeoIrrelevant.deserialize(BinaryReader reader) {
@@ -15883,7 +15890,7 @@ class InputReportReasonGeoIrrelevant extends ReportReasonBase {
 /// ID: `f5ddd6e7`.
 class InputReportReasonFake extends ReportReasonBase {
   /// Input Report Reason Fake constructor.
-  const InputReportReasonFake() : super._();
+  const InputReportReasonFake() ;
 
   /// Deserialize.
   factory InputReportReasonFake.deserialize(BinaryReader reader) {
@@ -15920,7 +15927,7 @@ class InputReportReasonFake extends ReportReasonBase {
 /// ID: `0a8eb2be`.
 class InputReportReasonIllegalDrugs extends ReportReasonBase {
   /// Input Report Reason Illegal Drugs constructor.
-  const InputReportReasonIllegalDrugs() : super._();
+  const InputReportReasonIllegalDrugs() ;
 
   /// Deserialize.
   factory InputReportReasonIllegalDrugs.deserialize(BinaryReader reader) {
@@ -15957,7 +15964,7 @@ class InputReportReasonIllegalDrugs extends ReportReasonBase {
 /// ID: `9ec7863d`.
 class InputReportReasonPersonalDetails extends ReportReasonBase {
   /// Input Report Reason Personal Details constructor.
-  const InputReportReasonPersonalDetails() : super._();
+  const InputReportReasonPersonalDetails() ;
 
   /// Deserialize.
   factory InputReportReasonPersonalDetails.deserialize(BinaryReader reader) {
@@ -16040,7 +16047,7 @@ class UserFull extends UserFullBase {
     this.personalChannelMessage,
     this.stargiftsCount,
     this.starrefProgram,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserFull.deserialize(BinaryReader reader) {
@@ -16199,7 +16206,7 @@ class UserFull extends UserFullBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: blocked,
       b04: phoneCallsAvailable,
       b05: phoneCallsPrivate,
@@ -16235,7 +16242,7 @@ class UserFull extends UserFullBase {
 
   /// Flags2.
   int get flags2 {
-    final v = _flag(
+    final v = toFlag(
       b07: sponsoredEnabled,
       b09: canViewRevenue,
       b10: botCanManageEmojiStatus,
@@ -16576,7 +16583,7 @@ class Contact extends ContactBase {
   const Contact({
     required this.userId,
     required this.mutual,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Contact.deserialize(BinaryReader reader) {
@@ -16637,7 +16644,7 @@ class ImportedContact extends ImportedContactBase {
   const ImportedContact({
     required this.userId,
     required this.clientId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ImportedContact.deserialize(BinaryReader reader) {
@@ -16700,7 +16707,7 @@ class ContactStatus extends ContactStatusBase {
   const ContactStatus({
     required this.userId,
     required this.status,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactStatus.deserialize(BinaryReader reader) {
@@ -16758,7 +16765,7 @@ class ContactStatus extends ContactStatusBase {
 /// ID: `b74ba9d2`.
 class ContactsContactsNotModified extends ContactsContactsBase {
   /// Contacts Contacts Not Modified constructor.
-  const ContactsContactsNotModified() : super._();
+  const ContactsContactsNotModified() ;
 
   /// Deserialize.
   factory ContactsContactsNotModified.deserialize(BinaryReader reader) {
@@ -16799,7 +16806,7 @@ class ContactsContacts extends ContactsContactsBase {
     required this.contacts,
     required this.savedCount,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsContacts.deserialize(BinaryReader reader) {
@@ -16869,7 +16876,7 @@ class ContactsImportedContacts extends ContactsImportedContactsBase {
     required this.popularInvites,
     required this.retryContacts,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsImportedContacts.deserialize(BinaryReader reader) {
@@ -16943,7 +16950,7 @@ class ContactsBlocked extends ContactsBlockedBase {
     required this.blocked,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsBlocked.deserialize(BinaryReader reader) {
@@ -17011,7 +17018,7 @@ class ContactsBlockedSlice extends ContactsBlockedBase {
     required this.blocked,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsBlockedSlice.deserialize(BinaryReader reader) {
@@ -17088,7 +17095,7 @@ class MessagesDialogs extends MessagesDialogsBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDialogs.deserialize(BinaryReader reader) {
@@ -17164,7 +17171,7 @@ class MessagesDialogsSlice extends MessagesDialogsBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDialogsSlice.deserialize(BinaryReader reader) {
@@ -17245,7 +17252,7 @@ class MessagesDialogsNotModified extends MessagesDialogsBase {
   /// Messages Dialogs Not Modified constructor.
   const MessagesDialogsNotModified({
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDialogsNotModified.deserialize(BinaryReader reader) {
@@ -17300,7 +17307,7 @@ class MessagesMessages extends MessagesMessagesBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessages.deserialize(BinaryReader reader) {
@@ -17371,7 +17378,7 @@ class MessagesMessagesSlice extends MessagesMessagesBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessagesSlice.deserialize(BinaryReader reader) {
@@ -17404,7 +17411,7 @@ class MessagesMessagesSlice extends MessagesMessagesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: inexact,
       b00: nextRate != null,
       b02: offsetIdOffset != null,
@@ -17494,7 +17501,7 @@ class MessagesChannelMessages extends MessagesMessagesBase {
     required this.topics,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChannelMessages.deserialize(BinaryReader reader) {
@@ -17528,7 +17535,7 @@ class MessagesChannelMessages extends MessagesMessagesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: inexact,
       b02: offsetIdOffset != null,
     );
@@ -17614,7 +17621,7 @@ class MessagesMessagesNotModified extends MessagesMessagesBase {
   /// Messages Messages Not Modified constructor.
   const MessagesMessagesNotModified({
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessagesNotModified.deserialize(BinaryReader reader) {
@@ -17667,7 +17674,7 @@ class MessagesChats extends MessagesChatsBase {
   /// Messages Chats constructor.
   const MessagesChats({
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChats.deserialize(BinaryReader reader) {
@@ -17719,7 +17726,7 @@ class MessagesChatsSlice extends MessagesChatsBase {
   const MessagesChatsSlice({
     required this.count,
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChatsSlice.deserialize(BinaryReader reader) {
@@ -17781,7 +17788,7 @@ class MessagesChatFull extends MessagesChatFullBase {
     required this.fullChat,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChatFull.deserialize(BinaryReader reader) {
@@ -17848,7 +17855,7 @@ class MessagesAffectedHistory extends MessagesAffectedHistoryBase {
     required this.pts,
     required this.ptsCount,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAffectedHistory.deserialize(BinaryReader reader) {
@@ -17917,7 +17924,7 @@ class MessagesAffectedHistory extends MessagesAffectedHistoryBase {
 /// ID: `57e2f66c`.
 class InputMessagesFilterEmpty extends MessagesFilterBase {
   /// Input Messages Filter Empty constructor.
-  const InputMessagesFilterEmpty() : super._();
+  const InputMessagesFilterEmpty() ;
 
   /// Deserialize.
   factory InputMessagesFilterEmpty.deserialize(BinaryReader reader) {
@@ -17954,7 +17961,7 @@ class InputMessagesFilterEmpty extends MessagesFilterBase {
 /// ID: `9609a51c`.
 class InputMessagesFilterPhotos extends MessagesFilterBase {
   /// Input Messages Filter Photos constructor.
-  const InputMessagesFilterPhotos() : super._();
+  const InputMessagesFilterPhotos() ;
 
   /// Deserialize.
   factory InputMessagesFilterPhotos.deserialize(BinaryReader reader) {
@@ -17991,7 +17998,7 @@ class InputMessagesFilterPhotos extends MessagesFilterBase {
 /// ID: `9fc00e65`.
 class InputMessagesFilterVideo extends MessagesFilterBase {
   /// Input Messages Filter Video constructor.
-  const InputMessagesFilterVideo() : super._();
+  const InputMessagesFilterVideo() ;
 
   /// Deserialize.
   factory InputMessagesFilterVideo.deserialize(BinaryReader reader) {
@@ -18028,7 +18035,7 @@ class InputMessagesFilterVideo extends MessagesFilterBase {
 /// ID: `56e9f0e4`.
 class InputMessagesFilterPhotoVideo extends MessagesFilterBase {
   /// Input Messages Filter Photo Video constructor.
-  const InputMessagesFilterPhotoVideo() : super._();
+  const InputMessagesFilterPhotoVideo() ;
 
   /// Deserialize.
   factory InputMessagesFilterPhotoVideo.deserialize(BinaryReader reader) {
@@ -18065,7 +18072,7 @@ class InputMessagesFilterPhotoVideo extends MessagesFilterBase {
 /// ID: `9eddf188`.
 class InputMessagesFilterDocument extends MessagesFilterBase {
   /// Input Messages Filter Document constructor.
-  const InputMessagesFilterDocument() : super._();
+  const InputMessagesFilterDocument() ;
 
   /// Deserialize.
   factory InputMessagesFilterDocument.deserialize(BinaryReader reader) {
@@ -18102,7 +18109,7 @@ class InputMessagesFilterDocument extends MessagesFilterBase {
 /// ID: `7ef0dd87`.
 class InputMessagesFilterUrl extends MessagesFilterBase {
   /// Input Messages Filter Url constructor.
-  const InputMessagesFilterUrl() : super._();
+  const InputMessagesFilterUrl() ;
 
   /// Deserialize.
   factory InputMessagesFilterUrl.deserialize(BinaryReader reader) {
@@ -18139,7 +18146,7 @@ class InputMessagesFilterUrl extends MessagesFilterBase {
 /// ID: `ffc86587`.
 class InputMessagesFilterGif extends MessagesFilterBase {
   /// Input Messages Filter Gif constructor.
-  const InputMessagesFilterGif() : super._();
+  const InputMessagesFilterGif() ;
 
   /// Deserialize.
   factory InputMessagesFilterGif.deserialize(BinaryReader reader) {
@@ -18176,7 +18183,7 @@ class InputMessagesFilterGif extends MessagesFilterBase {
 /// ID: `50f5c392`.
 class InputMessagesFilterVoice extends MessagesFilterBase {
   /// Input Messages Filter Voice constructor.
-  const InputMessagesFilterVoice() : super._();
+  const InputMessagesFilterVoice() ;
 
   /// Deserialize.
   factory InputMessagesFilterVoice.deserialize(BinaryReader reader) {
@@ -18213,7 +18220,7 @@ class InputMessagesFilterVoice extends MessagesFilterBase {
 /// ID: `3751b49e`.
 class InputMessagesFilterMusic extends MessagesFilterBase {
   /// Input Messages Filter Music constructor.
-  const InputMessagesFilterMusic() : super._();
+  const InputMessagesFilterMusic() ;
 
   /// Deserialize.
   factory InputMessagesFilterMusic.deserialize(BinaryReader reader) {
@@ -18250,7 +18257,7 @@ class InputMessagesFilterMusic extends MessagesFilterBase {
 /// ID: `3a20ecb8`.
 class InputMessagesFilterChatPhotos extends MessagesFilterBase {
   /// Input Messages Filter Chat Photos constructor.
-  const InputMessagesFilterChatPhotos() : super._();
+  const InputMessagesFilterChatPhotos() ;
 
   /// Deserialize.
   factory InputMessagesFilterChatPhotos.deserialize(BinaryReader reader) {
@@ -18289,7 +18296,7 @@ class InputMessagesFilterPhoneCalls extends MessagesFilterBase {
   /// Input Messages Filter Phone Calls constructor.
   const InputMessagesFilterPhoneCalls({
     required this.missed,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMessagesFilterPhoneCalls.deserialize(BinaryReader reader) {
@@ -18308,7 +18315,7 @@ class InputMessagesFilterPhoneCalls extends MessagesFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: missed,
     );
 
@@ -18349,7 +18356,7 @@ class InputMessagesFilterPhoneCalls extends MessagesFilterBase {
 /// ID: `7a7c17a4`.
 class InputMessagesFilterRoundVoice extends MessagesFilterBase {
   /// Input Messages Filter Round Voice constructor.
-  const InputMessagesFilterRoundVoice() : super._();
+  const InputMessagesFilterRoundVoice() ;
 
   /// Deserialize.
   factory InputMessagesFilterRoundVoice.deserialize(BinaryReader reader) {
@@ -18386,7 +18393,7 @@ class InputMessagesFilterRoundVoice extends MessagesFilterBase {
 /// ID: `b549da53`.
 class InputMessagesFilterRoundVideo extends MessagesFilterBase {
   /// Input Messages Filter Round Video constructor.
-  const InputMessagesFilterRoundVideo() : super._();
+  const InputMessagesFilterRoundVideo() ;
 
   /// Deserialize.
   factory InputMessagesFilterRoundVideo.deserialize(BinaryReader reader) {
@@ -18423,7 +18430,7 @@ class InputMessagesFilterRoundVideo extends MessagesFilterBase {
 /// ID: `c1f8e69a`.
 class InputMessagesFilterMyMentions extends MessagesFilterBase {
   /// Input Messages Filter My Mentions constructor.
-  const InputMessagesFilterMyMentions() : super._();
+  const InputMessagesFilterMyMentions() ;
 
   /// Deserialize.
   factory InputMessagesFilterMyMentions.deserialize(BinaryReader reader) {
@@ -18460,7 +18467,7 @@ class InputMessagesFilterMyMentions extends MessagesFilterBase {
 /// ID: `e7026d0d`.
 class InputMessagesFilterGeo extends MessagesFilterBase {
   /// Input Messages Filter Geo constructor.
-  const InputMessagesFilterGeo() : super._();
+  const InputMessagesFilterGeo() ;
 
   /// Deserialize.
   factory InputMessagesFilterGeo.deserialize(BinaryReader reader) {
@@ -18497,7 +18504,7 @@ class InputMessagesFilterGeo extends MessagesFilterBase {
 /// ID: `e062db83`.
 class InputMessagesFilterContacts extends MessagesFilterBase {
   /// Input Messages Filter Contacts constructor.
-  const InputMessagesFilterContacts() : super._();
+  const InputMessagesFilterContacts() ;
 
   /// Deserialize.
   factory InputMessagesFilterContacts.deserialize(BinaryReader reader) {
@@ -18534,7 +18541,7 @@ class InputMessagesFilterContacts extends MessagesFilterBase {
 /// ID: `1bb00451`.
 class InputMessagesFilterPinned extends MessagesFilterBase {
   /// Input Messages Filter Pinned constructor.
-  const InputMessagesFilterPinned() : super._();
+  const InputMessagesFilterPinned() ;
 
   /// Deserialize.
   factory InputMessagesFilterPinned.deserialize(BinaryReader reader) {
@@ -18575,7 +18582,7 @@ class UpdateNewMessage extends UpdateBase {
     required this.message,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewMessage.deserialize(BinaryReader reader) {
@@ -18645,7 +18652,7 @@ class UpdateMessageID extends UpdateBase {
   const UpdateMessageID({
     required this.id,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMessageID.deserialize(BinaryReader reader) {
@@ -18709,7 +18716,7 @@ class UpdateDeleteMessages extends UpdateBase {
     required this.messages,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDeleteMessages.deserialize(BinaryReader reader) {
@@ -18779,7 +18786,7 @@ class UpdateUserTyping extends UpdateBase {
   const UpdateUserTyping({
     required this.userId,
     required this.action,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUserTyping.deserialize(BinaryReader reader) {
@@ -18841,7 +18848,7 @@ class UpdateChatUserTyping extends UpdateBase {
     required this.chatId,
     required this.fromId,
     required this.action,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatUserTyping.deserialize(BinaryReader reader) {
@@ -18908,7 +18915,7 @@ class UpdateChatParticipants extends UpdateBase {
   /// Update Chat Participants constructor.
   const UpdateChatParticipants({
     required this.participants,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatParticipants.deserialize(BinaryReader reader) {
@@ -18960,7 +18967,7 @@ class UpdateUserStatus extends UpdateBase {
   const UpdateUserStatus({
     required this.userId,
     required this.status,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUserStatus.deserialize(BinaryReader reader) {
@@ -19023,7 +19030,7 @@ class UpdateUserName extends UpdateBase {
     required this.firstName,
     required this.lastName,
     required this.usernames,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUserName.deserialize(BinaryReader reader) {
@@ -19101,7 +19108,7 @@ class UpdateNewAuthorization extends UpdateBase {
     this.date,
     this.device,
     this.location,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewAuthorization.deserialize(BinaryReader reader) {
@@ -19131,7 +19138,7 @@ class UpdateNewAuthorization extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: unconfirmed || date != null || device != null || location != null,
     );
 
@@ -19206,7 +19213,7 @@ class UpdateNewEncryptedMessage extends UpdateBase {
   const UpdateNewEncryptedMessage({
     required this.message,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewEncryptedMessage.deserialize(BinaryReader reader) {
@@ -19266,7 +19273,7 @@ class UpdateEncryptedChatTyping extends UpdateBase {
   /// Update Encrypted Chat Typing constructor.
   const UpdateEncryptedChatTyping({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateEncryptedChatTyping.deserialize(BinaryReader reader) {
@@ -19320,7 +19327,7 @@ class UpdateEncryption extends UpdateBase {
   const UpdateEncryption({
     required this.chat,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateEncryption.deserialize(BinaryReader reader) {
@@ -19380,7 +19387,7 @@ class UpdateEncryptedMessagesRead extends UpdateBase {
     required this.chatId,
     required this.maxDate,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateEncryptedMessagesRead.deserialize(BinaryReader reader) {
@@ -19451,7 +19458,7 @@ class UpdateChatParticipantAdd extends UpdateBase {
     required this.inviterId,
     required this.date,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatParticipantAdd.deserialize(BinaryReader reader) {
@@ -19540,7 +19547,7 @@ class UpdateChatParticipantDelete extends UpdateBase {
     required this.chatId,
     required this.userId,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatParticipantDelete.deserialize(BinaryReader reader) {
@@ -19611,7 +19618,7 @@ class UpdateDcOptions extends UpdateBase {
   /// Update Dc Options constructor.
   const UpdateDcOptions({
     required this.dcOptions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDcOptions.deserialize(BinaryReader reader) {
@@ -19663,7 +19670,7 @@ class UpdateNotifySettings extends UpdateBase {
   const UpdateNotifySettings({
     required this.peer,
     required this.notifySettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNotifySettings.deserialize(BinaryReader reader) {
@@ -19727,7 +19734,7 @@ class UpdateServiceNotification extends UpdateBase {
     required this.message,
     required this.media,
     required this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateServiceNotification.deserialize(BinaryReader reader) {
@@ -19759,7 +19766,7 @@ class UpdateServiceNotification extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: popup,
       b02: invertMedia,
       b01: inboxDate != null,
@@ -19837,7 +19844,7 @@ class UpdatePrivacy extends UpdateBase {
   const UpdatePrivacy({
     required this.key,
     required this.rules,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePrivacy.deserialize(BinaryReader reader) {
@@ -19896,7 +19903,7 @@ class UpdateUserPhone extends UpdateBase {
   const UpdateUserPhone({
     required this.userId,
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUserPhone.deserialize(BinaryReader reader) {
@@ -19961,7 +19968,7 @@ class UpdateReadHistoryInbox extends UpdateBase {
     required this.stillUnreadCount,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadHistoryInbox.deserialize(BinaryReader reader) {
@@ -19991,7 +19998,7 @@ class UpdateReadHistoryInbox extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: folderId != null,
     );
 
@@ -20074,7 +20081,7 @@ class UpdateReadHistoryOutbox extends UpdateBase {
     required this.maxId,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadHistoryOutbox.deserialize(BinaryReader reader) {
@@ -20154,7 +20161,7 @@ class UpdateWebPage extends UpdateBase {
     required this.webpage,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateWebPage.deserialize(BinaryReader reader) {
@@ -20226,7 +20233,7 @@ class UpdateReadMessagesContents extends UpdateBase {
     required this.pts,
     required this.ptsCount,
     this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadMessagesContents.deserialize(BinaryReader reader) {
@@ -20252,7 +20259,7 @@ class UpdateReadMessagesContents extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: date != null,
     );
 
@@ -20319,7 +20326,7 @@ class UpdateChannelTooLong extends UpdateBase {
   const UpdateChannelTooLong({
     required this.channelId,
     this.pts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelTooLong.deserialize(BinaryReader reader) {
@@ -20341,7 +20348,7 @@ class UpdateChannelTooLong extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pts != null,
     );
 
@@ -20395,7 +20402,7 @@ class UpdateChannel extends UpdateBase {
   /// Update Channel constructor.
   const UpdateChannel({
     required this.channelId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannel.deserialize(BinaryReader reader) {
@@ -20450,7 +20457,7 @@ class UpdateNewChannelMessage extends UpdateBase {
     required this.message,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewChannelMessage.deserialize(BinaryReader reader) {
@@ -20523,7 +20530,7 @@ class UpdateReadChannelInbox extends UpdateBase {
     required this.maxId,
     required this.stillUnreadCount,
     required this.pts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadChannelInbox.deserialize(BinaryReader reader) {
@@ -20551,7 +20558,7 @@ class UpdateReadChannelInbox extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: folderId != null,
     );
 
@@ -20629,7 +20636,7 @@ class UpdateDeleteChannelMessages extends UpdateBase {
     required this.messages,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDeleteChannelMessages.deserialize(BinaryReader reader) {
@@ -20709,7 +20716,7 @@ class UpdateChannelMessageViews extends UpdateBase {
     required this.channelId,
     required this.id,
     required this.views,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelMessageViews.deserialize(BinaryReader reader) {
@@ -20783,7 +20790,7 @@ class UpdateChatParticipantAdmin extends UpdateBase {
     required this.userId,
     required this.isAdmin,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatParticipantAdmin.deserialize(BinaryReader reader) {
@@ -20861,7 +20868,7 @@ class UpdateNewStickerSet extends UpdateBase {
   /// Update New Sticker Set constructor.
   const UpdateNewStickerSet({
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewStickerSet.deserialize(BinaryReader reader) {
@@ -20914,7 +20921,7 @@ class UpdateStickerSetsOrder extends UpdateBase {
     required this.masks,
     required this.emojis,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStickerSetsOrder.deserialize(BinaryReader reader) {
@@ -20937,7 +20944,7 @@ class UpdateStickerSetsOrder extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b01: emojis,
     );
@@ -20991,7 +20998,7 @@ class UpdateStickerSets extends UpdateBase {
   const UpdateStickerSets({
     required this.masks,
     required this.emojis,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStickerSets.deserialize(BinaryReader reader) {
@@ -21012,7 +21019,7 @@ class UpdateStickerSets extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b01: emojis,
     );
@@ -21058,7 +21065,7 @@ class UpdateStickerSets extends UpdateBase {
 /// ID: `9375341e`.
 class UpdateSavedGifs extends UpdateBase {
   /// Update Saved Gifs constructor.
-  const UpdateSavedGifs() : super._();
+  const UpdateSavedGifs() ;
 
   /// Deserialize.
   factory UpdateSavedGifs.deserialize(BinaryReader reader) {
@@ -21102,7 +21109,7 @@ class UpdateBotInlineQuery extends UpdateBase {
     this.geo,
     this.peerType,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotInlineQuery.deserialize(BinaryReader reader) {
@@ -21135,7 +21142,7 @@ class UpdateBotInlineQuery extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: geo != null,
       b01: peerType != null,
     );
@@ -21219,7 +21226,7 @@ class UpdateBotInlineSend extends UpdateBase {
     this.geo,
     required this.id,
     this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotInlineSend.deserialize(BinaryReader reader) {
@@ -21250,7 +21257,7 @@ class UpdateBotInlineSend extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: geo != null,
       b01: msgId != null,
     );
@@ -21325,7 +21332,7 @@ class UpdateEditChannelMessage extends UpdateBase {
     required this.message,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateEditChannelMessage.deserialize(BinaryReader reader) {
@@ -21400,7 +21407,7 @@ class UpdateBotCallbackQuery extends UpdateBase {
     required this.chatInstance,
     this.data,
     this.gameShortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotCallbackQuery.deserialize(BinaryReader reader) {
@@ -21433,7 +21440,7 @@ class UpdateBotCallbackQuery extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: data != null,
       b01: gameShortName != null,
     );
@@ -21524,7 +21531,7 @@ class UpdateEditMessage extends UpdateBase {
     required this.message,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateEditMessage.deserialize(BinaryReader reader) {
@@ -21598,7 +21605,7 @@ class UpdateInlineBotCallbackQuery extends UpdateBase {
     required this.chatInstance,
     this.data,
     this.gameShortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateInlineBotCallbackQuery.deserialize(BinaryReader reader) {
@@ -21629,7 +21636,7 @@ class UpdateInlineBotCallbackQuery extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: data != null,
       b01: gameShortName != null,
     );
@@ -21712,7 +21719,7 @@ class UpdateReadChannelOutbox extends UpdateBase {
   const UpdateReadChannelOutbox({
     required this.channelId,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadChannelOutbox.deserialize(BinaryReader reader) {
@@ -21776,7 +21783,7 @@ class UpdateDraftMessage extends UpdateBase {
     required this.peer,
     this.topMsgId,
     required this.draft,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDraftMessage.deserialize(BinaryReader reader) {
@@ -21800,7 +21807,7 @@ class UpdateDraftMessage extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -21855,7 +21862,7 @@ class UpdateDraftMessage extends UpdateBase {
 /// ID: `571d2742`.
 class UpdateReadFeaturedStickers extends UpdateBase {
   /// Update Read Featured Stickers constructor.
-  const UpdateReadFeaturedStickers() : super._();
+  const UpdateReadFeaturedStickers() ;
 
   /// Deserialize.
   factory UpdateReadFeaturedStickers.deserialize(BinaryReader reader) {
@@ -21892,7 +21899,7 @@ class UpdateReadFeaturedStickers extends UpdateBase {
 /// ID: `9a422c20`.
 class UpdateRecentStickers extends UpdateBase {
   /// Update Recent Stickers constructor.
-  const UpdateRecentStickers() : super._();
+  const UpdateRecentStickers() ;
 
   /// Deserialize.
   factory UpdateRecentStickers.deserialize(BinaryReader reader) {
@@ -21929,7 +21936,7 @@ class UpdateRecentStickers extends UpdateBase {
 /// ID: `a229dd06`.
 class UpdateConfig extends UpdateBase {
   /// Update Config constructor.
-  const UpdateConfig() : super._();
+  const UpdateConfig() ;
 
   /// Deserialize.
   factory UpdateConfig.deserialize(BinaryReader reader) {
@@ -21966,7 +21973,7 @@ class UpdateConfig extends UpdateBase {
 /// ID: `3354678f`.
 class UpdatePtsChanged extends UpdateBase {
   /// Update Pts Changed constructor.
-  const UpdatePtsChanged() : super._();
+  const UpdatePtsChanged() ;
 
   /// Deserialize.
   factory UpdatePtsChanged.deserialize(BinaryReader reader) {
@@ -22008,7 +22015,7 @@ class UpdateChannelWebPage extends UpdateBase {
     required this.webpage,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelWebPage.deserialize(BinaryReader reader) {
@@ -22088,7 +22095,7 @@ class UpdateDialogPinned extends UpdateBase {
     required this.pinned,
     this.folderId,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDialogPinned.deserialize(BinaryReader reader) {
@@ -22112,7 +22119,7 @@ class UpdateDialogPinned extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
       b01: folderId != null,
     );
@@ -22170,7 +22177,7 @@ class UpdatePinnedDialogs extends UpdateBase {
   const UpdatePinnedDialogs({
     this.folderId,
     this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePinnedDialogs.deserialize(BinaryReader reader) {
@@ -22194,7 +22201,7 @@ class UpdatePinnedDialogs extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: folderId != null,
       b00: order != null,
     );
@@ -22250,7 +22257,7 @@ class UpdateBotWebhookJSON extends UpdateBase {
   /// Update Bot Webhook J S O N constructor.
   const UpdateBotWebhookJSON({
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotWebhookJSON.deserialize(BinaryReader reader) {
@@ -22303,7 +22310,7 @@ class UpdateBotWebhookJSONQuery extends UpdateBase {
     required this.queryId,
     required this.data,
     required this.timeout,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotWebhookJSONQuery.deserialize(BinaryReader reader) {
@@ -22375,7 +22382,7 @@ class UpdateBotShippingQuery extends UpdateBase {
     required this.userId,
     required this.payload,
     required this.shippingAddress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotShippingQuery.deserialize(BinaryReader reader) {
@@ -22457,7 +22464,7 @@ class UpdateBotPrecheckoutQuery extends UpdateBase {
     this.shippingOptionId,
     required this.currency,
     required this.totalAmount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotPrecheckoutQuery.deserialize(BinaryReader reader) {
@@ -22492,7 +22499,7 @@ class UpdateBotPrecheckoutQuery extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: info != null,
       b01: shippingOptionId != null,
     );
@@ -22579,7 +22586,7 @@ class UpdatePhoneCall extends UpdateBase {
   /// Update Phone Call constructor.
   const UpdatePhoneCall({
     required this.phoneCall,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePhoneCall.deserialize(BinaryReader reader) {
@@ -22630,7 +22637,7 @@ class UpdateLangPackTooLong extends UpdateBase {
   /// Update Lang Pack Too Long constructor.
   const UpdateLangPackTooLong({
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateLangPackTooLong.deserialize(BinaryReader reader) {
@@ -22681,7 +22688,7 @@ class UpdateLangPack extends UpdateBase {
   /// Update Lang Pack constructor.
   const UpdateLangPack({
     required this.difference,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateLangPack.deserialize(BinaryReader reader) {
@@ -22730,7 +22737,7 @@ class UpdateLangPack extends UpdateBase {
 /// ID: `e511996d`.
 class UpdateFavedStickers extends UpdateBase {
   /// Update Faved Stickers constructor.
-  const UpdateFavedStickers() : super._();
+  const UpdateFavedStickers() ;
 
   /// Deserialize.
   factory UpdateFavedStickers.deserialize(BinaryReader reader) {
@@ -22771,7 +22778,7 @@ class UpdateChannelReadMessagesContents extends UpdateBase {
     required this.channelId,
     this.topMsgId,
     required this.messages,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelReadMessagesContents.deserialize(BinaryReader reader) {
@@ -22795,7 +22802,7 @@ class UpdateChannelReadMessagesContents extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -22852,7 +22859,7 @@ class UpdateChannelReadMessagesContents extends UpdateBase {
 /// ID: `7084a7be`.
 class UpdateContactsReset extends UpdateBase {
   /// Update Contacts Reset constructor.
-  const UpdateContactsReset() : super._();
+  const UpdateContactsReset() ;
 
   /// Deserialize.
   factory UpdateContactsReset.deserialize(BinaryReader reader) {
@@ -22892,7 +22899,7 @@ class UpdateChannelAvailableMessages extends UpdateBase {
   const UpdateChannelAvailableMessages({
     required this.channelId,
     required this.availableMinId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelAvailableMessages.deserialize(BinaryReader reader) {
@@ -22955,7 +22962,7 @@ class UpdateDialogUnreadMark extends UpdateBase {
   const UpdateDialogUnreadMark({
     required this.unread,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDialogUnreadMark.deserialize(BinaryReader reader) {
@@ -22976,7 +22983,7 @@ class UpdateDialogUnreadMark extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: unread,
     );
 
@@ -23026,7 +23033,7 @@ class UpdateMessagePoll extends UpdateBase {
     required this.pollId,
     this.poll,
     required this.results,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMessagePoll.deserialize(BinaryReader reader) {
@@ -23050,7 +23057,7 @@ class UpdateMessagePoll extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: poll != null,
     );
 
@@ -23111,7 +23118,7 @@ class UpdateChatDefaultBannedRights extends UpdateBase {
     required this.peer,
     required this.defaultBannedRights,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatDefaultBannedRights.deserialize(BinaryReader reader) {
@@ -23180,7 +23187,7 @@ class UpdateFolderPeers extends UpdateBase {
     required this.folderPeers,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateFolderPeers.deserialize(BinaryReader reader) {
@@ -23250,7 +23257,7 @@ class UpdatePeerSettings extends UpdateBase {
   const UpdatePeerSettings({
     required this.peer,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePeerSettings.deserialize(BinaryReader reader) {
@@ -23308,7 +23315,7 @@ class UpdatePeerLocated extends UpdateBase {
   /// Update Peer Located constructor.
   const UpdatePeerLocated({
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePeerLocated.deserialize(BinaryReader reader) {
@@ -23359,7 +23366,7 @@ class UpdateNewScheduledMessage extends UpdateBase {
   /// Update New Scheduled Message constructor.
   const UpdateNewScheduledMessage({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewScheduledMessage.deserialize(BinaryReader reader) {
@@ -23412,7 +23419,7 @@ class UpdateDeleteScheduledMessages extends UpdateBase {
     required this.peer,
     required this.messages,
     this.sentMessages,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDeleteScheduledMessages.deserialize(BinaryReader reader) {
@@ -23436,7 +23443,7 @@ class UpdateDeleteScheduledMessages extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: sentMessages != null,
     );
 
@@ -23493,7 +23500,7 @@ class UpdateTheme extends UpdateBase {
   /// Update Theme constructor.
   const UpdateTheme({
     required this.theme,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateTheme.deserialize(BinaryReader reader) {
@@ -23545,7 +23552,7 @@ class UpdateGeoLiveViewed extends UpdateBase {
   const UpdateGeoLiveViewed({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateGeoLiveViewed.deserialize(BinaryReader reader) {
@@ -23603,7 +23610,7 @@ class UpdateGeoLiveViewed extends UpdateBase {
 /// ID: `564fe691`.
 class UpdateLoginToken extends UpdateBase {
   /// Update Login Token constructor.
-  const UpdateLoginToken() : super._();
+  const UpdateLoginToken() ;
 
   /// Deserialize.
   factory UpdateLoginToken.deserialize(BinaryReader reader) {
@@ -23645,7 +23652,7 @@ class UpdateMessagePollVote extends UpdateBase {
     required this.peer,
     required this.options,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMessagePollVote.deserialize(BinaryReader reader) {
@@ -23722,7 +23729,7 @@ class UpdateDialogFilter extends UpdateBase {
   const UpdateDialogFilter({
     required this.id,
     this.filter,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDialogFilter.deserialize(BinaryReader reader) {
@@ -23745,7 +23752,7 @@ class UpdateDialogFilter extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: filter != null,
     );
 
@@ -23799,7 +23806,7 @@ class UpdateDialogFilterOrder extends UpdateBase {
   /// Update Dialog Filter Order constructor.
   const UpdateDialogFilterOrder({
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDialogFilterOrder.deserialize(BinaryReader reader) {
@@ -23848,7 +23855,7 @@ class UpdateDialogFilterOrder extends UpdateBase {
 /// ID: `3504914f`.
 class UpdateDialogFilters extends UpdateBase {
   /// Update Dialog Filters constructor.
-  const UpdateDialogFilters() : super._();
+  const UpdateDialogFilters() ;
 
   /// Deserialize.
   factory UpdateDialogFilters.deserialize(BinaryReader reader) {
@@ -23888,7 +23895,7 @@ class UpdatePhoneCallSignalingData extends UpdateBase {
   const UpdatePhoneCallSignalingData({
     required this.phoneCallId,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePhoneCallSignalingData.deserialize(BinaryReader reader) {
@@ -23950,7 +23957,7 @@ class UpdateChannelMessageForwards extends UpdateBase {
     required this.channelId,
     required this.id,
     required this.forwards,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelMessageForwards.deserialize(BinaryReader reader) {
@@ -24025,7 +24032,7 @@ class UpdateReadChannelDiscussionInbox extends UpdateBase {
     required this.readMaxId,
     this.broadcastId,
     this.broadcastPost,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadChannelDiscussionInbox.deserialize(BinaryReader reader) {
@@ -24054,7 +24061,7 @@ class UpdateReadChannelDiscussionInbox extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: broadcastId != null || broadcastPost != null,
     );
 
@@ -24132,7 +24139,7 @@ class UpdateReadChannelDiscussionOutbox extends UpdateBase {
     required this.channelId,
     required this.topMsgId,
     required this.readMaxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadChannelDiscussionOutbox.deserialize(BinaryReader reader) {
@@ -24205,7 +24212,7 @@ class UpdatePeerBlocked extends UpdateBase {
     required this.blocked,
     required this.blockedMyStoriesFrom,
     required this.peerId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePeerBlocked.deserialize(BinaryReader reader) {
@@ -24228,7 +24235,7 @@ class UpdatePeerBlocked extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: blocked,
       b01: blockedMyStoriesFrom,
     );
@@ -24284,7 +24291,7 @@ class UpdateChannelUserTyping extends UpdateBase {
     this.topMsgId,
     required this.fromId,
     required this.action,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelUserTyping.deserialize(BinaryReader reader) {
@@ -24310,7 +24317,7 @@ class UpdateChannelUserTyping extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -24378,7 +24385,7 @@ class UpdatePinnedMessages extends UpdateBase {
     required this.messages,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePinnedMessages.deserialize(BinaryReader reader) {
@@ -24405,7 +24412,7 @@ class UpdatePinnedMessages extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -24476,7 +24483,7 @@ class UpdatePinnedChannelMessages extends UpdateBase {
     required this.messages,
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePinnedChannelMessages.deserialize(BinaryReader reader) {
@@ -24503,7 +24510,7 @@ class UpdatePinnedChannelMessages extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -24572,7 +24579,7 @@ class UpdateChat extends UpdateBase {
   /// Update Chat constructor.
   const UpdateChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChat.deserialize(BinaryReader reader) {
@@ -24627,7 +24634,7 @@ class UpdateGroupCallParticipants extends UpdateBase {
     required this.call,
     required this.participants,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateGroupCallParticipants.deserialize(BinaryReader reader) {
@@ -24695,7 +24702,7 @@ class UpdateGroupCall extends UpdateBase {
   const UpdateGroupCall({
     required this.chatId,
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateGroupCall.deserialize(BinaryReader reader) {
@@ -24756,7 +24763,7 @@ class UpdatePeerHistoryTTL extends UpdateBase {
   const UpdatePeerHistoryTTL({
     required this.peer,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePeerHistoryTTL.deserialize(BinaryReader reader) {
@@ -24778,7 +24785,7 @@ class UpdatePeerHistoryTTL extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ttlPeriod != null,
     );
 
@@ -24837,7 +24844,7 @@ class UpdateChatParticipant extends UpdateBase {
     this.newParticipant,
     this.invite,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChatParticipant.deserialize(BinaryReader reader) {
@@ -24878,7 +24885,7 @@ class UpdateChatParticipant extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: prevParticipant != null,
       b01: newParticipant != null,
       b02: invite != null,
@@ -24984,7 +24991,7 @@ class UpdateChannelParticipant extends UpdateBase {
     this.newParticipant,
     this.invite,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelParticipant.deserialize(BinaryReader reader) {
@@ -25027,7 +25034,7 @@ class UpdateChannelParticipant extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: viaChatlist,
       b00: prevParticipant != null,
       b01: newParticipant != null,
@@ -25133,7 +25140,7 @@ class UpdateBotStopped extends UpdateBase {
     required this.date,
     required this.stopped,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotStopped.deserialize(BinaryReader reader) {
@@ -25210,7 +25217,7 @@ class UpdateGroupCallConnection extends UpdateBase {
   const UpdateGroupCallConnection({
     required this.presentation,
     required this.params,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateGroupCallConnection.deserialize(BinaryReader reader) {
@@ -25231,7 +25238,7 @@ class UpdateGroupCallConnection extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: presentation,
     );
 
@@ -25281,7 +25288,7 @@ class UpdateBotCommands extends UpdateBase {
     required this.peer,
     required this.botId,
     required this.commands,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotCommands.deserialize(BinaryReader reader) {
@@ -25350,7 +25357,7 @@ class UpdatePendingJoinRequests extends UpdateBase {
     required this.peer,
     required this.requestsPending,
     required this.recentRequesters,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePendingJoinRequests.deserialize(BinaryReader reader) {
@@ -25422,7 +25429,7 @@ class UpdateBotChatInviteRequester extends UpdateBase {
     required this.about,
     required this.invite,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotChatInviteRequester.deserialize(BinaryReader reader) {
@@ -25515,7 +25522,7 @@ class UpdateMessageReactions extends UpdateBase {
     required this.msgId,
     this.topMsgId,
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMessageReactions.deserialize(BinaryReader reader) {
@@ -25541,7 +25548,7 @@ class UpdateMessageReactions extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -25603,7 +25610,7 @@ class UpdateMessageReactions extends UpdateBase {
 /// ID: `17b7a20b`.
 class UpdateAttachMenuBots extends UpdateBase {
   /// Update Attach Menu Bots constructor.
-  const UpdateAttachMenuBots() : super._();
+  const UpdateAttachMenuBots() ;
 
   /// Deserialize.
   factory UpdateAttachMenuBots.deserialize(BinaryReader reader) {
@@ -25642,7 +25649,7 @@ class UpdateWebViewResultSent extends UpdateBase {
   /// Update Web View Result Sent constructor.
   const UpdateWebViewResultSent({
     required this.queryId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateWebViewResultSent.deserialize(BinaryReader reader) {
@@ -25696,7 +25703,7 @@ class UpdateBotMenuButton extends UpdateBase {
   const UpdateBotMenuButton({
     required this.botId,
     required this.button,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotMenuButton.deserialize(BinaryReader reader) {
@@ -25754,7 +25761,7 @@ class UpdateBotMenuButton extends UpdateBase {
 /// ID: `74d8be99`.
 class UpdateSavedRingtones extends UpdateBase {
   /// Update Saved Ringtones constructor.
-  const UpdateSavedRingtones() : super._();
+  const UpdateSavedRingtones() ;
 
   /// Deserialize.
   factory UpdateSavedRingtones.deserialize(BinaryReader reader) {
@@ -25797,7 +25804,7 @@ class UpdateTranscribedAudio extends UpdateBase {
     required this.msgId,
     required this.transcriptionId,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateTranscribedAudio.deserialize(BinaryReader reader) {
@@ -25824,7 +25831,7 @@ class UpdateTranscribedAudio extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pending,
     );
 
@@ -25889,7 +25896,7 @@ class UpdateTranscribedAudio extends UpdateBase {
 /// ID: `fb4c496c`.
 class UpdateReadFeaturedEmojiStickers extends UpdateBase {
   /// Update Read Featured Emoji Stickers constructor.
-  const UpdateReadFeaturedEmojiStickers() : super._();
+  const UpdateReadFeaturedEmojiStickers() ;
 
   /// Deserialize.
   factory UpdateReadFeaturedEmojiStickers.deserialize(BinaryReader reader) {
@@ -25929,7 +25936,7 @@ class UpdateUserEmojiStatus extends UpdateBase {
   const UpdateUserEmojiStatus({
     required this.userId,
     required this.emojiStatus,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUserEmojiStatus.deserialize(BinaryReader reader) {
@@ -25987,7 +25994,7 @@ class UpdateUserEmojiStatus extends UpdateBase {
 /// ID: `30f443db`.
 class UpdateRecentEmojiStatuses extends UpdateBase {
   /// Update Recent Emoji Statuses constructor.
-  const UpdateRecentEmojiStatuses() : super._();
+  const UpdateRecentEmojiStatuses() ;
 
   /// Deserialize.
   factory UpdateRecentEmojiStatuses.deserialize(BinaryReader reader) {
@@ -26024,7 +26031,7 @@ class UpdateRecentEmojiStatuses extends UpdateBase {
 /// ID: `6f7863f4`.
 class UpdateRecentReactions extends UpdateBase {
   /// Update Recent Reactions constructor.
-  const UpdateRecentReactions() : super._();
+  const UpdateRecentReactions() ;
 
   /// Deserialize.
   factory UpdateRecentReactions.deserialize(BinaryReader reader) {
@@ -26065,7 +26072,7 @@ class UpdateMoveStickerSetToTop extends UpdateBase {
     required this.masks,
     required this.emojis,
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMoveStickerSetToTop.deserialize(BinaryReader reader) {
@@ -26088,7 +26095,7 @@ class UpdateMoveStickerSetToTop extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b01: emojis,
     );
@@ -26145,7 +26152,7 @@ class UpdateMessageExtendedMedia extends UpdateBase {
     required this.peer,
     required this.msgId,
     required this.extendedMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateMessageExtendedMedia.deserialize(BinaryReader reader) {
@@ -26214,7 +26221,7 @@ class UpdateChannelPinnedTopic extends UpdateBase {
     required this.pinned,
     required this.channelId,
     required this.topicId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelPinnedTopic.deserialize(BinaryReader reader) {
@@ -26237,7 +26244,7 @@ class UpdateChannelPinnedTopic extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -26295,7 +26302,7 @@ class UpdateChannelPinnedTopics extends UpdateBase {
   const UpdateChannelPinnedTopics({
     required this.channelId,
     this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelPinnedTopics.deserialize(BinaryReader reader) {
@@ -26317,7 +26324,7 @@ class UpdateChannelPinnedTopics extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: order != null,
     );
 
@@ -26371,7 +26378,7 @@ class UpdateUser extends UpdateBase {
   /// Update User constructor.
   const UpdateUser({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateUser.deserialize(BinaryReader reader) {
@@ -26422,7 +26429,7 @@ class UpdateUser extends UpdateBase {
 /// ID: `ec05b097`.
 class UpdateAutoSaveSettings extends UpdateBase {
   /// Update Auto Save Settings constructor.
-  const UpdateAutoSaveSettings() : super._();
+  const UpdateAutoSaveSettings() ;
 
   /// Deserialize.
   factory UpdateAutoSaveSettings.deserialize(BinaryReader reader) {
@@ -26462,7 +26469,7 @@ class UpdateStory extends UpdateBase {
   const UpdateStory({
     required this.peer,
     required this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStory.deserialize(BinaryReader reader) {
@@ -26521,7 +26528,7 @@ class UpdateReadStories extends UpdateBase {
   const UpdateReadStories({
     required this.peer,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateReadStories.deserialize(BinaryReader reader) {
@@ -26582,7 +26589,7 @@ class UpdateStoryID extends UpdateBase {
   const UpdateStoryID({
     required this.id,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStoryID.deserialize(BinaryReader reader) {
@@ -26644,7 +26651,7 @@ class UpdateStoriesStealthMode extends UpdateBase {
   /// Update Stories Stealth Mode constructor.
   const UpdateStoriesStealthMode({
     required this.stealthMode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStoriesStealthMode.deserialize(BinaryReader reader) {
@@ -26697,7 +26704,7 @@ class UpdateSentStoryReaction extends UpdateBase {
     required this.peer,
     required this.storyId,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateSentStoryReaction.deserialize(BinaryReader reader) {
@@ -26766,7 +26773,7 @@ class UpdateBotChatBoost extends UpdateBase {
     required this.peer,
     required this.boost,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotChatBoost.deserialize(BinaryReader reader) {
@@ -26834,7 +26841,7 @@ class UpdateChannelViewForumAsMessages extends UpdateBase {
   const UpdateChannelViewForumAsMessages({
     required this.channelId,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateChannelViewForumAsMessages.deserialize(BinaryReader reader) {
@@ -26896,7 +26903,7 @@ class UpdatePeerWallpaper extends UpdateBase {
     required this.wallpaperOverridden,
     required this.peer,
     this.wallpaper,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePeerWallpaper.deserialize(BinaryReader reader) {
@@ -26921,7 +26928,7 @@ class UpdatePeerWallpaper extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: wallpaperOverridden,
       b00: wallpaper != null,
     );
@@ -26984,7 +26991,7 @@ class UpdateBotMessageReaction extends UpdateBase {
     required this.oldReactions,
     required this.newReactions,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotMessageReaction.deserialize(BinaryReader reader) {
@@ -27085,7 +27092,7 @@ class UpdateBotMessageReactions extends UpdateBase {
     required this.date,
     required this.reactions,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotMessageReactions.deserialize(BinaryReader reader) {
@@ -27169,7 +27176,7 @@ class UpdateSavedDialogPinned extends UpdateBase {
   const UpdateSavedDialogPinned({
     required this.pinned,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateSavedDialogPinned.deserialize(BinaryReader reader) {
@@ -27190,7 +27197,7 @@ class UpdateSavedDialogPinned extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -27238,7 +27245,7 @@ class UpdatePinnedSavedDialogs extends UpdateBase {
   /// Update Pinned Saved Dialogs constructor.
   const UpdatePinnedSavedDialogs({
     this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePinnedSavedDialogs.deserialize(BinaryReader reader) {
@@ -27259,7 +27266,7 @@ class UpdatePinnedSavedDialogs extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: order != null,
     );
 
@@ -27304,7 +27311,7 @@ class UpdatePinnedSavedDialogs extends UpdateBase {
 /// ID: `39c67432`.
 class UpdateSavedReactionTags extends UpdateBase {
   /// Update Saved Reaction Tags constructor.
-  const UpdateSavedReactionTags() : super._();
+  const UpdateSavedReactionTags() ;
 
   /// Deserialize.
   factory UpdateSavedReactionTags.deserialize(BinaryReader reader) {
@@ -27343,7 +27350,7 @@ class UpdateSmsJob extends UpdateBase {
   /// Update Sms Job constructor.
   const UpdateSmsJob({
     required this.jobId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateSmsJob.deserialize(BinaryReader reader) {
@@ -27394,7 +27401,7 @@ class UpdateQuickReplies extends UpdateBase {
   /// Update Quick Replies constructor.
   const UpdateQuickReplies({
     required this.quickReplies,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateQuickReplies.deserialize(BinaryReader reader) {
@@ -27445,7 +27452,7 @@ class UpdateNewQuickReply extends UpdateBase {
   /// Update New Quick Reply constructor.
   const UpdateNewQuickReply({
     required this.quickReply,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewQuickReply.deserialize(BinaryReader reader) {
@@ -27496,7 +27503,7 @@ class UpdateDeleteQuickReply extends UpdateBase {
   /// Update Delete Quick Reply constructor.
   const UpdateDeleteQuickReply({
     required this.shortcutId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDeleteQuickReply.deserialize(BinaryReader reader) {
@@ -27549,7 +27556,7 @@ class UpdateQuickReplyMessage extends UpdateBase {
   /// Update Quick Reply Message constructor.
   const UpdateQuickReplyMessage({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateQuickReplyMessage.deserialize(BinaryReader reader) {
@@ -27601,7 +27608,7 @@ class UpdateDeleteQuickReplyMessages extends UpdateBase {
   const UpdateDeleteQuickReplyMessages({
     required this.shortcutId,
     required this.messages,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateDeleteQuickReplyMessages.deserialize(BinaryReader reader) {
@@ -27662,7 +27669,7 @@ class UpdateBotBusinessConnect extends UpdateBase {
   const UpdateBotBusinessConnect({
     required this.connection,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotBusinessConnect.deserialize(BinaryReader reader) {
@@ -27725,7 +27732,7 @@ class UpdateBotNewBusinessMessage extends UpdateBase {
     required this.message,
     this.replyToMessage,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotNewBusinessMessage.deserialize(BinaryReader reader) {
@@ -27752,7 +27759,7 @@ class UpdateBotNewBusinessMessage extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: replyToMessage != null,
     );
 
@@ -27819,7 +27826,7 @@ class UpdateBotEditBusinessMessage extends UpdateBase {
     required this.message,
     this.replyToMessage,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotEditBusinessMessage.deserialize(BinaryReader reader) {
@@ -27846,7 +27853,7 @@ class UpdateBotEditBusinessMessage extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: replyToMessage != null,
     );
 
@@ -27913,7 +27920,7 @@ class UpdateBotDeleteBusinessMessage extends UpdateBase {
     required this.peer,
     required this.messages,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotDeleteBusinessMessage.deserialize(BinaryReader reader) {
@@ -27989,7 +27996,7 @@ class UpdateNewStoryReaction extends UpdateBase {
     required this.storyId,
     required this.peer,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateNewStoryReaction.deserialize(BinaryReader reader) {
@@ -28057,7 +28064,7 @@ class UpdateBroadcastRevenueTransactions extends UpdateBase {
   const UpdateBroadcastRevenueTransactions({
     required this.peer,
     required this.balances,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBroadcastRevenueTransactions.deserialize(BinaryReader reader) {
@@ -28115,7 +28122,7 @@ class UpdateStarsBalance extends UpdateBase {
   /// Update Stars Balance constructor.
   const UpdateStarsBalance({
     required this.balance,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStarsBalance.deserialize(BinaryReader reader) {
@@ -28172,7 +28179,7 @@ class UpdateBusinessBotCallbackQuery extends UpdateBase {
     this.replyToMessage,
     required this.chatInstance,
     this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBusinessBotCallbackQuery.deserialize(BinaryReader reader) {
@@ -28206,7 +28213,7 @@ class UpdateBusinessBotCallbackQuery extends UpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyToMessage != null,
       b00: data != null,
     );
@@ -28294,7 +28301,7 @@ class UpdateStarsRevenueStatus extends UpdateBase {
   const UpdateStarsRevenueStatus({
     required this.peer,
     required this.status,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateStarsRevenueStatus.deserialize(BinaryReader reader) {
@@ -28354,7 +28361,7 @@ class UpdateBotPurchasedPaidMedia extends UpdateBase {
     required this.userId,
     required this.payload,
     required this.qts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateBotPurchasedPaidMedia.deserialize(BinaryReader reader) {
@@ -28423,7 +28430,7 @@ class UpdatePaidReactionPrivacy extends UpdateBase {
   /// Update Paid Reaction Privacy constructor.
   const UpdatePaidReactionPrivacy({
     required this.private,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatePaidReactionPrivacy.deserialize(BinaryReader reader) {
@@ -28478,7 +28485,7 @@ class UpdatesState extends UpdatesStateBase {
     required this.date,
     required this.seq,
     required this.unreadCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesState.deserialize(BinaryReader reader) {
@@ -28566,7 +28573,7 @@ class UpdatesDifferenceEmpty extends UpdatesDifferenceBase {
   const UpdatesDifferenceEmpty({
     required this.date,
     required this.seq,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesDifferenceEmpty.deserialize(BinaryReader reader) {
@@ -28631,7 +28638,7 @@ class UpdatesDifference extends UpdatesDifferenceBase {
     required this.chats,
     required this.users,
     required this.state,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesDifference.deserialize(BinaryReader reader) {
@@ -28723,7 +28730,7 @@ class UpdatesDifferenceSlice extends UpdatesDifferenceBase {
     required this.chats,
     required this.users,
     required this.intermediateState,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesDifferenceSlice.deserialize(BinaryReader reader) {
@@ -28810,7 +28817,7 @@ class UpdatesDifferenceTooLong extends UpdatesDifferenceBase {
   /// Updates Difference Too Long constructor.
   const UpdatesDifferenceTooLong({
     required this.pts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesDifferenceTooLong.deserialize(BinaryReader reader) {
@@ -28861,7 +28868,7 @@ class UpdatesDifferenceTooLong extends UpdatesDifferenceBase {
 /// ID: `e317af7e`.
 class UpdatesTooLong extends UpdatesBase {
   /// Updates Too Long constructor.
-  const UpdatesTooLong() : super._();
+  const UpdatesTooLong() ;
 
   /// Deserialize.
   factory UpdatesTooLong.deserialize(BinaryReader reader) {
@@ -28914,7 +28921,7 @@ class UpdateShortMessage extends UpdatesBase {
     this.replyTo,
     this.entities,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateShortMessage.deserialize(BinaryReader reader) {
@@ -28969,7 +28976,7 @@ class UpdateShortMessage extends UpdatesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: out,
       b04: mentioned,
       b05: mediaUnread,
@@ -29125,7 +29132,7 @@ class UpdateShortChatMessage extends UpdatesBase {
     this.replyTo,
     this.entities,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateShortChatMessage.deserialize(BinaryReader reader) {
@@ -29182,7 +29189,7 @@ class UpdateShortChatMessage extends UpdatesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: out,
       b04: mentioned,
       b05: mediaUnread,
@@ -29331,7 +29338,7 @@ class UpdateShort extends UpdatesBase {
   const UpdateShort({
     required this.update,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateShort.deserialize(BinaryReader reader) {
@@ -29394,7 +29401,7 @@ class UpdatesCombined extends UpdatesBase {
     required this.date,
     required this.seqStart,
     required this.seq,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesCombined.deserialize(BinaryReader reader) {
@@ -29488,7 +29495,7 @@ class Updates extends UpdatesBase {
     required this.chats,
     required this.date,
     required this.seq,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Updates.deserialize(BinaryReader reader) {
@@ -29576,7 +29583,7 @@ class UpdateShortSentMessage extends UpdatesBase {
     this.media,
     this.entities,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdateShortSentMessage.deserialize(BinaryReader reader) {
@@ -29614,7 +29621,7 @@ class UpdateShortSentMessage extends UpdatesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: out,
       b09: media != null,
       b07: entities != null,
@@ -29711,7 +29718,7 @@ class PhotosPhotos extends PhotosPhotosBase {
   const PhotosPhotos({
     required this.photos,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosPhotos.deserialize(BinaryReader reader) {
@@ -29771,7 +29778,7 @@ class PhotosPhotosSlice extends PhotosPhotosBase {
     required this.count,
     required this.photos,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosPhotosSlice.deserialize(BinaryReader reader) {
@@ -29839,7 +29846,7 @@ class PhotosPhoto extends PhotosPhotoBase {
   const PhotosPhoto({
     required this.photo,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosPhoto.deserialize(BinaryReader reader) {
@@ -29899,7 +29906,7 @@ class UploadFile extends UploadFileBase {
     required this.type,
     required this.mtime,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadFile.deserialize(BinaryReader reader) {
@@ -29970,7 +29977,7 @@ class UploadFileCdnRedirect extends UploadFileBase {
     required this.encryptionKey,
     required this.encryptionIv,
     required this.fileHashes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadFileCdnRedirect.deserialize(BinaryReader reader) {
@@ -30060,7 +30067,7 @@ class DcOption extends DcOptionBase {
     required this.ipAddress,
     required this.port,
     this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DcOption.deserialize(BinaryReader reader) {
@@ -30098,7 +30105,7 @@ class DcOption extends DcOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ipv6,
       b01: mediaOnly,
       b02: tcpoOnly,
@@ -30240,7 +30247,7 @@ class Config extends ConfigBase {
     this.baseLangPackVersion,
     this.reactionsDefault,
     this.autologinToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Config.deserialize(BinaryReader reader) {
@@ -30370,7 +30377,7 @@ class Config extends ConfigBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: defaultP2pContacts,
       b04: preloadFeaturedStickers,
       b06: revokePmInbox,
@@ -30739,7 +30746,7 @@ class NearestDc extends NearestDcBase {
     required this.country,
     required this.thisDc,
     required this.nearestDc,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NearestDc.deserialize(BinaryReader reader) {
@@ -30815,7 +30822,7 @@ class HelpAppUpdate extends HelpAppUpdateBase {
     this.document,
     this.url,
     this.sticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpAppUpdate.deserialize(BinaryReader reader) {
@@ -30853,7 +30860,7 @@ class HelpAppUpdate extends HelpAppUpdateBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canNotSkip,
       b01: document != null,
       b02: url != null,
@@ -30943,7 +30950,7 @@ class HelpAppUpdate extends HelpAppUpdateBase {
 /// ID: `c45a6536`.
 class HelpNoAppUpdate extends HelpAppUpdateBase {
   /// Help No App Update constructor.
-  const HelpNoAppUpdate() : super._();
+  const HelpNoAppUpdate() ;
 
   /// Deserialize.
   factory HelpNoAppUpdate.deserialize(BinaryReader reader) {
@@ -30982,7 +30989,7 @@ class HelpInviteText extends HelpInviteTextBase {
   /// Help Invite Text constructor.
   const HelpInviteText({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpInviteText.deserialize(BinaryReader reader) {
@@ -31033,7 +31040,7 @@ class EncryptedChatEmpty extends EncryptedChatBase {
   /// Encrypted Chat Empty constructor.
   const EncryptedChatEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedChatEmpty.deserialize(BinaryReader reader) {
@@ -31090,7 +31097,7 @@ class EncryptedChatWaiting extends EncryptedChatBase {
     required this.date,
     required this.adminId,
     required this.participantId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedChatWaiting.deserialize(BinaryReader reader) {
@@ -31183,7 +31190,7 @@ class EncryptedChatRequested extends EncryptedChatBase {
     required this.adminId,
     required this.participantId,
     required this.gA,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedChatRequested.deserialize(BinaryReader reader) {
@@ -31215,7 +31222,7 @@ class EncryptedChatRequested extends EncryptedChatBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: folderId != null,
     );
 
@@ -31306,7 +31313,7 @@ class EncryptedChat extends EncryptedChatBase {
     required this.participantId,
     required this.gAOrB,
     required this.keyFingerprint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedChat.deserialize(BinaryReader reader) {
@@ -31410,7 +31417,7 @@ class EncryptedChatDiscarded extends EncryptedChatBase {
   const EncryptedChatDiscarded({
     required this.historyDeleted,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedChatDiscarded.deserialize(BinaryReader reader) {
@@ -31431,7 +31438,7 @@ class EncryptedChatDiscarded extends EncryptedChatBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: historyDeleted,
     );
 
@@ -31482,7 +31489,7 @@ class InputEncryptedChat extends InputEncryptedChatBase {
   const InputEncryptedChat({
     required this.chatId,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputEncryptedChat.deserialize(BinaryReader reader) {
@@ -31542,7 +31549,7 @@ class InputEncryptedChat extends InputEncryptedChatBase {
 /// ID: `c21f497e`.
 class EncryptedFileEmpty extends EncryptedFileBase {
   /// Encrypted File Empty constructor.
-  const EncryptedFileEmpty() : super._();
+  const EncryptedFileEmpty() ;
 
   /// Deserialize.
   factory EncryptedFileEmpty.deserialize(BinaryReader reader) {
@@ -31585,7 +31592,7 @@ class EncryptedFile extends EncryptedFileBase {
     required this.size,
     required this.dcId,
     required this.keyFingerprint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedFile.deserialize(BinaryReader reader) {
@@ -31672,7 +31679,7 @@ class EncryptedFile extends EncryptedFileBase {
 /// ID: `1837c364`.
 class InputEncryptedFileEmpty extends InputEncryptedFileBase {
   /// Input Encrypted File Empty constructor.
-  const InputEncryptedFileEmpty() : super._();
+  const InputEncryptedFileEmpty() ;
 
   /// Deserialize.
   factory InputEncryptedFileEmpty.deserialize(BinaryReader reader) {
@@ -31714,7 +31721,7 @@ class InputEncryptedFileUploaded extends InputEncryptedFileBase {
     required this.parts,
     required this.md5Checksum,
     required this.keyFingerprint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputEncryptedFileUploaded.deserialize(BinaryReader reader) {
@@ -31793,7 +31800,7 @@ class InputEncryptedFile extends InputEncryptedFileBase {
   const InputEncryptedFile({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputEncryptedFile.deserialize(BinaryReader reader) {
@@ -31857,7 +31864,7 @@ class InputEncryptedFileBigUploaded extends InputEncryptedFileBase {
     required this.id,
     required this.parts,
     required this.keyFingerprint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputEncryptedFileBigUploaded.deserialize(BinaryReader reader) {
@@ -31932,7 +31939,7 @@ class EncryptedMessage extends EncryptedMessageBase {
     required this.date,
     required this.bytes,
     required this.file,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedMessage.deserialize(BinaryReader reader) {
@@ -32018,7 +32025,7 @@ class EncryptedMessageService extends EncryptedMessageBase {
     required this.chatId,
     required this.date,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EncryptedMessageService.deserialize(BinaryReader reader) {
@@ -32094,7 +32101,7 @@ class MessagesDhConfigNotModified extends MessagesDhConfigBase {
   /// Messages Dh Config Not Modified constructor.
   const MessagesDhConfigNotModified({
     required this.random,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDhConfigNotModified.deserialize(BinaryReader reader) {
@@ -32148,7 +32155,7 @@ class MessagesDhConfig extends MessagesDhConfigBase {
     required this.p,
     required this.version,
     required this.random,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDhConfig.deserialize(BinaryReader reader) {
@@ -32224,7 +32231,7 @@ class MessagesSentEncryptedMessage extends MessagesSentEncryptedMessageBase {
   /// Messages Sent Encrypted Message constructor.
   const MessagesSentEncryptedMessage({
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSentEncryptedMessage.deserialize(BinaryReader reader) {
@@ -32276,7 +32283,7 @@ class MessagesSentEncryptedFile extends MessagesSentEncryptedMessageBase {
   const MessagesSentEncryptedFile({
     required this.date,
     required this.file,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSentEncryptedFile.deserialize(BinaryReader reader) {
@@ -32332,7 +32339,7 @@ class MessagesSentEncryptedFile extends MessagesSentEncryptedMessageBase {
 /// ID: `72f0eaae`.
 class InputDocumentEmpty extends InputDocumentBase {
   /// Input Document Empty constructor.
-  const InputDocumentEmpty() : super._();
+  const InputDocumentEmpty() ;
 
   /// Deserialize.
   factory InputDocumentEmpty.deserialize(BinaryReader reader) {
@@ -32373,7 +32380,7 @@ class InputDocument extends InputDocumentBase {
     required this.id,
     required this.accessHash,
     required this.fileReference,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputDocument.deserialize(BinaryReader reader) {
@@ -32442,7 +32449,7 @@ class DocumentEmpty extends DocumentBase {
   /// Document Empty constructor.
   const DocumentEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentEmpty.deserialize(BinaryReader reader) {
@@ -32504,7 +32511,7 @@ class Document extends DocumentBase {
     this.videoThumbs,
     required this.dcId,
     required this.attributes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Document.deserialize(BinaryReader reader) {
@@ -32545,7 +32552,7 @@ class Document extends DocumentBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: thumbs != null,
       b01: videoThumbs != null,
     );
@@ -32650,7 +32657,7 @@ class HelpSupport extends HelpSupportBase {
   const HelpSupport({
     required this.phoneNumber,
     required this.user,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpSupport.deserialize(BinaryReader reader) {
@@ -32708,7 +32715,7 @@ class NotifyPeer extends NotifyPeerBase {
   /// Notify Peer constructor.
   const NotifyPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NotifyPeer.deserialize(BinaryReader reader) {
@@ -32757,7 +32764,7 @@ class NotifyPeer extends NotifyPeerBase {
 /// ID: `b4c83b4c`.
 class NotifyUsers extends NotifyPeerBase {
   /// Notify Users constructor.
-  const NotifyUsers() : super._();
+  const NotifyUsers() ;
 
   /// Deserialize.
   factory NotifyUsers.deserialize(BinaryReader reader) {
@@ -32794,7 +32801,7 @@ class NotifyUsers extends NotifyPeerBase {
 /// ID: `c007cec3`.
 class NotifyChats extends NotifyPeerBase {
   /// Notify Chats constructor.
-  const NotifyChats() : super._();
+  const NotifyChats() ;
 
   /// Deserialize.
   factory NotifyChats.deserialize(BinaryReader reader) {
@@ -32831,7 +32838,7 @@ class NotifyChats extends NotifyPeerBase {
 /// ID: `d612e8ef`.
 class NotifyBroadcasts extends NotifyPeerBase {
   /// Notify Broadcasts constructor.
-  const NotifyBroadcasts() : super._();
+  const NotifyBroadcasts() ;
 
   /// Deserialize.
   factory NotifyBroadcasts.deserialize(BinaryReader reader) {
@@ -32871,7 +32878,7 @@ class NotifyForumTopic extends NotifyPeerBase {
   const NotifyForumTopic({
     required this.peer,
     required this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NotifyForumTopic.deserialize(BinaryReader reader) {
@@ -32929,7 +32936,7 @@ class NotifyForumTopic extends NotifyPeerBase {
 /// ID: `16bf744e`.
 class SendMessageTypingAction extends SendMessageActionBase {
   /// Send Message Typing Action constructor.
-  const SendMessageTypingAction() : super._();
+  const SendMessageTypingAction() ;
 
   /// Deserialize.
   factory SendMessageTypingAction.deserialize(BinaryReader reader) {
@@ -32966,7 +32973,7 @@ class SendMessageTypingAction extends SendMessageActionBase {
 /// ID: `fd5ec8f5`.
 class SendMessageCancelAction extends SendMessageActionBase {
   /// Send Message Cancel Action constructor.
-  const SendMessageCancelAction() : super._();
+  const SendMessageCancelAction() ;
 
   /// Deserialize.
   factory SendMessageCancelAction.deserialize(BinaryReader reader) {
@@ -33003,7 +33010,7 @@ class SendMessageCancelAction extends SendMessageActionBase {
 /// ID: `a187d66f`.
 class SendMessageRecordVideoAction extends SendMessageActionBase {
   /// Send Message Record Video Action constructor.
-  const SendMessageRecordVideoAction() : super._();
+  const SendMessageRecordVideoAction() ;
 
   /// Deserialize.
   factory SendMessageRecordVideoAction.deserialize(BinaryReader reader) {
@@ -33042,7 +33049,7 @@ class SendMessageUploadVideoAction extends SendMessageActionBase {
   /// Send Message Upload Video Action constructor.
   const SendMessageUploadVideoAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageUploadVideoAction.deserialize(BinaryReader reader) {
@@ -33093,7 +33100,7 @@ class SendMessageUploadVideoAction extends SendMessageActionBase {
 /// ID: `d52f73f7`.
 class SendMessageRecordAudioAction extends SendMessageActionBase {
   /// Send Message Record Audio Action constructor.
-  const SendMessageRecordAudioAction() : super._();
+  const SendMessageRecordAudioAction() ;
 
   /// Deserialize.
   factory SendMessageRecordAudioAction.deserialize(BinaryReader reader) {
@@ -33132,7 +33139,7 @@ class SendMessageUploadAudioAction extends SendMessageActionBase {
   /// Send Message Upload Audio Action constructor.
   const SendMessageUploadAudioAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageUploadAudioAction.deserialize(BinaryReader reader) {
@@ -33185,7 +33192,7 @@ class SendMessageUploadPhotoAction extends SendMessageActionBase {
   /// Send Message Upload Photo Action constructor.
   const SendMessageUploadPhotoAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageUploadPhotoAction.deserialize(BinaryReader reader) {
@@ -33238,7 +33245,7 @@ class SendMessageUploadDocumentAction extends SendMessageActionBase {
   /// Send Message Upload Document Action constructor.
   const SendMessageUploadDocumentAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageUploadDocumentAction.deserialize(BinaryReader reader) {
@@ -33289,7 +33296,7 @@ class SendMessageUploadDocumentAction extends SendMessageActionBase {
 /// ID: `176f8ba1`.
 class SendMessageGeoLocationAction extends SendMessageActionBase {
   /// Send Message Geo Location Action constructor.
-  const SendMessageGeoLocationAction() : super._();
+  const SendMessageGeoLocationAction() ;
 
   /// Deserialize.
   factory SendMessageGeoLocationAction.deserialize(BinaryReader reader) {
@@ -33326,7 +33333,7 @@ class SendMessageGeoLocationAction extends SendMessageActionBase {
 /// ID: `628cbc6f`.
 class SendMessageChooseContactAction extends SendMessageActionBase {
   /// Send Message Choose Contact Action constructor.
-  const SendMessageChooseContactAction() : super._();
+  const SendMessageChooseContactAction() ;
 
   /// Deserialize.
   factory SendMessageChooseContactAction.deserialize(BinaryReader reader) {
@@ -33363,7 +33370,7 @@ class SendMessageChooseContactAction extends SendMessageActionBase {
 /// ID: `dd6a8f48`.
 class SendMessageGamePlayAction extends SendMessageActionBase {
   /// Send Message Game Play Action constructor.
-  const SendMessageGamePlayAction() : super._();
+  const SendMessageGamePlayAction() ;
 
   /// Deserialize.
   factory SendMessageGamePlayAction.deserialize(BinaryReader reader) {
@@ -33400,7 +33407,7 @@ class SendMessageGamePlayAction extends SendMessageActionBase {
 /// ID: `88f27fbc`.
 class SendMessageRecordRoundAction extends SendMessageActionBase {
   /// Send Message Record Round Action constructor.
-  const SendMessageRecordRoundAction() : super._();
+  const SendMessageRecordRoundAction() ;
 
   /// Deserialize.
   factory SendMessageRecordRoundAction.deserialize(BinaryReader reader) {
@@ -33439,7 +33446,7 @@ class SendMessageUploadRoundAction extends SendMessageActionBase {
   /// Send Message Upload Round Action constructor.
   const SendMessageUploadRoundAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageUploadRoundAction.deserialize(BinaryReader reader) {
@@ -33490,7 +33497,7 @@ class SendMessageUploadRoundAction extends SendMessageActionBase {
 /// ID: `d92c2285`.
 class SpeakingInGroupCallAction extends SendMessageActionBase {
   /// Speaking In Group Call Action constructor.
-  const SpeakingInGroupCallAction() : super._();
+  const SpeakingInGroupCallAction() ;
 
   /// Deserialize.
   factory SpeakingInGroupCallAction.deserialize(BinaryReader reader) {
@@ -33529,7 +33536,7 @@ class SendMessageHistoryImportAction extends SendMessageActionBase {
   /// Send Message History Import Action constructor.
   const SendMessageHistoryImportAction({
     required this.progress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageHistoryImportAction.deserialize(BinaryReader reader) {
@@ -33580,7 +33587,7 @@ class SendMessageHistoryImportAction extends SendMessageActionBase {
 /// ID: `b05ac6b1`.
 class SendMessageChooseStickerAction extends SendMessageActionBase {
   /// Send Message Choose Sticker Action constructor.
-  const SendMessageChooseStickerAction() : super._();
+  const SendMessageChooseStickerAction() ;
 
   /// Deserialize.
   factory SendMessageChooseStickerAction.deserialize(BinaryReader reader) {
@@ -33621,7 +33628,7 @@ class SendMessageEmojiInteraction extends SendMessageActionBase {
     required this.emoticon,
     required this.msgId,
     required this.interaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageEmojiInteraction.deserialize(BinaryReader reader) {
@@ -33688,7 +33695,7 @@ class SendMessageEmojiInteractionSeen extends SendMessageActionBase {
   /// Send Message Emoji Interaction Seen constructor.
   const SendMessageEmojiInteractionSeen({
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendMessageEmojiInteractionSeen.deserialize(BinaryReader reader) {
@@ -33742,7 +33749,7 @@ class ContactsFound extends ContactsFoundBase {
     required this.results,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsFound.deserialize(BinaryReader reader) {
@@ -33812,7 +33819,7 @@ class ContactsFound extends ContactsFoundBase {
 /// ID: `4f96cb18`.
 class InputPrivacyKeyStatusTimestamp extends InputPrivacyKeyBase {
   /// Input Privacy Key Status Timestamp constructor.
-  const InputPrivacyKeyStatusTimestamp() : super._();
+  const InputPrivacyKeyStatusTimestamp() ;
 
   /// Deserialize.
   factory InputPrivacyKeyStatusTimestamp.deserialize(BinaryReader reader) {
@@ -33849,7 +33856,7 @@ class InputPrivacyKeyStatusTimestamp extends InputPrivacyKeyBase {
 /// ID: `bdfb0426`.
 class InputPrivacyKeyChatInvite extends InputPrivacyKeyBase {
   /// Input Privacy Key Chat Invite constructor.
-  const InputPrivacyKeyChatInvite() : super._();
+  const InputPrivacyKeyChatInvite() ;
 
   /// Deserialize.
   factory InputPrivacyKeyChatInvite.deserialize(BinaryReader reader) {
@@ -33886,7 +33893,7 @@ class InputPrivacyKeyChatInvite extends InputPrivacyKeyBase {
 /// ID: `fabadc5f`.
 class InputPrivacyKeyPhoneCall extends InputPrivacyKeyBase {
   /// Input Privacy Key Phone Call constructor.
-  const InputPrivacyKeyPhoneCall() : super._();
+  const InputPrivacyKeyPhoneCall() ;
 
   /// Deserialize.
   factory InputPrivacyKeyPhoneCall.deserialize(BinaryReader reader) {
@@ -33923,7 +33930,7 @@ class InputPrivacyKeyPhoneCall extends InputPrivacyKeyBase {
 /// ID: `db9e70d2`.
 class InputPrivacyKeyPhoneP2P extends InputPrivacyKeyBase {
   /// Input Privacy Key Phone P2 P constructor.
-  const InputPrivacyKeyPhoneP2P() : super._();
+  const InputPrivacyKeyPhoneP2P() ;
 
   /// Deserialize.
   factory InputPrivacyKeyPhoneP2P.deserialize(BinaryReader reader) {
@@ -33960,7 +33967,7 @@ class InputPrivacyKeyPhoneP2P extends InputPrivacyKeyBase {
 /// ID: `a4dd4c08`.
 class InputPrivacyKeyForwards extends InputPrivacyKeyBase {
   /// Input Privacy Key Forwards constructor.
-  const InputPrivacyKeyForwards() : super._();
+  const InputPrivacyKeyForwards() ;
 
   /// Deserialize.
   factory InputPrivacyKeyForwards.deserialize(BinaryReader reader) {
@@ -33997,7 +34004,7 @@ class InputPrivacyKeyForwards extends InputPrivacyKeyBase {
 /// ID: `5719bacc`.
 class InputPrivacyKeyProfilePhoto extends InputPrivacyKeyBase {
   /// Input Privacy Key Profile Photo constructor.
-  const InputPrivacyKeyProfilePhoto() : super._();
+  const InputPrivacyKeyProfilePhoto() ;
 
   /// Deserialize.
   factory InputPrivacyKeyProfilePhoto.deserialize(BinaryReader reader) {
@@ -34034,7 +34041,7 @@ class InputPrivacyKeyProfilePhoto extends InputPrivacyKeyBase {
 /// ID: `0352dafa`.
 class InputPrivacyKeyPhoneNumber extends InputPrivacyKeyBase {
   /// Input Privacy Key Phone Number constructor.
-  const InputPrivacyKeyPhoneNumber() : super._();
+  const InputPrivacyKeyPhoneNumber() ;
 
   /// Deserialize.
   factory InputPrivacyKeyPhoneNumber.deserialize(BinaryReader reader) {
@@ -34071,7 +34078,7 @@ class InputPrivacyKeyPhoneNumber extends InputPrivacyKeyBase {
 /// ID: `d1219bdd`.
 class InputPrivacyKeyAddedByPhone extends InputPrivacyKeyBase {
   /// Input Privacy Key Added By Phone constructor.
-  const InputPrivacyKeyAddedByPhone() : super._();
+  const InputPrivacyKeyAddedByPhone() ;
 
   /// Deserialize.
   factory InputPrivacyKeyAddedByPhone.deserialize(BinaryReader reader) {
@@ -34108,7 +34115,7 @@ class InputPrivacyKeyAddedByPhone extends InputPrivacyKeyBase {
 /// ID: `aee69d68`.
 class InputPrivacyKeyVoiceMessages extends InputPrivacyKeyBase {
   /// Input Privacy Key Voice Messages constructor.
-  const InputPrivacyKeyVoiceMessages() : super._();
+  const InputPrivacyKeyVoiceMessages() ;
 
   /// Deserialize.
   factory InputPrivacyKeyVoiceMessages.deserialize(BinaryReader reader) {
@@ -34145,7 +34152,7 @@ class InputPrivacyKeyVoiceMessages extends InputPrivacyKeyBase {
 /// ID: `3823cc40`.
 class InputPrivacyKeyAbout extends InputPrivacyKeyBase {
   /// Input Privacy Key About constructor.
-  const InputPrivacyKeyAbout() : super._();
+  const InputPrivacyKeyAbout() ;
 
   /// Deserialize.
   factory InputPrivacyKeyAbout.deserialize(BinaryReader reader) {
@@ -34182,7 +34189,7 @@ class InputPrivacyKeyAbout extends InputPrivacyKeyBase {
 /// ID: `d65a11cc`.
 class InputPrivacyKeyBirthday extends InputPrivacyKeyBase {
   /// Input Privacy Key Birthday constructor.
-  const InputPrivacyKeyBirthday() : super._();
+  const InputPrivacyKeyBirthday() ;
 
   /// Deserialize.
   factory InputPrivacyKeyBirthday.deserialize(BinaryReader reader) {
@@ -34219,7 +34226,7 @@ class InputPrivacyKeyBirthday extends InputPrivacyKeyBase {
 /// ID: `e1732341`.
 class InputPrivacyKeyStarGiftsAutoSave extends InputPrivacyKeyBase {
   /// Input Privacy Key Star Gifts Auto Save constructor.
-  const InputPrivacyKeyStarGiftsAutoSave() : super._();
+  const InputPrivacyKeyStarGiftsAutoSave() ;
 
   /// Deserialize.
   factory InputPrivacyKeyStarGiftsAutoSave.deserialize(BinaryReader reader) {
@@ -34256,7 +34263,7 @@ class InputPrivacyKeyStarGiftsAutoSave extends InputPrivacyKeyBase {
 /// ID: `bc2eab30`.
 class PrivacyKeyStatusTimestamp extends PrivacyKeyBase {
   /// Privacy Key Status Timestamp constructor.
-  const PrivacyKeyStatusTimestamp() : super._();
+  const PrivacyKeyStatusTimestamp() ;
 
   /// Deserialize.
   factory PrivacyKeyStatusTimestamp.deserialize(BinaryReader reader) {
@@ -34293,7 +34300,7 @@ class PrivacyKeyStatusTimestamp extends PrivacyKeyBase {
 /// ID: `500e6dfa`.
 class PrivacyKeyChatInvite extends PrivacyKeyBase {
   /// Privacy Key Chat Invite constructor.
-  const PrivacyKeyChatInvite() : super._();
+  const PrivacyKeyChatInvite() ;
 
   /// Deserialize.
   factory PrivacyKeyChatInvite.deserialize(BinaryReader reader) {
@@ -34330,7 +34337,7 @@ class PrivacyKeyChatInvite extends PrivacyKeyBase {
 /// ID: `3d662b7b`.
 class PrivacyKeyPhoneCall extends PrivacyKeyBase {
   /// Privacy Key Phone Call constructor.
-  const PrivacyKeyPhoneCall() : super._();
+  const PrivacyKeyPhoneCall() ;
 
   /// Deserialize.
   factory PrivacyKeyPhoneCall.deserialize(BinaryReader reader) {
@@ -34367,7 +34374,7 @@ class PrivacyKeyPhoneCall extends PrivacyKeyBase {
 /// ID: `39491cc8`.
 class PrivacyKeyPhoneP2P extends PrivacyKeyBase {
   /// Privacy Key Phone P2 P constructor.
-  const PrivacyKeyPhoneP2P() : super._();
+  const PrivacyKeyPhoneP2P() ;
 
   /// Deserialize.
   factory PrivacyKeyPhoneP2P.deserialize(BinaryReader reader) {
@@ -34404,7 +34411,7 @@ class PrivacyKeyPhoneP2P extends PrivacyKeyBase {
 /// ID: `69ec56a3`.
 class PrivacyKeyForwards extends PrivacyKeyBase {
   /// Privacy Key Forwards constructor.
-  const PrivacyKeyForwards() : super._();
+  const PrivacyKeyForwards() ;
 
   /// Deserialize.
   factory PrivacyKeyForwards.deserialize(BinaryReader reader) {
@@ -34441,7 +34448,7 @@ class PrivacyKeyForwards extends PrivacyKeyBase {
 /// ID: `96151fed`.
 class PrivacyKeyProfilePhoto extends PrivacyKeyBase {
   /// Privacy Key Profile Photo constructor.
-  const PrivacyKeyProfilePhoto() : super._();
+  const PrivacyKeyProfilePhoto() ;
 
   /// Deserialize.
   factory PrivacyKeyProfilePhoto.deserialize(BinaryReader reader) {
@@ -34478,7 +34485,7 @@ class PrivacyKeyProfilePhoto extends PrivacyKeyBase {
 /// ID: `d19ae46d`.
 class PrivacyKeyPhoneNumber extends PrivacyKeyBase {
   /// Privacy Key Phone Number constructor.
-  const PrivacyKeyPhoneNumber() : super._();
+  const PrivacyKeyPhoneNumber() ;
 
   /// Deserialize.
   factory PrivacyKeyPhoneNumber.deserialize(BinaryReader reader) {
@@ -34515,7 +34522,7 @@ class PrivacyKeyPhoneNumber extends PrivacyKeyBase {
 /// ID: `42ffd42b`.
 class PrivacyKeyAddedByPhone extends PrivacyKeyBase {
   /// Privacy Key Added By Phone constructor.
-  const PrivacyKeyAddedByPhone() : super._();
+  const PrivacyKeyAddedByPhone() ;
 
   /// Deserialize.
   factory PrivacyKeyAddedByPhone.deserialize(BinaryReader reader) {
@@ -34552,7 +34559,7 @@ class PrivacyKeyAddedByPhone extends PrivacyKeyBase {
 /// ID: `0697f414`.
 class PrivacyKeyVoiceMessages extends PrivacyKeyBase {
   /// Privacy Key Voice Messages constructor.
-  const PrivacyKeyVoiceMessages() : super._();
+  const PrivacyKeyVoiceMessages() ;
 
   /// Deserialize.
   factory PrivacyKeyVoiceMessages.deserialize(BinaryReader reader) {
@@ -34589,7 +34596,7 @@ class PrivacyKeyVoiceMessages extends PrivacyKeyBase {
 /// ID: `a486b761`.
 class PrivacyKeyAbout extends PrivacyKeyBase {
   /// Privacy Key About constructor.
-  const PrivacyKeyAbout() : super._();
+  const PrivacyKeyAbout() ;
 
   /// Deserialize.
   factory PrivacyKeyAbout.deserialize(BinaryReader reader) {
@@ -34626,7 +34633,7 @@ class PrivacyKeyAbout extends PrivacyKeyBase {
 /// ID: `2000a518`.
 class PrivacyKeyBirthday extends PrivacyKeyBase {
   /// Privacy Key Birthday constructor.
-  const PrivacyKeyBirthday() : super._();
+  const PrivacyKeyBirthday() ;
 
   /// Deserialize.
   factory PrivacyKeyBirthday.deserialize(BinaryReader reader) {
@@ -34663,7 +34670,7 @@ class PrivacyKeyBirthday extends PrivacyKeyBase {
 /// ID: `2ca4fdf8`.
 class PrivacyKeyStarGiftsAutoSave extends PrivacyKeyBase {
   /// Privacy Key Star Gifts Auto Save constructor.
-  const PrivacyKeyStarGiftsAutoSave() : super._();
+  const PrivacyKeyStarGiftsAutoSave() ;
 
   /// Deserialize.
   factory PrivacyKeyStarGiftsAutoSave.deserialize(BinaryReader reader) {
@@ -34700,7 +34707,7 @@ class PrivacyKeyStarGiftsAutoSave extends PrivacyKeyBase {
 /// ID: `0d09e07b`.
 class InputPrivacyValueAllowContacts extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Contacts constructor.
-  const InputPrivacyValueAllowContacts() : super._();
+  const InputPrivacyValueAllowContacts() ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowContacts.deserialize(BinaryReader reader) {
@@ -34737,7 +34744,7 @@ class InputPrivacyValueAllowContacts extends InputPrivacyRuleBase {
 /// ID: `184b35ce`.
 class InputPrivacyValueAllowAll extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow All constructor.
-  const InputPrivacyValueAllowAll() : super._();
+  const InputPrivacyValueAllowAll() ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowAll.deserialize(BinaryReader reader) {
@@ -34776,7 +34783,7 @@ class InputPrivacyValueAllowUsers extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Users constructor.
   const InputPrivacyValueAllowUsers({
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowUsers.deserialize(BinaryReader reader) {
@@ -34825,7 +34832,7 @@ class InputPrivacyValueAllowUsers extends InputPrivacyRuleBase {
 /// ID: `0ba52007`.
 class InputPrivacyValueDisallowContacts extends InputPrivacyRuleBase {
   /// Input Privacy Value Disallow Contacts constructor.
-  const InputPrivacyValueDisallowContacts() : super._();
+  const InputPrivacyValueDisallowContacts() ;
 
   /// Deserialize.
   factory InputPrivacyValueDisallowContacts.deserialize(BinaryReader reader) {
@@ -34862,7 +34869,7 @@ class InputPrivacyValueDisallowContacts extends InputPrivacyRuleBase {
 /// ID: `d66b66c9`.
 class InputPrivacyValueDisallowAll extends InputPrivacyRuleBase {
   /// Input Privacy Value Disallow All constructor.
-  const InputPrivacyValueDisallowAll() : super._();
+  const InputPrivacyValueDisallowAll() ;
 
   /// Deserialize.
   factory InputPrivacyValueDisallowAll.deserialize(BinaryReader reader) {
@@ -34901,7 +34908,7 @@ class InputPrivacyValueDisallowUsers extends InputPrivacyRuleBase {
   /// Input Privacy Value Disallow Users constructor.
   const InputPrivacyValueDisallowUsers({
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPrivacyValueDisallowUsers.deserialize(BinaryReader reader) {
@@ -34952,7 +34959,7 @@ class InputPrivacyValueAllowChatParticipants extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Chat Participants constructor.
   const InputPrivacyValueAllowChatParticipants({
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowChatParticipants.deserialize(
@@ -35004,7 +35011,7 @@ class InputPrivacyValueDisallowChatParticipants extends InputPrivacyRuleBase {
   /// Input Privacy Value Disallow Chat Participants constructor.
   const InputPrivacyValueDisallowChatParticipants({
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPrivacyValueDisallowChatParticipants.deserialize(
@@ -35054,7 +35061,7 @@ class InputPrivacyValueDisallowChatParticipants extends InputPrivacyRuleBase {
 /// ID: `2f453e49`.
 class InputPrivacyValueAllowCloseFriends extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Close Friends constructor.
-  const InputPrivacyValueAllowCloseFriends() : super._();
+  const InputPrivacyValueAllowCloseFriends() ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowCloseFriends.deserialize(BinaryReader reader) {
@@ -35091,7 +35098,7 @@ class InputPrivacyValueAllowCloseFriends extends InputPrivacyRuleBase {
 /// ID: `77cdc9f1`.
 class InputPrivacyValueAllowPremium extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Premium constructor.
-  const InputPrivacyValueAllowPremium() : super._();
+  const InputPrivacyValueAllowPremium() ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowPremium.deserialize(BinaryReader reader) {
@@ -35128,7 +35135,7 @@ class InputPrivacyValueAllowPremium extends InputPrivacyRuleBase {
 /// ID: `5a4fcce5`.
 class InputPrivacyValueAllowBots extends InputPrivacyRuleBase {
   /// Input Privacy Value Allow Bots constructor.
-  const InputPrivacyValueAllowBots() : super._();
+  const InputPrivacyValueAllowBots() ;
 
   /// Deserialize.
   factory InputPrivacyValueAllowBots.deserialize(BinaryReader reader) {
@@ -35165,7 +35172,7 @@ class InputPrivacyValueAllowBots extends InputPrivacyRuleBase {
 /// ID: `c4e57915`.
 class InputPrivacyValueDisallowBots extends InputPrivacyRuleBase {
   /// Input Privacy Value Disallow Bots constructor.
-  const InputPrivacyValueDisallowBots() : super._();
+  const InputPrivacyValueDisallowBots() ;
 
   /// Deserialize.
   factory InputPrivacyValueDisallowBots.deserialize(BinaryReader reader) {
@@ -35202,7 +35209,7 @@ class InputPrivacyValueDisallowBots extends InputPrivacyRuleBase {
 /// ID: `fffe1bac`.
 class PrivacyValueAllowContacts extends PrivacyRuleBase {
   /// Privacy Value Allow Contacts constructor.
-  const PrivacyValueAllowContacts() : super._();
+  const PrivacyValueAllowContacts() ;
 
   /// Deserialize.
   factory PrivacyValueAllowContacts.deserialize(BinaryReader reader) {
@@ -35239,7 +35246,7 @@ class PrivacyValueAllowContacts extends PrivacyRuleBase {
 /// ID: `65427b82`.
 class PrivacyValueAllowAll extends PrivacyRuleBase {
   /// Privacy Value Allow All constructor.
-  const PrivacyValueAllowAll() : super._();
+  const PrivacyValueAllowAll() ;
 
   /// Deserialize.
   factory PrivacyValueAllowAll.deserialize(BinaryReader reader) {
@@ -35278,7 +35285,7 @@ class PrivacyValueAllowUsers extends PrivacyRuleBase {
   /// Privacy Value Allow Users constructor.
   const PrivacyValueAllowUsers({
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrivacyValueAllowUsers.deserialize(BinaryReader reader) {
@@ -35327,7 +35334,7 @@ class PrivacyValueAllowUsers extends PrivacyRuleBase {
 /// ID: `f888fa1a`.
 class PrivacyValueDisallowContacts extends PrivacyRuleBase {
   /// Privacy Value Disallow Contacts constructor.
-  const PrivacyValueDisallowContacts() : super._();
+  const PrivacyValueDisallowContacts() ;
 
   /// Deserialize.
   factory PrivacyValueDisallowContacts.deserialize(BinaryReader reader) {
@@ -35364,7 +35371,7 @@ class PrivacyValueDisallowContacts extends PrivacyRuleBase {
 /// ID: `8b73e763`.
 class PrivacyValueDisallowAll extends PrivacyRuleBase {
   /// Privacy Value Disallow All constructor.
-  const PrivacyValueDisallowAll() : super._();
+  const PrivacyValueDisallowAll() ;
 
   /// Deserialize.
   factory PrivacyValueDisallowAll.deserialize(BinaryReader reader) {
@@ -35403,7 +35410,7 @@ class PrivacyValueDisallowUsers extends PrivacyRuleBase {
   /// Privacy Value Disallow Users constructor.
   const PrivacyValueDisallowUsers({
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrivacyValueDisallowUsers.deserialize(BinaryReader reader) {
@@ -35454,7 +35461,7 @@ class PrivacyValueAllowChatParticipants extends PrivacyRuleBase {
   /// Privacy Value Allow Chat Participants constructor.
   const PrivacyValueAllowChatParticipants({
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrivacyValueAllowChatParticipants.deserialize(BinaryReader reader) {
@@ -35505,7 +35512,7 @@ class PrivacyValueDisallowChatParticipants extends PrivacyRuleBase {
   /// Privacy Value Disallow Chat Participants constructor.
   const PrivacyValueDisallowChatParticipants({
     required this.chats,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrivacyValueDisallowChatParticipants.deserialize(
@@ -35555,7 +35562,7 @@ class PrivacyValueDisallowChatParticipants extends PrivacyRuleBase {
 /// ID: `f7e8d89b`.
 class PrivacyValueAllowCloseFriends extends PrivacyRuleBase {
   /// Privacy Value Allow Close Friends constructor.
-  const PrivacyValueAllowCloseFriends() : super._();
+  const PrivacyValueAllowCloseFriends() ;
 
   /// Deserialize.
   factory PrivacyValueAllowCloseFriends.deserialize(BinaryReader reader) {
@@ -35592,7 +35599,7 @@ class PrivacyValueAllowCloseFriends extends PrivacyRuleBase {
 /// ID: `ece9814b`.
 class PrivacyValueAllowPremium extends PrivacyRuleBase {
   /// Privacy Value Allow Premium constructor.
-  const PrivacyValueAllowPremium() : super._();
+  const PrivacyValueAllowPremium() ;
 
   /// Deserialize.
   factory PrivacyValueAllowPremium.deserialize(BinaryReader reader) {
@@ -35629,7 +35636,7 @@ class PrivacyValueAllowPremium extends PrivacyRuleBase {
 /// ID: `21461b5d`.
 class PrivacyValueAllowBots extends PrivacyRuleBase {
   /// Privacy Value Allow Bots constructor.
-  const PrivacyValueAllowBots() : super._();
+  const PrivacyValueAllowBots() ;
 
   /// Deserialize.
   factory PrivacyValueAllowBots.deserialize(BinaryReader reader) {
@@ -35666,7 +35673,7 @@ class PrivacyValueAllowBots extends PrivacyRuleBase {
 /// ID: `f6a5f82f`.
 class PrivacyValueDisallowBots extends PrivacyRuleBase {
   /// Privacy Value Disallow Bots constructor.
-  const PrivacyValueDisallowBots() : super._();
+  const PrivacyValueDisallowBots() ;
 
   /// Deserialize.
   factory PrivacyValueDisallowBots.deserialize(BinaryReader reader) {
@@ -35707,7 +35714,7 @@ class AccountPrivacyRules extends AccountPrivacyRulesBase {
     required this.rules,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountPrivacyRules.deserialize(BinaryReader reader) {
@@ -35772,7 +35779,7 @@ class AccountDaysTTL extends AccountDaysTTLBase {
   /// Account Days T T L constructor.
   const AccountDaysTTL({
     required this.days,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountDaysTTL.deserialize(BinaryReader reader) {
@@ -35826,7 +35833,7 @@ class DocumentAttributeImageSize extends DocumentAttributeBase {
   const DocumentAttributeImageSize({
     required this.w,
     required this.h,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeImageSize.deserialize(BinaryReader reader) {
@@ -35886,7 +35893,7 @@ class DocumentAttributeImageSize extends DocumentAttributeBase {
 /// ID: `11b58939`.
 class DocumentAttributeAnimated extends DocumentAttributeBase {
   /// Document Attribute Animated constructor.
-  const DocumentAttributeAnimated() : super._();
+  const DocumentAttributeAnimated() ;
 
   /// Deserialize.
   factory DocumentAttributeAnimated.deserialize(BinaryReader reader) {
@@ -35928,7 +35935,7 @@ class DocumentAttributeSticker extends DocumentAttributeBase {
     required this.alt,
     required this.stickerset,
     this.maskCoords,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeSticker.deserialize(BinaryReader reader) {
@@ -35955,7 +35962,7 @@ class DocumentAttributeSticker extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: mask,
       b00: maskCoords != null,
     );
@@ -36025,7 +36032,7 @@ class DocumentAttributeVideo extends DocumentAttributeBase {
     this.preloadPrefixSize,
     this.videoStartTs,
     this.videoCodec,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeVideo.deserialize(BinaryReader reader) {
@@ -36064,7 +36071,7 @@ class DocumentAttributeVideo extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: roundMessage,
       b01: supportsStreaming,
       b03: nosound,
@@ -36167,7 +36174,7 @@ class DocumentAttributeAudio extends DocumentAttributeBase {
     this.title,
     this.performer,
     this.waveform,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeAudio.deserialize(BinaryReader reader) {
@@ -36197,7 +36204,7 @@ class DocumentAttributeAudio extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b10: voice,
       b00: title != null,
       b01: performer != null,
@@ -36274,7 +36281,7 @@ class DocumentAttributeFilename extends DocumentAttributeBase {
   /// Document Attribute Filename constructor.
   const DocumentAttributeFilename({
     required this.fileName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeFilename.deserialize(BinaryReader reader) {
@@ -36323,7 +36330,7 @@ class DocumentAttributeFilename extends DocumentAttributeBase {
 /// ID: `9801d2f7`.
 class DocumentAttributeHasStickers extends DocumentAttributeBase {
   /// Document Attribute Has Stickers constructor.
-  const DocumentAttributeHasStickers() : super._();
+  const DocumentAttributeHasStickers() ;
 
   /// Deserialize.
   factory DocumentAttributeHasStickers.deserialize(BinaryReader reader) {
@@ -36365,7 +36372,7 @@ class DocumentAttributeCustomEmoji extends DocumentAttributeBase {
     required this.textColor,
     required this.alt,
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DocumentAttributeCustomEmoji.deserialize(BinaryReader reader) {
@@ -36390,7 +36397,7 @@ class DocumentAttributeCustomEmoji extends DocumentAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: free,
       b01: textColor,
     );
@@ -36446,7 +36453,7 @@ class DocumentAttributeCustomEmoji extends DocumentAttributeBase {
 /// ID: `f1749a22`.
 class MessagesStickersNotModified extends MessagesStickersBase {
   /// Messages Stickers Not Modified constructor.
-  const MessagesStickersNotModified() : super._();
+  const MessagesStickersNotModified() ;
 
   /// Deserialize.
   factory MessagesStickersNotModified.deserialize(BinaryReader reader) {
@@ -36486,7 +36493,7 @@ class MessagesStickers extends MessagesStickersBase {
   const MessagesStickers({
     required this.hash,
     required this.stickers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesStickers.deserialize(BinaryReader reader) {
@@ -36547,7 +36554,7 @@ class StickerPack extends StickerPackBase {
   const StickerPack({
     required this.emoticon,
     required this.documents,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerPack.deserialize(BinaryReader reader) {
@@ -36603,7 +36610,7 @@ class StickerPack extends StickerPackBase {
 /// ID: `e86602c3`.
 class MessagesAllStickersNotModified extends MessagesAllStickersBase {
   /// Messages All Stickers Not Modified constructor.
-  const MessagesAllStickersNotModified() : super._();
+  const MessagesAllStickersNotModified() ;
 
   /// Deserialize.
   factory MessagesAllStickersNotModified.deserialize(BinaryReader reader) {
@@ -36643,7 +36650,7 @@ class MessagesAllStickers extends MessagesAllStickersBase {
   const MessagesAllStickers({
     required this.hash,
     required this.sets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAllStickers.deserialize(BinaryReader reader) {
@@ -36704,7 +36711,7 @@ class MessagesAffectedMessages extends MessagesAffectedMessagesBase {
   const MessagesAffectedMessages({
     required this.pts,
     required this.ptsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAffectedMessages.deserialize(BinaryReader reader) {
@@ -36767,7 +36774,7 @@ class WebPageEmpty extends WebPageBase {
   const WebPageEmpty({
     required this.id,
     this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPageEmpty.deserialize(BinaryReader reader) {
@@ -36789,7 +36796,7 @@ class WebPageEmpty extends WebPageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: url != null,
     );
 
@@ -36845,7 +36852,7 @@ class WebPagePending extends WebPageBase {
     required this.id,
     this.url,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPagePending.deserialize(BinaryReader reader) {
@@ -36869,7 +36876,7 @@ class WebPagePending extends WebPageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: url != null,
     );
 
@@ -36947,7 +36954,7 @@ class WebPage extends WebPageBase {
     this.document,
     this.cachedPage,
     this.attributes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPage.deserialize(BinaryReader reader) {
@@ -37022,7 +37029,7 @@ class WebPage extends WebPageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b13: hasLargeMedia,
       b14: videoCoverPhoto,
       b00: type != null,
@@ -37218,7 +37225,7 @@ class WebPageNotModified extends WebPageBase {
   /// Web Page Not Modified constructor.
   const WebPageNotModified({
     this.cachedPageViews,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPageNotModified.deserialize(BinaryReader reader) {
@@ -37238,7 +37245,7 @@ class WebPageNotModified extends WebPageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: cachedPageViews != null,
     );
 
@@ -37302,7 +37309,7 @@ class Authorization extends AuthorizationBase {
     required this.ip,
     required this.country,
     required this.region,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Authorization.deserialize(BinaryReader reader) {
@@ -37355,7 +37362,7 @@ class Authorization extends AuthorizationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: current,
       b01: officialApp,
       b02: passwordPending,
@@ -37488,7 +37495,7 @@ class AccountAuthorizations extends AccountAuthorizationsBase {
   const AccountAuthorizations({
     required this.authorizationTtlDays,
     required this.authorizations,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountAuthorizations.deserialize(BinaryReader reader) {
@@ -37560,7 +37567,7 @@ class AccountPassword extends AccountPasswordBase {
     required this.secureRandom,
     this.pendingResetDate,
     this.loginEmailPattern,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountPassword.deserialize(BinaryReader reader) {
@@ -37614,7 +37621,7 @@ class AccountPassword extends AccountPasswordBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hasRecovery,
       b01: hasSecureValues,
       b02: hasPassword || currentAlgo != null || srpB != null || srpId != null,
@@ -37743,7 +37750,7 @@ class AccountPasswordSettings extends AccountPasswordSettingsBase {
   const AccountPasswordSettings({
     this.email,
     this.secureSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountPasswordSettings.deserialize(BinaryReader reader) {
@@ -37768,7 +37775,7 @@ class AccountPasswordSettings extends AccountPasswordSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: email != null,
       b01: secureSettings != null,
     );
@@ -37828,7 +37835,7 @@ class AccountPasswordInputSettings extends AccountPasswordInputSettingsBase {
     this.hint,
     this.email,
     this.newSecureSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountPasswordInputSettings.deserialize(BinaryReader reader) {
@@ -37863,7 +37870,7 @@ class AccountPasswordInputSettings extends AccountPasswordInputSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: newAlgo != null || newPasswordHash != null || hint != null,
       b01: email != null,
       b02: newSecureSettings != null,
@@ -37944,7 +37951,7 @@ class AuthPasswordRecovery extends AuthPasswordRecoveryBase {
   /// Auth Password Recovery constructor.
   const AuthPasswordRecovery({
     required this.emailPattern,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthPasswordRecovery.deserialize(BinaryReader reader) {
@@ -37996,7 +38003,7 @@ class ReceivedNotifyMessage extends ReceivedNotifyMessageBase {
   const ReceivedNotifyMessage({
     required this.id,
     required this.flags,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReceivedNotifyMessage.deserialize(BinaryReader reader) {
@@ -38071,7 +38078,7 @@ class ChatInviteExported extends ExportedChatInviteBase {
     this.subscriptionExpired,
     this.title,
     this.subscriptionPricing,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatInviteExported.deserialize(BinaryReader reader) {
@@ -38127,7 +38134,7 @@ class ChatInviteExported extends ExportedChatInviteBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: revoked,
       b05: permanent,
       b06: requestNeeded,
@@ -38267,7 +38274,7 @@ class ChatInviteExported extends ExportedChatInviteBase {
 /// ID: `ed107ab7`.
 class ChatInvitePublicJoinRequests extends ExportedChatInviteBase {
   /// Chat Invite Public Join Requests constructor.
-  const ChatInvitePublicJoinRequests() : super._();
+  const ChatInvitePublicJoinRequests() ;
 
   /// Deserialize.
   factory ChatInvitePublicJoinRequests.deserialize(BinaryReader reader) {
@@ -38306,7 +38313,7 @@ class ChatInviteAlready extends ChatInviteBase {
   /// Chat Invite Already constructor.
   const ChatInviteAlready({
     required this.chat,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatInviteAlready.deserialize(BinaryReader reader) {
@@ -38373,7 +38380,7 @@ class ChatInvite extends ChatInviteBase {
     required this.color,
     this.subscriptionPricing,
     this.subscriptionFormId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatInvite.deserialize(BinaryReader reader) {
@@ -38432,7 +38439,7 @@ class ChatInvite extends ChatInviteBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: channel,
       b01: broadcast,
       b02: public,
@@ -38576,7 +38583,7 @@ class ChatInvitePeek extends ChatInviteBase {
   const ChatInvitePeek({
     required this.chat,
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatInvitePeek.deserialize(BinaryReader reader) {
@@ -38632,7 +38639,7 @@ class ChatInvitePeek extends ChatInviteBase {
 /// ID: `ffb62b95`.
 class InputStickerSetEmpty extends InputStickerSetBase {
   /// Input Sticker Set Empty constructor.
-  const InputStickerSetEmpty() : super._();
+  const InputStickerSetEmpty() ;
 
   /// Deserialize.
   factory InputStickerSetEmpty.deserialize(BinaryReader reader) {
@@ -38672,7 +38679,7 @@ class InputStickerSetID extends InputStickerSetBase {
   const InputStickerSetID({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickerSetID.deserialize(BinaryReader reader) {
@@ -38734,7 +38741,7 @@ class InputStickerSetShortName extends InputStickerSetBase {
   /// Input Sticker Set Short Name constructor.
   const InputStickerSetShortName({
     required this.shortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickerSetShortName.deserialize(BinaryReader reader) {
@@ -38783,7 +38790,7 @@ class InputStickerSetShortName extends InputStickerSetBase {
 /// ID: `028703c8`.
 class InputStickerSetAnimatedEmoji extends InputStickerSetBase {
   /// Input Sticker Set Animated Emoji constructor.
-  const InputStickerSetAnimatedEmoji() : super._();
+  const InputStickerSetAnimatedEmoji() ;
 
   /// Deserialize.
   factory InputStickerSetAnimatedEmoji.deserialize(BinaryReader reader) {
@@ -38822,7 +38829,7 @@ class InputStickerSetDice extends InputStickerSetBase {
   /// Input Sticker Set Dice constructor.
   const InputStickerSetDice({
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickerSetDice.deserialize(BinaryReader reader) {
@@ -38871,7 +38878,7 @@ class InputStickerSetDice extends InputStickerSetBase {
 /// ID: `0cde3739`.
 class InputStickerSetAnimatedEmojiAnimations extends InputStickerSetBase {
   /// Input Sticker Set Animated Emoji Animations constructor.
-  const InputStickerSetAnimatedEmojiAnimations() : super._();
+  const InputStickerSetAnimatedEmojiAnimations() ;
 
   /// Deserialize.
   factory InputStickerSetAnimatedEmojiAnimations.deserialize(
@@ -38909,7 +38916,7 @@ class InputStickerSetAnimatedEmojiAnimations extends InputStickerSetBase {
 /// ID: `c88b3b02`.
 class InputStickerSetPremiumGifts extends InputStickerSetBase {
   /// Input Sticker Set Premium Gifts constructor.
-  const InputStickerSetPremiumGifts() : super._();
+  const InputStickerSetPremiumGifts() ;
 
   /// Deserialize.
   factory InputStickerSetPremiumGifts.deserialize(BinaryReader reader) {
@@ -38946,7 +38953,7 @@ class InputStickerSetPremiumGifts extends InputStickerSetBase {
 /// ID: `04c4d4ce`.
 class InputStickerSetEmojiGenericAnimations extends InputStickerSetBase {
   /// Input Sticker Set Emoji Generic Animations constructor.
-  const InputStickerSetEmojiGenericAnimations() : super._();
+  const InputStickerSetEmojiGenericAnimations() ;
 
   /// Deserialize.
   factory InputStickerSetEmojiGenericAnimations.deserialize(
@@ -38984,7 +38991,7 @@ class InputStickerSetEmojiGenericAnimations extends InputStickerSetBase {
 /// ID: `29d0f5ee`.
 class InputStickerSetEmojiDefaultStatuses extends InputStickerSetBase {
   /// Input Sticker Set Emoji Default Statuses constructor.
-  const InputStickerSetEmojiDefaultStatuses() : super._();
+  const InputStickerSetEmojiDefaultStatuses() ;
 
   /// Deserialize.
   factory InputStickerSetEmojiDefaultStatuses.deserialize(BinaryReader reader) {
@@ -39021,7 +39028,7 @@ class InputStickerSetEmojiDefaultStatuses extends InputStickerSetBase {
 /// ID: `44c1f8e9`.
 class InputStickerSetEmojiDefaultTopicIcons extends InputStickerSetBase {
   /// Input Sticker Set Emoji Default Topic Icons constructor.
-  const InputStickerSetEmojiDefaultTopicIcons() : super._();
+  const InputStickerSetEmojiDefaultTopicIcons() ;
 
   /// Deserialize.
   factory InputStickerSetEmojiDefaultTopicIcons.deserialize(
@@ -39059,7 +39066,7 @@ class InputStickerSetEmojiDefaultTopicIcons extends InputStickerSetBase {
 /// ID: `49748553`.
 class InputStickerSetEmojiChannelDefaultStatuses extends InputStickerSetBase {
   /// Input Sticker Set Emoji Channel Default Statuses constructor.
-  const InputStickerSetEmojiChannelDefaultStatuses() : super._();
+  const InputStickerSetEmojiChannelDefaultStatuses() ;
 
   /// Deserialize.
   factory InputStickerSetEmojiChannelDefaultStatuses.deserialize(
@@ -39116,7 +39123,7 @@ class StickerSet extends StickerSetBase {
     this.thumbDocumentId,
     required this.count,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerSet.deserialize(BinaryReader reader) {
@@ -39175,7 +39182,7 @@ class StickerSet extends StickerSetBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: archived,
       b02: official,
       b03: masks,
@@ -39332,7 +39339,7 @@ class MessagesStickerSet extends MessagesStickerSetBase {
     required this.packs,
     required this.keywords,
     required this.documents,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesStickerSet.deserialize(BinaryReader reader) {
@@ -39402,7 +39409,7 @@ class MessagesStickerSet extends MessagesStickerSetBase {
 /// ID: `d3f924eb`.
 class MessagesStickerSetNotModified extends MessagesStickerSetBase {
   /// Messages Sticker Set Not Modified constructor.
-  const MessagesStickerSetNotModified() : super._();
+  const MessagesStickerSetNotModified() ;
 
   /// Deserialize.
   factory MessagesStickerSetNotModified.deserialize(BinaryReader reader) {
@@ -39442,7 +39449,7 @@ class BotCommand extends BotCommandBase {
   const BotCommand({
     required this.command,
     required this.description,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotCommand.deserialize(BinaryReader reader) {
@@ -39508,7 +39515,7 @@ class BotInfo extends BotInfoBase {
     this.menuButton,
     this.privacyPolicyUrl,
     this.appSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInfo.deserialize(BinaryReader reader) {
@@ -39558,7 +39565,7 @@ class BotInfo extends BotInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b06: hasPreviewMedias,
       b00: userId != null,
       b01: description != null,
@@ -39673,7 +39680,7 @@ class KeyboardButton extends KeyboardButtonBase {
   /// Keyboard Button constructor.
   const KeyboardButton({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButton.deserialize(BinaryReader reader) {
@@ -39725,7 +39732,7 @@ class KeyboardButtonUrl extends KeyboardButtonBase {
   const KeyboardButtonUrl({
     required this.text,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonUrl.deserialize(BinaryReader reader) {
@@ -39785,7 +39792,7 @@ class KeyboardButtonCallback extends KeyboardButtonBase {
     required this.requiresPassword,
     required this.text,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonCallback.deserialize(BinaryReader reader) {
@@ -39808,7 +39815,7 @@ class KeyboardButtonCallback extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requiresPassword,
     );
 
@@ -39861,7 +39868,7 @@ class KeyboardButtonRequestPhone extends KeyboardButtonBase {
   /// Keyboard Button Request Phone constructor.
   const KeyboardButtonRequestPhone({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonRequestPhone.deserialize(BinaryReader reader) {
@@ -39912,7 +39919,7 @@ class KeyboardButtonRequestGeoLocation extends KeyboardButtonBase {
   /// Keyboard Button Request Geo Location constructor.
   const KeyboardButtonRequestGeoLocation({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonRequestGeoLocation.deserialize(BinaryReader reader) {
@@ -39966,7 +39973,7 @@ class KeyboardButtonSwitchInline extends KeyboardButtonBase {
     required this.text,
     required this.query,
     this.peerTypes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonSwitchInline.deserialize(BinaryReader reader) {
@@ -39994,7 +40001,7 @@ class KeyboardButtonSwitchInline extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: samePeer,
       b01: peerTypes != null,
     );
@@ -40056,7 +40063,7 @@ class KeyboardButtonGame extends KeyboardButtonBase {
   /// Keyboard Button Game constructor.
   const KeyboardButtonGame({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonGame.deserialize(BinaryReader reader) {
@@ -40107,7 +40114,7 @@ class KeyboardButtonBuy extends KeyboardButtonBase {
   /// Keyboard Button Buy constructor.
   const KeyboardButtonBuy({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonBuy.deserialize(BinaryReader reader) {
@@ -40161,7 +40168,7 @@ class KeyboardButtonUrlAuth extends KeyboardButtonBase {
     this.fwdText,
     required this.url,
     required this.buttonId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonUrlAuth.deserialize(BinaryReader reader) {
@@ -40187,7 +40194,7 @@ class KeyboardButtonUrlAuth extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: fwdText != null,
     );
 
@@ -40255,7 +40262,7 @@ class InputKeyboardButtonUrlAuth extends KeyboardButtonBase {
     this.fwdText,
     required this.url,
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputKeyboardButtonUrlAuth.deserialize(BinaryReader reader) {
@@ -40283,7 +40290,7 @@ class InputKeyboardButtonUrlAuth extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requestWriteAccess,
       b01: fwdText != null,
     );
@@ -40351,7 +40358,7 @@ class KeyboardButtonRequestPoll extends KeyboardButtonBase {
   const KeyboardButtonRequestPoll({
     this.quiz,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonRequestPoll.deserialize(BinaryReader reader) {
@@ -40372,7 +40379,7 @@ class KeyboardButtonRequestPoll extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (quiz != null),
     );
 
@@ -40425,7 +40432,7 @@ class InputKeyboardButtonUserProfile extends KeyboardButtonBase {
   const InputKeyboardButtonUserProfile({
     required this.text,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputKeyboardButtonUserProfile.deserialize(BinaryReader reader) {
@@ -40484,7 +40491,7 @@ class KeyboardButtonUserProfile extends KeyboardButtonBase {
   const KeyboardButtonUserProfile({
     required this.text,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonUserProfile.deserialize(BinaryReader reader) {
@@ -40545,7 +40552,7 @@ class KeyboardButtonWebView extends KeyboardButtonBase {
   const KeyboardButtonWebView({
     required this.text,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonWebView.deserialize(BinaryReader reader) {
@@ -40604,7 +40611,7 @@ class KeyboardButtonSimpleWebView extends KeyboardButtonBase {
   const KeyboardButtonSimpleWebView({
     required this.text,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonSimpleWebView.deserialize(BinaryReader reader) {
@@ -40665,7 +40672,7 @@ class KeyboardButtonRequestPeer extends KeyboardButtonBase {
     required this.buttonId,
     required this.peerType,
     required this.maxQuantity,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonRequestPeer.deserialize(BinaryReader reader) {
@@ -40747,7 +40754,7 @@ class InputKeyboardButtonRequestPeer extends KeyboardButtonBase {
     required this.buttonId,
     required this.peerType,
     required this.maxQuantity,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputKeyboardButtonRequestPeer.deserialize(BinaryReader reader) {
@@ -40778,7 +40785,7 @@ class InputKeyboardButtonRequestPeer extends KeyboardButtonBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nameRequested,
       b01: usernameRequested,
       b02: photoRequested,
@@ -40856,7 +40863,7 @@ class KeyboardButtonCopy extends KeyboardButtonBase {
   const KeyboardButtonCopy({
     required this.text,
     required this.copyText,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonCopy.deserialize(BinaryReader reader) {
@@ -40914,7 +40921,7 @@ class KeyboardButtonRow extends KeyboardButtonRowBase {
   /// Keyboard Button Row constructor.
   const KeyboardButtonRow({
     required this.buttons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory KeyboardButtonRow.deserialize(BinaryReader reader) {
@@ -40965,7 +40972,7 @@ class ReplyKeyboardHide extends ReplyMarkupBase {
   /// Reply Keyboard Hide constructor.
   const ReplyKeyboardHide({
     required this.selective,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReplyKeyboardHide.deserialize(BinaryReader reader) {
@@ -40984,7 +40991,7 @@ class ReplyKeyboardHide extends ReplyMarkupBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: selective,
     );
 
@@ -41029,7 +41036,7 @@ class ReplyKeyboardForceReply extends ReplyMarkupBase {
     required this.singleUse,
     required this.selective,
     this.placeholder,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReplyKeyboardForceReply.deserialize(BinaryReader reader) {
@@ -41053,7 +41060,7 @@ class ReplyKeyboardForceReply extends ReplyMarkupBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: singleUse,
       b02: selective,
       b03: placeholder != null,
@@ -41115,7 +41122,7 @@ class ReplyKeyboardMarkup extends ReplyMarkupBase {
     required this.persistent,
     required this.rows,
     this.placeholder,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReplyKeyboardMarkup.deserialize(BinaryReader reader) {
@@ -41145,7 +41152,7 @@ class ReplyKeyboardMarkup extends ReplyMarkupBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: resize,
       b01: singleUse,
       b02: selective,
@@ -41217,7 +41224,7 @@ class ReplyInlineMarkup extends ReplyMarkupBase {
   /// Reply Inline Markup constructor.
   const ReplyInlineMarkup({
     required this.rows,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReplyInlineMarkup.deserialize(BinaryReader reader) {
@@ -41269,7 +41276,7 @@ class MessageEntityUnknown extends MessageEntityBase {
   const MessageEntityUnknown({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityUnknown.deserialize(BinaryReader reader) {
@@ -41332,7 +41339,7 @@ class MessageEntityMention extends MessageEntityBase {
   const MessageEntityMention({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityMention.deserialize(BinaryReader reader) {
@@ -41395,7 +41402,7 @@ class MessageEntityHashtag extends MessageEntityBase {
   const MessageEntityHashtag({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityHashtag.deserialize(BinaryReader reader) {
@@ -41458,7 +41465,7 @@ class MessageEntityBotCommand extends MessageEntityBase {
   const MessageEntityBotCommand({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityBotCommand.deserialize(BinaryReader reader) {
@@ -41521,7 +41528,7 @@ class MessageEntityUrl extends MessageEntityBase {
   const MessageEntityUrl({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityUrl.deserialize(BinaryReader reader) {
@@ -41584,7 +41591,7 @@ class MessageEntityEmail extends MessageEntityBase {
   const MessageEntityEmail({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityEmail.deserialize(BinaryReader reader) {
@@ -41647,7 +41654,7 @@ class MessageEntityBold extends MessageEntityBase {
   const MessageEntityBold({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityBold.deserialize(BinaryReader reader) {
@@ -41710,7 +41717,7 @@ class MessageEntityItalic extends MessageEntityBase {
   const MessageEntityItalic({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityItalic.deserialize(BinaryReader reader) {
@@ -41773,7 +41780,7 @@ class MessageEntityCode extends MessageEntityBase {
   const MessageEntityCode({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityCode.deserialize(BinaryReader reader) {
@@ -41837,7 +41844,7 @@ class MessageEntityPre extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.language,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityPre.deserialize(BinaryReader reader) {
@@ -41908,7 +41915,7 @@ class MessageEntityTextUrl extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityTextUrl.deserialize(BinaryReader reader) {
@@ -41979,7 +41986,7 @@ class MessageEntityMentionName extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityMentionName.deserialize(BinaryReader reader) {
@@ -42052,7 +42059,7 @@ class InputMessageEntityMentionName extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMessageEntityMentionName.deserialize(BinaryReader reader) {
@@ -42122,7 +42129,7 @@ class MessageEntityPhone extends MessageEntityBase {
   const MessageEntityPhone({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityPhone.deserialize(BinaryReader reader) {
@@ -42185,7 +42192,7 @@ class MessageEntityCashtag extends MessageEntityBase {
   const MessageEntityCashtag({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityCashtag.deserialize(BinaryReader reader) {
@@ -42248,7 +42255,7 @@ class MessageEntityUnderline extends MessageEntityBase {
   const MessageEntityUnderline({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityUnderline.deserialize(BinaryReader reader) {
@@ -42311,7 +42318,7 @@ class MessageEntityStrike extends MessageEntityBase {
   const MessageEntityStrike({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityStrike.deserialize(BinaryReader reader) {
@@ -42374,7 +42381,7 @@ class MessageEntityBankCard extends MessageEntityBase {
   const MessageEntityBankCard({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityBankCard.deserialize(BinaryReader reader) {
@@ -42437,7 +42444,7 @@ class MessageEntitySpoiler extends MessageEntityBase {
   const MessageEntitySpoiler({
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntitySpoiler.deserialize(BinaryReader reader) {
@@ -42501,7 +42508,7 @@ class MessageEntityCustomEmoji extends MessageEntityBase {
     required this.offset,
     required this.length,
     required this.documentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityCustomEmoji.deserialize(BinaryReader reader) {
@@ -42574,7 +42581,7 @@ class MessageEntityBlockquote extends MessageEntityBase {
     required this.collapsed,
     required this.offset,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageEntityBlockquote.deserialize(BinaryReader reader) {
@@ -42597,7 +42604,7 @@ class MessageEntityBlockquote extends MessageEntityBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: collapsed,
     );
 
@@ -42652,7 +42659,7 @@ class MessageEntityBlockquote extends MessageEntityBase {
 /// ID: `ee8c1e86`.
 class InputChannelEmpty extends InputChannelBase {
   /// Input Channel Empty constructor.
-  const InputChannelEmpty() : super._();
+  const InputChannelEmpty() ;
 
   /// Deserialize.
   factory InputChannelEmpty.deserialize(BinaryReader reader) {
@@ -42692,7 +42699,7 @@ class InputChannel extends InputChannelBase {
   const InputChannel({
     required this.channelId,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputChannel.deserialize(BinaryReader reader) {
@@ -42756,7 +42763,7 @@ class InputChannelFromMessage extends InputChannelBase {
     required this.peer,
     required this.msgId,
     required this.channelId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputChannelFromMessage.deserialize(BinaryReader reader) {
@@ -42827,7 +42834,7 @@ class ContactsResolvedPeer extends ContactsResolvedPeerBase {
     required this.peer,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsResolvedPeer.deserialize(BinaryReader reader) {
@@ -42893,7 +42900,7 @@ class MessageRange extends MessageRangeBase {
   const MessageRange({
     required this.minId,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageRange.deserialize(BinaryReader reader) {
@@ -42957,7 +42964,7 @@ class UpdatesChannelDifferenceEmpty extends UpdatesChannelDifferenceBase {
     required this.ffinal,
     required this.pts,
     this.timeout,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesChannelDifferenceEmpty.deserialize(BinaryReader reader) {
@@ -42981,7 +42988,7 @@ class UpdatesChannelDifferenceEmpty extends UpdatesChannelDifferenceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ffinal,
       b01: timeout != null,
     );
@@ -43045,7 +43052,7 @@ class UpdatesChannelDifferenceTooLong extends UpdatesChannelDifferenceBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesChannelDifferenceTooLong.deserialize(BinaryReader reader) {
@@ -43075,7 +43082,7 @@ class UpdatesChannelDifferenceTooLong extends UpdatesChannelDifferenceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ffinal,
       b01: timeout != null,
     );
@@ -43153,7 +43160,7 @@ class UpdatesChannelDifference extends UpdatesChannelDifferenceBase {
     required this.otherUpdates,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesChannelDifference.deserialize(BinaryReader reader) {
@@ -43185,7 +43192,7 @@ class UpdatesChannelDifference extends UpdatesChannelDifferenceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ffinal,
       b01: timeout != null,
     );
@@ -43262,7 +43269,7 @@ class UpdatesChannelDifference extends UpdatesChannelDifferenceBase {
 /// ID: `94d42ee7`.
 class ChannelMessagesFilterEmpty extends ChannelMessagesFilterBase {
   /// Channel Messages Filter Empty constructor.
-  const ChannelMessagesFilterEmpty() : super._();
+  const ChannelMessagesFilterEmpty() ;
 
   /// Deserialize.
   factory ChannelMessagesFilterEmpty.deserialize(BinaryReader reader) {
@@ -43302,7 +43309,7 @@ class ChannelMessagesFilter extends ChannelMessagesFilterBase {
   const ChannelMessagesFilter({
     required this.excludeNewMessages,
     required this.ranges,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelMessagesFilter.deserialize(BinaryReader reader) {
@@ -43323,7 +43330,7 @@ class ChannelMessagesFilter extends ChannelMessagesFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: excludeNewMessages,
     );
 
@@ -43373,7 +43380,7 @@ class ChannelParticipant extends ChannelParticipantBase {
     required this.userId,
     required this.date,
     this.subscriptionUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipant.deserialize(BinaryReader reader) {
@@ -43398,7 +43405,7 @@ class ChannelParticipant extends ChannelParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: subscriptionUntilDate != null,
     );
 
@@ -43461,7 +43468,7 @@ class ChannelParticipantSelf extends ChannelParticipantBase {
     required this.inviterId,
     required this.date,
     this.subscriptionUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantSelf.deserialize(BinaryReader reader) {
@@ -43490,7 +43497,7 @@ class ChannelParticipantSelf extends ChannelParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: viaRequest,
       b01: subscriptionUntilDate != null,
     );
@@ -43563,7 +43570,7 @@ class ChannelParticipantCreator extends ChannelParticipantBase {
     required this.userId,
     required this.adminRights,
     this.rank,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantCreator.deserialize(BinaryReader reader) {
@@ -43587,7 +43594,7 @@ class ChannelParticipantCreator extends ChannelParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: rank != null,
     );
 
@@ -43653,7 +43660,7 @@ class ChannelParticipantAdmin extends ChannelParticipantBase {
     required this.date,
     required this.adminRights,
     this.rank,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantAdmin.deserialize(BinaryReader reader) {
@@ -43688,7 +43695,7 @@ class ChannelParticipantAdmin extends ChannelParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canEdit,
       b01: self || inviterId != null,
       b02: rank != null,
@@ -43781,7 +43788,7 @@ class ChannelParticipantBanned extends ChannelParticipantBase {
     required this.kickedBy,
     required this.date,
     required this.bannedRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantBanned.deserialize(BinaryReader reader) {
@@ -43808,7 +43815,7 @@ class ChannelParticipantBanned extends ChannelParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: left,
     );
 
@@ -43873,7 +43880,7 @@ class ChannelParticipantLeft extends ChannelParticipantBase {
   /// Channel Participant Left constructor.
   const ChannelParticipantLeft({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantLeft.deserialize(BinaryReader reader) {
@@ -43922,7 +43929,7 @@ class ChannelParticipantLeft extends ChannelParticipantBase {
 /// ID: `de3f3c79`.
 class ChannelParticipantsRecent extends ChannelParticipantsFilterBase {
   /// Channel Participants Recent constructor.
-  const ChannelParticipantsRecent() : super._();
+  const ChannelParticipantsRecent() ;
 
   /// Deserialize.
   factory ChannelParticipantsRecent.deserialize(BinaryReader reader) {
@@ -43959,7 +43966,7 @@ class ChannelParticipantsRecent extends ChannelParticipantsFilterBase {
 /// ID: `b4608969`.
 class ChannelParticipantsAdmins extends ChannelParticipantsFilterBase {
   /// Channel Participants Admins constructor.
-  const ChannelParticipantsAdmins() : super._();
+  const ChannelParticipantsAdmins() ;
 
   /// Deserialize.
   factory ChannelParticipantsAdmins.deserialize(BinaryReader reader) {
@@ -43998,7 +44005,7 @@ class ChannelParticipantsKicked extends ChannelParticipantsFilterBase {
   /// Channel Participants Kicked constructor.
   const ChannelParticipantsKicked({
     required this.q,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantsKicked.deserialize(BinaryReader reader) {
@@ -44047,7 +44054,7 @@ class ChannelParticipantsKicked extends ChannelParticipantsFilterBase {
 /// ID: `b0d1865b`.
 class ChannelParticipantsBots extends ChannelParticipantsFilterBase {
   /// Channel Participants Bots constructor.
-  const ChannelParticipantsBots() : super._();
+  const ChannelParticipantsBots() ;
 
   /// Deserialize.
   factory ChannelParticipantsBots.deserialize(BinaryReader reader) {
@@ -44086,7 +44093,7 @@ class ChannelParticipantsBanned extends ChannelParticipantsFilterBase {
   /// Channel Participants Banned constructor.
   const ChannelParticipantsBanned({
     required this.q,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantsBanned.deserialize(BinaryReader reader) {
@@ -44137,7 +44144,7 @@ class ChannelParticipantsSearch extends ChannelParticipantsFilterBase {
   /// Channel Participants Search constructor.
   const ChannelParticipantsSearch({
     required this.q,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantsSearch.deserialize(BinaryReader reader) {
@@ -44188,7 +44195,7 @@ class ChannelParticipantsContacts extends ChannelParticipantsFilterBase {
   /// Channel Participants Contacts constructor.
   const ChannelParticipantsContacts({
     required this.q,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantsContacts.deserialize(BinaryReader reader) {
@@ -44240,7 +44247,7 @@ class ChannelParticipantsMentions extends ChannelParticipantsFilterBase {
   const ChannelParticipantsMentions({
     this.q,
     this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelParticipantsMentions.deserialize(BinaryReader reader) {
@@ -44263,7 +44270,7 @@ class ChannelParticipantsMentions extends ChannelParticipantsFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: q != null,
       b01: topMsgId != null,
     );
@@ -44322,7 +44329,7 @@ class ChannelsChannelParticipants extends ChannelsChannelParticipantsBase {
     required this.participants,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsChannelParticipants.deserialize(BinaryReader reader) {
@@ -44395,7 +44402,7 @@ class ChannelsChannelParticipants extends ChannelsChannelParticipantsBase {
 class ChannelsChannelParticipantsNotModified
     extends ChannelsChannelParticipantsBase {
   /// Channels Channel Participants Not Modified constructor.
-  const ChannelsChannelParticipantsNotModified() : super._();
+  const ChannelsChannelParticipantsNotModified() ;
 
   /// Deserialize.
   factory ChannelsChannelParticipantsNotModified.deserialize(
@@ -44437,7 +44444,7 @@ class ChannelsChannelParticipant extends ChannelsChannelParticipantBase {
     required this.participant,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsChannelParticipant.deserialize(BinaryReader reader) {
@@ -44506,7 +44513,7 @@ class HelpTermsOfService extends HelpTermsOfServiceBase {
     required this.text,
     required this.entities,
     this.minAgeConfirm,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpTermsOfService.deserialize(BinaryReader reader) {
@@ -44534,7 +44541,7 @@ class HelpTermsOfService extends HelpTermsOfServiceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: popup,
       b01: minAgeConfirm != null,
     );
@@ -44599,7 +44606,7 @@ class HelpTermsOfService extends HelpTermsOfServiceBase {
 /// ID: `e8025ca2`.
 class MessagesSavedGifsNotModified extends MessagesSavedGifsBase {
   /// Messages Saved Gifs Not Modified constructor.
-  const MessagesSavedGifsNotModified() : super._();
+  const MessagesSavedGifsNotModified() ;
 
   /// Deserialize.
   factory MessagesSavedGifsNotModified.deserialize(BinaryReader reader) {
@@ -44639,7 +44646,7 @@ class MessagesSavedGifs extends MessagesSavedGifsBase {
   const MessagesSavedGifs({
     required this.hash,
     required this.gifs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavedGifs.deserialize(BinaryReader reader) {
@@ -44702,7 +44709,7 @@ class InputBotInlineMessageMediaAuto extends InputBotInlineMessageBase {
     required this.message,
     this.entities,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaAuto.deserialize(BinaryReader reader) {
@@ -44731,7 +44738,7 @@ class InputBotInlineMessageMediaAuto extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: invertMedia,
       b01: entities != null,
       b02: replyMarkup != null,
@@ -44801,7 +44808,7 @@ class InputBotInlineMessageText extends InputBotInlineMessageBase {
     required this.message,
     this.entities,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageText.deserialize(BinaryReader reader) {
@@ -44832,7 +44839,7 @@ class InputBotInlineMessageText extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: noWebpage,
       b03: invertMedia,
       b01: entities != null,
@@ -44907,7 +44914,7 @@ class InputBotInlineMessageMediaGeo extends InputBotInlineMessageBase {
     this.period,
     this.proximityNotificationRadius,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaGeo.deserialize(BinaryReader reader) {
@@ -44940,7 +44947,7 @@ class InputBotInlineMessageMediaGeo extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: heading != null,
       b01: period != null,
       b03: proximityNotificationRadius != null,
@@ -45025,7 +45032,7 @@ class InputBotInlineMessageMediaVenue extends InputBotInlineMessageBase {
     required this.venueId,
     required this.venueType,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaVenue.deserialize(BinaryReader reader) {
@@ -45058,7 +45065,7 @@ class InputBotInlineMessageMediaVenue extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyMarkup != null,
     );
 
@@ -45139,7 +45146,7 @@ class InputBotInlineMessageMediaContact extends InputBotInlineMessageBase {
     required this.lastName,
     required this.vcard,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaContact.deserialize(BinaryReader reader) {
@@ -45168,7 +45175,7 @@ class InputBotInlineMessageMediaContact extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyMarkup != null,
     );
 
@@ -45235,7 +45242,7 @@ class InputBotInlineMessageGame extends InputBotInlineMessageBase {
   /// Input Bot Inline Message Game constructor.
   const InputBotInlineMessageGame({
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageGame.deserialize(BinaryReader reader) {
@@ -45256,7 +45263,7 @@ class InputBotInlineMessageGame extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyMarkup != null,
     );
 
@@ -45310,7 +45317,7 @@ class InputBotInlineMessageMediaInvoice extends InputBotInlineMessageBase {
     required this.provider,
     required this.providerData,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaInvoice.deserialize(BinaryReader reader) {
@@ -45347,7 +45354,7 @@ class InputBotInlineMessageMediaInvoice extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: photo != null,
       b02: replyMarkup != null,
     );
@@ -45440,7 +45447,7 @@ class InputBotInlineMessageMediaWebPage extends InputBotInlineMessageBase {
     this.entities,
     required this.url,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageMediaWebPage.deserialize(BinaryReader reader) {
@@ -45477,7 +45484,7 @@ class InputBotInlineMessageMediaWebPage extends InputBotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: invertMedia,
       b04: forceLargeMedia,
       b05: forceSmallMedia,
@@ -45570,7 +45577,7 @@ class InputBotInlineResult extends InputBotInlineResultBase {
     this.thumb,
     this.content,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineResult.deserialize(BinaryReader reader) {
@@ -45610,7 +45617,7 @@ class InputBotInlineResult extends InputBotInlineResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: title != null,
       b02: description != null,
       b03: url != null,
@@ -45711,7 +45718,7 @@ class InputBotInlineResultPhoto extends InputBotInlineResultBase {
     required this.type,
     required this.photo,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineResultPhoto.deserialize(BinaryReader reader) {
@@ -45788,7 +45795,7 @@ class InputBotInlineResultDocument extends InputBotInlineResultBase {
     this.description,
     required this.document,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineResultDocument.deserialize(BinaryReader reader) {
@@ -45819,7 +45826,7 @@ class InputBotInlineResultDocument extends InputBotInlineResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: title != null,
       b02: description != null,
     );
@@ -45897,7 +45904,7 @@ class InputBotInlineResultGame extends InputBotInlineResultBase {
     required this.id,
     required this.shortName,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineResultGame.deserialize(BinaryReader reader) {
@@ -45965,7 +45972,7 @@ class BotInlineMessageMediaAuto extends BotInlineMessageBase {
     required this.message,
     this.entities,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaAuto.deserialize(BinaryReader reader) {
@@ -45994,7 +46001,7 @@ class BotInlineMessageMediaAuto extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: invertMedia,
       b01: entities != null,
       b02: replyMarkup != null,
@@ -46064,7 +46071,7 @@ class BotInlineMessageText extends BotInlineMessageBase {
     required this.message,
     this.entities,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageText.deserialize(BinaryReader reader) {
@@ -46095,7 +46102,7 @@ class BotInlineMessageText extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: noWebpage,
       b03: invertMedia,
       b01: entities != null,
@@ -46170,7 +46177,7 @@ class BotInlineMessageMediaGeo extends BotInlineMessageBase {
     this.period,
     this.proximityNotificationRadius,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaGeo.deserialize(BinaryReader reader) {
@@ -46203,7 +46210,7 @@ class BotInlineMessageMediaGeo extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: heading != null,
       b01: period != null,
       b03: proximityNotificationRadius != null,
@@ -46288,7 +46295,7 @@ class BotInlineMessageMediaVenue extends BotInlineMessageBase {
     required this.venueId,
     required this.venueType,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaVenue.deserialize(BinaryReader reader) {
@@ -46321,7 +46328,7 @@ class BotInlineMessageMediaVenue extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyMarkup != null,
     );
 
@@ -46402,7 +46409,7 @@ class BotInlineMessageMediaContact extends BotInlineMessageBase {
     required this.lastName,
     required this.vcard,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaContact.deserialize(BinaryReader reader) {
@@ -46431,7 +46438,7 @@ class BotInlineMessageMediaContact extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyMarkup != null,
     );
 
@@ -46505,7 +46512,7 @@ class BotInlineMessageMediaInvoice extends BotInlineMessageBase {
     required this.currency,
     required this.totalAmount,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaInvoice.deserialize(BinaryReader reader) {
@@ -46541,7 +46548,7 @@ class BotInlineMessageMediaInvoice extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: shippingAddressRequested,
       b03: test,
       b00: photo != null,
@@ -46637,7 +46644,7 @@ class BotInlineMessageMediaWebPage extends BotInlineMessageBase {
     this.entities,
     required this.url,
     this.replyMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMessageMediaWebPage.deserialize(BinaryReader reader) {
@@ -46676,7 +46683,7 @@ class BotInlineMessageMediaWebPage extends BotInlineMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: invertMedia,
       b04: forceLargeMedia,
       b05: forceSmallMedia,
@@ -46774,7 +46781,7 @@ class BotInlineResult extends BotInlineResultBase {
     this.thumb,
     this.content,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineResult.deserialize(BinaryReader reader) {
@@ -46813,7 +46820,7 @@ class BotInlineResult extends BotInlineResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: title != null,
       b02: description != null,
       b03: url != null,
@@ -46917,7 +46924,7 @@ class BotInlineMediaResult extends BotInlineResultBase {
     this.title,
     this.description,
     required this.sendMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotInlineMediaResult.deserialize(BinaryReader reader) {
@@ -46953,7 +46960,7 @@ class BotInlineMediaResult extends BotInlineResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: photo != null,
       b01: document != null,
       b02: title != null,
@@ -47049,7 +47056,7 @@ class MessagesBotResults extends MessagesBotResultsBase {
     required this.results,
     required this.cacheTime,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesBotResults.deserialize(BinaryReader reader) {
@@ -47088,7 +47095,7 @@ class MessagesBotResults extends MessagesBotResultsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: gallery,
       b01: nextOffset != null,
       b02: switchPm != null,
@@ -47183,7 +47190,7 @@ class ExportedMessageLink extends ExportedMessageLinkBase {
   const ExportedMessageLink({
     required this.link,
     required this.html,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ExportedMessageLink.deserialize(BinaryReader reader) {
@@ -47253,7 +47260,7 @@ class MessageFwdHeader extends MessageFwdHeaderBase {
     this.savedFromName,
     this.savedDate,
     this.psaType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageFwdHeader.deserialize(BinaryReader reader) {
@@ -47308,7 +47315,7 @@ class MessageFwdHeader extends MessageFwdHeaderBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b07: imported,
       b11: savedOut,
       b00: fromId != null,
@@ -47448,7 +47455,7 @@ class MessageFwdHeader extends MessageFwdHeaderBase {
 /// ID: `72a3158c`.
 class AuthCodeTypeSms extends AuthCodeTypeBase {
   /// Auth Code Type Sms constructor.
-  const AuthCodeTypeSms() : super._();
+  const AuthCodeTypeSms() ;
 
   /// Deserialize.
   factory AuthCodeTypeSms.deserialize(BinaryReader reader) {
@@ -47485,7 +47492,7 @@ class AuthCodeTypeSms extends AuthCodeTypeBase {
 /// ID: `741cd3e3`.
 class AuthCodeTypeCall extends AuthCodeTypeBase {
   /// Auth Code Type Call constructor.
-  const AuthCodeTypeCall() : super._();
+  const AuthCodeTypeCall() ;
 
   /// Deserialize.
   factory AuthCodeTypeCall.deserialize(BinaryReader reader) {
@@ -47522,7 +47529,7 @@ class AuthCodeTypeCall extends AuthCodeTypeBase {
 /// ID: `226ccefb`.
 class AuthCodeTypeFlashCall extends AuthCodeTypeBase {
   /// Auth Code Type Flash Call constructor.
-  const AuthCodeTypeFlashCall() : super._();
+  const AuthCodeTypeFlashCall() ;
 
   /// Deserialize.
   factory AuthCodeTypeFlashCall.deserialize(BinaryReader reader) {
@@ -47559,7 +47566,7 @@ class AuthCodeTypeFlashCall extends AuthCodeTypeBase {
 /// ID: `d61ad6ee`.
 class AuthCodeTypeMissedCall extends AuthCodeTypeBase {
   /// Auth Code Type Missed Call constructor.
-  const AuthCodeTypeMissedCall() : super._();
+  const AuthCodeTypeMissedCall() ;
 
   /// Deserialize.
   factory AuthCodeTypeMissedCall.deserialize(BinaryReader reader) {
@@ -47596,7 +47603,7 @@ class AuthCodeTypeMissedCall extends AuthCodeTypeBase {
 /// ID: `06ed998c`.
 class AuthCodeTypeFragmentSms extends AuthCodeTypeBase {
   /// Auth Code Type Fragment Sms constructor.
-  const AuthCodeTypeFragmentSms() : super._();
+  const AuthCodeTypeFragmentSms() ;
 
   /// Deserialize.
   factory AuthCodeTypeFragmentSms.deserialize(BinaryReader reader) {
@@ -47635,7 +47642,7 @@ class AuthSentCodeTypeApp extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type App constructor.
   const AuthSentCodeTypeApp({
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeApp.deserialize(BinaryReader reader) {
@@ -47688,7 +47695,7 @@ class AuthSentCodeTypeSms extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type Sms constructor.
   const AuthSentCodeTypeSms({
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeSms.deserialize(BinaryReader reader) {
@@ -47741,7 +47748,7 @@ class AuthSentCodeTypeCall extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type Call constructor.
   const AuthSentCodeTypeCall({
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeCall.deserialize(BinaryReader reader) {
@@ -47794,7 +47801,7 @@ class AuthSentCodeTypeFlashCall extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type Flash Call constructor.
   const AuthSentCodeTypeFlashCall({
     required this.pattern,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeFlashCall.deserialize(BinaryReader reader) {
@@ -47846,7 +47853,7 @@ class AuthSentCodeTypeMissedCall extends AuthSentCodeTypeBase {
   const AuthSentCodeTypeMissedCall({
     required this.prefix,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeMissedCall.deserialize(BinaryReader reader) {
@@ -47911,7 +47918,7 @@ class AuthSentCodeTypeEmailCode extends AuthSentCodeTypeBase {
     required this.length,
     this.resetAvailablePeriod,
     this.resetPendingDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeEmailCode.deserialize(BinaryReader reader) {
@@ -47944,7 +47951,7 @@ class AuthSentCodeTypeEmailCode extends AuthSentCodeTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: appleSigninAllowed,
       b01: googleSigninAllowed,
       b03: resetAvailablePeriod != null,
@@ -48023,7 +48030,7 @@ class AuthSentCodeTypeSetUpEmailRequired extends AuthSentCodeTypeBase {
   const AuthSentCodeTypeSetUpEmailRequired({
     required this.appleSigninAllowed,
     required this.googleSigninAllowed,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeSetUpEmailRequired.deserialize(BinaryReader reader) {
@@ -48044,7 +48051,7 @@ class AuthSentCodeTypeSetUpEmailRequired extends AuthSentCodeTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: appleSigninAllowed,
       b01: googleSigninAllowed,
     );
@@ -48093,7 +48100,7 @@ class AuthSentCodeTypeFragmentSms extends AuthSentCodeTypeBase {
   const AuthSentCodeTypeFragmentSms({
     required this.url,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeFragmentSms.deserialize(BinaryReader reader) {
@@ -48158,7 +48165,7 @@ class AuthSentCodeTypeFirebaseSms extends AuthSentCodeTypeBase {
     this.receipt,
     this.pushTimeout,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeFirebaseSms.deserialize(BinaryReader reader) {
@@ -48194,7 +48201,7 @@ class AuthSentCodeTypeFirebaseSms extends AuthSentCodeTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nonce != null,
       b02: playIntegrityProjectId != null || playIntegrityNonce != null,
       b01: receipt != null || pushTimeout != null,
@@ -48282,7 +48289,7 @@ class AuthSentCodeTypeSmsWord extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type Sms Word constructor.
   const AuthSentCodeTypeSmsWord({
     this.beginning,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeSmsWord.deserialize(BinaryReader reader) {
@@ -48302,7 +48309,7 @@ class AuthSentCodeTypeSmsWord extends AuthSentCodeTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: beginning != null,
     );
 
@@ -48349,7 +48356,7 @@ class AuthSentCodeTypeSmsPhrase extends AuthSentCodeTypeBase {
   /// Auth Sent Code Type Sms Phrase constructor.
   const AuthSentCodeTypeSmsPhrase({
     this.beginning,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSentCodeTypeSmsPhrase.deserialize(BinaryReader reader) {
@@ -48369,7 +48376,7 @@ class AuthSentCodeTypeSmsPhrase extends AuthSentCodeTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: beginning != null,
     );
 
@@ -48421,7 +48428,7 @@ class MessagesBotCallbackAnswer extends MessagesBotCallbackAnswerBase {
     this.message,
     this.url,
     required this.cacheTime,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesBotCallbackAnswer.deserialize(BinaryReader reader) {
@@ -48452,7 +48459,7 @@ class MessagesBotCallbackAnswer extends MessagesBotCallbackAnswerBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: alert,
       b03: hasUrl,
       b04: nativeUi,
@@ -48530,7 +48537,7 @@ class MessagesMessageEditData extends MessagesMessageEditDataBase {
   /// Messages Message Edit Data constructor.
   const MessagesMessageEditData({
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessageEditData.deserialize(BinaryReader reader) {
@@ -48549,7 +48556,7 @@ class MessagesMessageEditData extends MessagesMessageEditDataBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: caption,
     );
 
@@ -48594,7 +48601,7 @@ class InputBotInlineMessageID extends InputBotInlineMessageIDBase {
     required this.dcId,
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageID.deserialize(BinaryReader reader) {
@@ -48668,7 +48675,7 @@ class InputBotInlineMessageID64 extends InputBotInlineMessageIDBase {
     required this.ownerId,
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotInlineMessageID64.deserialize(BinaryReader reader) {
@@ -48749,7 +48756,7 @@ class InlineBotSwitchPM extends InlineBotSwitchPMBase {
   const InlineBotSwitchPM({
     required this.text,
     required this.startParam,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InlineBotSwitchPM.deserialize(BinaryReader reader) {
@@ -48811,7 +48818,7 @@ class MessagesPeerDialogs extends MessagesPeerDialogsBase {
     required this.chats,
     required this.users,
     required this.state,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesPeerDialogs.deserialize(BinaryReader reader) {
@@ -48891,7 +48898,7 @@ class TopPeer extends TopPeerBase {
   const TopPeer({
     required this.peer,
     required this.rating,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TopPeer.deserialize(BinaryReader reader) {
@@ -48947,7 +48954,7 @@ class TopPeer extends TopPeerBase {
 /// ID: `ab661b5b`.
 class TopPeerCategoryBotsPM extends TopPeerCategoryBase {
   /// Top Peer Category Bots P M constructor.
-  const TopPeerCategoryBotsPM() : super._();
+  const TopPeerCategoryBotsPM() ;
 
   /// Deserialize.
   factory TopPeerCategoryBotsPM.deserialize(BinaryReader reader) {
@@ -48984,7 +48991,7 @@ class TopPeerCategoryBotsPM extends TopPeerCategoryBase {
 /// ID: `148677e2`.
 class TopPeerCategoryBotsInline extends TopPeerCategoryBase {
   /// Top Peer Category Bots Inline constructor.
-  const TopPeerCategoryBotsInline() : super._();
+  const TopPeerCategoryBotsInline() ;
 
   /// Deserialize.
   factory TopPeerCategoryBotsInline.deserialize(BinaryReader reader) {
@@ -49021,7 +49028,7 @@ class TopPeerCategoryBotsInline extends TopPeerCategoryBase {
 /// ID: `0637b7ed`.
 class TopPeerCategoryCorrespondents extends TopPeerCategoryBase {
   /// Top Peer Category Correspondents constructor.
-  const TopPeerCategoryCorrespondents() : super._();
+  const TopPeerCategoryCorrespondents() ;
 
   /// Deserialize.
   factory TopPeerCategoryCorrespondents.deserialize(BinaryReader reader) {
@@ -49058,7 +49065,7 @@ class TopPeerCategoryCorrespondents extends TopPeerCategoryBase {
 /// ID: `bd17a14a`.
 class TopPeerCategoryGroups extends TopPeerCategoryBase {
   /// Top Peer Category Groups constructor.
-  const TopPeerCategoryGroups() : super._();
+  const TopPeerCategoryGroups() ;
 
   /// Deserialize.
   factory TopPeerCategoryGroups.deserialize(BinaryReader reader) {
@@ -49095,7 +49102,7 @@ class TopPeerCategoryGroups extends TopPeerCategoryBase {
 /// ID: `161d9628`.
 class TopPeerCategoryChannels extends TopPeerCategoryBase {
   /// Top Peer Category Channels constructor.
-  const TopPeerCategoryChannels() : super._();
+  const TopPeerCategoryChannels() ;
 
   /// Deserialize.
   factory TopPeerCategoryChannels.deserialize(BinaryReader reader) {
@@ -49132,7 +49139,7 @@ class TopPeerCategoryChannels extends TopPeerCategoryBase {
 /// ID: `1e76a78c`.
 class TopPeerCategoryPhoneCalls extends TopPeerCategoryBase {
   /// Top Peer Category Phone Calls constructor.
-  const TopPeerCategoryPhoneCalls() : super._();
+  const TopPeerCategoryPhoneCalls() ;
 
   /// Deserialize.
   factory TopPeerCategoryPhoneCalls.deserialize(BinaryReader reader) {
@@ -49169,7 +49176,7 @@ class TopPeerCategoryPhoneCalls extends TopPeerCategoryBase {
 /// ID: `a8406ca9`.
 class TopPeerCategoryForwardUsers extends TopPeerCategoryBase {
   /// Top Peer Category Forward Users constructor.
-  const TopPeerCategoryForwardUsers() : super._();
+  const TopPeerCategoryForwardUsers() ;
 
   /// Deserialize.
   factory TopPeerCategoryForwardUsers.deserialize(BinaryReader reader) {
@@ -49206,7 +49213,7 @@ class TopPeerCategoryForwardUsers extends TopPeerCategoryBase {
 /// ID: `fbeec0f0`.
 class TopPeerCategoryForwardChats extends TopPeerCategoryBase {
   /// Top Peer Category Forward Chats constructor.
-  const TopPeerCategoryForwardChats() : super._();
+  const TopPeerCategoryForwardChats() ;
 
   /// Deserialize.
   factory TopPeerCategoryForwardChats.deserialize(BinaryReader reader) {
@@ -49243,7 +49250,7 @@ class TopPeerCategoryForwardChats extends TopPeerCategoryBase {
 /// ID: `fd9e7bec`.
 class TopPeerCategoryBotsApp extends TopPeerCategoryBase {
   /// Top Peer Category Bots App constructor.
-  const TopPeerCategoryBotsApp() : super._();
+  const TopPeerCategoryBotsApp() ;
 
   /// Deserialize.
   factory TopPeerCategoryBotsApp.deserialize(BinaryReader reader) {
@@ -49284,7 +49291,7 @@ class TopPeerCategoryPeers extends TopPeerCategoryPeersBase {
     required this.category,
     required this.count,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TopPeerCategoryPeers.deserialize(BinaryReader reader) {
@@ -49349,7 +49356,7 @@ class TopPeerCategoryPeers extends TopPeerCategoryPeersBase {
 /// ID: `de266ef5`.
 class ContactsTopPeersNotModified extends ContactsTopPeersBase {
   /// Contacts Top Peers Not Modified constructor.
-  const ContactsTopPeersNotModified() : super._();
+  const ContactsTopPeersNotModified() ;
 
   /// Deserialize.
   factory ContactsTopPeersNotModified.deserialize(BinaryReader reader) {
@@ -49390,7 +49397,7 @@ class ContactsTopPeers extends ContactsTopPeersBase {
     required this.categories,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsTopPeers.deserialize(BinaryReader reader) {
@@ -49453,7 +49460,7 @@ class ContactsTopPeers extends ContactsTopPeersBase {
 /// ID: `b52c939d`.
 class ContactsTopPeersDisabled extends ContactsTopPeersBase {
   /// Contacts Top Peers Disabled constructor.
-  const ContactsTopPeersDisabled() : super._();
+  const ContactsTopPeersDisabled() ;
 
   /// Deserialize.
   factory ContactsTopPeersDisabled.deserialize(BinaryReader reader) {
@@ -49492,7 +49499,7 @@ class DraftMessageEmpty extends DraftMessageBase {
   /// Draft Message Empty constructor.
   const DraftMessageEmpty({
     this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DraftMessageEmpty.deserialize(BinaryReader reader) {
@@ -49512,7 +49519,7 @@ class DraftMessageEmpty extends DraftMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: date != null,
     );
 
@@ -49566,7 +49573,7 @@ class DraftMessage extends DraftMessageBase {
     this.media,
     required this.date,
     this.effect,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DraftMessage.deserialize(BinaryReader reader) {
@@ -49605,7 +49612,7 @@ class DraftMessage extends DraftMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: noWebpage,
       b06: invertMedia,
       b04: replyTo != null,
@@ -49699,7 +49706,7 @@ class MessagesFeaturedStickersNotModified extends MessagesFeaturedStickersBase {
   /// Messages Featured Stickers Not Modified constructor.
   const MessagesFeaturedStickersNotModified({
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFeaturedStickersNotModified.deserialize(BinaryReader reader) {
@@ -49756,7 +49763,7 @@ class MessagesFeaturedStickers extends MessagesFeaturedStickersBase {
     required this.count,
     required this.sets,
     required this.unread,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFeaturedStickers.deserialize(BinaryReader reader) {
@@ -49783,7 +49790,7 @@ class MessagesFeaturedStickers extends MessagesFeaturedStickersBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: premium,
     );
 
@@ -49848,7 +49855,7 @@ class MessagesFeaturedStickers extends MessagesFeaturedStickersBase {
 /// ID: `0b17f890`.
 class MessagesRecentStickersNotModified extends MessagesRecentStickersBase {
   /// Messages Recent Stickers Not Modified constructor.
-  const MessagesRecentStickersNotModified() : super._();
+  const MessagesRecentStickersNotModified() ;
 
   /// Deserialize.
   factory MessagesRecentStickersNotModified.deserialize(BinaryReader reader) {
@@ -49890,7 +49897,7 @@ class MessagesRecentStickers extends MessagesRecentStickersBase {
     required this.packs,
     required this.stickers,
     required this.dates,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRecentStickers.deserialize(BinaryReader reader) {
@@ -49965,7 +49972,7 @@ class MessagesArchivedStickers extends MessagesArchivedStickersBase {
   const MessagesArchivedStickers({
     required this.count,
     required this.sets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesArchivedStickers.deserialize(BinaryReader reader) {
@@ -50024,7 +50031,7 @@ class MessagesArchivedStickers extends MessagesArchivedStickersBase {
 class MessagesStickerSetInstallResultSuccess
     extends MessagesStickerSetInstallResultBase {
   /// Messages Sticker Set Install Result Success constructor.
-  const MessagesStickerSetInstallResultSuccess() : super._();
+  const MessagesStickerSetInstallResultSuccess() ;
 
   /// Deserialize.
   factory MessagesStickerSetInstallResultSuccess.deserialize(
@@ -50065,7 +50072,7 @@ class MessagesStickerSetInstallResultArchive
   /// Messages Sticker Set Install Result Archive constructor.
   const MessagesStickerSetInstallResultArchive({
     required this.sets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesStickerSetInstallResultArchive.deserialize(
@@ -50118,7 +50125,7 @@ class StickerSetCovered extends StickerSetCoveredBase {
   const StickerSetCovered({
     required this.set,
     required this.cover,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerSetCovered.deserialize(BinaryReader reader) {
@@ -50177,7 +50184,7 @@ class StickerSetMultiCovered extends StickerSetCoveredBase {
   const StickerSetMultiCovered({
     required this.set,
     required this.covers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerSetMultiCovered.deserialize(BinaryReader reader) {
@@ -50238,7 +50245,7 @@ class StickerSetFullCovered extends StickerSetCoveredBase {
     required this.packs,
     required this.keywords,
     required this.documents,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerSetFullCovered.deserialize(BinaryReader reader) {
@@ -50310,7 +50317,7 @@ class StickerSetNoCovered extends StickerSetCoveredBase {
   /// Sticker Set No Covered constructor.
   const StickerSetNoCovered({
     required this.set,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerSetNoCovered.deserialize(BinaryReader reader) {
@@ -50364,7 +50371,7 @@ class MaskCoords extends MaskCoordsBase {
     required this.x,
     required this.y,
     required this.zoom,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MaskCoords.deserialize(BinaryReader reader) {
@@ -50438,7 +50445,7 @@ class InputStickeredMediaPhoto extends InputStickeredMediaBase {
   /// Input Stickered Media Photo constructor.
   const InputStickeredMediaPhoto({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickeredMediaPhoto.deserialize(BinaryReader reader) {
@@ -50489,7 +50496,7 @@ class InputStickeredMediaDocument extends InputStickeredMediaBase {
   /// Input Stickered Media Document constructor.
   const InputStickeredMediaDocument({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickeredMediaDocument.deserialize(BinaryReader reader) {
@@ -50546,7 +50553,7 @@ class Game extends GameBase {
     required this.description,
     required this.photo,
     this.document,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Game.deserialize(BinaryReader reader) {
@@ -50579,7 +50586,7 @@ class Game extends GameBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: document != null,
     );
 
@@ -50661,7 +50668,7 @@ class InputGameID extends InputGameBase {
   const InputGameID({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputGameID.deserialize(BinaryReader reader) {
@@ -50724,7 +50731,7 @@ class InputGameShortName extends InputGameBase {
   const InputGameShortName({
     required this.botId,
     required this.shortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputGameShortName.deserialize(BinaryReader reader) {
@@ -50784,7 +50791,7 @@ class HighScore extends HighScoreBase {
     required this.pos,
     required this.userId,
     required this.score,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HighScore.deserialize(BinaryReader reader) {
@@ -50856,7 +50863,7 @@ class MessagesHighScores extends MessagesHighScoresBase {
   const MessagesHighScores({
     required this.scores,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHighScores.deserialize(BinaryReader reader) {
@@ -50912,7 +50919,7 @@ class MessagesHighScores extends MessagesHighScoresBase {
 /// ID: `dc3d824f`.
 class TextEmpty extends RichTextBase {
   /// Text Empty constructor.
-  const TextEmpty() : super._();
+  const TextEmpty() ;
 
   /// Deserialize.
   factory TextEmpty.deserialize(BinaryReader reader) {
@@ -50951,7 +50958,7 @@ class TextPlain extends RichTextBase {
   /// Text Plain constructor.
   const TextPlain({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextPlain.deserialize(BinaryReader reader) {
@@ -51002,7 +51009,7 @@ class TextBold extends RichTextBase {
   /// Text Bold constructor.
   const TextBold({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextBold.deserialize(BinaryReader reader) {
@@ -51053,7 +51060,7 @@ class TextItalic extends RichTextBase {
   /// Text Italic constructor.
   const TextItalic({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextItalic.deserialize(BinaryReader reader) {
@@ -51104,7 +51111,7 @@ class TextUnderline extends RichTextBase {
   /// Text Underline constructor.
   const TextUnderline({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextUnderline.deserialize(BinaryReader reader) {
@@ -51155,7 +51162,7 @@ class TextStrike extends RichTextBase {
   /// Text Strike constructor.
   const TextStrike({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextStrike.deserialize(BinaryReader reader) {
@@ -51206,7 +51213,7 @@ class TextFixed extends RichTextBase {
   /// Text Fixed constructor.
   const TextFixed({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextFixed.deserialize(BinaryReader reader) {
@@ -51259,7 +51266,7 @@ class TextUrl extends RichTextBase {
     required this.text,
     required this.url,
     required this.webpageId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextUrl.deserialize(BinaryReader reader) {
@@ -51327,7 +51334,7 @@ class TextEmail extends RichTextBase {
   const TextEmail({
     required this.text,
     required this.email,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextEmail.deserialize(BinaryReader reader) {
@@ -51385,7 +51392,7 @@ class TextConcat extends RichTextBase {
   /// Text Concat constructor.
   const TextConcat({
     required this.texts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextConcat.deserialize(BinaryReader reader) {
@@ -51436,7 +51443,7 @@ class TextSubscript extends RichTextBase {
   /// Text Subscript constructor.
   const TextSubscript({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextSubscript.deserialize(BinaryReader reader) {
@@ -51487,7 +51494,7 @@ class TextSuperscript extends RichTextBase {
   /// Text Superscript constructor.
   const TextSuperscript({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextSuperscript.deserialize(BinaryReader reader) {
@@ -51538,7 +51545,7 @@ class TextMarked extends RichTextBase {
   /// Text Marked constructor.
   const TextMarked({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextMarked.deserialize(BinaryReader reader) {
@@ -51590,7 +51597,7 @@ class TextPhone extends RichTextBase {
   const TextPhone({
     required this.text,
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextPhone.deserialize(BinaryReader reader) {
@@ -51650,7 +51657,7 @@ class TextImage extends RichTextBase {
     required this.documentId,
     required this.w,
     required this.h,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextImage.deserialize(BinaryReader reader) {
@@ -51722,7 +51729,7 @@ class TextAnchor extends RichTextBase {
   const TextAnchor({
     required this.text,
     required this.name,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextAnchor.deserialize(BinaryReader reader) {
@@ -51778,7 +51785,7 @@ class TextAnchor extends RichTextBase {
 /// ID: `13567e8a`.
 class PageBlockUnsupported extends PageBlockBase {
   /// Page Block Unsupported constructor.
-  const PageBlockUnsupported() : super._();
+  const PageBlockUnsupported() ;
 
   /// Deserialize.
   factory PageBlockUnsupported.deserialize(BinaryReader reader) {
@@ -51817,7 +51824,7 @@ class PageBlockTitle extends PageBlockBase {
   /// Page Block Title constructor.
   const PageBlockTitle({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockTitle.deserialize(BinaryReader reader) {
@@ -51868,7 +51875,7 @@ class PageBlockSubtitle extends PageBlockBase {
   /// Page Block Subtitle constructor.
   const PageBlockSubtitle({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockSubtitle.deserialize(BinaryReader reader) {
@@ -51920,7 +51927,7 @@ class PageBlockAuthorDate extends PageBlockBase {
   const PageBlockAuthorDate({
     required this.author,
     required this.publishedDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockAuthorDate.deserialize(BinaryReader reader) {
@@ -51978,7 +51985,7 @@ class PageBlockHeader extends PageBlockBase {
   /// Page Block Header constructor.
   const PageBlockHeader({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockHeader.deserialize(BinaryReader reader) {
@@ -52029,7 +52036,7 @@ class PageBlockSubheader extends PageBlockBase {
   /// Page Block Subheader constructor.
   const PageBlockSubheader({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockSubheader.deserialize(BinaryReader reader) {
@@ -52080,7 +52087,7 @@ class PageBlockParagraph extends PageBlockBase {
   /// Page Block Paragraph constructor.
   const PageBlockParagraph({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockParagraph.deserialize(BinaryReader reader) {
@@ -52132,7 +52139,7 @@ class PageBlockPreformatted extends PageBlockBase {
   const PageBlockPreformatted({
     required this.text,
     required this.language,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockPreformatted.deserialize(BinaryReader reader) {
@@ -52190,7 +52197,7 @@ class PageBlockFooter extends PageBlockBase {
   /// Page Block Footer constructor.
   const PageBlockFooter({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockFooter.deserialize(BinaryReader reader) {
@@ -52239,7 +52246,7 @@ class PageBlockFooter extends PageBlockBase {
 /// ID: `db20b188`.
 class PageBlockDivider extends PageBlockBase {
   /// Page Block Divider constructor.
-  const PageBlockDivider() : super._();
+  const PageBlockDivider() ;
 
   /// Deserialize.
   factory PageBlockDivider.deserialize(BinaryReader reader) {
@@ -52278,7 +52285,7 @@ class PageBlockAnchor extends PageBlockBase {
   /// Page Block Anchor constructor.
   const PageBlockAnchor({
     required this.name,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockAnchor.deserialize(BinaryReader reader) {
@@ -52329,7 +52336,7 @@ class PageBlockList extends PageBlockBase {
   /// Page Block List constructor.
   const PageBlockList({
     required this.items,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockList.deserialize(BinaryReader reader) {
@@ -52381,7 +52388,7 @@ class PageBlockBlockquote extends PageBlockBase {
   const PageBlockBlockquote({
     required this.text,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockBlockquote.deserialize(BinaryReader reader) {
@@ -52440,7 +52447,7 @@ class PageBlockPullquote extends PageBlockBase {
   const PageBlockPullquote({
     required this.text,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockPullquote.deserialize(BinaryReader reader) {
@@ -52501,7 +52508,7 @@ class PageBlockPhoto extends PageBlockBase {
     required this.caption,
     this.url,
     this.webpageId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockPhoto.deserialize(BinaryReader reader) {
@@ -52528,7 +52535,7 @@ class PageBlockPhoto extends PageBlockBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: url != null || webpageId != null,
     );
 
@@ -52598,7 +52605,7 @@ class PageBlockVideo extends PageBlockBase {
     required this.loop,
     required this.videoId,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockVideo.deserialize(BinaryReader reader) {
@@ -52623,7 +52630,7 @@ class PageBlockVideo extends PageBlockBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: autoplay,
       b01: loop,
     );
@@ -52683,7 +52690,7 @@ class PageBlockCover extends PageBlockBase {
   /// Page Block Cover constructor.
   const PageBlockCover({
     required this.cover,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockCover.deserialize(BinaryReader reader) {
@@ -52741,7 +52748,7 @@ class PageBlockEmbed extends PageBlockBase {
     this.w,
     this.h,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockEmbed.deserialize(BinaryReader reader) {
@@ -52779,7 +52786,7 @@ class PageBlockEmbed extends PageBlockBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: fullWidth,
       b03: allowScrolling,
       b01: url != null,
@@ -52882,7 +52889,7 @@ class PageBlockEmbedPost extends PageBlockBase {
     required this.date,
     required this.blocks,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockEmbedPost.deserialize(BinaryReader reader) {
@@ -52980,7 +52987,7 @@ class PageBlockCollage extends PageBlockBase {
   const PageBlockCollage({
     required this.items,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockCollage.deserialize(BinaryReader reader) {
@@ -53039,7 +53046,7 @@ class PageBlockSlideshow extends PageBlockBase {
   const PageBlockSlideshow({
     required this.items,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockSlideshow.deserialize(BinaryReader reader) {
@@ -53097,7 +53104,7 @@ class PageBlockChannel extends PageBlockBase {
   /// Page Block Channel constructor.
   const PageBlockChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockChannel.deserialize(BinaryReader reader) {
@@ -53149,7 +53156,7 @@ class PageBlockAudio extends PageBlockBase {
   const PageBlockAudio({
     required this.audioId,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockAudio.deserialize(BinaryReader reader) {
@@ -53209,7 +53216,7 @@ class PageBlockKicker extends PageBlockBase {
   /// Page Block Kicker constructor.
   const PageBlockKicker({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockKicker.deserialize(BinaryReader reader) {
@@ -53263,7 +53270,7 @@ class PageBlockTable extends PageBlockBase {
     required this.striped,
     required this.title,
     required this.rows,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockTable.deserialize(BinaryReader reader) {
@@ -53288,7 +53295,7 @@ class PageBlockTable extends PageBlockBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: bordered,
       b01: striped,
     );
@@ -53346,7 +53353,7 @@ class PageBlockOrderedList extends PageBlockBase {
   /// Page Block Ordered List constructor.
   const PageBlockOrderedList({
     required this.items,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockOrderedList.deserialize(BinaryReader reader) {
@@ -53399,7 +53406,7 @@ class PageBlockDetails extends PageBlockBase {
     required this.open,
     required this.blocks,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockDetails.deserialize(BinaryReader reader) {
@@ -53422,7 +53429,7 @@ class PageBlockDetails extends PageBlockBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: open,
     );
 
@@ -53476,7 +53483,7 @@ class PageBlockRelatedArticles extends PageBlockBase {
   const PageBlockRelatedArticles({
     required this.title,
     required this.articles,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockRelatedArticles.deserialize(BinaryReader reader) {
@@ -53538,7 +53545,7 @@ class PageBlockMap extends PageBlockBase {
     required this.w,
     required this.h,
     required this.caption,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageBlockMap.deserialize(BinaryReader reader) {
@@ -53621,7 +53628,7 @@ class PageBlockMap extends PageBlockBase {
 /// ID: `85e42301`.
 class PhoneCallDiscardReasonMissed extends PhoneCallDiscardReasonBase {
   /// Phone Call Discard Reason Missed constructor.
-  const PhoneCallDiscardReasonMissed() : super._();
+  const PhoneCallDiscardReasonMissed() ;
 
   /// Deserialize.
   factory PhoneCallDiscardReasonMissed.deserialize(BinaryReader reader) {
@@ -53658,7 +53665,7 @@ class PhoneCallDiscardReasonMissed extends PhoneCallDiscardReasonBase {
 /// ID: `e095c1a0`.
 class PhoneCallDiscardReasonDisconnect extends PhoneCallDiscardReasonBase {
   /// Phone Call Discard Reason Disconnect constructor.
-  const PhoneCallDiscardReasonDisconnect() : super._();
+  const PhoneCallDiscardReasonDisconnect() ;
 
   /// Deserialize.
   factory PhoneCallDiscardReasonDisconnect.deserialize(BinaryReader reader) {
@@ -53695,7 +53702,7 @@ class PhoneCallDiscardReasonDisconnect extends PhoneCallDiscardReasonBase {
 /// ID: `57adc690`.
 class PhoneCallDiscardReasonHangup extends PhoneCallDiscardReasonBase {
   /// Phone Call Discard Reason Hangup constructor.
-  const PhoneCallDiscardReasonHangup() : super._();
+  const PhoneCallDiscardReasonHangup() ;
 
   /// Deserialize.
   factory PhoneCallDiscardReasonHangup.deserialize(BinaryReader reader) {
@@ -53732,7 +53739,7 @@ class PhoneCallDiscardReasonHangup extends PhoneCallDiscardReasonBase {
 /// ID: `faf7e8c9`.
 class PhoneCallDiscardReasonBusy extends PhoneCallDiscardReasonBase {
   /// Phone Call Discard Reason Busy constructor.
-  const PhoneCallDiscardReasonBusy() : super._();
+  const PhoneCallDiscardReasonBusy() ;
 
   /// Deserialize.
   factory PhoneCallDiscardReasonBusy.deserialize(BinaryReader reader) {
@@ -53771,7 +53778,7 @@ class DataJSON extends DataJSONBase {
   /// Data J S O N constructor.
   const DataJSON({
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DataJSON.deserialize(BinaryReader reader) {
@@ -53823,7 +53830,7 @@ class LabeledPrice extends LabeledPriceBase {
   const LabeledPrice({
     required this.label,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LabeledPrice.deserialize(BinaryReader reader) {
@@ -53897,7 +53904,7 @@ class Invoice extends InvoiceBase {
     this.suggestedTipAmounts,
     this.termsUrl,
     this.subscriptionPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Invoice.deserialize(BinaryReader reader) {
@@ -53950,7 +53957,7 @@ class Invoice extends InvoiceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: test,
       b01: nameRequested,
       b02: phoneRequested,
@@ -53986,10 +53993,10 @@ class Invoice extends InvoiceBase {
   /// flexible: bit 5 of flags.5?true
   final bool flexible;
 
-  /// phone_to_provider: bit 6 of flags.6?true
+  /// phoneto_provider: bit 6 of flags.6?true
   final bool phoneToProvider;
 
-  /// email_to_provider: bit 7 of flags.7?true
+  /// emailto_provider: bit 7 of flags.7?true
   final bool emailToProvider;
 
   /// recurring: bit 9 of flags.9?true
@@ -54079,7 +54086,7 @@ class PaymentCharge extends PaymentChargeBase {
   const PaymentCharge({
     required this.id,
     required this.providerChargeId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentCharge.deserialize(BinaryReader reader) {
@@ -54142,7 +54149,7 @@ class PostAddress extends PostAddressBase {
     required this.state,
     required this.countryIso2,
     required this.postCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PostAddress.deserialize(BinaryReader reader) {
@@ -54231,7 +54238,7 @@ class PaymentRequestedInfo extends PaymentRequestedInfoBase {
     this.phone,
     this.email,
     this.shippingAddress,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentRequestedInfo.deserialize(BinaryReader reader) {
@@ -54261,7 +54268,7 @@ class PaymentRequestedInfo extends PaymentRequestedInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: name != null,
       b01: phone != null,
       b02: email != null,
@@ -54336,7 +54343,7 @@ class PaymentSavedCredentialsCard extends PaymentSavedCredentialsBase {
   const PaymentSavedCredentialsCard({
     required this.id,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentSavedCredentialsCard.deserialize(BinaryReader reader) {
@@ -54398,7 +54405,7 @@ class WebDocument extends WebDocumentBase {
     required this.size,
     required this.mimeType,
     required this.attributes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebDocument.deserialize(BinaryReader reader) {
@@ -54484,7 +54491,7 @@ class WebDocumentNoProxy extends WebDocumentBase {
     required this.size,
     required this.mimeType,
     required this.attributes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebDocumentNoProxy.deserialize(BinaryReader reader) {
@@ -54561,7 +54568,7 @@ class InputWebDocument extends InputWebDocumentBase {
     required this.size,
     required this.mimeType,
     required this.attributes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWebDocument.deserialize(BinaryReader reader) {
@@ -54636,7 +54643,7 @@ class InputWebFileLocation extends InputWebFileLocationBase {
   const InputWebFileLocation({
     required this.url,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWebFileLocation.deserialize(BinaryReader reader) {
@@ -54701,7 +54708,7 @@ class InputWebFileGeoPointLocation extends InputWebFileLocationBase {
     required this.h,
     required this.zoom,
     required this.scale,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWebFileGeoPointLocation.deserialize(BinaryReader reader) {
@@ -54800,7 +54807,7 @@ class InputWebFileAudioAlbumThumbLocation extends InputWebFileLocationBase {
     this.document,
     this.title,
     this.performer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWebFileAudioAlbumThumbLocation.deserialize(BinaryReader reader) {
@@ -54829,7 +54836,7 @@ class InputWebFileAudioAlbumThumbLocation extends InputWebFileLocationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: small,
       b00: document != null,
       b01: title != null || performer != null,
@@ -54902,7 +54909,7 @@ class UploadWebFile extends UploadWebFileBase {
     required this.fileType,
     required this.mtime,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadWebFile.deserialize(BinaryReader reader) {
@@ -55000,7 +55007,7 @@ class PaymentsPaymentForm extends PaymentsPaymentFormBase {
     this.savedInfo,
     this.savedCredentials,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentForm.deserialize(BinaryReader reader) {
@@ -55062,7 +55069,7 @@ class PaymentsPaymentForm extends PaymentsPaymentFormBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: canSaveCredentials,
       b03: passwordMissing,
       b05: photo != null,
@@ -55215,7 +55222,7 @@ class PaymentsPaymentFormStars extends PaymentsPaymentFormBase {
     this.photo,
     required this.invoice,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentFormStars.deserialize(BinaryReader reader) {
@@ -55247,7 +55254,7 @@ class PaymentsPaymentFormStars extends PaymentsPaymentFormBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: photo != null,
     );
 
@@ -55329,7 +55336,7 @@ class PaymentsPaymentFormStarGift extends PaymentsPaymentFormBase {
   const PaymentsPaymentFormStarGift({
     required this.formId,
     required this.invoice,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentFormStarGift.deserialize(BinaryReader reader) {
@@ -55391,7 +55398,7 @@ class PaymentsValidatedRequestedInfo
   const PaymentsValidatedRequestedInfo({
     this.id,
     this.shippingOptions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsValidatedRequestedInfo.deserialize(BinaryReader reader) {
@@ -55416,7 +55423,7 @@ class PaymentsValidatedRequestedInfo
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: id != null,
       b01: shippingOptions != null,
     );
@@ -55472,7 +55479,7 @@ class PaymentsPaymentResult extends PaymentsPaymentResultBase {
   /// Payments Payment Result constructor.
   const PaymentsPaymentResult({
     required this.updates,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentResult.deserialize(BinaryReader reader) {
@@ -55523,7 +55530,7 @@ class PaymentsPaymentVerificationNeeded extends PaymentsPaymentResultBase {
   /// Payments Payment Verification Needed constructor.
   const PaymentsPaymentVerificationNeeded({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentVerificationNeeded.deserialize(BinaryReader reader) {
@@ -55587,7 +55594,7 @@ class PaymentsPaymentReceipt extends PaymentsPaymentReceiptBase {
     required this.totalAmount,
     required this.credentialsTitle,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentReceipt.deserialize(BinaryReader reader) {
@@ -55638,7 +55645,7 @@ class PaymentsPaymentReceipt extends PaymentsPaymentReceiptBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: photo != null,
       b00: info != null,
       b01: shipping != null,
@@ -55777,7 +55784,7 @@ class PaymentsPaymentReceiptStars extends PaymentsPaymentReceiptBase {
     required this.totalAmount,
     required this.transactionId,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsPaymentReceiptStars.deserialize(BinaryReader reader) {
@@ -55815,7 +55822,7 @@ class PaymentsPaymentReceiptStars extends PaymentsPaymentReceiptBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: photo != null,
     );
 
@@ -55912,7 +55919,7 @@ class PaymentsSavedInfo extends PaymentsSavedInfoBase {
   const PaymentsSavedInfo({
     required this.hasSavedCredentials,
     this.savedInfo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsSavedInfo.deserialize(BinaryReader reader) {
@@ -55936,7 +55943,7 @@ class PaymentsSavedInfo extends PaymentsSavedInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: hasSavedCredentials,
       b00: savedInfo != null,
     );
@@ -55989,7 +55996,7 @@ class InputPaymentCredentialsSaved extends InputPaymentCredentialsBase {
   const InputPaymentCredentialsSaved({
     required this.id,
     required this.tmpPassword,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPaymentCredentialsSaved.deserialize(BinaryReader reader) {
@@ -56048,7 +56055,7 @@ class InputPaymentCredentials extends InputPaymentCredentialsBase {
   const InputPaymentCredentials({
     required this.save,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPaymentCredentials.deserialize(BinaryReader reader) {
@@ -56069,7 +56076,7 @@ class InputPaymentCredentials extends InputPaymentCredentialsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: save,
     );
 
@@ -56117,7 +56124,7 @@ class InputPaymentCredentialsApplePay extends InputPaymentCredentialsBase {
   /// Input Payment Credentials Apple Pay constructor.
   const InputPaymentCredentialsApplePay({
     required this.paymentData,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPaymentCredentialsApplePay.deserialize(BinaryReader reader) {
@@ -56168,7 +56175,7 @@ class InputPaymentCredentialsGooglePay extends InputPaymentCredentialsBase {
   /// Input Payment Credentials Google Pay constructor.
   const InputPaymentCredentialsGooglePay({
     required this.paymentToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPaymentCredentialsGooglePay.deserialize(BinaryReader reader) {
@@ -56220,7 +56227,7 @@ class AccountTmpPassword extends AccountTmpPasswordBase {
   const AccountTmpPassword({
     required this.tmpPassword,
     required this.validUntil,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountTmpPassword.deserialize(BinaryReader reader) {
@@ -56282,7 +56289,7 @@ class ShippingOption extends ShippingOptionBase {
     required this.id,
     required this.title,
     required this.prices,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ShippingOption.deserialize(BinaryReader reader) {
@@ -56350,7 +56357,7 @@ class InputStickerSetItem extends InputStickerSetItemBase {
     required this.emoji,
     this.maskCoords,
     this.keywords,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStickerSetItem.deserialize(BinaryReader reader) {
@@ -56378,7 +56385,7 @@ class InputStickerSetItem extends InputStickerSetItemBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: maskCoords != null,
       b01: keywords != null,
     );
@@ -56445,7 +56452,7 @@ class InputPhoneCall extends InputPhoneCallBase {
   const InputPhoneCall({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputPhoneCall.deserialize(BinaryReader reader) {
@@ -56507,7 +56514,7 @@ class PhoneCallEmpty extends PhoneCallBase {
   /// Phone Call Empty constructor.
   const PhoneCallEmpty({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallEmpty.deserialize(BinaryReader reader) {
@@ -56567,7 +56574,7 @@ class PhoneCallWaiting extends PhoneCallBase {
     required this.participantId,
     required this.protocol,
     this.receiveDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallWaiting.deserialize(BinaryReader reader) {
@@ -56601,7 +56608,7 @@ class PhoneCallWaiting extends PhoneCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b06: video,
       b00: receiveDate != null,
     );
@@ -56698,7 +56705,7 @@ class PhoneCallRequested extends PhoneCallBase {
     required this.participantId,
     required this.gAHash,
     required this.protocol,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallRequested.deserialize(BinaryReader reader) {
@@ -56731,7 +56738,7 @@ class PhoneCallRequested extends PhoneCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b06: video,
     );
 
@@ -56824,7 +56831,7 @@ class PhoneCallAccepted extends PhoneCallBase {
     required this.participantId,
     required this.gB,
     required this.protocol,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallAccepted.deserialize(BinaryReader reader) {
@@ -56857,7 +56864,7 @@ class PhoneCallAccepted extends PhoneCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b06: video,
     );
 
@@ -56955,7 +56962,7 @@ class PhoneCall extends PhoneCallBase {
     required this.connections,
     required this.startDate,
     this.customParameters,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCall.deserialize(BinaryReader reader) {
@@ -57000,7 +57007,7 @@ class PhoneCall extends PhoneCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: p2pAllowed,
       b06: video,
       b07: customParameters != null,
@@ -57122,7 +57129,7 @@ class PhoneCallDiscarded extends PhoneCallBase {
     required this.id,
     this.reason,
     this.duration,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallDiscarded.deserialize(BinaryReader reader) {
@@ -57155,7 +57162,7 @@ class PhoneCallDiscarded extends PhoneCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: needRating,
       b03: needDebug,
       b06: video,
@@ -57238,7 +57245,7 @@ class PhoneConnection extends PhoneConnectionBase {
     required this.ipv6,
     required this.port,
     required this.peerTag,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneConnection.deserialize(BinaryReader reader) {
@@ -57267,7 +57274,7 @@ class PhoneConnection extends PhoneConnectionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: tcp,
     );
 
@@ -57346,7 +57353,7 @@ class PhoneConnectionWebrtc extends PhoneConnectionBase {
     required this.port,
     required this.username,
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneConnectionWebrtc.deserialize(BinaryReader reader) {
@@ -57379,7 +57386,7 @@ class PhoneConnectionWebrtc extends PhoneConnectionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: turn,
       b01: stun,
     );
@@ -57465,7 +57472,7 @@ class PhoneCallProtocol extends PhoneCallProtocolBase {
     required this.minLayer,
     required this.maxLayer,
     required this.libraryVersions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCallProtocol.deserialize(BinaryReader reader) {
@@ -57492,7 +57499,7 @@ class PhoneCallProtocol extends PhoneCallProtocolBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: udpP2p,
       b01: udpReflector,
     );
@@ -57560,7 +57567,7 @@ class PhonePhoneCall extends PhonePhoneCallBase {
   const PhonePhoneCall({
     required this.phoneCall,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhonePhoneCall.deserialize(BinaryReader reader) {
@@ -57618,7 +57625,7 @@ class UploadCdnFileReuploadNeeded extends UploadCdnFileBase {
   /// Upload Cdn File Reupload Needed constructor.
   const UploadCdnFileReuploadNeeded({
     required this.requestToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadCdnFileReuploadNeeded.deserialize(BinaryReader reader) {
@@ -57669,7 +57676,7 @@ class UploadCdnFile extends UploadCdnFileBase {
   /// Upload Cdn File constructor.
   const UploadCdnFile({
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadCdnFile.deserialize(BinaryReader reader) {
@@ -57721,7 +57728,7 @@ class CdnPublicKey extends CdnPublicKeyBase {
   const CdnPublicKey({
     required this.dcId,
     required this.publicKey,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory CdnPublicKey.deserialize(BinaryReader reader) {
@@ -57781,7 +57788,7 @@ class CdnConfig extends CdnConfigBase {
   /// Cdn Config constructor.
   const CdnConfig({
     required this.publicKeys,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory CdnConfig.deserialize(BinaryReader reader) {
@@ -57833,7 +57840,7 @@ class LangPackString extends LangPackStringBase {
   const LangPackString({
     required this.key,
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangPackString.deserialize(BinaryReader reader) {
@@ -57897,7 +57904,7 @@ class LangPackStringPluralized extends LangPackStringBase {
     this.fewValue,
     this.manyValue,
     required this.otherValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangPackStringPluralized.deserialize(BinaryReader reader) {
@@ -57933,7 +57940,7 @@ class LangPackStringPluralized extends LangPackStringBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: zeroValue != null,
       b01: oneValue != null,
       b02: twoValue != null,
@@ -58026,7 +58033,7 @@ class LangPackStringDeleted extends LangPackStringBase {
   /// Lang Pack String Deleted constructor.
   const LangPackStringDeleted({
     required this.key,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangPackStringDeleted.deserialize(BinaryReader reader) {
@@ -58080,7 +58087,7 @@ class LangPackDifference extends LangPackDifferenceBase {
     required this.fromVersion,
     required this.version,
     required this.strings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangPackDifference.deserialize(BinaryReader reader) {
@@ -58166,7 +58173,7 @@ class LangPackLanguage extends LangPackLanguageBase {
     required this.stringsCount,
     required this.translatedCount,
     required this.translationsUrl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangPackLanguage.deserialize(BinaryReader reader) {
@@ -58206,7 +58213,7 @@ class LangPackLanguage extends LangPackLanguageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: official,
       b02: rtl,
       b03: beta,
@@ -58309,7 +58316,7 @@ class ChannelAdminLogEventActionChangeTitle
   const ChannelAdminLogEventActionChangeTitle({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeTitle.deserialize(
@@ -58370,7 +58377,7 @@ class ChannelAdminLogEventActionChangeAbout
   const ChannelAdminLogEventActionChangeAbout({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeAbout.deserialize(
@@ -58431,7 +58438,7 @@ class ChannelAdminLogEventActionChangeUsername
   const ChannelAdminLogEventActionChangeUsername({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeUsername.deserialize(
@@ -58492,7 +58499,7 @@ class ChannelAdminLogEventActionChangePhoto
   const ChannelAdminLogEventActionChangePhoto({
     required this.prevPhoto,
     required this.newPhoto,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangePhoto.deserialize(
@@ -58552,7 +58559,7 @@ class ChannelAdminLogEventActionToggleInvites
   /// Channel Admin Log Event Action Toggle Invites constructor.
   const ChannelAdminLogEventActionToggleInvites({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleInvites.deserialize(
@@ -58605,7 +58612,7 @@ class ChannelAdminLogEventActionToggleSignatures
   /// Channel Admin Log Event Action Toggle Signatures constructor.
   const ChannelAdminLogEventActionToggleSignatures({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleSignatures.deserialize(
@@ -58658,7 +58665,7 @@ class ChannelAdminLogEventActionUpdatePinned
   /// Channel Admin Log Event Action Update Pinned constructor.
   const ChannelAdminLogEventActionUpdatePinned({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionUpdatePinned.deserialize(
@@ -58712,7 +58719,7 @@ class ChannelAdminLogEventActionEditMessage
   const ChannelAdminLogEventActionEditMessage({
     required this.prevMessage,
     required this.newMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionEditMessage.deserialize(
@@ -58772,7 +58779,7 @@ class ChannelAdminLogEventActionDeleteMessage
   /// Channel Admin Log Event Action Delete Message constructor.
   const ChannelAdminLogEventActionDeleteMessage({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionDeleteMessage.deserialize(
@@ -58823,7 +58830,7 @@ class ChannelAdminLogEventActionDeleteMessage
 class ChannelAdminLogEventActionParticipantJoin
     extends ChannelAdminLogEventActionBase {
   /// Channel Admin Log Event Action Participant Join constructor.
-  const ChannelAdminLogEventActionParticipantJoin() : super._();
+  const ChannelAdminLogEventActionParticipantJoin() ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantJoin.deserialize(
@@ -58862,7 +58869,7 @@ class ChannelAdminLogEventActionParticipantJoin
 class ChannelAdminLogEventActionParticipantLeave
     extends ChannelAdminLogEventActionBase {
   /// Channel Admin Log Event Action Participant Leave constructor.
-  const ChannelAdminLogEventActionParticipantLeave() : super._();
+  const ChannelAdminLogEventActionParticipantLeave() ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantLeave.deserialize(
@@ -58903,7 +58910,7 @@ class ChannelAdminLogEventActionParticipantInvite
   /// Channel Admin Log Event Action Participant Invite constructor.
   const ChannelAdminLogEventActionParticipantInvite({
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantInvite.deserialize(
@@ -58957,7 +58964,7 @@ class ChannelAdminLogEventActionParticipantToggleBan
   const ChannelAdminLogEventActionParticipantToggleBan({
     required this.prevParticipant,
     required this.newParticipant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantToggleBan.deserialize(
@@ -59018,7 +59025,7 @@ class ChannelAdminLogEventActionParticipantToggleAdmin
   const ChannelAdminLogEventActionParticipantToggleAdmin({
     required this.prevParticipant,
     required this.newParticipant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantToggleAdmin.deserialize(
@@ -59079,7 +59086,7 @@ class ChannelAdminLogEventActionChangeStickerSet
   const ChannelAdminLogEventActionChangeStickerSet({
     required this.prevStickerset,
     required this.newStickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeStickerSet.deserialize(
@@ -59139,7 +59146,7 @@ class ChannelAdminLogEventActionTogglePreHistoryHidden
   /// Channel Admin Log Event Action Toggle Pre History Hidden constructor.
   const ChannelAdminLogEventActionTogglePreHistoryHidden({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionTogglePreHistoryHidden.deserialize(
@@ -59193,7 +59200,7 @@ class ChannelAdminLogEventActionDefaultBannedRights
   const ChannelAdminLogEventActionDefaultBannedRights({
     required this.prevBannedRights,
     required this.newBannedRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionDefaultBannedRights.deserialize(
@@ -59253,7 +59260,7 @@ class ChannelAdminLogEventActionStopPoll
   /// Channel Admin Log Event Action Stop Poll constructor.
   const ChannelAdminLogEventActionStopPoll({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionStopPoll.deserialize(BinaryReader reader) {
@@ -59306,7 +59313,7 @@ class ChannelAdminLogEventActionChangeLinkedChat
   const ChannelAdminLogEventActionChangeLinkedChat({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeLinkedChat.deserialize(
@@ -59371,7 +59378,7 @@ class ChannelAdminLogEventActionChangeLocation
   const ChannelAdminLogEventActionChangeLocation({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeLocation.deserialize(
@@ -59432,7 +59439,7 @@ class ChannelAdminLogEventActionToggleSlowMode
   const ChannelAdminLogEventActionToggleSlowMode({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleSlowMode.deserialize(
@@ -59496,7 +59503,7 @@ class ChannelAdminLogEventActionStartGroupCall
   /// Channel Admin Log Event Action Start Group Call constructor.
   const ChannelAdminLogEventActionStartGroupCall({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionStartGroupCall.deserialize(
@@ -59549,7 +59556,7 @@ class ChannelAdminLogEventActionDiscardGroupCall
   /// Channel Admin Log Event Action Discard Group Call constructor.
   const ChannelAdminLogEventActionDiscardGroupCall({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionDiscardGroupCall.deserialize(
@@ -59602,7 +59609,7 @@ class ChannelAdminLogEventActionParticipantMute
   /// Channel Admin Log Event Action Participant Mute constructor.
   const ChannelAdminLogEventActionParticipantMute({
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantMute.deserialize(
@@ -59655,7 +59662,7 @@ class ChannelAdminLogEventActionParticipantUnmute
   /// Channel Admin Log Event Action Participant Unmute constructor.
   const ChannelAdminLogEventActionParticipantUnmute({
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantUnmute.deserialize(
@@ -59708,7 +59715,7 @@ class ChannelAdminLogEventActionToggleGroupCallSetting
   /// Channel Admin Log Event Action Toggle Group Call Setting constructor.
   const ChannelAdminLogEventActionToggleGroupCallSetting({
     required this.joinMuted,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleGroupCallSetting.deserialize(
@@ -59762,7 +59769,7 @@ class ChannelAdminLogEventActionParticipantJoinByInvite
   const ChannelAdminLogEventActionParticipantJoinByInvite({
     required this.viaChatlist,
     required this.invite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantJoinByInvite.deserialize(
@@ -59784,7 +59791,7 @@ class ChannelAdminLogEventActionParticipantJoinByInvite
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: viaChatlist,
     );
 
@@ -59833,7 +59840,7 @@ class ChannelAdminLogEventActionExportedInviteDelete
   /// Channel Admin Log Event Action Exported Invite Delete constructor.
   const ChannelAdminLogEventActionExportedInviteDelete({
     required this.invite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionExportedInviteDelete.deserialize(
@@ -59886,7 +59893,7 @@ class ChannelAdminLogEventActionExportedInviteRevoke
   /// Channel Admin Log Event Action Exported Invite Revoke constructor.
   const ChannelAdminLogEventActionExportedInviteRevoke({
     required this.invite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionExportedInviteRevoke.deserialize(
@@ -59940,7 +59947,7 @@ class ChannelAdminLogEventActionExportedInviteEdit
   const ChannelAdminLogEventActionExportedInviteEdit({
     required this.prevInvite,
     required this.newInvite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionExportedInviteEdit.deserialize(
@@ -60000,7 +60007,7 @@ class ChannelAdminLogEventActionParticipantVolume
   /// Channel Admin Log Event Action Participant Volume constructor.
   const ChannelAdminLogEventActionParticipantVolume({
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantVolume.deserialize(
@@ -60054,7 +60061,7 @@ class ChannelAdminLogEventActionChangeHistoryTTL
   const ChannelAdminLogEventActionChangeHistoryTTL({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeHistoryTTL.deserialize(
@@ -60119,7 +60126,7 @@ class ChannelAdminLogEventActionParticipantJoinByRequest
   const ChannelAdminLogEventActionParticipantJoinByRequest({
     required this.invite,
     required this.approvedBy,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantJoinByRequest.deserialize(
@@ -60181,7 +60188,7 @@ class ChannelAdminLogEventActionToggleNoForwards
   /// Channel Admin Log Event Action Toggle No Forwards constructor.
   const ChannelAdminLogEventActionToggleNoForwards({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleNoForwards.deserialize(
@@ -60234,7 +60241,7 @@ class ChannelAdminLogEventActionSendMessage
   /// Channel Admin Log Event Action Send Message constructor.
   const ChannelAdminLogEventActionSendMessage({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionSendMessage.deserialize(
@@ -60288,7 +60295,7 @@ class ChannelAdminLogEventActionChangeAvailableReactions
   const ChannelAdminLogEventActionChangeAvailableReactions({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeAvailableReactions.deserialize(
@@ -60349,7 +60356,7 @@ class ChannelAdminLogEventActionChangeUsernames
   const ChannelAdminLogEventActionChangeUsernames({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeUsernames.deserialize(
@@ -60409,7 +60416,7 @@ class ChannelAdminLogEventActionToggleForum
   /// Channel Admin Log Event Action Toggle Forum constructor.
   const ChannelAdminLogEventActionToggleForum({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleForum.deserialize(
@@ -60462,7 +60469,7 @@ class ChannelAdminLogEventActionCreateTopic
   /// Channel Admin Log Event Action Create Topic constructor.
   const ChannelAdminLogEventActionCreateTopic({
     required this.topic,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionCreateTopic.deserialize(
@@ -60516,7 +60523,7 @@ class ChannelAdminLogEventActionEditTopic
   const ChannelAdminLogEventActionEditTopic({
     required this.prevTopic,
     required this.newTopic,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionEditTopic.deserialize(BinaryReader reader) {
@@ -60575,7 +60582,7 @@ class ChannelAdminLogEventActionDeleteTopic
   /// Channel Admin Log Event Action Delete Topic constructor.
   const ChannelAdminLogEventActionDeleteTopic({
     required this.topic,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionDeleteTopic.deserialize(
@@ -60629,7 +60636,7 @@ class ChannelAdminLogEventActionPinTopic
   const ChannelAdminLogEventActionPinTopic({
     this.prevTopic,
     this.newTopic,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionPinTopic.deserialize(BinaryReader reader) {
@@ -60654,7 +60661,7 @@ class ChannelAdminLogEventActionPinTopic
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: prevTopic != null,
       b01: newTopic != null,
     );
@@ -60711,7 +60718,7 @@ class ChannelAdminLogEventActionToggleAntiSpam
   /// Channel Admin Log Event Action Toggle Anti Spam constructor.
   const ChannelAdminLogEventActionToggleAntiSpam({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleAntiSpam.deserialize(
@@ -60765,7 +60772,7 @@ class ChannelAdminLogEventActionChangePeerColor
   const ChannelAdminLogEventActionChangePeerColor({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangePeerColor.deserialize(
@@ -60826,7 +60833,7 @@ class ChannelAdminLogEventActionChangeProfilePeerColor
   const ChannelAdminLogEventActionChangeProfilePeerColor({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeProfilePeerColor.deserialize(
@@ -60887,7 +60894,7 @@ class ChannelAdminLogEventActionChangeWallpaper
   const ChannelAdminLogEventActionChangeWallpaper({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeWallpaper.deserialize(
@@ -60948,7 +60955,7 @@ class ChannelAdminLogEventActionChangeEmojiStatus
   const ChannelAdminLogEventActionChangeEmojiStatus({
     required this.prevValue,
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeEmojiStatus.deserialize(
@@ -61009,7 +61016,7 @@ class ChannelAdminLogEventActionChangeEmojiStickerSet
   const ChannelAdminLogEventActionChangeEmojiStickerSet({
     required this.prevStickerset,
     required this.newStickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionChangeEmojiStickerSet.deserialize(
@@ -61069,7 +61076,7 @@ class ChannelAdminLogEventActionToggleSignatureProfiles
   /// Channel Admin Log Event Action Toggle Signature Profiles constructor.
   const ChannelAdminLogEventActionToggleSignatureProfiles({
     required this.newValue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionToggleSignatureProfiles.deserialize(
@@ -61123,7 +61130,7 @@ class ChannelAdminLogEventActionParticipantSubExtend
   const ChannelAdminLogEventActionParticipantSubExtend({
     required this.prevParticipant,
     required this.newParticipant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventActionParticipantSubExtend.deserialize(
@@ -61185,7 +61192,7 @@ class ChannelAdminLogEvent extends ChannelAdminLogEventBase {
     required this.date,
     required this.userId,
     required this.action,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEvent.deserialize(BinaryReader reader) {
@@ -61263,7 +61270,7 @@ class ChannelsAdminLogResults extends ChannelsAdminLogResultsBase {
     required this.events,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsAdminLogResults.deserialize(BinaryReader reader) {
@@ -61346,7 +61353,7 @@ class ChannelAdminLogEventsFilter extends ChannelAdminLogEventsFilterBase {
     required this.send,
     required this.forums,
     required this.subExtend,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelAdminLogEventsFilter.deserialize(BinaryReader reader) {
@@ -61401,7 +61408,7 @@ class ChannelAdminLogEventsFilter extends ChannelAdminLogEventsFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: join,
       b01: leave,
       b02: invite,
@@ -61535,7 +61542,7 @@ class PopularContact extends PopularContactBase {
   const PopularContact({
     required this.clientId,
     required this.importers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PopularContact.deserialize(BinaryReader reader) {
@@ -61595,7 +61602,7 @@ class PopularContact extends PopularContactBase {
 /// ID: `9e8fa6d3`.
 class MessagesFavedStickersNotModified extends MessagesFavedStickersBase {
   /// Messages Faved Stickers Not Modified constructor.
-  const MessagesFavedStickersNotModified() : super._();
+  const MessagesFavedStickersNotModified() ;
 
   /// Deserialize.
   factory MessagesFavedStickersNotModified.deserialize(BinaryReader reader) {
@@ -61636,7 +61643,7 @@ class MessagesFavedStickers extends MessagesFavedStickersBase {
     required this.hash,
     required this.packs,
     required this.stickers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFavedStickers.deserialize(BinaryReader reader) {
@@ -61703,7 +61710,7 @@ class RecentMeUrlUnknown extends RecentMeUrlBase {
   /// Recent Me Url Unknown constructor.
   const RecentMeUrlUnknown({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RecentMeUrlUnknown.deserialize(BinaryReader reader) {
@@ -61755,7 +61762,7 @@ class RecentMeUrlUser extends RecentMeUrlBase {
   const RecentMeUrlUser({
     required this.url,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RecentMeUrlUser.deserialize(BinaryReader reader) {
@@ -61816,7 +61823,7 @@ class RecentMeUrlChat extends RecentMeUrlBase {
   const RecentMeUrlChat({
     required this.url,
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RecentMeUrlChat.deserialize(BinaryReader reader) {
@@ -61877,7 +61884,7 @@ class RecentMeUrlChatInvite extends RecentMeUrlBase {
   const RecentMeUrlChatInvite({
     required this.url,
     required this.chatInvite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RecentMeUrlChatInvite.deserialize(BinaryReader reader) {
@@ -61936,7 +61943,7 @@ class RecentMeUrlStickerSet extends RecentMeUrlBase {
   const RecentMeUrlStickerSet({
     required this.url,
     required this.set,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RecentMeUrlStickerSet.deserialize(BinaryReader reader) {
@@ -61996,7 +62003,7 @@ class HelpRecentMeUrls extends HelpRecentMeUrlsBase {
     required this.urls,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpRecentMeUrls.deserialize(BinaryReader reader) {
@@ -62064,7 +62071,7 @@ class InputSingleMedia extends InputSingleMediaBase {
     required this.randomId,
     required this.message,
     this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputSingleMedia.deserialize(BinaryReader reader) {
@@ -62091,7 +62098,7 @@ class InputSingleMedia extends InputSingleMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: entities != null,
     );
 
@@ -62163,7 +62170,7 @@ class WebAuthorization extends WebAuthorizationBase {
     required this.dateActive,
     required this.ip,
     required this.region,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebAuthorization.deserialize(BinaryReader reader) {
@@ -62275,7 +62282,7 @@ class AccountWebAuthorizations extends AccountWebAuthorizationsBase {
   const AccountWebAuthorizations({
     required this.authorizations,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountWebAuthorizations.deserialize(BinaryReader reader) {
@@ -62333,7 +62340,7 @@ class InputMessageID extends InputMessageBase {
   /// Input Message I D constructor.
   const InputMessageID({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMessageID.deserialize(BinaryReader reader) {
@@ -62386,7 +62393,7 @@ class InputMessageReplyTo extends InputMessageBase {
   /// Input Message Reply To constructor.
   const InputMessageReplyTo({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMessageReplyTo.deserialize(BinaryReader reader) {
@@ -62437,7 +62444,7 @@ class InputMessageReplyTo extends InputMessageBase {
 /// ID: `86872538`.
 class InputMessagePinned extends InputMessageBase {
   /// Input Message Pinned constructor.
-  const InputMessagePinned() : super._();
+  const InputMessagePinned() ;
 
   /// Deserialize.
   factory InputMessagePinned.deserialize(BinaryReader reader) {
@@ -62477,7 +62484,7 @@ class InputMessageCallbackQuery extends InputMessageBase {
   const InputMessageCallbackQuery({
     required this.id,
     required this.queryId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMessageCallbackQuery.deserialize(BinaryReader reader) {
@@ -62539,7 +62546,7 @@ class InputDialogPeer extends InputDialogPeerBase {
   /// Input Dialog Peer constructor.
   const InputDialogPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputDialogPeer.deserialize(BinaryReader reader) {
@@ -62590,7 +62597,7 @@ class InputDialogPeerFolder extends InputDialogPeerBase {
   /// Input Dialog Peer Folder constructor.
   const InputDialogPeerFolder({
     required this.folderId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputDialogPeerFolder.deserialize(BinaryReader reader) {
@@ -62643,7 +62650,7 @@ class DialogPeer extends DialogPeerBase {
   /// Dialog Peer constructor.
   const DialogPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogPeer.deserialize(BinaryReader reader) {
@@ -62694,7 +62701,7 @@ class DialogPeerFolder extends DialogPeerBase {
   /// Dialog Peer Folder constructor.
   const DialogPeerFolder({
     required this.folderId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogPeerFolder.deserialize(BinaryReader reader) {
@@ -62745,7 +62752,7 @@ class DialogPeerFolder extends DialogPeerBase {
 /// ID: `0d54b65d`.
 class MessagesFoundStickerSetsNotModified extends MessagesFoundStickerSetsBase {
   /// Messages Found Sticker Sets Not Modified constructor.
-  const MessagesFoundStickerSetsNotModified() : super._();
+  const MessagesFoundStickerSetsNotModified() ;
 
   /// Deserialize.
   factory MessagesFoundStickerSetsNotModified.deserialize(BinaryReader reader) {
@@ -62785,7 +62792,7 @@ class MessagesFoundStickerSets extends MessagesFoundStickerSetsBase {
   const MessagesFoundStickerSets({
     required this.hash,
     required this.sets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFoundStickerSets.deserialize(BinaryReader reader) {
@@ -62847,7 +62854,7 @@ class FileHash extends FileHashBase {
     required this.offset,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FileHash.deserialize(BinaryReader reader) {
@@ -62917,7 +62924,7 @@ class InputClientProxy extends InputClientProxyBase {
   const InputClientProxy({
     required this.address,
     required this.port,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputClientProxy.deserialize(BinaryReader reader) {
@@ -62977,7 +62984,7 @@ class HelpTermsOfServiceUpdateEmpty extends HelpTermsOfServiceUpdateBase {
   /// Help Terms Of Service Update Empty constructor.
   const HelpTermsOfServiceUpdateEmpty({
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpTermsOfServiceUpdateEmpty.deserialize(BinaryReader reader) {
@@ -63029,7 +63036,7 @@ class HelpTermsOfServiceUpdate extends HelpTermsOfServiceUpdateBase {
   const HelpTermsOfServiceUpdate({
     required this.expires,
     required this.termsOfService,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpTermsOfServiceUpdate.deserialize(BinaryReader reader) {
@@ -63091,7 +63098,7 @@ class InputSecureFileUploaded extends InputSecureFileBase {
     required this.md5Checksum,
     required this.fileHash,
     required this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputSecureFileUploaded.deserialize(BinaryReader reader) {
@@ -63175,7 +63182,7 @@ class InputSecureFile extends InputSecureFileBase {
   const InputSecureFile({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputSecureFile.deserialize(BinaryReader reader) {
@@ -63235,7 +63242,7 @@ class InputSecureFile extends InputSecureFileBase {
 /// ID: `64199744`.
 class SecureFileEmpty extends SecureFileBase {
   /// Secure File Empty constructor.
-  const SecureFileEmpty() : super._();
+  const SecureFileEmpty() ;
 
   /// Deserialize.
   factory SecureFileEmpty.deserialize(BinaryReader reader) {
@@ -63280,7 +63287,7 @@ class SecureFile extends SecureFileBase {
     required this.date,
     required this.fileHash,
     required this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureFile.deserialize(BinaryReader reader) {
@@ -63383,7 +63390,7 @@ class SecureData extends SecureDataBase {
     required this.data,
     required this.dataHash,
     required this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureData.deserialize(BinaryReader reader) {
@@ -63448,7 +63455,7 @@ class SecurePlainPhone extends SecurePlainDataBase {
   /// Secure Plain Phone constructor.
   const SecurePlainPhone({
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecurePlainPhone.deserialize(BinaryReader reader) {
@@ -63499,7 +63506,7 @@ class SecurePlainEmail extends SecurePlainDataBase {
   /// Secure Plain Email constructor.
   const SecurePlainEmail({
     required this.email,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecurePlainEmail.deserialize(BinaryReader reader) {
@@ -63548,7 +63555,7 @@ class SecurePlainEmail extends SecurePlainDataBase {
 /// ID: `9d2a81e3`.
 class SecureValueTypePersonalDetails extends SecureValueTypeBase {
   /// Secure Value Type Personal Details constructor.
-  const SecureValueTypePersonalDetails() : super._();
+  const SecureValueTypePersonalDetails() ;
 
   /// Deserialize.
   factory SecureValueTypePersonalDetails.deserialize(BinaryReader reader) {
@@ -63585,7 +63592,7 @@ class SecureValueTypePersonalDetails extends SecureValueTypeBase {
 /// ID: `3dac6a00`.
 class SecureValueTypePassport extends SecureValueTypeBase {
   /// Secure Value Type Passport constructor.
-  const SecureValueTypePassport() : super._();
+  const SecureValueTypePassport() ;
 
   /// Deserialize.
   factory SecureValueTypePassport.deserialize(BinaryReader reader) {
@@ -63622,7 +63629,7 @@ class SecureValueTypePassport extends SecureValueTypeBase {
 /// ID: `06e425c4`.
 class SecureValueTypeDriverLicense extends SecureValueTypeBase {
   /// Secure Value Type Driver License constructor.
-  const SecureValueTypeDriverLicense() : super._();
+  const SecureValueTypeDriverLicense() ;
 
   /// Deserialize.
   factory SecureValueTypeDriverLicense.deserialize(BinaryReader reader) {
@@ -63659,7 +63666,7 @@ class SecureValueTypeDriverLicense extends SecureValueTypeBase {
 /// ID: `a0d0744b`.
 class SecureValueTypeIdentityCard extends SecureValueTypeBase {
   /// Secure Value Type Identity Card constructor.
-  const SecureValueTypeIdentityCard() : super._();
+  const SecureValueTypeIdentityCard() ;
 
   /// Deserialize.
   factory SecureValueTypeIdentityCard.deserialize(BinaryReader reader) {
@@ -63696,7 +63703,7 @@ class SecureValueTypeIdentityCard extends SecureValueTypeBase {
 /// ID: `99a48f23`.
 class SecureValueTypeInternalPassport extends SecureValueTypeBase {
   /// Secure Value Type Internal Passport constructor.
-  const SecureValueTypeInternalPassport() : super._();
+  const SecureValueTypeInternalPassport() ;
 
   /// Deserialize.
   factory SecureValueTypeInternalPassport.deserialize(BinaryReader reader) {
@@ -63733,7 +63740,7 @@ class SecureValueTypeInternalPassport extends SecureValueTypeBase {
 /// ID: `cbe31e26`.
 class SecureValueTypeAddress extends SecureValueTypeBase {
   /// Secure Value Type Address constructor.
-  const SecureValueTypeAddress() : super._();
+  const SecureValueTypeAddress() ;
 
   /// Deserialize.
   factory SecureValueTypeAddress.deserialize(BinaryReader reader) {
@@ -63770,7 +63777,7 @@ class SecureValueTypeAddress extends SecureValueTypeBase {
 /// ID: `fc36954e`.
 class SecureValueTypeUtilityBill extends SecureValueTypeBase {
   /// Secure Value Type Utility Bill constructor.
-  const SecureValueTypeUtilityBill() : super._();
+  const SecureValueTypeUtilityBill() ;
 
   /// Deserialize.
   factory SecureValueTypeUtilityBill.deserialize(BinaryReader reader) {
@@ -63807,7 +63814,7 @@ class SecureValueTypeUtilityBill extends SecureValueTypeBase {
 /// ID: `89137c0d`.
 class SecureValueTypeBankStatement extends SecureValueTypeBase {
   /// Secure Value Type Bank Statement constructor.
-  const SecureValueTypeBankStatement() : super._();
+  const SecureValueTypeBankStatement() ;
 
   /// Deserialize.
   factory SecureValueTypeBankStatement.deserialize(BinaryReader reader) {
@@ -63844,7 +63851,7 @@ class SecureValueTypeBankStatement extends SecureValueTypeBase {
 /// ID: `8b883488`.
 class SecureValueTypeRentalAgreement extends SecureValueTypeBase {
   /// Secure Value Type Rental Agreement constructor.
-  const SecureValueTypeRentalAgreement() : super._();
+  const SecureValueTypeRentalAgreement() ;
 
   /// Deserialize.
   factory SecureValueTypeRentalAgreement.deserialize(BinaryReader reader) {
@@ -63881,7 +63888,7 @@ class SecureValueTypeRentalAgreement extends SecureValueTypeBase {
 /// ID: `99e3806a`.
 class SecureValueTypePassportRegistration extends SecureValueTypeBase {
   /// Secure Value Type Passport Registration constructor.
-  const SecureValueTypePassportRegistration() : super._();
+  const SecureValueTypePassportRegistration() ;
 
   /// Deserialize.
   factory SecureValueTypePassportRegistration.deserialize(BinaryReader reader) {
@@ -63918,7 +63925,7 @@ class SecureValueTypePassportRegistration extends SecureValueTypeBase {
 /// ID: `ea02ec33`.
 class SecureValueTypeTemporaryRegistration extends SecureValueTypeBase {
   /// Secure Value Type Temporary Registration constructor.
-  const SecureValueTypeTemporaryRegistration() : super._();
+  const SecureValueTypeTemporaryRegistration() ;
 
   /// Deserialize.
   factory SecureValueTypeTemporaryRegistration.deserialize(
@@ -63956,7 +63963,7 @@ class SecureValueTypeTemporaryRegistration extends SecureValueTypeBase {
 /// ID: `b320aadb`.
 class SecureValueTypePhone extends SecureValueTypeBase {
   /// Secure Value Type Phone constructor.
-  const SecureValueTypePhone() : super._();
+  const SecureValueTypePhone() ;
 
   /// Deserialize.
   factory SecureValueTypePhone.deserialize(BinaryReader reader) {
@@ -63993,7 +64000,7 @@ class SecureValueTypePhone extends SecureValueTypeBase {
 /// ID: `8e3ca7ee`.
 class SecureValueTypeEmail extends SecureValueTypeBase {
   /// Secure Value Type Email constructor.
-  const SecureValueTypeEmail() : super._();
+  const SecureValueTypeEmail() ;
 
   /// Deserialize.
   factory SecureValueTypeEmail.deserialize(BinaryReader reader) {
@@ -64040,7 +64047,7 @@ class SecureValue extends SecureValueBase {
     this.files,
     this.plainData,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValue.deserialize(BinaryReader reader) {
@@ -64088,7 +64095,7 @@ class SecureValue extends SecureValueBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: data != null,
       b01: frontSide != null,
       b02: reverseSide != null,
@@ -64206,7 +64213,7 @@ class InputSecureValue extends InputSecureValueBase {
     this.translation,
     this.files,
     this.plainData,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputSecureValue.deserialize(BinaryReader reader) {
@@ -64253,7 +64260,7 @@ class InputSecureValue extends InputSecureValueBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: data != null,
       b01: frontSide != null,
       b02: reverseSide != null,
@@ -64360,7 +64367,7 @@ class SecureValueHash extends SecureValueHashBase {
   const SecureValueHash({
     required this.type,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueHash.deserialize(BinaryReader reader) {
@@ -64421,7 +64428,7 @@ class SecureValueErrorData extends SecureValueErrorBase {
     required this.dataHash,
     required this.field,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorData.deserialize(BinaryReader reader) {
@@ -64495,7 +64502,7 @@ class SecureValueErrorFrontSide extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorFrontSide.deserialize(BinaryReader reader) {
@@ -64562,7 +64569,7 @@ class SecureValueErrorReverseSide extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorReverseSide.deserialize(BinaryReader reader) {
@@ -64629,7 +64636,7 @@ class SecureValueErrorSelfie extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorSelfie.deserialize(BinaryReader reader) {
@@ -64696,7 +64703,7 @@ class SecureValueErrorFile extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorFile.deserialize(BinaryReader reader) {
@@ -64763,7 +64770,7 @@ class SecureValueErrorFiles extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorFiles.deserialize(BinaryReader reader) {
@@ -64830,7 +64837,7 @@ class SecureValueError extends SecureValueErrorBase {
     required this.type,
     required this.hash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueError.deserialize(BinaryReader reader) {
@@ -64897,7 +64904,7 @@ class SecureValueErrorTranslationFile extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorTranslationFile.deserialize(BinaryReader reader) {
@@ -64964,7 +64971,7 @@ class SecureValueErrorTranslationFiles extends SecureValueErrorBase {
     required this.type,
     required this.fileHash,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureValueErrorTranslationFiles.deserialize(BinaryReader reader) {
@@ -65031,7 +65038,7 @@ class SecureCredentialsEncrypted extends SecureCredentialsEncryptedBase {
     required this.data,
     required this.hash,
     required this.secret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureCredentialsEncrypted.deserialize(BinaryReader reader) {
@@ -65100,7 +65107,7 @@ class AccountAuthorizationForm extends AccountAuthorizationFormBase {
     required this.errors,
     required this.users,
     this.privacyPolicyUrl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountAuthorizationForm.deserialize(BinaryReader reader) {
@@ -65129,7 +65136,7 @@ class AccountAuthorizationForm extends AccountAuthorizationFormBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: privacyPolicyUrl != null,
     );
 
@@ -65197,7 +65204,7 @@ class AccountSentEmailCode extends AccountSentEmailCodeBase {
   const AccountSentEmailCode({
     required this.emailPattern,
     required this.length,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSentEmailCode.deserialize(BinaryReader reader) {
@@ -65255,7 +65262,7 @@ class AccountSentEmailCode extends AccountSentEmailCodeBase {
 /// ID: `66afa166`.
 class HelpDeepLinkInfoEmpty extends HelpDeepLinkInfoBase {
   /// Help Deep Link Info Empty constructor.
-  const HelpDeepLinkInfoEmpty() : super._();
+  const HelpDeepLinkInfoEmpty() ;
 
   /// Deserialize.
   factory HelpDeepLinkInfoEmpty.deserialize(BinaryReader reader) {
@@ -65296,7 +65303,7 @@ class HelpDeepLinkInfo extends HelpDeepLinkInfoBase {
     required this.updateApp,
     required this.message,
     this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpDeepLinkInfo.deserialize(BinaryReader reader) {
@@ -65321,7 +65328,7 @@ class HelpDeepLinkInfo extends HelpDeepLinkInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: updateApp,
       b01: entities != null,
     );
@@ -65381,7 +65388,7 @@ class SavedPhoneContact extends SavedContactBase {
     required this.firstName,
     required this.lastName,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SavedPhoneContact.deserialize(BinaryReader reader) {
@@ -65453,7 +65460,7 @@ class AccountTakeout extends AccountTakeoutBase {
   /// Account Takeout constructor.
   const AccountTakeout({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountTakeout.deserialize(BinaryReader reader) {
@@ -65504,7 +65511,7 @@ class AccountTakeout extends AccountTakeoutBase {
 /// ID: `d45ab096`.
 class PasswordKdfAlgoUnknown extends PasswordKdfAlgoBase {
   /// Password Kdf Algo Unknown constructor.
-  const PasswordKdfAlgoUnknown() : super._();
+  const PasswordKdfAlgoUnknown() ;
 
   /// Deserialize.
   factory PasswordKdfAlgoUnknown.deserialize(BinaryReader reader) {
@@ -65547,7 +65554,7 @@ class PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
     required this.salt2,
     required this.g,
     required this.p,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow.deserialize(
@@ -65622,7 +65629,7 @@ class PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
 /// ID: `004a8537`.
 class SecurePasswordKdfAlgoUnknown extends SecurePasswordKdfAlgoBase {
   /// Secure Password Kdf Algo Unknown constructor.
-  const SecurePasswordKdfAlgoUnknown() : super._();
+  const SecurePasswordKdfAlgoUnknown() ;
 
   /// Deserialize.
   factory SecurePasswordKdfAlgoUnknown.deserialize(BinaryReader reader) {
@@ -65662,7 +65669,7 @@ class SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000
   /// Secure Password Kdf Algo P B K D F2 H M A C S H A512iter100000 constructor.
   const SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000({
     required this.salt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000.deserialize(
@@ -65714,7 +65721,7 @@ class SecurePasswordKdfAlgoSHA512 extends SecurePasswordKdfAlgoBase {
   /// Secure Password Kdf Algo S H A512 constructor.
   const SecurePasswordKdfAlgoSHA512({
     required this.salt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecurePasswordKdfAlgoSHA512.deserialize(BinaryReader reader) {
@@ -65767,7 +65774,7 @@ class SecureSecretSettings extends SecureSecretSettingsBase {
     required this.secureAlgo,
     required this.secureSecret,
     required this.secureSecretId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureSecretSettings.deserialize(BinaryReader reader) {
@@ -65832,7 +65839,7 @@ class SecureSecretSettings extends SecureSecretSettingsBase {
 /// ID: `9880f658`.
 class InputCheckPasswordEmpty extends InputCheckPasswordSRPBase {
   /// Input Check Password Empty constructor.
-  const InputCheckPasswordEmpty() : super._();
+  const InputCheckPasswordEmpty() ;
 
   /// Deserialize.
   factory InputCheckPasswordEmpty.deserialize(BinaryReader reader) {
@@ -65873,7 +65880,7 @@ class InputCheckPasswordSRP extends InputCheckPasswordSRPBase {
     required this.srpId,
     required this.a,
     required this.m1,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputCheckPasswordSRP.deserialize(BinaryReader reader) {
@@ -65943,7 +65950,7 @@ class SecureRequiredType extends SecureRequiredTypeBase {
     required this.selfieRequired,
     required this.translationRequired,
     required this.type,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureRequiredType.deserialize(BinaryReader reader) {
@@ -65968,7 +65975,7 @@ class SecureRequiredType extends SecureRequiredTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nativeNames,
       b01: selfieRequired,
       b02: translationRequired,
@@ -66026,7 +66033,7 @@ class SecureRequiredTypeOneOf extends SecureRequiredTypeBase {
   /// Secure Required Type One Of constructor.
   const SecureRequiredTypeOneOf({
     required this.types,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SecureRequiredTypeOneOf.deserialize(BinaryReader reader) {
@@ -66075,7 +66082,7 @@ class SecureRequiredTypeOneOf extends SecureRequiredTypeBase {
 /// ID: `bfb9f457`.
 class HelpPassportConfigNotModified extends HelpPassportConfigBase {
   /// Help Passport Config Not Modified constructor.
-  const HelpPassportConfigNotModified() : super._();
+  const HelpPassportConfigNotModified() ;
 
   /// Deserialize.
   factory HelpPassportConfigNotModified.deserialize(BinaryReader reader) {
@@ -66115,7 +66122,7 @@ class HelpPassportConfig extends HelpPassportConfigBase {
   const HelpPassportConfig({
     required this.hash,
     required this.countriesLangs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPassportConfig.deserialize(BinaryReader reader) {
@@ -66178,7 +66185,7 @@ class InputAppEvent extends InputAppEventBase {
     required this.type,
     required this.peer,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputAppEvent.deserialize(BinaryReader reader) {
@@ -66253,7 +66260,7 @@ class JsonObjectValue extends JSONObjectValueBase {
   const JsonObjectValue({
     required this.key,
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonObjectValue.deserialize(BinaryReader reader) {
@@ -66309,7 +66316,7 @@ class JsonObjectValue extends JSONObjectValueBase {
 /// ID: `3f6d7b68`.
 class JsonNull extends JSONValueBase {
   /// Json Null constructor.
-  const JsonNull() : super._();
+  const JsonNull() ;
 
   /// Deserialize.
   factory JsonNull.deserialize(BinaryReader reader) {
@@ -66348,7 +66355,7 @@ class JsonBool extends JSONValueBase {
   /// Json Bool constructor.
   const JsonBool({
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonBool.deserialize(BinaryReader reader) {
@@ -66399,7 +66406,7 @@ class JsonNumber extends JSONValueBase {
   /// Json Number constructor.
   const JsonNumber({
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonNumber.deserialize(BinaryReader reader) {
@@ -66450,7 +66457,7 @@ class JsonString extends JSONValueBase {
   /// Json String constructor.
   const JsonString({
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonString.deserialize(BinaryReader reader) {
@@ -66501,7 +66508,7 @@ class JsonArray extends JSONValueBase {
   /// Json Array constructor.
   const JsonArray({
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonArray.deserialize(BinaryReader reader) {
@@ -66552,7 +66559,7 @@ class JsonObject extends JSONValueBase {
   /// Json Object constructor.
   const JsonObject({
     required this.value,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory JsonObject.deserialize(BinaryReader reader) {
@@ -66610,7 +66617,7 @@ class PageTableCell extends PageTableCellBase {
     this.text,
     this.colspan,
     this.rowspan,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageTableCell.deserialize(BinaryReader reader) {
@@ -66646,7 +66653,7 @@ class PageTableCell extends PageTableCellBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: header,
       b03: alignCenter,
       b04: alignRight,
@@ -66736,7 +66743,7 @@ class PageTableRow extends PageTableRowBase {
   /// Page Table Row constructor.
   const PageTableRow({
     required this.cells,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageTableRow.deserialize(BinaryReader reader) {
@@ -66788,7 +66795,7 @@ class PageCaption extends PageCaptionBase {
   const PageCaption({
     required this.text,
     required this.credit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageCaption.deserialize(BinaryReader reader) {
@@ -66846,7 +66853,7 @@ class PageListItemText extends PageListItemBase {
   /// Page List Item Text constructor.
   const PageListItemText({
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageListItemText.deserialize(BinaryReader reader) {
@@ -66897,7 +66904,7 @@ class PageListItemBlocks extends PageListItemBase {
   /// Page List Item Blocks constructor.
   const PageListItemBlocks({
     required this.blocks,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageListItemBlocks.deserialize(BinaryReader reader) {
@@ -66949,7 +66956,7 @@ class PageListOrderedItemText extends PageListOrderedItemBase {
   const PageListOrderedItemText({
     required this.num,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageListOrderedItemText.deserialize(BinaryReader reader) {
@@ -67008,7 +67015,7 @@ class PageListOrderedItemBlocks extends PageListOrderedItemBase {
   const PageListOrderedItemBlocks({
     required this.num,
     required this.blocks,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageListOrderedItemBlocks.deserialize(BinaryReader reader) {
@@ -67072,7 +67079,7 @@ class PageRelatedArticle extends PageRelatedArticleBase {
     this.photoId,
     this.author,
     this.publishedDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PageRelatedArticle.deserialize(BinaryReader reader) {
@@ -67108,7 +67115,7 @@ class PageRelatedArticle extends PageRelatedArticleBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b01: description != null,
       b02: photoId != null,
@@ -67210,7 +67217,7 @@ class Page extends PageBase {
     required this.photos,
     required this.documents,
     this.views,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Page.deserialize(BinaryReader reader) {
@@ -67244,7 +67251,7 @@ class Page extends PageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: part,
       b01: rtl,
       b02: v2,
@@ -67326,7 +67333,7 @@ class HelpSupportName extends HelpSupportNameBase {
   /// Help Support Name constructor.
   const HelpSupportName({
     required this.name,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpSupportName.deserialize(BinaryReader reader) {
@@ -67375,7 +67382,7 @@ class HelpSupportName extends HelpSupportNameBase {
 /// ID: `f3ae2eed`.
 class HelpUserInfoEmpty extends HelpUserInfoBase {
   /// Help User Info Empty constructor.
-  const HelpUserInfoEmpty() : super._();
+  const HelpUserInfoEmpty() ;
 
   /// Deserialize.
   factory HelpUserInfoEmpty.deserialize(BinaryReader reader) {
@@ -67417,7 +67424,7 @@ class HelpUserInfo extends HelpUserInfoBase {
     required this.entities,
     required this.author,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpUserInfo.deserialize(BinaryReader reader) {
@@ -67490,7 +67497,7 @@ class PollAnswer extends PollAnswerBase {
   const PollAnswer({
     required this.text,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PollAnswer.deserialize(BinaryReader reader) {
@@ -67556,7 +67563,7 @@ class Poll extends PollBase {
     required this.answers,
     this.closePeriod,
     this.closeDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Poll.deserialize(BinaryReader reader) {
@@ -67593,7 +67600,7 @@ class Poll extends PollBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: closed,
       b01: publicVoters,
       b02: multipleChoice,
@@ -67689,7 +67696,7 @@ class PollAnswerVoters extends PollAnswerVotersBase {
     required this.correct,
     required this.option,
     required this.voters,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PollAnswerVoters.deserialize(BinaryReader reader) {
@@ -67714,7 +67721,7 @@ class PollAnswerVoters extends PollAnswerVotersBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: chosen,
       b01: correct,
     );
@@ -67779,7 +67786,7 @@ class PollResults extends PollResultsBase {
     this.recentVoters,
     this.solution,
     this.solutionEntities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PollResults.deserialize(BinaryReader reader) {
@@ -67818,7 +67825,7 @@ class PollResults extends PollResultsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: min,
       b01: results != null,
       b02: totalVoters != null,
@@ -67905,7 +67912,7 @@ class ChatOnlines extends ChatOnlinesBase {
   /// Chat Onlines constructor.
   const ChatOnlines({
     required this.onlines,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatOnlines.deserialize(BinaryReader reader) {
@@ -67958,7 +67965,7 @@ class StatsURL extends StatsURLBase {
   /// Stats U R L constructor.
   const StatsURL({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsURL.deserialize(BinaryReader reader) {
@@ -68023,7 +68030,7 @@ class ChatAdminRights extends ChatAdminRightsBase {
     required this.postStories,
     required this.editStories,
     required this.deleteStories,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatAdminRights.deserialize(BinaryReader reader) {
@@ -68070,7 +68077,7 @@ class ChatAdminRights extends ChatAdminRightsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: changeInfo,
       b01: postMessages,
       b02: editMessages,
@@ -68124,7 +68131,7 @@ class ChatAdminRights extends ChatAdminRightsBase {
   /// other: bit 12 of flags.12?true
   final bool other;
 
-  /// manage_topics: bit 13 of flags.13?true
+  /// managetopics: bit 13 of flags.13?true
   final bool manageTopics;
 
   /// post_stories: bit 14 of flags.14?true
@@ -68203,7 +68210,7 @@ class ChatBannedRights extends ChatBannedRightsBase {
     required this.sendDocs,
     required this.sendPlain,
     required this.untilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatBannedRights.deserialize(BinaryReader reader) {
@@ -68262,7 +68269,7 @@ class ChatBannedRights extends ChatBannedRightsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: viewMessages,
       b01: sendMessages,
       b02: sendMedia,
@@ -68324,7 +68331,7 @@ class ChatBannedRights extends ChatBannedRightsBase {
   /// pin_messages: bit 17 of flags.17?true
   final bool pinMessages;
 
-  /// manage_topics: bit 18 of flags.18?true
+  /// managetopics: bit 18 of flags.18?true
   final bool manageTopics;
 
   /// send_photos: bit 19 of flags.19?true
@@ -68406,7 +68413,7 @@ class InputWallPaper extends InputWallPaperBase {
   const InputWallPaper({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWallPaper.deserialize(BinaryReader reader) {
@@ -68468,7 +68475,7 @@ class InputWallPaperSlug extends InputWallPaperBase {
   /// Input Wall Paper Slug constructor.
   const InputWallPaperSlug({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWallPaperSlug.deserialize(BinaryReader reader) {
@@ -68519,7 +68526,7 @@ class InputWallPaperNoFile extends InputWallPaperBase {
   /// Input Wall Paper No File constructor.
   const InputWallPaperNoFile({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputWallPaperNoFile.deserialize(BinaryReader reader) {
@@ -68570,7 +68577,7 @@ class InputWallPaperNoFile extends InputWallPaperBase {
 /// ID: `1c199183`.
 class AccountWallPapersNotModified extends AccountWallPapersBase {
   /// Account Wall Papers Not Modified constructor.
-  const AccountWallPapersNotModified() : super._();
+  const AccountWallPapersNotModified() ;
 
   /// Deserialize.
   factory AccountWallPapersNotModified.deserialize(BinaryReader reader) {
@@ -68610,7 +68617,7 @@ class AccountWallPapers extends AccountWallPapersBase {
   const AccountWallPapers({
     required this.hash,
     required this.wallpapers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountWallPapers.deserialize(BinaryReader reader) {
@@ -68678,7 +68685,7 @@ class CodeSettings extends CodeSettingsBase {
     this.logoutTokens,
     this.token,
     this.appSandbox,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory CodeSettings.deserialize(BinaryReader reader) {
@@ -68715,7 +68722,7 @@ class CodeSettings extends CodeSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: allowFlashcall,
       b01: currentNumber,
       b04: allowAppHash,
@@ -68817,7 +68824,7 @@ class WallPaperSettings extends WallPaperSettingsBase {
     this.intensity,
     this.rotation,
     this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WallPaperSettings.deserialize(BinaryReader reader) {
@@ -68862,7 +68869,7 @@ class WallPaperSettings extends WallPaperSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: blur,
       b02: motion,
       b00: backgroundColor != null,
@@ -68982,7 +68989,7 @@ class AutoDownloadSettings extends AutoDownloadSettingsBase {
     required this.videoUploadMaxbitrate,
     required this.smallQueueActiveOperationsMax,
     required this.largeQueueActiveOperationsMax,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AutoDownloadSettings.deserialize(BinaryReader reader) {
@@ -69021,7 +69028,7 @@ class AutoDownloadSettings extends AutoDownloadSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: disabled,
       b01: videoPreloadLarge,
       b02: audioPreloadNext,
@@ -69128,7 +69135,7 @@ class AccountAutoDownloadSettings extends AccountAutoDownloadSettingsBase {
     required this.low,
     required this.medium,
     required this.high,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountAutoDownloadSettings.deserialize(BinaryReader reader) {
@@ -69194,7 +69201,7 @@ class EmojiKeyword extends EmojiKeywordBase {
   const EmojiKeyword({
     required this.keyword,
     required this.emoticons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiKeyword.deserialize(BinaryReader reader) {
@@ -69253,7 +69260,7 @@ class EmojiKeywordDeleted extends EmojiKeywordBase {
   const EmojiKeywordDeleted({
     required this.keyword,
     required this.emoticons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiKeywordDeleted.deserialize(BinaryReader reader) {
@@ -69314,7 +69321,7 @@ class EmojiKeywordsDifference extends EmojiKeywordsDifferenceBase {
     required this.fromVersion,
     required this.version,
     required this.keywords,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiKeywordsDifference.deserialize(BinaryReader reader) {
@@ -69390,7 +69397,7 @@ class EmojiURL extends EmojiURLBase {
   /// Emoji U R L constructor.
   const EmojiURL({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiURL.deserialize(BinaryReader reader) {
@@ -69441,7 +69448,7 @@ class EmojiLanguage extends EmojiLanguageBase {
   /// Emoji Language constructor.
   const EmojiLanguage({
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiLanguage.deserialize(BinaryReader reader) {
@@ -69497,7 +69504,7 @@ class Folder extends FolderBase {
     required this.id,
     required this.title,
     this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Folder.deserialize(BinaryReader reader) {
@@ -69527,7 +69534,7 @@ class Folder extends FolderBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: autofillNewBroadcasts,
       b01: autofillPublicGroups,
       b02: autofillNewCorrespondents,
@@ -69602,7 +69609,7 @@ class InputFolderPeer extends InputFolderPeerBase {
   const InputFolderPeer({
     required this.peer,
     required this.folderId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputFolderPeer.deserialize(BinaryReader reader) {
@@ -69663,7 +69670,7 @@ class FolderPeer extends FolderPeerBase {
   const FolderPeer({
     required this.peer,
     required this.folderId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FolderPeer.deserialize(BinaryReader reader) {
@@ -69725,7 +69732,7 @@ class MessagesSearchCounter extends MessagesSearchCounterBase {
     required this.inexact,
     required this.filter,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchCounter.deserialize(BinaryReader reader) {
@@ -69748,7 +69755,7 @@ class MessagesSearchCounter extends MessagesSearchCounterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: inexact,
     );
 
@@ -69805,7 +69812,7 @@ class UrlAuthResultRequest extends UrlAuthResultBase {
     required this.requestWriteAccess,
     required this.bot,
     required this.domain,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UrlAuthResultRequest.deserialize(BinaryReader reader) {
@@ -69828,7 +69835,7 @@ class UrlAuthResultRequest extends UrlAuthResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requestWriteAccess,
     );
 
@@ -69881,7 +69888,7 @@ class UrlAuthResultAccepted extends UrlAuthResultBase {
   /// Url Auth Result Accepted constructor.
   const UrlAuthResultAccepted({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UrlAuthResultAccepted.deserialize(BinaryReader reader) {
@@ -69930,7 +69937,7 @@ class UrlAuthResultAccepted extends UrlAuthResultBase {
 /// ID: `a9d6db1f`.
 class UrlAuthResultDefault extends UrlAuthResultBase {
   /// Url Auth Result Default constructor.
-  const UrlAuthResultDefault() : super._();
+  const UrlAuthResultDefault() ;
 
   /// Deserialize.
   factory UrlAuthResultDefault.deserialize(BinaryReader reader) {
@@ -69967,7 +69974,7 @@ class UrlAuthResultDefault extends UrlAuthResultBase {
 /// ID: `bfb5ad8b`.
 class ChannelLocationEmpty extends ChannelLocationBase {
   /// Channel Location Empty constructor.
-  const ChannelLocationEmpty() : super._();
+  const ChannelLocationEmpty() ;
 
   /// Deserialize.
   factory ChannelLocationEmpty.deserialize(BinaryReader reader) {
@@ -70007,7 +70014,7 @@ class ChannelLocation extends ChannelLocationBase {
   const ChannelLocation({
     required this.geoPoint,
     required this.address,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelLocation.deserialize(BinaryReader reader) {
@@ -70067,7 +70074,7 @@ class PeerLocated extends PeerLocatedBase {
     required this.peer,
     required this.expires,
     required this.distance,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerLocated.deserialize(BinaryReader reader) {
@@ -70134,7 +70141,7 @@ class PeerSelfLocated extends PeerLocatedBase {
   /// Peer Self Located constructor.
   const PeerSelfLocated({
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerSelfLocated.deserialize(BinaryReader reader) {
@@ -70187,7 +70194,7 @@ class RestrictionReason extends RestrictionReasonBase {
     required this.platform,
     required this.reason,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RestrictionReason.deserialize(BinaryReader reader) {
@@ -70253,7 +70260,7 @@ class InputTheme extends InputThemeBase {
   const InputTheme({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputTheme.deserialize(BinaryReader reader) {
@@ -70315,7 +70322,7 @@ class InputThemeSlug extends InputThemeBase {
   /// Input Theme Slug constructor.
   const InputThemeSlug({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputThemeSlug.deserialize(BinaryReader reader) {
@@ -70376,7 +70383,7 @@ class Theme extends ThemeBase {
     this.settings,
     this.emoticon,
     this.installsCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Theme.deserialize(BinaryReader reader) {
@@ -70421,7 +70428,7 @@ class Theme extends ThemeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b01: ddefault,
       b05: forChat,
@@ -70532,7 +70539,7 @@ class Theme extends ThemeBase {
 /// ID: `f41eb622`.
 class AccountThemesNotModified extends AccountThemesBase {
   /// Account Themes Not Modified constructor.
-  const AccountThemesNotModified() : super._();
+  const AccountThemesNotModified() ;
 
   /// Deserialize.
   factory AccountThemesNotModified.deserialize(BinaryReader reader) {
@@ -70572,7 +70579,7 @@ class AccountThemes extends AccountThemesBase {
   const AccountThemes({
     required this.hash,
     required this.themes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountThemes.deserialize(BinaryReader reader) {
@@ -70633,7 +70640,7 @@ class AuthLoginToken extends AuthLoginTokenBase {
   const AuthLoginToken({
     required this.expires,
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthLoginToken.deserialize(BinaryReader reader) {
@@ -70692,7 +70699,7 @@ class AuthLoginTokenMigrateTo extends AuthLoginTokenBase {
   const AuthLoginTokenMigrateTo({
     required this.dcId,
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthLoginTokenMigrateTo.deserialize(BinaryReader reader) {
@@ -70752,7 +70759,7 @@ class AuthLoginTokenSuccess extends AuthLoginTokenBase {
   /// Auth Login Token Success constructor.
   const AuthLoginTokenSuccess({
     required this.authorization,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthLoginTokenSuccess.deserialize(BinaryReader reader) {
@@ -70804,7 +70811,7 @@ class AccountContentSettings extends AccountContentSettingsBase {
   const AccountContentSettings({
     required this.sensitiveEnabled,
     required this.sensitiveCanChange,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountContentSettings.deserialize(BinaryReader reader) {
@@ -70825,7 +70832,7 @@ class AccountContentSettings extends AccountContentSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: sensitiveEnabled,
       b01: sensitiveCanChange,
     );
@@ -70875,7 +70882,7 @@ class MessagesInactiveChats extends MessagesInactiveChatsBase {
     required this.dates,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesInactiveChats.deserialize(BinaryReader reader) {
@@ -70938,7 +70945,7 @@ class MessagesInactiveChats extends MessagesInactiveChatsBase {
 /// ID: `c3a12462`.
 class BaseThemeClassic extends BaseThemeBase {
   /// Base Theme Classic constructor.
-  const BaseThemeClassic() : super._();
+  const BaseThemeClassic() ;
 
   /// Deserialize.
   factory BaseThemeClassic.deserialize(BinaryReader reader) {
@@ -70975,7 +70982,7 @@ class BaseThemeClassic extends BaseThemeBase {
 /// ID: `fbd81688`.
 class BaseThemeDay extends BaseThemeBase {
   /// Base Theme Day constructor.
-  const BaseThemeDay() : super._();
+  const BaseThemeDay() ;
 
   /// Deserialize.
   factory BaseThemeDay.deserialize(BinaryReader reader) {
@@ -71012,7 +71019,7 @@ class BaseThemeDay extends BaseThemeBase {
 /// ID: `b7b31ea8`.
 class BaseThemeNight extends BaseThemeBase {
   /// Base Theme Night constructor.
-  const BaseThemeNight() : super._();
+  const BaseThemeNight() ;
 
   /// Deserialize.
   factory BaseThemeNight.deserialize(BinaryReader reader) {
@@ -71049,7 +71056,7 @@ class BaseThemeNight extends BaseThemeBase {
 /// ID: `6d5f77ee`.
 class BaseThemeTinted extends BaseThemeBase {
   /// Base Theme Tinted constructor.
-  const BaseThemeTinted() : super._();
+  const BaseThemeTinted() ;
 
   /// Deserialize.
   factory BaseThemeTinted.deserialize(BinaryReader reader) {
@@ -71086,7 +71093,7 @@ class BaseThemeTinted extends BaseThemeBase {
 /// ID: `5b11125a`.
 class BaseThemeArctic extends BaseThemeBase {
   /// Base Theme Arctic constructor.
-  const BaseThemeArctic() : super._();
+  const BaseThemeArctic() ;
 
   /// Deserialize.
   factory BaseThemeArctic.deserialize(BinaryReader reader) {
@@ -71131,7 +71138,7 @@ class InputThemeSettings extends InputThemeSettingsBase {
     this.messageColors,
     this.wallpaper,
     this.wallpaperSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputThemeSettings.deserialize(BinaryReader reader) {
@@ -71171,7 +71178,7 @@ class InputThemeSettings extends InputThemeSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: messageColorsAnimated,
       b03: outboxAccentColor != null,
       b00: messageColors != null,
@@ -71266,7 +71273,7 @@ class ThemeSettings extends ThemeSettingsBase {
     this.outboxAccentColor,
     this.messageColors,
     this.wallpaper,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ThemeSettings.deserialize(BinaryReader reader) {
@@ -71301,7 +71308,7 @@ class ThemeSettings extends ThemeSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: messageColorsAnimated,
       b03: outboxAccentColor != null,
       b00: messageColors != null,
@@ -71384,7 +71391,7 @@ class WebPageAttributeTheme extends WebPageAttributeBase {
   const WebPageAttributeTheme({
     this.documents,
     this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPageAttributeTheme.deserialize(BinaryReader reader) {
@@ -71409,7 +71416,7 @@ class WebPageAttributeTheme extends WebPageAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: documents != null,
       b01: settings != null,
     );
@@ -71467,7 +71474,7 @@ class WebPageAttributeStory extends WebPageAttributeBase {
     required this.peer,
     required this.id,
     this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPageAttributeStory.deserialize(BinaryReader reader) {
@@ -71491,7 +71498,7 @@ class WebPageAttributeStory extends WebPageAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: story != null,
     );
 
@@ -71552,7 +71559,7 @@ class WebPageAttributeStickerSet extends WebPageAttributeBase {
     required this.emojis,
     required this.textColor,
     required this.stickers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebPageAttributeStickerSet.deserialize(BinaryReader reader) {
@@ -71575,7 +71582,7 @@ class WebPageAttributeStickerSet extends WebPageAttributeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: emojis,
       b01: textColor,
     );
@@ -71632,7 +71639,7 @@ class MessagesVotesList extends MessagesVotesListBase {
     required this.chats,
     required this.users,
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesVotesList.deserialize(BinaryReader reader) {
@@ -71660,7 +71667,7 @@ class MessagesVotesList extends MessagesVotesListBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -71730,7 +71737,7 @@ class BankCardOpenUrl extends BankCardOpenUrlBase {
   const BankCardOpenUrl({
     required this.url,
     required this.name,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BankCardOpenUrl.deserialize(BinaryReader reader) {
@@ -71789,7 +71796,7 @@ class PaymentsBankCardData extends PaymentsBankCardDataBase {
   const PaymentsBankCardData({
     required this.title,
     required this.openUrls,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsBankCardData.deserialize(BinaryReader reader) {
@@ -71861,7 +71868,7 @@ class DialogFilter extends DialogFilterBase {
     required this.pinnedPeers,
     required this.includePeers,
     required this.excludePeers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogFilter.deserialize(BinaryReader reader) {
@@ -71910,7 +71917,7 @@ class DialogFilter extends DialogFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: contacts,
       b01: nonContacts,
       b02: groups,
@@ -72031,7 +72038,7 @@ class DialogFilter extends DialogFilterBase {
 /// ID: `363293ae`.
 class DialogFilterDefault extends DialogFilterBase {
   /// Dialog Filter Default constructor.
-  const DialogFilterDefault() : super._();
+  const DialogFilterDefault() ;
 
   /// Deserialize.
   factory DialogFilterDefault.deserialize(BinaryReader reader) {
@@ -72076,7 +72083,7 @@ class DialogFilterChatlist extends DialogFilterBase {
     this.color,
     required this.pinnedPeers,
     required this.includePeers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogFilterChatlist.deserialize(BinaryReader reader) {
@@ -72109,7 +72116,7 @@ class DialogFilterChatlist extends DialogFilterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b26: hasMyInvites,
       b25: emoticon != null,
       b27: color != null,
@@ -72193,7 +72200,7 @@ class DialogFilterSuggested extends DialogFilterSuggestedBase {
   const DialogFilterSuggested({
     required this.filter,
     required this.description,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DialogFilterSuggested.deserialize(BinaryReader reader) {
@@ -72252,7 +72259,7 @@ class StatsDateRangeDays extends StatsDateRangeDaysBase {
   const StatsDateRangeDays({
     required this.minDate,
     required this.maxDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsDateRangeDays.deserialize(BinaryReader reader) {
@@ -72311,7 +72318,7 @@ class StatsAbsValueAndPrev extends StatsAbsValueAndPrevBase {
   const StatsAbsValueAndPrev({
     required this.current,
     required this.previous,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsAbsValueAndPrev.deserialize(BinaryReader reader) {
@@ -72370,7 +72377,7 @@ class StatsPercentValue extends StatsPercentValueBase {
   const StatsPercentValue({
     required this.part,
     required this.total,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsPercentValue.deserialize(BinaryReader reader) {
@@ -72428,7 +72435,7 @@ class StatsGraphAsync extends StatsGraphBase {
   /// Stats Graph Async constructor.
   const StatsGraphAsync({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGraphAsync.deserialize(BinaryReader reader) {
@@ -72479,7 +72486,7 @@ class StatsGraphError extends StatsGraphBase {
   /// Stats Graph Error constructor.
   const StatsGraphError({
     required this.error,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGraphError.deserialize(BinaryReader reader) {
@@ -72531,7 +72538,7 @@ class StatsGraph extends StatsGraphBase {
   const StatsGraph({
     required this.json,
     this.zoomToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGraph.deserialize(BinaryReader reader) {
@@ -72553,7 +72560,7 @@ class StatsGraph extends StatsGraphBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: zoomToken != null,
     );
 
@@ -72626,7 +72633,7 @@ class StatsBroadcastStats extends StatsBroadcastStatsBase {
     required this.storyInteractionsGraph,
     required this.storyReactionsByEmotionGraph,
     required this.recentPostsInteractions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsBroadcastStats.deserialize(BinaryReader reader) {
@@ -72825,7 +72832,7 @@ class HelpPromoDataEmpty extends HelpPromoDataBase {
   /// Help Promo Data Empty constructor.
   const HelpPromoDataEmpty({
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPromoDataEmpty.deserialize(BinaryReader reader) {
@@ -72882,7 +72889,7 @@ class HelpPromoData extends HelpPromoDataBase {
     required this.users,
     this.psaType,
     this.psaMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPromoData.deserialize(BinaryReader reader) {
@@ -72915,7 +72922,7 @@ class HelpPromoData extends HelpPromoDataBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: proxy,
       b01: psaType != null,
       b02: psaMessage != null,
@@ -73000,7 +73007,7 @@ class VideoSize extends VideoSizeBase {
     required this.h,
     required this.size,
     this.videoStartTs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory VideoSize.deserialize(BinaryReader reader) {
@@ -73028,7 +73035,7 @@ class VideoSize extends VideoSizeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: videoStartTs != null,
     );
 
@@ -73102,7 +73109,7 @@ class VideoSizeEmojiMarkup extends VideoSizeBase {
   const VideoSizeEmojiMarkup({
     required this.emojiId,
     required this.backgroundColors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory VideoSizeEmojiMarkup.deserialize(BinaryReader reader) {
@@ -73164,7 +73171,7 @@ class VideoSizeStickerMarkup extends VideoSizeBase {
     required this.stickerset,
     required this.stickerId,
     required this.backgroundColors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory VideoSizeStickerMarkup.deserialize(BinaryReader reader) {
@@ -73233,7 +73240,7 @@ class StatsGroupTopPoster extends StatsGroupTopPosterBase {
     required this.userId,
     required this.messages,
     required this.avgChars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGroupTopPoster.deserialize(BinaryReader reader) {
@@ -73307,7 +73314,7 @@ class StatsGroupTopAdmin extends StatsGroupTopAdminBase {
     required this.deleted,
     required this.kicked,
     required this.banned,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGroupTopAdmin.deserialize(BinaryReader reader) {
@@ -73388,7 +73395,7 @@ class StatsGroupTopInviter extends StatsGroupTopInviterBase {
   const StatsGroupTopInviter({
     required this.userId,
     required this.invitations,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGroupTopInviter.deserialize(BinaryReader reader) {
@@ -73466,7 +73473,7 @@ class StatsMegagroupStats extends StatsMegagroupStatsBase {
     required this.topAdmins,
     required this.topInviters,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsMegagroupStats.deserialize(BinaryReader reader) {
@@ -73633,7 +73640,7 @@ class GlobalPrivacySettings extends GlobalPrivacySettingsBase {
     required this.keepArchivedFolders,
     required this.hideReadMarks,
     required this.newNoncontactPeersRequirePremium,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GlobalPrivacySettings.deserialize(BinaryReader reader) {
@@ -73660,7 +73667,7 @@ class GlobalPrivacySettings extends GlobalPrivacySettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: archiveAndMuteNewNoncontactPeers,
       b01: keepArchivedUnmuted,
       b02: keepArchivedFolders,
@@ -73725,7 +73732,7 @@ class HelpCountryCode extends HelpCountryCodeBase {
     required this.countryCode,
     this.prefixes,
     this.patterns,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpCountryCode.deserialize(BinaryReader reader) {
@@ -73750,7 +73757,7 @@ class HelpCountryCode extends HelpCountryCodeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: prefixes != null,
       b01: patterns != null,
     );
@@ -73815,7 +73822,7 @@ class HelpCountry extends HelpCountryBase {
     required this.defaultName,
     this.name,
     required this.countryCodes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpCountry.deserialize(BinaryReader reader) {
@@ -73843,7 +73850,7 @@ class HelpCountry extends HelpCountryBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hidden,
       b01: name != null,
     );
@@ -73908,7 +73915,7 @@ class HelpCountry extends HelpCountryBase {
 /// ID: `93cc1f32`.
 class HelpCountriesListNotModified extends HelpCountriesListBase {
   /// Help Countries List Not Modified constructor.
-  const HelpCountriesListNotModified() : super._();
+  const HelpCountriesListNotModified() ;
 
   /// Deserialize.
   factory HelpCountriesListNotModified.deserialize(BinaryReader reader) {
@@ -73948,7 +73955,7 @@ class HelpCountriesList extends HelpCountriesListBase {
   const HelpCountriesList({
     required this.countries,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpCountriesList.deserialize(BinaryReader reader) {
@@ -74010,7 +74017,7 @@ class MessageViews extends MessageViewsBase {
     this.views,
     this.forwards,
     this.replies,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageViews.deserialize(BinaryReader reader) {
@@ -74037,7 +74044,7 @@ class MessageViews extends MessageViewsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: views != null,
       b01: forwards != null,
       b02: replies != null,
@@ -74104,7 +74111,7 @@ class MessagesMessageViews extends MessagesMessageViewsBase {
     required this.views,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessageViews.deserialize(BinaryReader reader) {
@@ -74175,7 +74182,7 @@ class MessagesDiscussionMessage extends MessagesDiscussionMessageBase {
     required this.unreadCount,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDiscussionMessage.deserialize(BinaryReader reader) {
@@ -74209,7 +74216,7 @@ class MessagesDiscussionMessage extends MessagesDiscussionMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: maxId != null,
       b01: readInboxMaxId != null,
       b02: readOutboxMaxId != null,
@@ -74306,7 +74313,7 @@ class MessageReplyHeader extends MessageReplyHeaderBase {
     this.quoteText,
     this.quoteEntities,
     this.quoteOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReplyHeader.deserialize(BinaryReader reader) {
@@ -74358,7 +74365,7 @@ class MessageReplyHeader extends MessageReplyHeaderBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: replyToScheduled,
       b03: forumTopic,
       b09: quote,
@@ -74375,10 +74382,10 @@ class MessageReplyHeader extends MessageReplyHeaderBase {
     return v;
   }
 
-  /// reply_to_scheduled: bit 2 of flags.2?true
+  /// replyto_scheduled: bit 2 of flags.2?true
   final bool replyToScheduled;
 
-  /// forum_topic: bit 3 of flags.3?true
+  /// forumtopic: bit 3 of flags.3?true
   final bool forumTopic;
 
   /// quote: bit 9 of flags.9?true
@@ -74484,7 +74491,7 @@ class MessageReplyStoryHeader extends MessageReplyHeaderBase {
   const MessageReplyStoryHeader({
     required this.peer,
     required this.storyId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReplyStoryHeader.deserialize(BinaryReader reader) {
@@ -74550,7 +74557,7 @@ class MessageReplies extends MessageRepliesBase {
     this.channelId,
     this.maxId,
     this.readMaxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReplies.deserialize(BinaryReader reader) {
@@ -74586,7 +74593,7 @@ class MessageReplies extends MessageRepliesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: comments || channelId != null,
       b01: recentRepliers != null,
       b02: maxId != null,
@@ -74679,7 +74686,7 @@ class PeerBlocked extends PeerBlockedBase {
   const PeerBlocked({
     required this.peerId,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerBlocked.deserialize(BinaryReader reader) {
@@ -74738,7 +74745,7 @@ class StatsMessageStats extends StatsMessageStatsBase {
   const StatsMessageStats({
     required this.viewsGraph,
     required this.reactionsByEmotionGraph,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsMessageStats.deserialize(BinaryReader reader) {
@@ -74798,7 +74805,7 @@ class GroupCallDiscarded extends GroupCallBase {
     required this.id,
     required this.accessHash,
     required this.duration,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCallDiscarded.deserialize(BinaryReader reader) {
@@ -74886,7 +74893,7 @@ class GroupCall extends GroupCallBase {
     this.unmutedVideoCount,
     required this.unmutedVideoLimit,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCall.deserialize(BinaryReader reader) {
@@ -74946,7 +74953,7 @@ class GroupCall extends GroupCallBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: joinMuted,
       b02: canChangeJoinMuted,
       b06: joinDateAsc,
@@ -75105,7 +75112,7 @@ class InputGroupCall extends InputGroupCallBase {
   const InputGroupCall({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputGroupCall.deserialize(BinaryReader reader) {
@@ -75185,7 +75192,7 @@ class GroupCallParticipant extends GroupCallParticipantBase {
     this.raiseHandRating,
     this.video,
     this.presentation,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCallParticipant.deserialize(BinaryReader reader) {
@@ -75250,7 +75257,7 @@ class GroupCallParticipant extends GroupCallParticipantBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: muted,
       b01: left,
       b02: canSelfUnmute,
@@ -75413,7 +75420,7 @@ class PhoneGroupCall extends PhoneGroupCallBase {
     required this.participantsNextOffset,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGroupCall.deserialize(BinaryReader reader) {
@@ -75497,7 +75504,7 @@ class PhoneGroupParticipants extends PhoneGroupParticipantsBase {
     required this.chats,
     required this.users,
     required this.version,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGroupParticipants.deserialize(BinaryReader reader) {
@@ -75585,7 +75592,7 @@ class PhoneGroupParticipants extends PhoneGroupParticipantsBase {
 /// ID: `3081ed9d`.
 class InlineQueryPeerTypeSameBotPM extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type Same Bot P M constructor.
-  const InlineQueryPeerTypeSameBotPM() : super._();
+  const InlineQueryPeerTypeSameBotPM() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypeSameBotPM.deserialize(BinaryReader reader) {
@@ -75622,7 +75629,7 @@ class InlineQueryPeerTypeSameBotPM extends InlineQueryPeerTypeBase {
 /// ID: `833c0fac`.
 class InlineQueryPeerTypePM extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type P M constructor.
-  const InlineQueryPeerTypePM() : super._();
+  const InlineQueryPeerTypePM() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypePM.deserialize(BinaryReader reader) {
@@ -75659,7 +75666,7 @@ class InlineQueryPeerTypePM extends InlineQueryPeerTypeBase {
 /// ID: `d766c50a`.
 class InlineQueryPeerTypeChat extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type Chat constructor.
-  const InlineQueryPeerTypeChat() : super._();
+  const InlineQueryPeerTypeChat() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypeChat.deserialize(BinaryReader reader) {
@@ -75696,7 +75703,7 @@ class InlineQueryPeerTypeChat extends InlineQueryPeerTypeBase {
 /// ID: `5ec4be43`.
 class InlineQueryPeerTypeMegagroup extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type Megagroup constructor.
-  const InlineQueryPeerTypeMegagroup() : super._();
+  const InlineQueryPeerTypeMegagroup() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypeMegagroup.deserialize(BinaryReader reader) {
@@ -75733,7 +75740,7 @@ class InlineQueryPeerTypeMegagroup extends InlineQueryPeerTypeBase {
 /// ID: `6334ee9a`.
 class InlineQueryPeerTypeBroadcast extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type Broadcast constructor.
-  const InlineQueryPeerTypeBroadcast() : super._();
+  const InlineQueryPeerTypeBroadcast() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypeBroadcast.deserialize(BinaryReader reader) {
@@ -75770,7 +75777,7 @@ class InlineQueryPeerTypeBroadcast extends InlineQueryPeerTypeBase {
 /// ID: `0e3b2d0c`.
 class InlineQueryPeerTypeBotPM extends InlineQueryPeerTypeBase {
   /// Inline Query Peer Type Bot P M constructor.
-  const InlineQueryPeerTypeBotPM() : super._();
+  const InlineQueryPeerTypeBotPM() ;
 
   /// Deserialize.
   factory InlineQueryPeerTypeBotPM.deserialize(BinaryReader reader) {
@@ -75809,7 +75816,7 @@ class MessagesHistoryImport extends MessagesHistoryImportBase {
   /// Messages History Import constructor.
   const MessagesHistoryImport({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHistoryImport.deserialize(BinaryReader reader) {
@@ -75864,7 +75871,7 @@ class MessagesHistoryImportParsed extends MessagesHistoryImportParsedBase {
     required this.pm,
     required this.group,
     this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHistoryImportParsed.deserialize(BinaryReader reader) {
@@ -75888,7 +75895,7 @@ class MessagesHistoryImportParsed extends MessagesHistoryImportParsedBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pm,
       b01: group,
       b02: title != null,
@@ -75948,7 +75955,7 @@ class MessagesAffectedFoundMessages extends MessagesAffectedFoundMessagesBase {
     required this.ptsCount,
     required this.offset,
     required this.messages,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAffectedFoundMessages.deserialize(BinaryReader reader) {
@@ -76031,7 +76038,7 @@ class ChatInviteImporter extends ChatInviteImporterBase {
     required this.date,
     this.about,
     this.approvedBy,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatInviteImporter.deserialize(BinaryReader reader) {
@@ -76062,7 +76069,7 @@ class ChatInviteImporter extends ChatInviteImporterBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requested,
       b03: viaChatlist,
       b02: about != null,
@@ -76142,7 +76149,7 @@ class MessagesExportedChatInvites extends MessagesExportedChatInvitesBase {
     required this.count,
     required this.invites,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesExportedChatInvites.deserialize(BinaryReader reader) {
@@ -76210,7 +76217,7 @@ class MessagesExportedChatInvite extends MessagesExportedChatInviteBase {
   const MessagesExportedChatInvite({
     required this.invite,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesExportedChatInvite.deserialize(BinaryReader reader) {
@@ -76271,7 +76278,7 @@ class MessagesExportedChatInviteReplaced
     required this.invite,
     required this.newInvite,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesExportedChatInviteReplaced.deserialize(BinaryReader reader) {
@@ -76338,7 +76345,7 @@ class MessagesChatInviteImporters extends MessagesChatInviteImportersBase {
     required this.count,
     required this.importers,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChatInviteImporters.deserialize(BinaryReader reader) {
@@ -76407,7 +76414,7 @@ class ChatAdminWithInvites extends ChatAdminWithInvitesBase {
     required this.adminId,
     required this.invitesCount,
     required this.revokedInvitesCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatAdminWithInvites.deserialize(BinaryReader reader) {
@@ -76479,7 +76486,7 @@ class MessagesChatAdminsWithInvites extends MessagesChatAdminsWithInvitesBase {
   const MessagesChatAdminsWithInvites({
     required this.admins,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesChatAdminsWithInvites.deserialize(BinaryReader reader) {
@@ -76538,7 +76545,7 @@ class MessagesCheckedHistoryImportPeer
   /// Messages Checked History Import Peer constructor.
   const MessagesCheckedHistoryImportPeer({
     required this.confirmText,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCheckedHistoryImportPeer.deserialize(BinaryReader reader) {
@@ -76591,7 +76598,7 @@ class PhoneJoinAsPeers extends PhoneJoinAsPeersBase {
     required this.peers,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneJoinAsPeers.deserialize(BinaryReader reader) {
@@ -76656,7 +76663,7 @@ class PhoneExportedGroupCallInvite extends PhoneExportedGroupCallInviteBase {
   /// Phone Exported Group Call Invite constructor.
   const PhoneExportedGroupCallInvite({
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneExportedGroupCallInvite.deserialize(BinaryReader reader) {
@@ -76709,7 +76716,7 @@ class GroupCallParticipantVideoSourceGroup
   const GroupCallParticipantVideoSourceGroup({
     required this.semantics,
     required this.sources,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCallParticipantVideoSourceGroup.deserialize(
@@ -76771,7 +76778,7 @@ class GroupCallParticipantVideo extends GroupCallParticipantVideoBase {
     required this.endpoint,
     required this.sourceGroups,
     this.audioSource,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCallParticipantVideo.deserialize(BinaryReader reader) {
@@ -76798,7 +76805,7 @@ class GroupCallParticipantVideo extends GroupCallParticipantVideoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: paused,
       b01: audioSource != null,
     );
@@ -76860,7 +76867,7 @@ class StickersSuggestedShortName extends StickersSuggestedShortNameBase {
   /// Stickers Suggested Short Name constructor.
   const StickersSuggestedShortName({
     required this.shortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersSuggestedShortName.deserialize(BinaryReader reader) {
@@ -76909,7 +76916,7 @@ class StickersSuggestedShortName extends StickersSuggestedShortNameBase {
 /// ID: `2f6cb2ab`.
 class BotCommandScopeDefault extends BotCommandScopeBase {
   /// Bot Command Scope Default constructor.
-  const BotCommandScopeDefault() : super._();
+  const BotCommandScopeDefault() ;
 
   /// Deserialize.
   factory BotCommandScopeDefault.deserialize(BinaryReader reader) {
@@ -76946,7 +76953,7 @@ class BotCommandScopeDefault extends BotCommandScopeBase {
 /// ID: `3c4f04d8`.
 class BotCommandScopeUsers extends BotCommandScopeBase {
   /// Bot Command Scope Users constructor.
-  const BotCommandScopeUsers() : super._();
+  const BotCommandScopeUsers() ;
 
   /// Deserialize.
   factory BotCommandScopeUsers.deserialize(BinaryReader reader) {
@@ -76983,7 +76990,7 @@ class BotCommandScopeUsers extends BotCommandScopeBase {
 /// ID: `6fe1a881`.
 class BotCommandScopeChats extends BotCommandScopeBase {
   /// Bot Command Scope Chats constructor.
-  const BotCommandScopeChats() : super._();
+  const BotCommandScopeChats() ;
 
   /// Deserialize.
   factory BotCommandScopeChats.deserialize(BinaryReader reader) {
@@ -77020,7 +77027,7 @@ class BotCommandScopeChats extends BotCommandScopeBase {
 /// ID: `b9aa606a`.
 class BotCommandScopeChatAdmins extends BotCommandScopeBase {
   /// Bot Command Scope Chat Admins constructor.
-  const BotCommandScopeChatAdmins() : super._();
+  const BotCommandScopeChatAdmins() ;
 
   /// Deserialize.
   factory BotCommandScopeChatAdmins.deserialize(BinaryReader reader) {
@@ -77059,7 +77066,7 @@ class BotCommandScopePeer extends BotCommandScopeBase {
   /// Bot Command Scope Peer constructor.
   const BotCommandScopePeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotCommandScopePeer.deserialize(BinaryReader reader) {
@@ -77110,7 +77117,7 @@ class BotCommandScopePeerAdmins extends BotCommandScopeBase {
   /// Bot Command Scope Peer Admins constructor.
   const BotCommandScopePeerAdmins({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotCommandScopePeerAdmins.deserialize(BinaryReader reader) {
@@ -77162,7 +77169,7 @@ class BotCommandScopePeerUser extends BotCommandScopeBase {
   const BotCommandScopePeerUser({
     required this.peer,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotCommandScopePeerUser.deserialize(BinaryReader reader) {
@@ -77220,7 +77227,7 @@ class AccountResetPasswordFailedWait extends AccountResetPasswordResultBase {
   /// Account Reset Password Failed Wait constructor.
   const AccountResetPasswordFailedWait({
     required this.retryDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResetPasswordFailedWait.deserialize(BinaryReader reader) {
@@ -77271,7 +77278,7 @@ class AccountResetPasswordRequestedWait extends AccountResetPasswordResultBase {
   /// Account Reset Password Requested Wait constructor.
   const AccountResetPasswordRequestedWait({
     required this.untilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResetPasswordRequestedWait.deserialize(BinaryReader reader) {
@@ -77320,7 +77327,7 @@ class AccountResetPasswordRequestedWait extends AccountResetPasswordResultBase {
 /// ID: `e926d63e`.
 class AccountResetPasswordOk extends AccountResetPasswordResultBase {
   /// Account Reset Password Ok constructor.
-  const AccountResetPasswordOk() : super._();
+  const AccountResetPasswordOk() ;
 
   /// Deserialize.
   factory AccountResetPasswordOk.deserialize(BinaryReader reader) {
@@ -77371,7 +77378,7 @@ class SponsoredMessage extends SponsoredMessageBase {
     required this.buttonText,
     this.sponsorInfo,
     this.additionalInfo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SponsoredMessage.deserialize(BinaryReader reader) {
@@ -77422,7 +77429,7 @@ class SponsoredMessage extends SponsoredMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: recommended,
       b12: canReport,
       b01: entities != null,
@@ -77552,7 +77559,7 @@ class MessagesSponsoredMessages extends MessagesSponsoredMessagesBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSponsoredMessages.deserialize(BinaryReader reader) {
@@ -77578,7 +77585,7 @@ class MessagesSponsoredMessages extends MessagesSponsoredMessagesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: postsBetween != null,
     );
 
@@ -77638,7 +77645,7 @@ class MessagesSponsoredMessages extends MessagesSponsoredMessagesBase {
 /// ID: `1839490f`.
 class MessagesSponsoredMessagesEmpty extends MessagesSponsoredMessagesBase {
   /// Messages Sponsored Messages Empty constructor.
-  const MessagesSponsoredMessagesEmpty() : super._();
+  const MessagesSponsoredMessagesEmpty() ;
 
   /// Deserialize.
   factory MessagesSponsoredMessagesEmpty.deserialize(BinaryReader reader) {
@@ -77680,7 +77687,7 @@ class SearchResultsCalendarPeriod extends SearchResultsCalendarPeriodBase {
     required this.minMsgId,
     required this.maxMsgId,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SearchResultsCalendarPeriod.deserialize(BinaryReader reader) {
@@ -77766,7 +77773,7 @@ class MessagesSearchResultsCalendar extends MessagesSearchResultsCalendarBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchResultsCalendar.deserialize(BinaryReader reader) {
@@ -77802,7 +77809,7 @@ class MessagesSearchResultsCalendar extends MessagesSearchResultsCalendarBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: inexact,
       b01: offsetIdOffset != null,
     );
@@ -77895,7 +77902,7 @@ class SearchResultPosition extends SearchResultsPositionBase {
     required this.msgId,
     required this.date,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SearchResultPosition.deserialize(BinaryReader reader) {
@@ -77966,7 +77973,7 @@ class MessagesSearchResultsPositions
   const MessagesSearchResultsPositions({
     required this.count,
     required this.positions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchResultsPositions.deserialize(BinaryReader reader) {
@@ -78028,7 +78035,7 @@ class ChannelsSendAsPeers extends ChannelsSendAsPeersBase {
     required this.peers,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSendAsPeers.deserialize(BinaryReader reader) {
@@ -78095,7 +78102,7 @@ class UsersUserFull extends UsersUserFullBase {
     required this.fullUser,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UsersUserFull.deserialize(BinaryReader reader) {
@@ -78162,7 +78169,7 @@ class MessagesPeerSettings extends MessagesPeerSettingsBase {
     required this.settings,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesPeerSettings.deserialize(BinaryReader reader) {
@@ -78227,7 +78234,7 @@ class AuthLoggedOut extends AuthLoggedOutBase {
   /// Auth Logged Out constructor.
   const AuthLoggedOut({
     this.futureAuthToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthLoggedOut.deserialize(BinaryReader reader) {
@@ -78247,7 +78254,7 @@ class AuthLoggedOut extends AuthLoggedOutBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: futureAuthToken != null,
     );
 
@@ -78296,7 +78303,7 @@ class ReactionCount extends ReactionCountBase {
     this.chosenOrder,
     required this.reaction,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReactionCount.deserialize(BinaryReader reader) {
@@ -78320,7 +78327,7 @@ class ReactionCount extends ReactionCountBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: chosenOrder != null,
     );
 
@@ -78384,7 +78391,7 @@ class MessageReactions extends MessageReactionsBase {
     required this.results,
     this.recentReactions,
     this.topReactors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReactions.deserialize(BinaryReader reader) {
@@ -78419,7 +78426,7 @@ class MessageReactions extends MessageReactionsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: min,
       b02: canSeeList,
       b03: reactionsAsTags,
@@ -78499,7 +78506,7 @@ class MessagesMessageReactionsList extends MessagesMessageReactionsListBase {
     required this.chats,
     required this.users,
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMessageReactionsList.deserialize(BinaryReader reader) {
@@ -78527,7 +78534,7 @@ class MessagesMessageReactionsList extends MessagesMessageReactionsListBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -78606,7 +78613,7 @@ class AvailableReaction extends AvailableReactionBase {
     required this.effectAnimation,
     this.aroundAnimation,
     this.centerIcon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AvailableReaction.deserialize(BinaryReader reader) {
@@ -78649,7 +78656,7 @@ class AvailableReaction extends AvailableReactionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: inactive,
       b02: premium,
       b01: aroundAnimation != null || centerIcon != null,
@@ -78748,7 +78755,7 @@ class AvailableReaction extends AvailableReactionBase {
 class MessagesAvailableReactionsNotModified
     extends MessagesAvailableReactionsBase {
   /// Messages Available Reactions Not Modified constructor.
-  const MessagesAvailableReactionsNotModified() : super._();
+  const MessagesAvailableReactionsNotModified() ;
 
   /// Deserialize.
   factory MessagesAvailableReactionsNotModified.deserialize(
@@ -78789,7 +78796,7 @@ class MessagesAvailableReactions extends MessagesAvailableReactionsBase {
   const MessagesAvailableReactions({
     required this.hash,
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAvailableReactions.deserialize(BinaryReader reader) {
@@ -78854,7 +78861,7 @@ class MessagePeerReaction extends MessagePeerReactionBase {
     required this.peerId,
     required this.date,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagePeerReaction.deserialize(BinaryReader reader) {
@@ -78883,7 +78890,7 @@ class MessagePeerReaction extends MessagePeerReactionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: big,
       b01: unread,
       b02: my,
@@ -78953,7 +78960,7 @@ class GroupCallStreamChannel extends GroupCallStreamChannelBase {
     required this.channel,
     required this.scale,
     required this.lastTimestampMs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GroupCallStreamChannel.deserialize(BinaryReader reader) {
@@ -79024,7 +79031,7 @@ class PhoneGroupCallStreamChannels extends PhoneGroupCallStreamChannelsBase {
   /// Phone Group Call Stream Channels constructor.
   const PhoneGroupCallStreamChannels({
     required this.channels,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGroupCallStreamChannels.deserialize(BinaryReader reader) {
@@ -79076,7 +79083,7 @@ class PhoneGroupCallStreamRtmpUrl extends PhoneGroupCallStreamRtmpUrlBase {
   const PhoneGroupCallStreamRtmpUrl({
     required this.url,
     required this.key,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGroupCallStreamRtmpUrl.deserialize(BinaryReader reader) {
@@ -79135,7 +79142,7 @@ class AttachMenuBotIconColor extends AttachMenuBotIconColorBase {
   const AttachMenuBotIconColor({
     required this.name,
     required this.color,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AttachMenuBotIconColor.deserialize(BinaryReader reader) {
@@ -79197,7 +79204,7 @@ class AttachMenuBotIcon extends AttachMenuBotIconBase {
     required this.name,
     required this.icon,
     this.colors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AttachMenuBotIcon.deserialize(BinaryReader reader) {
@@ -79223,7 +79230,7 @@ class AttachMenuBotIcon extends AttachMenuBotIconBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: colors != null,
     );
 
@@ -79289,7 +79296,7 @@ class AttachMenuBot extends AttachMenuBotBase {
     required this.shortName,
     this.peerTypes,
     required this.icons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AttachMenuBot.deserialize(BinaryReader reader) {
@@ -79329,7 +79336,7 @@ class AttachMenuBot extends AttachMenuBotBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: inactive,
       b01: hasSettings,
       b02: requestWriteAccess,
@@ -79420,7 +79427,7 @@ class AttachMenuBot extends AttachMenuBotBase {
 /// ID: `f1d88a5c`.
 class AttachMenuBotsNotModified extends AttachMenuBotsBase {
   /// Attach Menu Bots Not Modified constructor.
-  const AttachMenuBotsNotModified() : super._();
+  const AttachMenuBotsNotModified() ;
 
   /// Deserialize.
   factory AttachMenuBotsNotModified.deserialize(BinaryReader reader) {
@@ -79461,7 +79468,7 @@ class AttachMenuBots extends AttachMenuBotsBase {
     required this.hash,
     required this.bots,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AttachMenuBots.deserialize(BinaryReader reader) {
@@ -79529,7 +79536,7 @@ class AttachMenuBotsBot extends AttachMenuBotsBotBase {
   const AttachMenuBotsBot({
     required this.bot,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AttachMenuBotsBot.deserialize(BinaryReader reader) {
@@ -79590,7 +79597,7 @@ class WebViewResultUrl extends WebViewResultBase {
     required this.fullscreen,
     this.queryId,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebViewResultUrl.deserialize(BinaryReader reader) {
@@ -79616,7 +79623,7 @@ class WebViewResultUrl extends WebViewResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: fullsize,
       b02: fullscreen,
       b00: queryId != null,
@@ -79678,7 +79685,7 @@ class WebViewMessageSent extends WebViewMessageSentBase {
   /// Web View Message Sent constructor.
   const WebViewMessageSent({
     this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory WebViewMessageSent.deserialize(BinaryReader reader) {
@@ -79700,7 +79707,7 @@ class WebViewMessageSent extends WebViewMessageSentBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: msgId != null,
     );
 
@@ -79745,7 +79752,7 @@ class WebViewMessageSent extends WebViewMessageSentBase {
 /// ID: `7533a588`.
 class BotMenuButtonDefault extends BotMenuButtonBase {
   /// Bot Menu Button Default constructor.
-  const BotMenuButtonDefault() : super._();
+  const BotMenuButtonDefault() ;
 
   /// Deserialize.
   factory BotMenuButtonDefault.deserialize(BinaryReader reader) {
@@ -79782,7 +79789,7 @@ class BotMenuButtonDefault extends BotMenuButtonBase {
 /// ID: `4258c205`.
 class BotMenuButtonCommands extends BotMenuButtonBase {
   /// Bot Menu Button Commands constructor.
-  const BotMenuButtonCommands() : super._();
+  const BotMenuButtonCommands() ;
 
   /// Deserialize.
   factory BotMenuButtonCommands.deserialize(BinaryReader reader) {
@@ -79822,7 +79829,7 @@ class BotMenuButton extends BotMenuButtonBase {
   const BotMenuButton({
     required this.text,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotMenuButton.deserialize(BinaryReader reader) {
@@ -79878,7 +79885,7 @@ class BotMenuButton extends BotMenuButtonBase {
 /// ID: `fbf6e8b1`.
 class AccountSavedRingtonesNotModified extends AccountSavedRingtonesBase {
   /// Account Saved Ringtones Not Modified constructor.
-  const AccountSavedRingtonesNotModified() : super._();
+  const AccountSavedRingtonesNotModified() ;
 
   /// Deserialize.
   factory AccountSavedRingtonesNotModified.deserialize(BinaryReader reader) {
@@ -79918,7 +79925,7 @@ class AccountSavedRingtones extends AccountSavedRingtonesBase {
   const AccountSavedRingtones({
     required this.hash,
     required this.ringtones,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSavedRingtones.deserialize(BinaryReader reader) {
@@ -79976,7 +79983,7 @@ class AccountSavedRingtones extends AccountSavedRingtonesBase {
 /// ID: `97e8bebe`.
 class NotificationSoundDefault extends NotificationSoundBase {
   /// Notification Sound Default constructor.
-  const NotificationSoundDefault() : super._();
+  const NotificationSoundDefault() ;
 
   /// Deserialize.
   factory NotificationSoundDefault.deserialize(BinaryReader reader) {
@@ -80013,7 +80020,7 @@ class NotificationSoundDefault extends NotificationSoundBase {
 /// ID: `6f0c34df`.
 class NotificationSoundNone extends NotificationSoundBase {
   /// Notification Sound None constructor.
-  const NotificationSoundNone() : super._();
+  const NotificationSoundNone() ;
 
   /// Deserialize.
   factory NotificationSoundNone.deserialize(BinaryReader reader) {
@@ -80053,7 +80060,7 @@ class NotificationSoundLocal extends NotificationSoundBase {
   const NotificationSoundLocal({
     required this.title,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NotificationSoundLocal.deserialize(BinaryReader reader) {
@@ -80111,7 +80118,7 @@ class NotificationSoundRingtone extends NotificationSoundBase {
   /// Notification Sound Ringtone constructor.
   const NotificationSoundRingtone({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NotificationSoundRingtone.deserialize(BinaryReader reader) {
@@ -80162,7 +80169,7 @@ class NotificationSoundRingtone extends NotificationSoundBase {
 /// ID: `b7263f6d`.
 class AccountSavedRingtone extends AccountSavedRingtoneBase {
   /// Account Saved Ringtone constructor.
-  const AccountSavedRingtone() : super._();
+  const AccountSavedRingtone() ;
 
   /// Deserialize.
   factory AccountSavedRingtone.deserialize(BinaryReader reader) {
@@ -80201,7 +80208,7 @@ class AccountSavedRingtoneConverted extends AccountSavedRingtoneBase {
   /// Account Saved Ringtone Converted constructor.
   const AccountSavedRingtoneConverted({
     required this.document,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSavedRingtoneConverted.deserialize(BinaryReader reader) {
@@ -80250,7 +80257,7 @@ class AccountSavedRingtoneConverted extends AccountSavedRingtoneBase {
 /// ID: `7d6be90e`.
 class AttachMenuPeerTypeSameBotPM extends AttachMenuPeerTypeBase {
   /// Attach Menu Peer Type Same Bot P M constructor.
-  const AttachMenuPeerTypeSameBotPM() : super._();
+  const AttachMenuPeerTypeSameBotPM() ;
 
   /// Deserialize.
   factory AttachMenuPeerTypeSameBotPM.deserialize(BinaryReader reader) {
@@ -80287,7 +80294,7 @@ class AttachMenuPeerTypeSameBotPM extends AttachMenuPeerTypeBase {
 /// ID: `c32bfa1a`.
 class AttachMenuPeerTypeBotPM extends AttachMenuPeerTypeBase {
   /// Attach Menu Peer Type Bot P M constructor.
-  const AttachMenuPeerTypeBotPM() : super._();
+  const AttachMenuPeerTypeBotPM() ;
 
   /// Deserialize.
   factory AttachMenuPeerTypeBotPM.deserialize(BinaryReader reader) {
@@ -80324,7 +80331,7 @@ class AttachMenuPeerTypeBotPM extends AttachMenuPeerTypeBase {
 /// ID: `f146d31f`.
 class AttachMenuPeerTypePM extends AttachMenuPeerTypeBase {
   /// Attach Menu Peer Type P M constructor.
-  const AttachMenuPeerTypePM() : super._();
+  const AttachMenuPeerTypePM() ;
 
   /// Deserialize.
   factory AttachMenuPeerTypePM.deserialize(BinaryReader reader) {
@@ -80361,7 +80368,7 @@ class AttachMenuPeerTypePM extends AttachMenuPeerTypeBase {
 /// ID: `0509113f`.
 class AttachMenuPeerTypeChat extends AttachMenuPeerTypeBase {
   /// Attach Menu Peer Type Chat constructor.
-  const AttachMenuPeerTypeChat() : super._();
+  const AttachMenuPeerTypeChat() ;
 
   /// Deserialize.
   factory AttachMenuPeerTypeChat.deserialize(BinaryReader reader) {
@@ -80398,7 +80405,7 @@ class AttachMenuPeerTypeChat extends AttachMenuPeerTypeBase {
 /// ID: `7bfbdefc`.
 class AttachMenuPeerTypeBroadcast extends AttachMenuPeerTypeBase {
   /// Attach Menu Peer Type Broadcast constructor.
-  const AttachMenuPeerTypeBroadcast() : super._();
+  const AttachMenuPeerTypeBroadcast() ;
 
   /// Deserialize.
   factory AttachMenuPeerTypeBroadcast.deserialize(BinaryReader reader) {
@@ -80438,7 +80445,7 @@ class InputInvoiceMessage extends InputInvoiceBase {
   const InputInvoiceMessage({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoiceMessage.deserialize(BinaryReader reader) {
@@ -80498,7 +80505,7 @@ class InputInvoiceSlug extends InputInvoiceBase {
   /// Input Invoice Slug constructor.
   const InputInvoiceSlug({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoiceSlug.deserialize(BinaryReader reader) {
@@ -80550,7 +80557,7 @@ class InputInvoicePremiumGiftCode extends InputInvoiceBase {
   const InputInvoicePremiumGiftCode({
     required this.purpose,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoicePremiumGiftCode.deserialize(BinaryReader reader) {
@@ -80608,7 +80615,7 @@ class InputInvoiceStars extends InputInvoiceBase {
   /// Input Invoice Stars constructor.
   const InputInvoiceStars({
     required this.purpose,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoiceStars.deserialize(BinaryReader reader) {
@@ -80659,7 +80666,7 @@ class InputInvoiceChatInviteSubscription extends InputInvoiceBase {
   /// Input Invoice Chat Invite Subscription constructor.
   const InputInvoiceChatInviteSubscription({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoiceChatInviteSubscription.deserialize(BinaryReader reader) {
@@ -80713,7 +80720,7 @@ class InputInvoiceStarGift extends InputInvoiceBase {
     required this.userId,
     required this.giftId,
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputInvoiceStarGift.deserialize(BinaryReader reader) {
@@ -80740,7 +80747,7 @@ class InputInvoiceStarGift extends InputInvoiceBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hideName,
       b01: message != null,
     );
@@ -80804,7 +80811,7 @@ class PaymentsExportedInvoice extends PaymentsExportedInvoiceBase {
   /// Payments Exported Invoice constructor.
   const PaymentsExportedInvoice({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsExportedInvoice.deserialize(BinaryReader reader) {
@@ -80859,7 +80866,7 @@ class MessagesTranscribedAudio extends MessagesTranscribedAudioBase {
     required this.text,
     this.trialRemainsNum,
     this.trialRemainsUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTranscribedAudio.deserialize(BinaryReader reader) {
@@ -80889,7 +80896,7 @@ class MessagesTranscribedAudio extends MessagesTranscribedAudioBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pending,
       b01: trialRemainsNum != null || trialRemainsUntilDate != null,
     );
@@ -80966,7 +80973,7 @@ class HelpPremiumPromo extends HelpPremiumPromoBase {
     required this.videos,
     required this.periodOptions,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPremiumPromo.deserialize(BinaryReader reader) {
@@ -81055,7 +81062,7 @@ class InputStorePaymentPremiumSubscription
   const InputStorePaymentPremiumSubscription({
     required this.restore,
     required this.upgrade,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentPremiumSubscription.deserialize(
@@ -81077,7 +81084,7 @@ class InputStorePaymentPremiumSubscription
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: restore,
       b01: upgrade,
     );
@@ -81127,7 +81134,7 @@ class InputStorePaymentGiftPremium extends InputStorePaymentPurposeBase {
     required this.userId,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentGiftPremium.deserialize(BinaryReader reader) {
@@ -81198,7 +81205,7 @@ class InputStorePaymentPremiumGiftCode extends InputStorePaymentPurposeBase {
     required this.currency,
     required this.amount,
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentPremiumGiftCode.deserialize(BinaryReader reader) {
@@ -81229,7 +81236,7 @@ class InputStorePaymentPremiumGiftCode extends InputStorePaymentPurposeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: boostPeer != null,
       b01: message != null,
     );
@@ -81311,7 +81318,7 @@ class InputStorePaymentPremiumGiveaway extends InputStorePaymentPurposeBase {
     required this.untilDate,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentPremiumGiveaway.deserialize(BinaryReader reader) {
@@ -81355,7 +81362,7 @@ class InputStorePaymentPremiumGiveaway extends InputStorePaymentPurposeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: onlyNewSubscribers,
       b03: winnersAreVisible,
       b01: additionalPeers != null,
@@ -81461,7 +81468,7 @@ class InputStorePaymentStarsTopup extends InputStorePaymentPurposeBase {
     required this.stars,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentStarsTopup.deserialize(BinaryReader reader) {
@@ -81533,7 +81540,7 @@ class InputStorePaymentStarsGift extends InputStorePaymentPurposeBase {
     required this.stars,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentStarsGift.deserialize(BinaryReader reader) {
@@ -81620,7 +81627,7 @@ class InputStorePaymentStarsGiveaway extends InputStorePaymentPurposeBase {
     required this.currency,
     required this.amount,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStorePaymentStarsGiveaway.deserialize(BinaryReader reader) {
@@ -81668,7 +81675,7 @@ class InputStorePaymentStarsGiveaway extends InputStorePaymentPurposeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: onlyNewSubscribers,
       b03: winnersAreVisible,
       b01: additionalPeers != null,
@@ -81790,7 +81797,7 @@ class PremiumGiftOption extends PremiumGiftOptionBase {
     required this.amount,
     required this.botUrl,
     this.storeProduct,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumGiftOption.deserialize(BinaryReader reader) {
@@ -81818,7 +81825,7 @@ class PremiumGiftOption extends PremiumGiftOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: storeProduct != null,
     );
 
@@ -81890,7 +81897,7 @@ class PaymentFormMethod extends PaymentFormMethodBase {
   const PaymentFormMethod({
     required this.url,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentFormMethod.deserialize(BinaryReader reader) {
@@ -81946,7 +81953,7 @@ class PaymentFormMethod extends PaymentFormMethodBase {
 /// ID: `2de11aae`.
 class EmojiStatusEmpty extends EmojiStatusBase {
   /// Emoji Status Empty constructor.
-  const EmojiStatusEmpty() : super._();
+  const EmojiStatusEmpty() ;
 
   /// Deserialize.
   factory EmojiStatusEmpty.deserialize(BinaryReader reader) {
@@ -81985,7 +81992,7 @@ class EmojiStatus extends EmojiStatusBase {
   /// Emoji Status constructor.
   const EmojiStatus({
     required this.documentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiStatus.deserialize(BinaryReader reader) {
@@ -82039,7 +82046,7 @@ class EmojiStatusUntil extends EmojiStatusBase {
   const EmojiStatusUntil({
     required this.documentId,
     required this.until,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiStatusUntil.deserialize(BinaryReader reader) {
@@ -82099,7 +82106,7 @@ class EmojiStatusUntil extends EmojiStatusBase {
 /// ID: `d08ce645`.
 class AccountEmojiStatusesNotModified extends AccountEmojiStatusesBase {
   /// Account Emoji Statuses Not Modified constructor.
-  const AccountEmojiStatusesNotModified() : super._();
+  const AccountEmojiStatusesNotModified() ;
 
   /// Deserialize.
   factory AccountEmojiStatusesNotModified.deserialize(BinaryReader reader) {
@@ -82139,7 +82146,7 @@ class AccountEmojiStatuses extends AccountEmojiStatusesBase {
   const AccountEmojiStatuses({
     required this.hash,
     required this.statuses,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountEmojiStatuses.deserialize(BinaryReader reader) {
@@ -82197,7 +82204,7 @@ class AccountEmojiStatuses extends AccountEmojiStatusesBase {
 /// ID: `79f5d419`.
 class ReactionEmpty extends ReactionBase {
   /// Reaction Empty constructor.
-  const ReactionEmpty() : super._();
+  const ReactionEmpty() ;
 
   /// Deserialize.
   factory ReactionEmpty.deserialize(BinaryReader reader) {
@@ -82236,7 +82243,7 @@ class ReactionEmoji extends ReactionBase {
   /// Reaction Emoji constructor.
   const ReactionEmoji({
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReactionEmoji.deserialize(BinaryReader reader) {
@@ -82287,7 +82294,7 @@ class ReactionCustomEmoji extends ReactionBase {
   /// Reaction Custom Emoji constructor.
   const ReactionCustomEmoji({
     required this.documentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReactionCustomEmoji.deserialize(BinaryReader reader) {
@@ -82338,7 +82345,7 @@ class ReactionCustomEmoji extends ReactionBase {
 /// ID: `523da4eb`.
 class ReactionPaid extends ReactionBase {
   /// Reaction Paid constructor.
-  const ReactionPaid() : super._();
+  const ReactionPaid() ;
 
   /// Deserialize.
   factory ReactionPaid.deserialize(BinaryReader reader) {
@@ -82375,7 +82382,7 @@ class ReactionPaid extends ReactionBase {
 /// ID: `eafc32bc`.
 class ChatReactionsNone extends ChatReactionsBase {
   /// Chat Reactions None constructor.
-  const ChatReactionsNone() : super._();
+  const ChatReactionsNone() ;
 
   /// Deserialize.
   factory ChatReactionsNone.deserialize(BinaryReader reader) {
@@ -82414,7 +82421,7 @@ class ChatReactionsAll extends ChatReactionsBase {
   /// Chat Reactions All constructor.
   const ChatReactionsAll({
     required this.allowCustom,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatReactionsAll.deserialize(BinaryReader reader) {
@@ -82433,7 +82440,7 @@ class ChatReactionsAll extends ChatReactionsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: allowCustom,
     );
 
@@ -82476,7 +82483,7 @@ class ChatReactionsSome extends ChatReactionsBase {
   /// Chat Reactions Some constructor.
   const ChatReactionsSome({
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatReactionsSome.deserialize(BinaryReader reader) {
@@ -82525,7 +82532,7 @@ class ChatReactionsSome extends ChatReactionsBase {
 /// ID: `b06fdbdf`.
 class MessagesReactionsNotModified extends MessagesReactionsBase {
   /// Messages Reactions Not Modified constructor.
-  const MessagesReactionsNotModified() : super._();
+  const MessagesReactionsNotModified() ;
 
   /// Deserialize.
   factory MessagesReactionsNotModified.deserialize(BinaryReader reader) {
@@ -82565,7 +82572,7 @@ class MessagesReactions extends MessagesReactionsBase {
   const MessagesReactions({
     required this.hash,
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReactions.deserialize(BinaryReader reader) {
@@ -82626,7 +82633,7 @@ class EmailVerifyPurposeLoginSetup extends EmailVerifyPurposeBase {
   const EmailVerifyPurposeLoginSetup({
     required this.phoneNumber,
     required this.phoneCodeHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmailVerifyPurposeLoginSetup.deserialize(BinaryReader reader) {
@@ -82682,7 +82689,7 @@ class EmailVerifyPurposeLoginSetup extends EmailVerifyPurposeBase {
 /// ID: `527d22eb`.
 class EmailVerifyPurposeLoginChange extends EmailVerifyPurposeBase {
   /// Email Verify Purpose Login Change constructor.
-  const EmailVerifyPurposeLoginChange() : super._();
+  const EmailVerifyPurposeLoginChange() ;
 
   /// Deserialize.
   factory EmailVerifyPurposeLoginChange.deserialize(BinaryReader reader) {
@@ -82719,7 +82726,7 @@ class EmailVerifyPurposeLoginChange extends EmailVerifyPurposeBase {
 /// ID: `bbf51685`.
 class EmailVerifyPurposePassport extends EmailVerifyPurposeBase {
   /// Email Verify Purpose Passport constructor.
-  const EmailVerifyPurposePassport() : super._();
+  const EmailVerifyPurposePassport() ;
 
   /// Deserialize.
   factory EmailVerifyPurposePassport.deserialize(BinaryReader reader) {
@@ -82758,7 +82765,7 @@ class EmailVerificationCode extends EmailVerificationBase {
   /// Email Verification Code constructor.
   const EmailVerificationCode({
     required this.code,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmailVerificationCode.deserialize(BinaryReader reader) {
@@ -82809,7 +82816,7 @@ class EmailVerificationGoogle extends EmailVerificationBase {
   /// Email Verification Google constructor.
   const EmailVerificationGoogle({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmailVerificationGoogle.deserialize(BinaryReader reader) {
@@ -82860,7 +82867,7 @@ class EmailVerificationApple extends EmailVerificationBase {
   /// Email Verification Apple constructor.
   const EmailVerificationApple({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmailVerificationApple.deserialize(BinaryReader reader) {
@@ -82911,7 +82918,7 @@ class AccountEmailVerified extends AccountEmailVerifiedBase {
   /// Account Email Verified constructor.
   const AccountEmailVerified({
     required this.email,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountEmailVerified.deserialize(BinaryReader reader) {
@@ -82963,7 +82970,7 @@ class AccountEmailVerifiedLogin extends AccountEmailVerifiedBase {
   const AccountEmailVerifiedLogin({
     required this.email,
     required this.sentCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountEmailVerifiedLogin.deserialize(BinaryReader reader) {
@@ -83028,7 +83035,7 @@ class PremiumSubscriptionOption extends PremiumSubscriptionOptionBase {
     required this.amount,
     required this.botUrl,
     this.storeProduct,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumSubscriptionOption.deserialize(BinaryReader reader) {
@@ -83063,7 +83070,7 @@ class PremiumSubscriptionOption extends PremiumSubscriptionOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: current,
       b02: canPurchaseUpgrade,
       b03: transaction != null,
@@ -83154,7 +83161,7 @@ class SendAsPeer extends SendAsPeerBase {
   const SendAsPeer({
     required this.premiumRequired,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SendAsPeer.deserialize(BinaryReader reader) {
@@ -83175,7 +83182,7 @@ class SendAsPeer extends SendAsPeerBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: premiumRequired,
     );
 
@@ -83226,7 +83233,7 @@ class MessageExtendedMediaPreview extends MessageExtendedMediaBase {
     this.h,
     this.thumb,
     this.videoDuration,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageExtendedMediaPreview.deserialize(BinaryReader reader) {
@@ -83255,7 +83262,7 @@ class MessageExtendedMediaPreview extends MessageExtendedMediaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: w != null || h != null,
       b01: thumb != null,
       b02: videoDuration != null,
@@ -83328,7 +83335,7 @@ class MessageExtendedMedia extends MessageExtendedMediaBase {
   /// Message Extended Media constructor.
   const MessageExtendedMedia({
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageExtendedMedia.deserialize(BinaryReader reader) {
@@ -83380,7 +83387,7 @@ class StickerKeyword extends StickerKeywordBase {
   const StickerKeyword({
     required this.documentId,
     required this.keyword,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickerKeyword.deserialize(BinaryReader reader) {
@@ -83442,7 +83449,7 @@ class Username extends UsernameBase {
     required this.editable,
     required this.active,
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Username.deserialize(BinaryReader reader) {
@@ -83465,7 +83472,7 @@ class Username extends UsernameBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: editable,
       b01: active,
     );
@@ -83518,7 +83525,7 @@ class ForumTopicDeleted extends ForumTopicBase {
   /// Forum Topic Deleted constructor.
   const ForumTopicDeleted({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ForumTopicDeleted.deserialize(BinaryReader reader) {
@@ -83589,7 +83596,7 @@ class ForumTopic extends ForumTopicBase {
     required this.fromId,
     required this.notifySettings,
     this.draft,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ForumTopic.deserialize(BinaryReader reader) {
@@ -83647,7 +83654,7 @@ class ForumTopic extends ForumTopicBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: my,
       b02: closed,
       b03: pinned,
@@ -83810,7 +83817,7 @@ class MessagesForumTopics extends MessagesForumTopicsBase {
     required this.chats,
     required this.users,
     required this.pts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesForumTopics.deserialize(BinaryReader reader) {
@@ -83841,7 +83848,7 @@ class MessagesForumTopics extends MessagesForumTopicsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: orderByCreateDate,
     );
 
@@ -83918,7 +83925,7 @@ class DefaultHistoryTTL extends DefaultHistoryTTLBase {
   /// Default History T T L constructor.
   const DefaultHistoryTTL({
     required this.period,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DefaultHistoryTTL.deserialize(BinaryReader reader) {
@@ -83972,7 +83979,7 @@ class ExportedContactToken extends ExportedContactTokenBase {
   const ExportedContactToken({
     required this.url,
     required this.expires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ExportedContactToken.deserialize(BinaryReader reader) {
@@ -84031,7 +84038,7 @@ class RequestPeerTypeUser extends RequestPeerTypeBase {
   const RequestPeerTypeUser({
     this.bot,
     this.premium,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestPeerTypeUser.deserialize(BinaryReader reader) {
@@ -84052,7 +84059,7 @@ class RequestPeerTypeUser extends RequestPeerTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (bot != null),
       b01: (premium != null),
     );
@@ -84113,7 +84120,7 @@ class RequestPeerTypeChat extends RequestPeerTypeBase {
     this.forum,
     this.userAdminRights,
     this.botAdminRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestPeerTypeChat.deserialize(BinaryReader reader) {
@@ -84148,7 +84155,7 @@ class RequestPeerTypeChat extends RequestPeerTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b05: botParticipant,
       b03: (hasUsername != null),
@@ -84235,7 +84242,7 @@ class RequestPeerTypeBroadcast extends RequestPeerTypeBase {
     this.hasUsername,
     this.userAdminRights,
     this.botAdminRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestPeerTypeBroadcast.deserialize(BinaryReader reader) {
@@ -84266,7 +84273,7 @@ class RequestPeerTypeBroadcast extends RequestPeerTypeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: creator,
       b03: (hasUsername != null),
       b01: userAdminRights != null,
@@ -84334,7 +84341,7 @@ class RequestPeerTypeBroadcast extends RequestPeerTypeBase {
 /// ID: `481eadfa`.
 class EmojiListNotModified extends EmojiListBase {
   /// Emoji List Not Modified constructor.
-  const EmojiListNotModified() : super._();
+  const EmojiListNotModified() ;
 
   /// Deserialize.
   factory EmojiListNotModified.deserialize(BinaryReader reader) {
@@ -84374,7 +84381,7 @@ class EmojiList extends EmojiListBase {
   const EmojiList({
     required this.hash,
     required this.documentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiList.deserialize(BinaryReader reader) {
@@ -84436,7 +84443,7 @@ class EmojiGroup extends EmojiGroupBase {
     required this.title,
     required this.iconEmojiId,
     required this.emoticons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiGroup.deserialize(BinaryReader reader) {
@@ -84505,7 +84512,7 @@ class EmojiGroupGreeting extends EmojiGroupBase {
     required this.title,
     required this.iconEmojiId,
     required this.emoticons,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiGroupGreeting.deserialize(BinaryReader reader) {
@@ -84573,7 +84580,7 @@ class EmojiGroupPremium extends EmojiGroupBase {
   const EmojiGroupPremium({
     required this.title,
     required this.iconEmojiId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory EmojiGroupPremium.deserialize(BinaryReader reader) {
@@ -84631,7 +84638,7 @@ class EmojiGroupPremium extends EmojiGroupBase {
 /// ID: `6fb4ad87`.
 class MessagesEmojiGroupsNotModified extends MessagesEmojiGroupsBase {
   /// Messages Emoji Groups Not Modified constructor.
-  const MessagesEmojiGroupsNotModified() : super._();
+  const MessagesEmojiGroupsNotModified() ;
 
   /// Deserialize.
   factory MessagesEmojiGroupsNotModified.deserialize(BinaryReader reader) {
@@ -84671,7 +84678,7 @@ class MessagesEmojiGroups extends MessagesEmojiGroupsBase {
   const MessagesEmojiGroups({
     required this.hash,
     required this.groups,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEmojiGroups.deserialize(BinaryReader reader) {
@@ -84732,7 +84739,7 @@ class TextWithEntities extends TextWithEntitiesBase {
   const TextWithEntities({
     required this.text,
     required this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory TextWithEntities.deserialize(BinaryReader reader) {
@@ -84790,7 +84797,7 @@ class MessagesTranslateResult extends MessagesTranslatedTextBase {
   /// Messages Translate Result constructor.
   const MessagesTranslateResult({
     required this.result,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTranslateResult.deserialize(BinaryReader reader) {
@@ -84843,7 +84850,7 @@ class AutoSaveSettings extends AutoSaveSettingsBase {
     required this.photos,
     required this.videos,
     this.videoMaxSize,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AutoSaveSettings.deserialize(BinaryReader reader) {
@@ -84867,7 +84874,7 @@ class AutoSaveSettings extends AutoSaveSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: photos,
       b01: videos,
       b02: videoMaxSize != null,
@@ -84925,7 +84932,7 @@ class AutoSaveException extends AutoSaveExceptionBase {
   const AutoSaveException({
     required this.peer,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AutoSaveException.deserialize(BinaryReader reader) {
@@ -84988,7 +84995,7 @@ class AccountAutoSaveSettings extends AccountAutoSaveSettingsBase {
     required this.exceptions,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountAutoSaveSettings.deserialize(BinaryReader reader) {
@@ -85072,7 +85079,7 @@ class AccountAutoSaveSettings extends AccountAutoSaveSettingsBase {
 /// ID: `7cde641d`.
 class HelpAppConfigNotModified extends HelpAppConfigBase {
   /// Help App Config Not Modified constructor.
-  const HelpAppConfigNotModified() : super._();
+  const HelpAppConfigNotModified() ;
 
   /// Deserialize.
   factory HelpAppConfigNotModified.deserialize(BinaryReader reader) {
@@ -85112,7 +85119,7 @@ class HelpAppConfig extends HelpAppConfigBase {
   const HelpAppConfig({
     required this.hash,
     required this.config,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpAppConfig.deserialize(BinaryReader reader) {
@@ -85173,7 +85180,7 @@ class InputBotAppID extends InputBotAppBase {
   const InputBotAppID({
     required this.id,
     required this.accessHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotAppID.deserialize(BinaryReader reader) {
@@ -85236,7 +85243,7 @@ class InputBotAppShortName extends InputBotAppBase {
   const InputBotAppShortName({
     required this.botId,
     required this.shortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBotAppShortName.deserialize(BinaryReader reader) {
@@ -85292,7 +85299,7 @@ class InputBotAppShortName extends InputBotAppBase {
 /// ID: `5da674b7`.
 class BotAppNotModified extends BotAppBase {
   /// Bot App Not Modified constructor.
-  const BotAppNotModified() : super._();
+  const BotAppNotModified() ;
 
   /// Deserialize.
   factory BotAppNotModified.deserialize(BinaryReader reader) {
@@ -85338,7 +85345,7 @@ class BotApp extends BotAppBase {
     required this.photo,
     this.document,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotApp.deserialize(BinaryReader reader) {
@@ -85373,7 +85380,7 @@ class BotApp extends BotAppBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: document != null,
     );
 
@@ -85464,7 +85471,7 @@ class MessagesBotApp extends MessagesBotAppBase {
     required this.requestWriteAccess,
     required this.hasSettings,
     required this.app,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesBotApp.deserialize(BinaryReader reader) {
@@ -85489,7 +85496,7 @@ class MessagesBotApp extends MessagesBotAppBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: inactive,
       b01: requestWriteAccess,
       b02: hasSettings,
@@ -85548,7 +85555,7 @@ class InlineBotWebView extends InlineBotWebViewBase {
   const InlineBotWebView({
     required this.text,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InlineBotWebView.deserialize(BinaryReader reader) {
@@ -85607,7 +85614,7 @@ class ReadParticipantDate extends ReadParticipantDateBase {
   const ReadParticipantDate({
     required this.userId,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReadParticipantDate.deserialize(BinaryReader reader) {
@@ -85667,7 +85674,7 @@ class InputChatlistDialogFilter extends InputChatlistBase {
   /// Input Chatlist Dialog Filter constructor.
   const InputChatlistDialogFilter({
     required this.filterId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputChatlistDialogFilter.deserialize(BinaryReader reader) {
@@ -85722,7 +85729,7 @@ class ExportedChatlistInvite extends ExportedChatlistInviteBase {
     required this.title,
     required this.url,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ExportedChatlistInvite.deserialize(BinaryReader reader) {
@@ -85745,7 +85752,7 @@ class ExportedChatlistInvite extends ExportedChatlistInviteBase {
 
   /// Flags.
   int get flags {
-    final v = _flag();
+    final v = toFlag();
 
     return v;
   }
@@ -85799,7 +85806,7 @@ class ChatlistsExportedChatlistInvite
   const ChatlistsExportedChatlistInvite({
     required this.filter,
     required this.invite,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsExportedChatlistInvite.deserialize(BinaryReader reader) {
@@ -85859,7 +85866,7 @@ class ChatlistsExportedInvites extends ChatlistsExportedInvitesBase {
     required this.invites,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsExportedInvites.deserialize(BinaryReader reader) {
@@ -85928,7 +85935,7 @@ class ChatlistsChatlistInviteAlready extends ChatlistsChatlistInviteBase {
     required this.alreadyPeers,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsChatlistInviteAlready.deserialize(BinaryReader reader) {
@@ -86013,7 +86020,7 @@ class ChatlistsChatlistInvite extends ChatlistsChatlistInviteBase {
     required this.peers,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsChatlistInvite.deserialize(BinaryReader reader) {
@@ -86041,7 +86048,7 @@ class ChatlistsChatlistInvite extends ChatlistsChatlistInviteBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: emoticon != null,
     );
 
@@ -86110,7 +86117,7 @@ class ChatlistsChatlistUpdates extends ChatlistsChatlistUpdatesBase {
     required this.missingPeers,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsChatlistUpdates.deserialize(BinaryReader reader) {
@@ -86177,7 +86184,7 @@ class BotsBotInfo extends BotsBotInfoBase {
     required this.name,
     required this.about,
     required this.description,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsBotInfo.deserialize(BinaryReader reader) {
@@ -86244,7 +86251,7 @@ class MessagePeerVote extends MessagePeerVoteBase {
     required this.peer,
     required this.option,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagePeerVote.deserialize(BinaryReader reader) {
@@ -86310,7 +86317,7 @@ class MessagePeerVoteInputOption extends MessagePeerVoteBase {
   const MessagePeerVoteInputOption({
     required this.peer,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagePeerVoteInputOption.deserialize(BinaryReader reader) {
@@ -86370,7 +86377,7 @@ class MessagePeerVoteMultiple extends MessagePeerVoteBase {
     required this.peer,
     required this.options,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagePeerVoteMultiple.deserialize(BinaryReader reader) {
@@ -86440,7 +86447,7 @@ class StoryViews extends StoryViewsBase {
     this.reactions,
     this.reactionsCount,
     this.recentViewers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryViews.deserialize(BinaryReader reader) {
@@ -86475,7 +86482,7 @@ class StoryViews extends StoryViewsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: hasViewers,
       b02: forwardsCount != null,
       b03: reactions != null,
@@ -86561,7 +86568,7 @@ class StoryItemDeleted extends StoryItemBase {
   /// Story Item Deleted constructor.
   const StoryItemDeleted({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryItemDeleted.deserialize(BinaryReader reader) {
@@ -86617,7 +86624,7 @@ class StoryItemSkipped extends StoryItemBase {
     required this.id,
     required this.date,
     required this.expireDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryItemSkipped.deserialize(BinaryReader reader) {
@@ -86642,7 +86649,7 @@ class StoryItemSkipped extends StoryItemBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b08: closeFriends,
     );
 
@@ -86722,7 +86729,7 @@ class StoryItem extends StoryItemBase {
     this.privacy,
     this.views,
     this.sentReaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryItem.deserialize(BinaryReader reader) {
@@ -86794,7 +86801,7 @@ class StoryItem extends StoryItemBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: pinned,
       b07: public,
       b08: closeFriends,
@@ -86972,7 +86979,7 @@ class StoriesAllStoriesNotModified extends StoriesAllStoriesBase {
   const StoriesAllStoriesNotModified({
     required this.state,
     required this.stealthMode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesAllStoriesNotModified.deserialize(BinaryReader reader) {
@@ -86993,7 +87000,7 @@ class StoriesAllStoriesNotModified extends StoriesAllStoriesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag();
+    final v = toFlag();
 
     return v;
   }
@@ -87046,7 +87053,7 @@ class StoriesAllStories extends StoriesAllStoriesBase {
     required this.chats,
     required this.users,
     required this.stealthMode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesAllStories.deserialize(BinaryReader reader) {
@@ -87077,7 +87084,7 @@ class StoriesAllStories extends StoriesAllStoriesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hasMore,
     );
 
@@ -87156,7 +87163,7 @@ class StoriesStories extends StoriesStoriesBase {
     this.pinnedToTop,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesStories.deserialize(BinaryReader reader) {
@@ -87184,7 +87191,7 @@ class StoriesStories extends StoriesStoriesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinnedToTop != null,
     );
 
@@ -87257,7 +87264,7 @@ class StoryView extends StoryViewBase {
     required this.userId,
     required this.date,
     this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryView.deserialize(BinaryReader reader) {
@@ -87286,7 +87293,7 @@ class StoryView extends StoryViewBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: blocked,
       b01: blockedMyStoriesFrom,
       b02: reaction != null,
@@ -87357,7 +87364,7 @@ class StoryViewPublicForward extends StoryViewBase {
     required this.blocked,
     required this.blockedMyStoriesFrom,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryViewPublicForward.deserialize(BinaryReader reader) {
@@ -87380,7 +87387,7 @@ class StoryViewPublicForward extends StoryViewBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: blocked,
       b01: blockedMyStoriesFrom,
     );
@@ -87436,7 +87443,7 @@ class StoryViewPublicRepost extends StoryViewBase {
     required this.blockedMyStoriesFrom,
     required this.peerId,
     required this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryViewPublicRepost.deserialize(BinaryReader reader) {
@@ -87461,7 +87468,7 @@ class StoryViewPublicRepost extends StoryViewBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: blocked,
       b01: blockedMyStoriesFrom,
     );
@@ -87526,7 +87533,7 @@ class StoriesStoryViewsList extends StoriesStoryViewsListBase {
     required this.chats,
     required this.users,
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesStoryViewsList.deserialize(BinaryReader reader) {
@@ -87560,7 +87567,7 @@ class StoriesStoryViewsList extends StoriesStoryViewsListBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -87651,7 +87658,7 @@ class StoriesStoryViews extends StoriesStoryViewsBase {
   const StoriesStoryViews({
     required this.views,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesStoryViews.deserialize(BinaryReader reader) {
@@ -87714,7 +87721,7 @@ class InputReplyToMessage extends InputReplyToBase {
     this.quoteText,
     this.quoteEntities,
     this.quoteOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputReplyToMessage.deserialize(BinaryReader reader) {
@@ -87751,7 +87758,7 @@ class InputReplyToMessage extends InputReplyToBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
       b01: replyToPeerId != null,
       b02: quoteText != null,
@@ -87842,7 +87849,7 @@ class InputReplyToStory extends InputReplyToBase {
   const InputReplyToStory({
     required this.peer,
     required this.storyId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputReplyToStory.deserialize(BinaryReader reader) {
@@ -87902,7 +87909,7 @@ class ExportedStoryLink extends ExportedStoryLinkBase {
   /// Exported Story Link constructor.
   const ExportedStoryLink({
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ExportedStoryLink.deserialize(BinaryReader reader) {
@@ -87954,7 +87961,7 @@ class StoriesStealthMode extends StoriesStealthModeBase {
   const StoriesStealthMode({
     this.activeUntilDate,
     this.cooldownUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesStealthMode.deserialize(BinaryReader reader) {
@@ -87979,7 +87986,7 @@ class StoriesStealthMode extends StoriesStealthModeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: activeUntilDate != null,
       b01: cooldownUntilDate != null,
     );
@@ -88040,7 +88047,7 @@ class MediaAreaCoordinates extends MediaAreaCoordinatesBase {
     required this.h,
     required this.rotation,
     this.radius,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaCoordinates.deserialize(BinaryReader reader) {
@@ -88070,7 +88077,7 @@ class MediaAreaCoordinates extends MediaAreaCoordinatesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: radius != null,
     );
 
@@ -88148,7 +88155,7 @@ class MediaAreaVenue extends MediaAreaBase {
     required this.provider,
     required this.venueId,
     required this.venueType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaVenue.deserialize(BinaryReader reader) {
@@ -88243,7 +88250,7 @@ class InputMediaAreaVenue extends MediaAreaBase {
     required this.coordinates,
     required this.queryId,
     required this.resultId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaAreaVenue.deserialize(BinaryReader reader) {
@@ -88312,7 +88319,7 @@ class MediaAreaGeoPoint extends MediaAreaBase {
     required this.coordinates,
     required this.geo,
     this.address,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaGeoPoint.deserialize(BinaryReader reader) {
@@ -88337,7 +88344,7 @@ class MediaAreaGeoPoint extends MediaAreaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: address != null,
     );
 
@@ -88397,7 +88404,7 @@ class MediaAreaSuggestedReaction extends MediaAreaBase {
     required this.flipped,
     required this.coordinates,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaSuggestedReaction.deserialize(BinaryReader reader) {
@@ -88422,7 +88429,7 @@ class MediaAreaSuggestedReaction extends MediaAreaBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
       b01: flipped,
     );
@@ -88482,7 +88489,7 @@ class MediaAreaChannelPost extends MediaAreaBase {
     required this.coordinates,
     required this.channelId,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaChannelPost.deserialize(BinaryReader reader) {
@@ -88553,7 +88560,7 @@ class InputMediaAreaChannelPost extends MediaAreaBase {
     required this.coordinates,
     required this.channel,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputMediaAreaChannelPost.deserialize(BinaryReader reader) {
@@ -88621,7 +88628,7 @@ class MediaAreaUrl extends MediaAreaBase {
   const MediaAreaUrl({
     required this.coordinates,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaUrl.deserialize(BinaryReader reader) {
@@ -88682,7 +88689,7 @@ class MediaAreaWeather extends MediaAreaBase {
     required this.emoji,
     required this.temperatureC,
     required this.color,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MediaAreaWeather.deserialize(BinaryReader reader) {
@@ -88758,7 +88765,7 @@ class PeerStories extends PeerStoriesBase {
     required this.peer,
     this.maxReadId,
     required this.stories,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerStories.deserialize(BinaryReader reader) {
@@ -88782,7 +88789,7 @@ class PeerStories extends PeerStoriesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: maxReadId != null,
     );
 
@@ -88841,7 +88848,7 @@ class StoriesPeerStories extends StoriesPeerStoriesBase {
     required this.stories,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesPeerStories.deserialize(BinaryReader reader) {
@@ -88908,7 +88915,7 @@ class MessagesWebPage extends MessagesWebPageBase {
     required this.webpage,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesWebPage.deserialize(BinaryReader reader) {
@@ -88978,7 +88985,7 @@ class PremiumGiftCodeOption extends PremiumGiftCodeOptionBase {
     this.storeQuantity,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumGiftCodeOption.deserialize(BinaryReader reader) {
@@ -89009,7 +89016,7 @@ class PremiumGiftCodeOption extends PremiumGiftCodeOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: storeProduct != null,
       b01: storeQuantity != null,
     );
@@ -89099,7 +89106,7 @@ class PaymentsCheckedGiftCode extends PaymentsCheckedGiftCodeBase {
     this.usedDate,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsCheckedGiftCode.deserialize(BinaryReader reader) {
@@ -89138,7 +89145,7 @@ class PaymentsCheckedGiftCode extends PaymentsCheckedGiftCodeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: viaGiveaway,
       b04: fromId != null,
       b03: giveawayMsgId != null,
@@ -89244,7 +89251,7 @@ class PaymentsGiveawayInfo extends PaymentsGiveawayInfoBase {
     this.joinedTooEarlyDate,
     this.adminDisallowedChatId,
     this.disallowedCountry,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGiveawayInfo.deserialize(BinaryReader reader) {
@@ -89279,7 +89286,7 @@ class PaymentsGiveawayInfo extends PaymentsGiveawayInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: participating,
       b03: preparingResults,
       b01: joinedTooEarlyDate != null,
@@ -89366,7 +89373,7 @@ class PaymentsGiveawayInfoResults extends PaymentsGiveawayInfoBase {
     required this.finishDate,
     required this.winnersCount,
     this.activatedCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGiveawayInfoResults.deserialize(BinaryReader reader) {
@@ -89402,7 +89409,7 @@ class PaymentsGiveawayInfoResults extends PaymentsGiveawayInfoBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: winner,
       b01: refunded,
       b03: giftCodeSlug != null,
@@ -89497,7 +89504,7 @@ class PrepaidGiveaway extends PrepaidGiveawayBase {
     required this.months,
     required this.quantity,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrepaidGiveaway.deserialize(BinaryReader reader) {
@@ -89579,7 +89586,7 @@ class PrepaidStarsGiveaway extends PrepaidGiveawayBase {
     required this.quantity,
     required this.boosts,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PrepaidStarsGiveaway.deserialize(BinaryReader reader) {
@@ -89676,7 +89683,7 @@ class Boost extends BoostBase {
     this.usedGiftSlug,
     this.multiplier,
     this.stars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Boost.deserialize(BinaryReader reader) {
@@ -89720,7 +89727,7 @@ class Boost extends BoostBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: gift,
       b02: giveaway || giveawayMsgId != null,
       b03: unclaimed,
@@ -89835,7 +89842,7 @@ class PremiumBoostsList extends PremiumBoostsListBase {
     required this.boosts,
     this.nextOffset,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumBoostsList.deserialize(BinaryReader reader) {
@@ -89861,7 +89868,7 @@ class PremiumBoostsList extends PremiumBoostsListBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -89929,7 +89936,7 @@ class MyBoost extends MyBoostBase {
     required this.date,
     required this.expires,
     this.cooldownUntilDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MyBoost.deserialize(BinaryReader reader) {
@@ -89959,7 +89966,7 @@ class MyBoost extends MyBoostBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: peer != null,
       b01: cooldownUntilDate != null,
     );
@@ -90034,7 +90041,7 @@ class PremiumMyBoosts extends PremiumMyBoostsBase {
     required this.myBoosts,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumMyBoosts.deserialize(BinaryReader reader) {
@@ -90108,7 +90115,7 @@ class PremiumBoostsStatus extends PremiumBoostsStatusBase {
     required this.boostUrl,
     this.prepaidGiveaways,
     this.myBoostSlots,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumBoostsStatus.deserialize(BinaryReader reader) {
@@ -90154,7 +90161,7 @@ class PremiumBoostsStatus extends PremiumBoostsStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: myBoost || myBoostSlots != null,
       b04: giftBoosts != null,
       b00: nextLevelBoosts != null,
@@ -90270,7 +90277,7 @@ class StoryFwdHeader extends StoryFwdHeaderBase {
     this.from,
     this.fromName,
     this.storyId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryFwdHeader.deserialize(BinaryReader reader) {
@@ -90298,7 +90305,7 @@ class StoryFwdHeader extends StoryFwdHeaderBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: modified,
       b00: from != null,
       b01: fromName != null,
@@ -90371,7 +90378,7 @@ class PostInteractionCountersMessage extends PostInteractionCountersBase {
     required this.views,
     required this.forwards,
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PostInteractionCountersMessage.deserialize(BinaryReader reader) {
@@ -90454,7 +90461,7 @@ class PostInteractionCountersStory extends PostInteractionCountersBase {
     required this.views,
     required this.forwards,
     required this.reactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PostInteractionCountersStory.deserialize(BinaryReader reader) {
@@ -90535,7 +90542,7 @@ class StatsStoryStats extends StatsStoryStatsBase {
   const StatsStoryStats({
     required this.viewsGraph,
     required this.reactionsByEmotionGraph,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsStoryStats.deserialize(BinaryReader reader) {
@@ -90593,7 +90600,7 @@ class PublicForwardMessage extends PublicForwardBase {
   /// Public Forward Message constructor.
   const PublicForwardMessage({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PublicForwardMessage.deserialize(BinaryReader reader) {
@@ -90645,7 +90652,7 @@ class PublicForwardStory extends PublicForwardBase {
   const PublicForwardStory({
     required this.peer,
     required this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PublicForwardStory.deserialize(BinaryReader reader) {
@@ -90707,7 +90714,7 @@ class StatsPublicForwards extends StatsPublicForwardsBase {
     this.nextOffset,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsPublicForwards.deserialize(BinaryReader reader) {
@@ -90735,7 +90742,7 @@ class StatsPublicForwards extends StatsPublicForwardsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -90805,7 +90812,7 @@ class PeerColor extends PeerColorBase {
   const PeerColor({
     this.color,
     this.backgroundEmojiId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PeerColor.deserialize(BinaryReader reader) {
@@ -90829,7 +90836,7 @@ class PeerColor extends PeerColorBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: color != null,
       b01: backgroundEmojiId != null,
     );
@@ -90885,7 +90892,7 @@ class HelpPeerColorSet extends HelpPeerColorSetBase {
   /// Help Peer Color Set constructor.
   const HelpPeerColorSet({
     required this.colors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPeerColorSet.deserialize(BinaryReader reader) {
@@ -90938,7 +90945,7 @@ class HelpPeerColorProfileSet extends HelpPeerColorSetBase {
     required this.paletteColors,
     required this.bgColors,
     required this.storyColors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPeerColorProfileSet.deserialize(BinaryReader reader) {
@@ -91008,7 +91015,7 @@ class HelpPeerColorOption extends HelpPeerColorOptionBase {
     this.darkColors,
     this.channelMinLevel,
     this.groupMinLevel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPeerColorOption.deserialize(BinaryReader reader) {
@@ -91043,7 +91050,7 @@ class HelpPeerColorOption extends HelpPeerColorOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hidden,
       b01: colors != null,
       b02: darkColors != null,
@@ -91127,7 +91134,7 @@ class HelpPeerColorOption extends HelpPeerColorOptionBase {
 /// ID: `2ba1f5ce`.
 class HelpPeerColorsNotModified extends HelpPeerColorsBase {
   /// Help Peer Colors Not Modified constructor.
-  const HelpPeerColorsNotModified() : super._();
+  const HelpPeerColorsNotModified() ;
 
   /// Deserialize.
   factory HelpPeerColorsNotModified.deserialize(BinaryReader reader) {
@@ -91167,7 +91174,7 @@ class HelpPeerColors extends HelpPeerColorsBase {
   const HelpPeerColors({
     required this.hash,
     required this.colors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpPeerColors.deserialize(BinaryReader reader) {
@@ -91229,7 +91236,7 @@ class StoryReaction extends StoryReactionBase {
     required this.peerId,
     required this.date,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryReaction.deserialize(BinaryReader reader) {
@@ -91294,7 +91301,7 @@ class StoryReactionPublicForward extends StoryReactionBase {
   /// Story Reaction Public Forward constructor.
   const StoryReactionPublicForward({
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryReactionPublicForward.deserialize(BinaryReader reader) {
@@ -91346,7 +91353,7 @@ class StoryReactionPublicRepost extends StoryReactionBase {
   const StoryReactionPublicRepost({
     required this.peerId,
     required this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoryReactionPublicRepost.deserialize(BinaryReader reader) {
@@ -91408,7 +91415,7 @@ class StoriesStoryReactionsList extends StoriesStoryReactionsListBase {
     required this.chats,
     required this.users,
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesStoryReactionsList.deserialize(BinaryReader reader) {
@@ -91436,7 +91443,7 @@ class StoriesStoryReactionsList extends StoriesStoryReactionsListBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -91507,7 +91514,7 @@ class SavedDialog extends SavedDialogBase {
     required this.pinned,
     required this.peer,
     required this.topMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SavedDialog.deserialize(BinaryReader reader) {
@@ -91530,7 +91537,7 @@ class SavedDialog extends SavedDialogBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: pinned,
     );
 
@@ -91588,7 +91595,7 @@ class MessagesSavedDialogs extends MessagesSavedDialogsBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavedDialogs.deserialize(BinaryReader reader) {
@@ -91664,7 +91671,7 @@ class MessagesSavedDialogsSlice extends MessagesSavedDialogsBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavedDialogsSlice.deserialize(BinaryReader reader) {
@@ -91745,7 +91752,7 @@ class MessagesSavedDialogsNotModified extends MessagesSavedDialogsBase {
   /// Messages Saved Dialogs Not Modified constructor.
   const MessagesSavedDialogsNotModified({
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavedDialogsNotModified.deserialize(BinaryReader reader) {
@@ -91800,7 +91807,7 @@ class SavedReactionTag extends SavedReactionTagBase {
     required this.reaction,
     this.title,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SavedReactionTag.deserialize(BinaryReader reader) {
@@ -91824,7 +91831,7 @@ class SavedReactionTag extends SavedReactionTagBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
     );
 
@@ -91882,7 +91889,7 @@ class SavedReactionTag extends SavedReactionTagBase {
 class MessagesSavedReactionTagsNotModified
     extends MessagesSavedReactionTagsBase {
   /// Messages Saved Reaction Tags Not Modified constructor.
-  const MessagesSavedReactionTagsNotModified() : super._();
+  const MessagesSavedReactionTagsNotModified() ;
 
   /// Deserialize.
   factory MessagesSavedReactionTagsNotModified.deserialize(
@@ -91923,7 +91930,7 @@ class MessagesSavedReactionTags extends MessagesSavedReactionTagsBase {
   const MessagesSavedReactionTags({
     required this.tags,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavedReactionTags.deserialize(BinaryReader reader) {
@@ -91983,7 +91990,7 @@ class OutboxReadDate extends OutboxReadDateBase {
   /// Outbox Read Date constructor.
   const OutboxReadDate({
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory OutboxReadDate.deserialize(BinaryReader reader) {
@@ -92035,7 +92042,7 @@ class SmsjobsEligibleToJoin extends SmsjobsEligibilityToJoinBase {
   const SmsjobsEligibleToJoin({
     required this.termsUrl,
     required this.monthlySentSms,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsjobsEligibleToJoin.deserialize(BinaryReader reader) {
@@ -92102,7 +92109,7 @@ class SmsjobsStatus extends SmsjobsStatusBase {
     required this.totalSince,
     this.lastGiftSlug,
     required this.termsUrl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsjobsStatus.deserialize(BinaryReader reader) {
@@ -92136,7 +92143,7 @@ class SmsjobsStatus extends SmsjobsStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: allowInternational,
       b01: lastGiftSlug != null,
     );
@@ -92230,7 +92237,7 @@ class SmsJob extends SmsJobBase {
     required this.jobId,
     required this.phoneNumber,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsJob.deserialize(BinaryReader reader) {
@@ -92296,7 +92303,7 @@ class BusinessWeeklyOpen extends BusinessWeeklyOpenBase {
   const BusinessWeeklyOpen({
     required this.startMinute,
     required this.endMinute,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessWeeklyOpen.deserialize(BinaryReader reader) {
@@ -92360,7 +92367,7 @@ class BusinessWorkHours extends BusinessWorkHoursBase {
     required this.openNow,
     required this.timezoneId,
     required this.weeklyOpen,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessWorkHours.deserialize(BinaryReader reader) {
@@ -92383,7 +92390,7 @@ class BusinessWorkHours extends BusinessWorkHoursBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: openNow,
     );
 
@@ -92437,7 +92444,7 @@ class BusinessLocation extends BusinessLocationBase {
   const BusinessLocation({
     this.geoPoint,
     required this.address,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessLocation.deserialize(BinaryReader reader) {
@@ -92460,7 +92467,7 @@ class BusinessLocation extends BusinessLocationBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: geoPoint != null,
     );
 
@@ -92517,7 +92524,7 @@ class InputBusinessRecipients extends InputBusinessRecipientsBase {
     required this.nonContacts,
     required this.excludeSelected,
     this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessRecipients.deserialize(BinaryReader reader) {
@@ -92548,7 +92555,7 @@ class InputBusinessRecipients extends InputBusinessRecipientsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: existingChats,
       b01: newChats,
       b02: contacts,
@@ -92625,7 +92632,7 @@ class BusinessRecipients extends BusinessRecipientsBase {
     required this.nonContacts,
     required this.excludeSelected,
     this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessRecipients.deserialize(BinaryReader reader) {
@@ -92655,7 +92662,7 @@ class BusinessRecipients extends BusinessRecipientsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: existingChats,
       b01: newChats,
       b02: contacts,
@@ -92726,7 +92733,7 @@ class BusinessRecipients extends BusinessRecipientsBase {
 class BusinessAwayMessageScheduleAlways
     extends BusinessAwayMessageScheduleBase {
   /// Business Away Message Schedule Always constructor.
-  const BusinessAwayMessageScheduleAlways() : super._();
+  const BusinessAwayMessageScheduleAlways() ;
 
   /// Deserialize.
   factory BusinessAwayMessageScheduleAlways.deserialize(BinaryReader reader) {
@@ -92764,7 +92771,7 @@ class BusinessAwayMessageScheduleAlways
 class BusinessAwayMessageScheduleOutsideWorkHours
     extends BusinessAwayMessageScheduleBase {
   /// Business Away Message Schedule Outside Work Hours constructor.
-  const BusinessAwayMessageScheduleOutsideWorkHours() : super._();
+  const BusinessAwayMessageScheduleOutsideWorkHours() ;
 
   /// Deserialize.
   factory BusinessAwayMessageScheduleOutsideWorkHours.deserialize(
@@ -92806,7 +92813,7 @@ class BusinessAwayMessageScheduleCustom
   const BusinessAwayMessageScheduleCustom({
     required this.startDate,
     required this.endDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessAwayMessageScheduleCustom.deserialize(BinaryReader reader) {
@@ -92866,7 +92873,7 @@ class InputBusinessGreetingMessage extends InputBusinessGreetingMessageBase {
     required this.shortcutId,
     required this.recipients,
     required this.noActivityDays,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessGreetingMessage.deserialize(BinaryReader reader) {
@@ -92937,7 +92944,7 @@ class BusinessGreetingMessage extends BusinessGreetingMessageBase {
     required this.shortcutId,
     required this.recipients,
     required this.noActivityDays,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessGreetingMessage.deserialize(BinaryReader reader) {
@@ -93009,7 +93016,7 @@ class InputBusinessAwayMessage extends InputBusinessAwayMessageBase {
     required this.shortcutId,
     required this.schedule,
     required this.recipients,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessAwayMessage.deserialize(BinaryReader reader) {
@@ -93034,7 +93041,7 @@ class InputBusinessAwayMessage extends InputBusinessAwayMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: offlineOnly,
     );
 
@@ -93097,7 +93104,7 @@ class BusinessAwayMessage extends BusinessAwayMessageBase {
     required this.shortcutId,
     required this.schedule,
     required this.recipients,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessAwayMessage.deserialize(BinaryReader reader) {
@@ -93122,7 +93129,7 @@ class BusinessAwayMessage extends BusinessAwayMessageBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: offlineOnly,
     );
 
@@ -93184,7 +93191,7 @@ class Timezone extends TimezoneBase {
     required this.id,
     required this.name,
     required this.utcOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Timezone.deserialize(BinaryReader reader) {
@@ -93249,7 +93256,7 @@ class Timezone extends TimezoneBase {
 /// ID: `970708cc`.
 class HelpTimezonesListNotModified extends HelpTimezonesListBase {
   /// Help Timezones List Not Modified constructor.
-  const HelpTimezonesListNotModified() : super._();
+  const HelpTimezonesListNotModified() ;
 
   /// Deserialize.
   factory HelpTimezonesListNotModified.deserialize(BinaryReader reader) {
@@ -93289,7 +93296,7 @@ class HelpTimezonesList extends HelpTimezonesListBase {
   const HelpTimezonesList({
     required this.timezones,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpTimezonesList.deserialize(BinaryReader reader) {
@@ -93352,7 +93359,7 @@ class QuickReply extends QuickReplyBase {
     required this.shortcut,
     required this.topMessage,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory QuickReply.deserialize(BinaryReader reader) {
@@ -93430,7 +93437,7 @@ class InputQuickReplyShortcut extends InputQuickReplyShortcutBase {
   /// Input Quick Reply Shortcut constructor.
   const InputQuickReplyShortcut({
     required this.shortcut,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputQuickReplyShortcut.deserialize(BinaryReader reader) {
@@ -93481,7 +93488,7 @@ class InputQuickReplyShortcutId extends InputQuickReplyShortcutBase {
   /// Input Quick Reply Shortcut Id constructor.
   const InputQuickReplyShortcutId({
     required this.shortcutId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputQuickReplyShortcutId.deserialize(BinaryReader reader) {
@@ -93537,7 +93544,7 @@ class MessagesQuickReplies extends MessagesQuickRepliesBase {
     required this.messages,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesQuickReplies.deserialize(BinaryReader reader) {
@@ -93607,7 +93614,7 @@ class MessagesQuickReplies extends MessagesQuickRepliesBase {
 /// ID: `5f91eb5b`.
 class MessagesQuickRepliesNotModified extends MessagesQuickRepliesBase {
   /// Messages Quick Replies Not Modified constructor.
-  const MessagesQuickRepliesNotModified() : super._();
+  const MessagesQuickRepliesNotModified() ;
 
   /// Deserialize.
   factory MessagesQuickRepliesNotModified.deserialize(BinaryReader reader) {
@@ -93648,7 +93655,7 @@ class ConnectedBot extends ConnectedBotBase {
     required this.canReply,
     required this.botId,
     required this.recipients,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ConnectedBot.deserialize(BinaryReader reader) {
@@ -93671,7 +93678,7 @@ class ConnectedBot extends ConnectedBotBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canReply,
     );
 
@@ -93727,7 +93734,7 @@ class AccountConnectedBots extends AccountConnectedBotsBase {
   const AccountConnectedBots({
     required this.connectedBots,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountConnectedBots.deserialize(BinaryReader reader) {
@@ -93786,7 +93793,7 @@ class MessagesDialogFilters extends MessagesDialogFiltersBase {
   const MessagesDialogFilters({
     required this.tagsEnabled,
     required this.filters,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDialogFilters.deserialize(BinaryReader reader) {
@@ -93807,7 +93814,7 @@ class MessagesDialogFilters extends MessagesDialogFiltersBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: tagsEnabled,
     );
 
@@ -93857,7 +93864,7 @@ class Birthday extends BirthdayBase {
     required this.day,
     required this.month,
     this.year,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Birthday.deserialize(BinaryReader reader) {
@@ -93881,7 +93888,7 @@ class Birthday extends BirthdayBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: year != null,
     );
 
@@ -93947,7 +93954,7 @@ class BotBusinessConnection extends BotBusinessConnectionBase {
     required this.userId,
     required this.dcId,
     required this.date,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotBusinessConnection.deserialize(BinaryReader reader) {
@@ -93976,7 +93983,7 @@ class BotBusinessConnection extends BotBusinessConnectionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canReply,
       b01: disabled,
     );
@@ -94050,7 +94057,7 @@ class InputBusinessIntro extends InputBusinessIntroBase {
     required this.title,
     required this.description,
     this.sticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessIntro.deserialize(BinaryReader reader) {
@@ -94075,7 +94082,7 @@ class InputBusinessIntro extends InputBusinessIntroBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: sticker != null,
     );
 
@@ -94134,7 +94141,7 @@ class BusinessIntro extends BusinessIntroBase {
     required this.title,
     required this.description,
     this.sticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessIntro.deserialize(BinaryReader reader) {
@@ -94159,7 +94166,7 @@ class BusinessIntro extends BusinessIntroBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: sticker != null,
     );
 
@@ -94217,7 +94224,7 @@ class MessagesMyStickers extends MessagesMyStickersBase {
   const MessagesMyStickers({
     required this.count,
     required this.sets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMyStickers.deserialize(BinaryReader reader) {
@@ -94277,7 +94284,7 @@ class InputCollectibleUsername extends InputCollectibleBase {
   /// Input Collectible Username constructor.
   const InputCollectibleUsername({
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputCollectibleUsername.deserialize(BinaryReader reader) {
@@ -94328,7 +94335,7 @@ class InputCollectiblePhone extends InputCollectibleBase {
   /// Input Collectible Phone constructor.
   const InputCollectiblePhone({
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputCollectiblePhone.deserialize(BinaryReader reader) {
@@ -94384,7 +94391,7 @@ class FragmentCollectibleInfo extends FragmentCollectibleInfoBase {
     required this.cryptoCurrency,
     required this.cryptoAmount,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FragmentCollectibleInfo.deserialize(BinaryReader reader) {
@@ -94480,7 +94487,7 @@ class InputBusinessBotRecipients extends InputBusinessBotRecipientsBase {
     required this.excludeSelected,
     this.users,
     this.excludeUsers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessBotRecipients.deserialize(BinaryReader reader) {
@@ -94515,7 +94522,7 @@ class InputBusinessBotRecipients extends InputBusinessBotRecipientsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: existingChats,
       b01: newChats,
       b02: contacts,
@@ -94602,7 +94609,7 @@ class BusinessBotRecipients extends BusinessBotRecipientsBase {
     required this.excludeSelected,
     this.users,
     this.excludeUsers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessBotRecipients.deserialize(BinaryReader reader) {
@@ -94635,7 +94642,7 @@ class BusinessBotRecipients extends BusinessBotRecipientsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: existingChats,
       b01: newChats,
       b02: contacts,
@@ -94717,7 +94724,7 @@ class ContactBirthday extends ContactBirthdayBase {
   const ContactBirthday({
     required this.contactId,
     required this.birthday,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactBirthday.deserialize(BinaryReader reader) {
@@ -94778,7 +94785,7 @@ class ContactsContactBirthdays extends ContactsContactBirthdaysBase {
   const ContactsContactBirthdays({
     required this.contacts,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsContactBirthdays.deserialize(BinaryReader reader) {
@@ -94838,7 +94845,7 @@ class MissingInvitee extends MissingInviteeBase {
     required this.premiumWouldAllowInvite,
     required this.premiumRequiredForPm,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MissingInvitee.deserialize(BinaryReader reader) {
@@ -94861,7 +94868,7 @@ class MissingInvitee extends MissingInviteeBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: premiumWouldAllowInvite,
       b01: premiumRequiredForPm,
     );
@@ -94917,7 +94924,7 @@ class MessagesInvitedUsers extends MessagesInvitedUsersBase {
   const MessagesInvitedUsers({
     required this.updates,
     required this.missingInvitees,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesInvitedUsers.deserialize(BinaryReader reader) {
@@ -94977,7 +94984,7 @@ class InputBusinessChatLink extends InputBusinessChatLinkBase {
     required this.message,
     this.entities,
     this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputBusinessChatLink.deserialize(BinaryReader reader) {
@@ -95003,7 +95010,7 @@ class InputBusinessChatLink extends InputBusinessChatLinkBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: entities != null,
       b01: title != null,
     );
@@ -95068,7 +95075,7 @@ class BusinessChatLink extends BusinessChatLinkBase {
     this.entities,
     this.title,
     required this.views,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BusinessChatLink.deserialize(BinaryReader reader) {
@@ -95098,7 +95105,7 @@ class BusinessChatLink extends BusinessChatLinkBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: entities != null,
       b01: title != null,
     );
@@ -95173,7 +95180,7 @@ class AccountBusinessChatLinks extends AccountBusinessChatLinksBase {
     required this.links,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountBusinessChatLinks.deserialize(BinaryReader reader) {
@@ -95243,7 +95250,7 @@ class AccountResolvedBusinessChatLinks
     this.entities,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResolvedBusinessChatLinks.deserialize(BinaryReader reader) {
@@ -95272,7 +95279,7 @@ class AccountResolvedBusinessChatLinks
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: entities != null,
     );
 
@@ -95343,7 +95350,7 @@ class RequestedPeerUser extends RequestedPeerBase {
     this.lastName,
     this.username,
     this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestedPeerUser.deserialize(BinaryReader reader) {
@@ -95374,7 +95381,7 @@ class RequestedPeerUser extends RequestedPeerBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: firstName != null || lastName != null,
       b01: username != null,
       b02: photo != null,
@@ -95456,7 +95463,7 @@ class RequestedPeerChat extends RequestedPeerBase {
     required this.chatId,
     this.title,
     this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestedPeerChat.deserialize(BinaryReader reader) {
@@ -95481,7 +95488,7 @@ class RequestedPeerChat extends RequestedPeerBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b02: photo != null,
     );
@@ -95547,7 +95554,7 @@ class RequestedPeerChannel extends RequestedPeerBase {
     this.title,
     this.username,
     this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RequestedPeerChannel.deserialize(BinaryReader reader) {
@@ -95575,7 +95582,7 @@ class RequestedPeerChannel extends RequestedPeerBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b01: username != null,
       b02: photo != null,
@@ -95648,7 +95655,7 @@ class SponsoredMessageReportOption extends SponsoredMessageReportOptionBase {
   const SponsoredMessageReportOption({
     required this.text,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SponsoredMessageReportOption.deserialize(BinaryReader reader) {
@@ -95708,7 +95715,7 @@ class ChannelsSponsoredMessageReportResultChooseOption
   const ChannelsSponsoredMessageReportResultChooseOption({
     required this.title,
     required this.options,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSponsoredMessageReportResultChooseOption.deserialize(
@@ -95766,7 +95773,7 @@ class ChannelsSponsoredMessageReportResultChooseOption
 class ChannelsSponsoredMessageReportResultAdsHidden
     extends ChannelsSponsoredMessageReportResultBase {
   /// Channels Sponsored Message Report Result Ads Hidden constructor.
-  const ChannelsSponsoredMessageReportResultAdsHidden() : super._();
+  const ChannelsSponsoredMessageReportResultAdsHidden() ;
 
   /// Deserialize.
   factory ChannelsSponsoredMessageReportResultAdsHidden.deserialize(
@@ -95805,7 +95812,7 @@ class ChannelsSponsoredMessageReportResultAdsHidden
 class ChannelsSponsoredMessageReportResultReported
     extends ChannelsSponsoredMessageReportResultBase {
   /// Channels Sponsored Message Report Result Reported constructor.
-  const ChannelsSponsoredMessageReportResultReported() : super._();
+  const ChannelsSponsoredMessageReportResultReported() ;
 
   /// Deserialize.
   factory ChannelsSponsoredMessageReportResultReported.deserialize(
@@ -95848,7 +95855,7 @@ class StatsBroadcastRevenueStats extends StatsBroadcastRevenueStatsBase {
     required this.revenueGraph,
     required this.balances,
     required this.usdRate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsBroadcastRevenueStats.deserialize(BinaryReader reader) {
@@ -95921,7 +95928,7 @@ class StatsBroadcastRevenueWithdrawalUrl
   /// Stats Broadcast Revenue Withdrawal Url constructor.
   const StatsBroadcastRevenueWithdrawalUrl({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsBroadcastRevenueWithdrawalUrl.deserialize(BinaryReader reader) {
@@ -95975,7 +95982,7 @@ class BroadcastRevenueTransactionProceeds
     required this.amount,
     required this.fromDate,
     required this.toDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BroadcastRevenueTransactionProceeds.deserialize(BinaryReader reader) {
@@ -96049,7 +96056,7 @@ class BroadcastRevenueTransactionWithdrawal
     required this.provider,
     this.transactionDate,
     this.transactionUrl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BroadcastRevenueTransactionWithdrawal.deserialize(
@@ -96084,7 +96091,7 @@ class BroadcastRevenueTransactionWithdrawal
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pending,
       b02: failed,
       b01: transactionDate != null || transactionUrl != null,
@@ -96169,7 +96176,7 @@ class BroadcastRevenueTransactionRefund
     required this.amount,
     required this.date,
     required this.provider,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BroadcastRevenueTransactionRefund.deserialize(BinaryReader reader) {
@@ -96238,7 +96245,7 @@ class StatsBroadcastRevenueTransactions
   const StatsBroadcastRevenueTransactions({
     required this.count,
     required this.transactions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsBroadcastRevenueTransactions.deserialize(BinaryReader reader) {
@@ -96297,7 +96304,7 @@ class StatsBroadcastRevenueTransactions
 /// ID: `bac3a61a`.
 class ReactionNotificationsFromContacts extends ReactionNotificationsFromBase {
   /// Reaction Notifications From Contacts constructor.
-  const ReactionNotificationsFromContacts() : super._();
+  const ReactionNotificationsFromContacts() ;
 
   /// Deserialize.
   factory ReactionNotificationsFromContacts.deserialize(BinaryReader reader) {
@@ -96334,7 +96341,7 @@ class ReactionNotificationsFromContacts extends ReactionNotificationsFromBase {
 /// ID: `4b9e22a0`.
 class ReactionNotificationsFromAll extends ReactionNotificationsFromBase {
   /// Reaction Notifications From All constructor.
-  const ReactionNotificationsFromAll() : super._();
+  const ReactionNotificationsFromAll() ;
 
   /// Deserialize.
   factory ReactionNotificationsFromAll.deserialize(BinaryReader reader) {
@@ -96376,7 +96383,7 @@ class ReactionsNotifySettings extends ReactionsNotifySettingsBase {
     this.storiesNotifyFrom,
     required this.sound,
     required this.showPreviews,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReactionsNotifySettings.deserialize(BinaryReader reader) {
@@ -96407,7 +96414,7 @@ class ReactionsNotifySettings extends ReactionsNotifySettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: messagesNotifyFrom != null,
       b01: storiesNotifyFrom != null,
     );
@@ -96476,7 +96483,7 @@ class BroadcastRevenueBalances extends BroadcastRevenueBalancesBase {
     required this.currentBalance,
     required this.availableBalance,
     required this.overallRevenue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BroadcastRevenueBalances.deserialize(BinaryReader reader) {
@@ -96501,7 +96508,7 @@ class BroadcastRevenueBalances extends BroadcastRevenueBalancesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: withdrawalEnabled,
     );
 
@@ -96570,7 +96577,7 @@ class AvailableEffect extends AvailableEffectBase {
     this.staticIconId,
     required this.effectStickerId,
     this.effectAnimationId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AvailableEffect.deserialize(BinaryReader reader) {
@@ -96602,7 +96609,7 @@ class AvailableEffect extends AvailableEffectBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: premiumRequired,
       b00: staticIconId != null,
       b01: effectAnimationId != null,
@@ -96680,7 +96687,7 @@ class AvailableEffect extends AvailableEffectBase {
 /// ID: `d1ed9a5b`.
 class MessagesAvailableEffectsNotModified extends MessagesAvailableEffectsBase {
   /// Messages Available Effects Not Modified constructor.
-  const MessagesAvailableEffectsNotModified() : super._();
+  const MessagesAvailableEffectsNotModified() ;
 
   /// Deserialize.
   factory MessagesAvailableEffectsNotModified.deserialize(BinaryReader reader) {
@@ -96721,7 +96728,7 @@ class MessagesAvailableEffects extends MessagesAvailableEffectsBase {
     required this.hash,
     required this.effects,
     required this.documents,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAvailableEffects.deserialize(BinaryReader reader) {
@@ -96791,7 +96798,7 @@ class FactCheck extends FactCheckBase {
     this.country,
     this.text,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FactCheck.deserialize(BinaryReader reader) {
@@ -96819,7 +96826,7 @@ class FactCheck extends FactCheckBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: needCheck,
       b01: country != null || text != null,
     );
@@ -96884,7 +96891,7 @@ class FactCheck extends FactCheckBase {
 /// ID: `95f2bfe4`.
 class StarsTransactionPeerUnsupported extends StarsTransactionPeerBase {
   /// Stars Transaction Peer Unsupported constructor.
-  const StarsTransactionPeerUnsupported() : super._();
+  const StarsTransactionPeerUnsupported() ;
 
   /// Deserialize.
   factory StarsTransactionPeerUnsupported.deserialize(BinaryReader reader) {
@@ -96921,7 +96928,7 @@ class StarsTransactionPeerUnsupported extends StarsTransactionPeerBase {
 /// ID: `b457b375`.
 class StarsTransactionPeerAppStore extends StarsTransactionPeerBase {
   /// Stars Transaction Peer App Store constructor.
-  const StarsTransactionPeerAppStore() : super._();
+  const StarsTransactionPeerAppStore() ;
 
   /// Deserialize.
   factory StarsTransactionPeerAppStore.deserialize(BinaryReader reader) {
@@ -96958,7 +96965,7 @@ class StarsTransactionPeerAppStore extends StarsTransactionPeerBase {
 /// ID: `7b560a0b`.
 class StarsTransactionPeerPlayMarket extends StarsTransactionPeerBase {
   /// Stars Transaction Peer Play Market constructor.
-  const StarsTransactionPeerPlayMarket() : super._();
+  const StarsTransactionPeerPlayMarket() ;
 
   /// Deserialize.
   factory StarsTransactionPeerPlayMarket.deserialize(BinaryReader reader) {
@@ -96995,7 +97002,7 @@ class StarsTransactionPeerPlayMarket extends StarsTransactionPeerBase {
 /// ID: `250dbaf8`.
 class StarsTransactionPeerPremiumBot extends StarsTransactionPeerBase {
   /// Stars Transaction Peer Premium Bot constructor.
-  const StarsTransactionPeerPremiumBot() : super._();
+  const StarsTransactionPeerPremiumBot() ;
 
   /// Deserialize.
   factory StarsTransactionPeerPremiumBot.deserialize(BinaryReader reader) {
@@ -97032,7 +97039,7 @@ class StarsTransactionPeerPremiumBot extends StarsTransactionPeerBase {
 /// ID: `e92fd902`.
 class StarsTransactionPeerFragment extends StarsTransactionPeerBase {
   /// Stars Transaction Peer Fragment constructor.
-  const StarsTransactionPeerFragment() : super._();
+  const StarsTransactionPeerFragment() ;
 
   /// Deserialize.
   factory StarsTransactionPeerFragment.deserialize(BinaryReader reader) {
@@ -97071,7 +97078,7 @@ class StarsTransactionPeer extends StarsTransactionPeerBase {
   /// Stars Transaction Peer constructor.
   const StarsTransactionPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsTransactionPeer.deserialize(BinaryReader reader) {
@@ -97120,7 +97127,7 @@ class StarsTransactionPeer extends StarsTransactionPeerBase {
 /// ID: `60682812`.
 class StarsTransactionPeerAds extends StarsTransactionPeerBase {
   /// Stars Transaction Peer Ads constructor.
-  const StarsTransactionPeerAds() : super._();
+  const StarsTransactionPeerAds() ;
 
   /// Deserialize.
   factory StarsTransactionPeerAds.deserialize(BinaryReader reader) {
@@ -97157,7 +97164,7 @@ class StarsTransactionPeerAds extends StarsTransactionPeerBase {
 /// ID: `f9677aad`.
 class StarsTransactionPeerAPI extends StarsTransactionPeerBase {
   /// Stars Transaction Peer A P I constructor.
-  const StarsTransactionPeerAPI() : super._();
+  const StarsTransactionPeerAPI() ;
 
   /// Deserialize.
   factory StarsTransactionPeerAPI.deserialize(BinaryReader reader) {
@@ -97200,7 +97207,7 @@ class StarsTopupOption extends StarsTopupOptionBase {
     this.storeProduct,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsTopupOption.deserialize(BinaryReader reader) {
@@ -97228,7 +97235,7 @@ class StarsTopupOption extends StarsTopupOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: extended,
       b00: storeProduct != null,
     );
@@ -97322,7 +97329,7 @@ class StarsTransaction extends StarsTransactionBase {
     this.starrefCommissionPermille,
     this.starrefPeer,
     this.starrefAmount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsTransaction.deserialize(BinaryReader reader) {
@@ -97410,7 +97417,7 @@ class StarsTransaction extends StarsTransactionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: refund,
       b04: pending,
       b06: failed,
@@ -97633,7 +97640,7 @@ class PaymentsStarsStatus extends PaymentsStarsStatusBase {
     this.nextOffset,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsStarsStatus.deserialize(BinaryReader reader) {
@@ -97677,7 +97684,7 @@ class PaymentsStarsStatus extends PaymentsStarsStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: subscriptions != null,
       b02: subscriptionsNextOffset != null,
       b04: subscriptionsMissingBalance != null,
@@ -97776,7 +97783,7 @@ class FoundStory extends FoundStoryBase {
   const FoundStory({
     required this.peer,
     required this.story,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FoundStory.deserialize(BinaryReader reader) {
@@ -97838,7 +97845,7 @@ class StoriesFoundStories extends StoriesFoundStoriesBase {
     this.nextOffset,
     required this.chats,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesFoundStories.deserialize(BinaryReader reader) {
@@ -97866,7 +97873,7 @@ class StoriesFoundStories extends StoriesFoundStoriesBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -97938,7 +97945,7 @@ class GeoPointAddress extends GeoPointAddressBase {
     this.state,
     this.city,
     this.street,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GeoPointAddress.deserialize(BinaryReader reader) {
@@ -97966,7 +97973,7 @@ class GeoPointAddress extends GeoPointAddressBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: state != null,
       b01: city != null,
       b02: street != null,
@@ -98040,7 +98047,7 @@ class StarsRevenueStatus extends StarsRevenueStatusBase {
     required this.availableBalance,
     required this.overallRevenue,
     this.nextWithdrawalAt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsRevenueStatus.deserialize(BinaryReader reader) {
@@ -98069,7 +98076,7 @@ class StarsRevenueStatus extends StarsRevenueStatusBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: withdrawalEnabled,
       b01: nextWithdrawalAt != null,
     );
@@ -98138,7 +98145,7 @@ class PaymentsStarsRevenueStats extends PaymentsStarsRevenueStatsBase {
     required this.revenueGraph,
     required this.status,
     required this.usdRate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsStarsRevenueStats.deserialize(BinaryReader reader) {
@@ -98204,7 +98211,7 @@ class PaymentsStarsRevenueWithdrawalUrl
   /// Payments Stars Revenue Withdrawal Url constructor.
   const PaymentsStarsRevenueWithdrawalUrl({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsStarsRevenueWithdrawalUrl.deserialize(BinaryReader reader) {
@@ -98256,7 +98263,7 @@ class PaymentsStarsRevenueAdsAccountUrl
   /// Payments Stars Revenue Ads Account Url constructor.
   const PaymentsStarsRevenueAdsAccountUrl({
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsStarsRevenueAdsAccountUrl.deserialize(BinaryReader reader) {
@@ -98308,7 +98315,7 @@ class InputStarsTransaction extends InputStarsTransactionBase {
   const InputStarsTransaction({
     required this.refund,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InputStarsTransaction.deserialize(BinaryReader reader) {
@@ -98329,7 +98336,7 @@ class InputStarsTransaction extends InputStarsTransactionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: refund,
     );
 
@@ -98381,7 +98388,7 @@ class StarsGiftOption extends StarsGiftOptionBase {
     this.storeProduct,
     required this.currency,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsGiftOption.deserialize(BinaryReader reader) {
@@ -98409,7 +98416,7 @@ class StarsGiftOption extends StarsGiftOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: extended,
       b00: storeProduct != null,
     );
@@ -98481,7 +98488,7 @@ class BotsPopularAppBots extends BotsPopularAppBotsBase {
   const BotsPopularAppBots({
     this.nextOffset,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsPopularAppBots.deserialize(BinaryReader reader) {
@@ -98503,7 +98510,7 @@ class BotsPopularAppBots extends BotsPopularAppBotsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -98556,7 +98563,7 @@ class BotPreviewMedia extends BotPreviewMediaBase {
   const BotPreviewMedia({
     required this.date,
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotPreviewMedia.deserialize(BinaryReader reader) {
@@ -98615,7 +98622,7 @@ class BotsPreviewInfo extends BotsPreviewInfoBase {
   const BotsPreviewInfo({
     required this.media,
     required this.langCodes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsPreviewInfo.deserialize(BinaryReader reader) {
@@ -98674,7 +98681,7 @@ class StarsSubscriptionPricing extends StarsSubscriptionPricingBase {
   const StarsSubscriptionPricing({
     required this.period,
     required this.amount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsSubscriptionPricing.deserialize(BinaryReader reader) {
@@ -98747,7 +98754,7 @@ class StarsSubscription extends StarsSubscriptionBase {
     this.title,
     this.photo,
     this.invoiceSlug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsSubscription.deserialize(BinaryReader reader) {
@@ -98792,7 +98799,7 @@ class StarsSubscription extends StarsSubscriptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canceled,
       b01: canRefulfill,
       b02: missingBalance,
@@ -98910,7 +98917,7 @@ class MessageReactor extends MessageReactorBase {
     required this.anonymous,
     this.peerId,
     required this.count,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReactor.deserialize(BinaryReader reader) {
@@ -98938,7 +98945,7 @@ class MessageReactor extends MessageReactorBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: top,
       b01: my,
       b02: anonymous,
@@ -99014,7 +99021,7 @@ class StarsGiveawayOption extends StarsGiveawayOptionBase {
     required this.currency,
     required this.amount,
     required this.winners,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsGiveawayOption.deserialize(BinaryReader reader) {
@@ -99048,7 +99055,7 @@ class StarsGiveawayOption extends StarsGiveawayOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: extended,
       b01: ddefault,
       b02: storeProduct != null,
@@ -99138,7 +99145,7 @@ class StarsGiveawayWinnersOption extends StarsGiveawayWinnersOptionBase {
     required this.ddefault,
     required this.users,
     required this.perUserStars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsGiveawayWinnersOption.deserialize(BinaryReader reader) {
@@ -99161,7 +99168,7 @@ class StarsGiveawayWinnersOption extends StarsGiveawayWinnersOptionBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ddefault,
     );
 
@@ -99228,7 +99235,7 @@ class StarGift extends StarGiftBase {
     required this.convertStars,
     this.firstSaleDate,
     this.lastSaleDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarGift.deserialize(BinaryReader reader) {
@@ -99273,7 +99280,7 @@ class StarGift extends StarGiftBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: limited || availabilityRemains != null || availabilityTotal != null,
       b01: soldOut || firstSaleDate != null || lastSaleDate != null,
       b02: birthday,
@@ -99382,7 +99389,7 @@ class StarGift extends StarGiftBase {
 /// ID: `a388a368`.
 class PaymentsStarGiftsNotModified extends PaymentsStarGiftsBase {
   /// Payments Star Gifts Not Modified constructor.
-  const PaymentsStarGiftsNotModified() : super._();
+  const PaymentsStarGiftsNotModified() ;
 
   /// Deserialize.
   factory PaymentsStarGiftsNotModified.deserialize(BinaryReader reader) {
@@ -99422,7 +99429,7 @@ class PaymentsStarGifts extends PaymentsStarGiftsBase {
   const PaymentsStarGifts({
     required this.hash,
     required this.gifts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsStarGifts.deserialize(BinaryReader reader) {
@@ -99489,7 +99496,7 @@ class UserStarGift extends UserStarGiftBase {
     this.message,
     this.msgId,
     this.convertStars,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UserStarGift.deserialize(BinaryReader reader) {
@@ -99527,7 +99534,7 @@ class UserStarGift extends UserStarGiftBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nameHidden,
       b05: unsaved,
       b01: fromId != null,
@@ -99624,7 +99631,7 @@ class PaymentsUserStarGifts extends PaymentsUserStarGiftsBase {
     required this.gifts,
     this.nextOffset,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsUserStarGifts.deserialize(BinaryReader reader) {
@@ -99650,7 +99657,7 @@ class PaymentsUserStarGifts extends PaymentsUserStarGiftsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -99715,7 +99722,7 @@ class MessageReportOption extends MessageReportOptionBase {
   const MessageReportOption({
     required this.text,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessageReportOption.deserialize(BinaryReader reader) {
@@ -99774,7 +99781,7 @@ class ReportResultChooseOption extends ReportResultBase {
   const ReportResultChooseOption({
     required this.title,
     required this.options,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReportResultChooseOption.deserialize(BinaryReader reader) {
@@ -99833,7 +99840,7 @@ class ReportResultAddComment extends ReportResultBase {
   const ReportResultAddComment({
     required this.optional,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReportResultAddComment.deserialize(BinaryReader reader) {
@@ -99854,7 +99861,7 @@ class ReportResultAddComment extends ReportResultBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: optional,
     );
 
@@ -99900,7 +99907,7 @@ class ReportResultAddComment extends ReportResultBase {
 /// ID: `8db33c4b`.
 class ReportResultReported extends ReportResultBase {
   /// Report Result Reported constructor.
-  const ReportResultReported() : super._();
+  const ReportResultReported() ;
 
   /// Deserialize.
   factory ReportResultReported.deserialize(BinaryReader reader) {
@@ -99941,7 +99948,7 @@ class MessagesBotPreparedInlineMessage
   const MessagesBotPreparedInlineMessage({
     required this.id,
     required this.expireDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesBotPreparedInlineMessage.deserialize(BinaryReader reader) {
@@ -100003,7 +100010,7 @@ class MessagesPreparedInlineMessage extends MessagesPreparedInlineMessageBase {
     required this.peerTypes,
     required this.cacheTime,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesPreparedInlineMessage.deserialize(BinaryReader reader) {
@@ -100090,7 +100097,7 @@ class BotAppSettings extends BotAppSettingsBase {
     this.backgroundDarkColor,
     this.headerColor,
     this.headerDarkColor,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotAppSettings.deserialize(BinaryReader reader) {
@@ -100123,7 +100130,7 @@ class BotAppSettings extends BotAppSettingsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: placeholderPath != null,
       b01: backgroundColor != null,
       b02: backgroundDarkColor != null,
@@ -100210,7 +100217,7 @@ class StarRefProgram extends StarRefProgramBase {
     this.durationMonths,
     this.endDate,
     this.dailyRevenuePerUser,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarRefProgram.deserialize(BinaryReader reader) {
@@ -100242,7 +100249,7 @@ class StarRefProgram extends StarRefProgramBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: durationMonths != null,
       b01: endDate != null,
       b02: dailyRevenuePerUser != null,
@@ -100328,7 +100335,7 @@ class ConnectedBotStarRef extends ConnectedBotStarRefBase {
     this.durationMonths,
     required this.participants,
     required this.revenue,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ConnectedBotStarRef.deserialize(BinaryReader reader) {
@@ -100362,7 +100369,7 @@ class ConnectedBotStarRef extends ConnectedBotStarRefBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: revoked,
       b00: durationMonths != null,
     );
@@ -100454,7 +100461,7 @@ class PaymentsConnectedStarRefBots extends PaymentsConnectedStarRefBotsBase {
     required this.count,
     required this.connectedBots,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsConnectedStarRefBots.deserialize(BinaryReader reader) {
@@ -100524,7 +100531,7 @@ class PaymentsSuggestedStarRefBots extends PaymentsSuggestedStarRefBotsBase {
     required this.suggestedBots,
     required this.users,
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsSuggestedStarRefBots.deserialize(BinaryReader reader) {
@@ -100550,7 +100557,7 @@ class PaymentsSuggestedStarRefBots extends PaymentsSuggestedStarRefBotsBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -100615,7 +100622,7 @@ class StarsAmount extends StarsAmountBase {
   const StarsAmount({
     required this.amount,
     required this.nanos,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StarsAmount.deserialize(BinaryReader reader) {
@@ -100677,7 +100684,7 @@ class MessagesFoundStickersNotModified extends MessagesFoundStickersBase {
   /// Messages Found Stickers Not Modified constructor.
   const MessagesFoundStickersNotModified({
     this.nextOffset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFoundStickersNotModified.deserialize(BinaryReader reader) {
@@ -100697,7 +100704,7 @@ class MessagesFoundStickersNotModified extends MessagesFoundStickersBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -100746,7 +100753,7 @@ class MessagesFoundStickers extends MessagesFoundStickersBase {
     this.nextOffset,
     required this.hash,
     required this.stickers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFoundStickers.deserialize(BinaryReader reader) {
@@ -100770,7 +100777,7 @@ class MessagesFoundStickers extends MessagesFoundStickersBase {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: nextOffset != null,
     );
 
@@ -100831,7 +100838,7 @@ class InvokeAfterMsg extends TlMethod {
   const InvokeAfterMsg({
     required this.msgId,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeAfterMsg.deserialize(BinaryReader reader) {
@@ -100893,7 +100900,7 @@ class InvokeAfterMsgs extends TlMethod {
   const InvokeAfterMsgs({
     required this.msgIds,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeAfterMsgs.deserialize(BinaryReader reader) {
@@ -100955,7 +100962,7 @@ class AuthSendCode extends TlMethod {
     required this.apiId,
     required this.apiHash,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSendCode.deserialize(BinaryReader reader) {
@@ -101034,7 +101041,7 @@ class AuthSignUp extends TlMethod {
     required this.phoneCodeHash,
     required this.firstName,
     required this.lastName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSignUp.deserialize(BinaryReader reader) {
@@ -101061,7 +101068,7 @@ class AuthSignUp extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: noJoinedNotifications,
     );
 
@@ -101128,7 +101135,7 @@ class AuthSignIn extends TlMethod {
     required this.phoneCodeHash,
     this.phoneCode,
     this.emailVerification,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthSignIn.deserialize(BinaryReader reader) {
@@ -101157,7 +101164,7 @@ class AuthSignIn extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: phoneCode != null,
       b01: emailVerification != null,
     );
@@ -101222,7 +101229,7 @@ class AuthSignIn extends TlMethod {
 /// ID: `3e72ba19`.
 class AuthLogOut extends TlMethod {
   /// Auth Log Out constructor.
-  const AuthLogOut() : super._();
+  const AuthLogOut() ;
 
   /// Deserialize.
   factory AuthLogOut.deserialize(BinaryReader reader) {
@@ -101260,7 +101267,7 @@ class AuthLogOut extends TlMethod {
 /// ID: `9fab0d1a`.
 class AuthResetAuthorizations extends TlMethod {
   /// Auth Reset Authorizations constructor.
-  const AuthResetAuthorizations() : super._();
+  const AuthResetAuthorizations() ;
 
   /// Deserialize.
   factory AuthResetAuthorizations.deserialize(BinaryReader reader) {
@@ -101300,7 +101307,7 @@ class AuthExportAuthorization extends TlMethod {
   /// Auth Export Authorization constructor.
   const AuthExportAuthorization({
     required this.dcId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthExportAuthorization.deserialize(BinaryReader reader) {
@@ -101355,7 +101362,7 @@ class AuthImportAuthorization extends TlMethod {
   const AuthImportAuthorization({
     required this.id,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthImportAuthorization.deserialize(BinaryReader reader) {
@@ -101419,7 +101426,7 @@ class AuthBindTempAuthKey extends TlMethod {
     required this.nonce,
     required this.expiresAt,
     required this.encryptedMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthBindTempAuthKey.deserialize(BinaryReader reader) {
@@ -101501,7 +101508,7 @@ class AccountRegisterDevice extends TlMethod {
     required this.appSandbox,
     required this.secret,
     required this.otherUids,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountRegisterDevice.deserialize(BinaryReader reader) {
@@ -101530,7 +101537,7 @@ class AccountRegisterDevice extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: noMuted,
     );
 
@@ -101603,7 +101610,7 @@ class AccountUnregisterDevice extends TlMethod {
     required this.tokenType,
     required this.token,
     required this.otherUids,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUnregisterDevice.deserialize(BinaryReader reader) {
@@ -101672,7 +101679,7 @@ class AccountUpdateNotifySettings extends TlMethod {
   const AccountUpdateNotifySettings({
     required this.peer,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateNotifySettings.deserialize(BinaryReader reader) {
@@ -101731,7 +101738,7 @@ class AccountGetNotifySettings extends TlMethod {
   /// Account Get Notify Settings constructor.
   const AccountGetNotifySettings({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetNotifySettings.deserialize(BinaryReader reader) {
@@ -101781,7 +101788,7 @@ class AccountGetNotifySettings extends TlMethod {
 /// ID: `db7e1747`.
 class AccountResetNotifySettings extends TlMethod {
   /// Account Reset Notify Settings constructor.
-  const AccountResetNotifySettings() : super._();
+  const AccountResetNotifySettings() ;
 
   /// Deserialize.
   factory AccountResetNotifySettings.deserialize(BinaryReader reader) {
@@ -101823,7 +101830,7 @@ class AccountUpdateProfile extends TlMethod {
     this.firstName,
     this.lastName,
     this.about,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateProfile.deserialize(BinaryReader reader) {
@@ -101849,7 +101856,7 @@ class AccountUpdateProfile extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: firstName != null,
       b01: lastName != null,
       b02: about != null,
@@ -101915,7 +101922,7 @@ class AccountUpdateStatus extends TlMethod {
   /// Account Update Status constructor.
   const AccountUpdateStatus({
     required this.offline,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateStatus.deserialize(BinaryReader reader) {
@@ -101967,7 +101974,7 @@ class AccountGetWallPapers extends TlMethod {
   /// Account Get Wall Papers constructor.
   const AccountGetWallPapers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetWallPapers.deserialize(BinaryReader reader) {
@@ -102023,7 +102030,7 @@ class AccountReportPeer extends TlMethod {
     required this.peer,
     required this.reason,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountReportPeer.deserialize(BinaryReader reader) {
@@ -102089,7 +102096,7 @@ class UsersGetUsers extends TlMethod {
   /// Users Get Users constructor.
   const UsersGetUsers({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UsersGetUsers.deserialize(BinaryReader reader) {
@@ -102141,7 +102148,7 @@ class UsersGetFullUser extends TlMethod {
   /// Users Get Full User constructor.
   const UsersGetFullUser({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UsersGetFullUser.deserialize(BinaryReader reader) {
@@ -102193,7 +102200,7 @@ class ContactsGetContactIDs extends TlMethod {
   /// Contacts Get Contact I Ds constructor.
   const ContactsGetContactIDs({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsGetContactIDs.deserialize(BinaryReader reader) {
@@ -102245,7 +102252,7 @@ class ContactsGetContactIDs extends TlMethod {
 /// ID: `c4a353ee`.
 class ContactsGetStatuses extends TlMethod {
   /// Contacts Get Statuses constructor.
-  const ContactsGetStatuses() : super._();
+  const ContactsGetStatuses() ;
 
   /// Deserialize.
   factory ContactsGetStatuses.deserialize(BinaryReader reader) {
@@ -102285,7 +102292,7 @@ class ContactsGetContacts extends TlMethod {
   /// Contacts Get Contacts constructor.
   const ContactsGetContacts({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsGetContacts.deserialize(BinaryReader reader) {
@@ -102339,7 +102346,7 @@ class ContactsImportContacts extends TlMethod {
   /// Contacts Import Contacts constructor.
   const ContactsImportContacts({
     required this.contacts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsImportContacts.deserialize(BinaryReader reader) {
@@ -102391,7 +102398,7 @@ class ContactsDeleteContacts extends TlMethod {
   /// Contacts Delete Contacts constructor.
   const ContactsDeleteContacts({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsDeleteContacts.deserialize(BinaryReader reader) {
@@ -102443,7 +102450,7 @@ class ContactsDeleteByPhones extends TlMethod {
   /// Contacts Delete By Phones constructor.
   const ContactsDeleteByPhones({
     required this.phones,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsDeleteByPhones.deserialize(BinaryReader reader) {
@@ -102496,7 +102503,7 @@ class ContactsBlock extends TlMethod {
   const ContactsBlock({
     required this.myStoriesFrom,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsBlock.deserialize(BinaryReader reader) {
@@ -102517,7 +102524,7 @@ class ContactsBlock extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: myStoriesFrom,
     );
 
@@ -102567,7 +102574,7 @@ class ContactsUnblock extends TlMethod {
   const ContactsUnblock({
     required this.myStoriesFrom,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsUnblock.deserialize(BinaryReader reader) {
@@ -102588,7 +102595,7 @@ class ContactsUnblock extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: myStoriesFrom,
     );
 
@@ -102639,7 +102646,7 @@ class ContactsGetBlocked extends TlMethod {
     required this.myStoriesFrom,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsGetBlocked.deserialize(BinaryReader reader) {
@@ -102662,7 +102669,7 @@ class ContactsGetBlocked extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: myStoriesFrom,
     );
 
@@ -102720,7 +102727,7 @@ class MessagesGetMessages extends TlMethod {
   /// Messages Get Messages constructor.
   const MessagesGetMessages({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessages.deserialize(BinaryReader reader) {
@@ -102778,7 +102785,7 @@ class MessagesGetDialogs extends TlMethod {
     required this.offsetPeer,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetDialogs.deserialize(BinaryReader reader) {
@@ -102810,7 +102817,7 @@ class MessagesGetDialogs extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: excludePinned,
       b01: folderId != null,
     );
@@ -102901,7 +102908,7 @@ class MessagesGetHistory extends TlMethod {
     required this.maxId,
     required this.minId,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetHistory.deserialize(BinaryReader reader) {
@@ -103028,7 +103035,7 @@ class MessagesSearch extends TlMethod {
     required this.maxId,
     required this.minId,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearch.deserialize(BinaryReader reader) {
@@ -103081,7 +103088,7 @@ class MessagesSearch extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: fromId != null,
       b02: savedPeerId != null,
       b03: savedReaction != null,
@@ -103224,7 +103231,7 @@ class MessagesReadHistory extends TlMethod {
   const MessagesReadHistory({
     required this.peer,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadHistory.deserialize(BinaryReader reader) {
@@ -103290,7 +103297,7 @@ class MessagesDeleteHistory extends TlMethod {
     required this.maxId,
     this.minDate,
     this.maxDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteHistory.deserialize(BinaryReader reader) {
@@ -103321,7 +103328,7 @@ class MessagesDeleteHistory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: justClear,
       b01: revoke,
       b02: minDate != null,
@@ -103401,7 +103408,7 @@ class MessagesDeleteMessages extends TlMethod {
   const MessagesDeleteMessages({
     required this.revoke,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteMessages.deserialize(BinaryReader reader) {
@@ -103422,7 +103429,7 @@ class MessagesDeleteMessages extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: revoke,
     );
 
@@ -103471,7 +103478,7 @@ class MessagesReceivedMessages extends TlMethod {
   /// Messages Received Messages constructor.
   const MessagesReceivedMessages({
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReceivedMessages.deserialize(BinaryReader reader) {
@@ -103527,7 +103534,7 @@ class MessagesSetTyping extends TlMethod {
     required this.peer,
     this.topMsgId,
     required this.action,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetTyping.deserialize(BinaryReader reader) {
@@ -103551,7 +103558,7 @@ class MessagesSetTyping extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -103626,7 +103633,7 @@ class MessagesSendMessage extends TlMethod {
     this.sendAs,
     this.quickReplyShortcut,
     this.effect,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendMessage.deserialize(BinaryReader reader) {
@@ -103691,7 +103698,7 @@ class MessagesSendMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: noWebpage,
       b05: silent,
       b06: background,
@@ -103867,7 +103874,7 @@ class MessagesSendMedia extends TlMethod {
     this.sendAs,
     this.quickReplyShortcut,
     this.effect,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendMedia.deserialize(BinaryReader reader) {
@@ -103932,7 +103939,7 @@ class MessagesSendMedia extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: silent,
       b06: background,
       b07: clearDraft,
@@ -104105,7 +104112,7 @@ class MessagesForwardMessages extends TlMethod {
     this.scheduleDate,
     this.sendAs,
     this.quickReplyShortcut,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesForwardMessages.deserialize(BinaryReader reader) {
@@ -104158,7 +104165,7 @@ class MessagesForwardMessages extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: silent,
       b06: background,
       b08: withMyScore,
@@ -104288,7 +104295,7 @@ class MessagesReportSpam extends TlMethod {
   /// Messages Report Spam constructor.
   const MessagesReportSpam({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReportSpam.deserialize(BinaryReader reader) {
@@ -104340,7 +104347,7 @@ class MessagesGetPeerSettings extends TlMethod {
   /// Messages Get Peer Settings constructor.
   const MessagesGetPeerSettings({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPeerSettings.deserialize(BinaryReader reader) {
@@ -104395,7 +104402,7 @@ class MessagesReport extends TlMethod {
     required this.id,
     required this.option,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReport.deserialize(BinaryReader reader) {
@@ -104468,7 +104475,7 @@ class MessagesGetChats extends TlMethod {
   /// Messages Get Chats constructor.
   const MessagesGetChats({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetChats.deserialize(BinaryReader reader) {
@@ -104520,7 +104527,7 @@ class MessagesGetFullChat extends TlMethod {
   /// Messages Get Full Chat constructor.
   const MessagesGetFullChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetFullChat.deserialize(BinaryReader reader) {
@@ -104575,7 +104582,7 @@ class MessagesEditChatTitle extends TlMethod {
   const MessagesEditChatTitle({
     required this.chatId,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditChatTitle.deserialize(BinaryReader reader) {
@@ -104637,7 +104644,7 @@ class MessagesEditChatPhoto extends TlMethod {
   const MessagesEditChatPhoto({
     required this.chatId,
     required this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditChatPhoto.deserialize(BinaryReader reader) {
@@ -104700,7 +104707,7 @@ class MessagesAddChatUser extends TlMethod {
     required this.chatId,
     required this.userId,
     required this.fwdLimit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAddChatUser.deserialize(BinaryReader reader) {
@@ -104772,7 +104779,7 @@ class MessagesDeleteChatUser extends TlMethod {
     required this.revokeHistory,
     required this.chatId,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteChatUser.deserialize(BinaryReader reader) {
@@ -104795,7 +104802,7 @@ class MessagesDeleteChatUser extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: revokeHistory,
     );
 
@@ -104853,7 +104860,7 @@ class MessagesCreateChat extends TlMethod {
     required this.users,
     required this.title,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCreateChat.deserialize(BinaryReader reader) {
@@ -104877,7 +104884,7 @@ class MessagesCreateChat extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: ttlPeriod != null,
     );
 
@@ -104933,7 +104940,7 @@ class MessagesCreateChat extends TlMethod {
 /// ID: `edd4882a`.
 class UpdatesGetState extends TlMethod {
   /// Updates Get State constructor.
-  const UpdatesGetState() : super._();
+  const UpdatesGetState() ;
 
   /// Deserialize.
   factory UpdatesGetState.deserialize(BinaryReader reader) {
@@ -104978,7 +104985,7 @@ class UpdatesGetDifference extends TlMethod {
     required this.date,
     required this.qts,
     this.qtsLimit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesGetDifference.deserialize(BinaryReader reader) {
@@ -105010,7 +105017,7 @@ class UpdatesGetDifference extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: ptsLimit != null,
       b00: ptsTotalLimit != null,
       b02: qtsLimit != null,
@@ -105097,7 +105104,7 @@ class PhotosUpdateProfilePhoto extends TlMethod {
     required this.fallback,
     this.bot,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosUpdateProfilePhoto.deserialize(BinaryReader reader) {
@@ -105121,7 +105128,7 @@ class PhotosUpdateProfilePhoto extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: fallback,
       b01: bot != null,
     );
@@ -105184,7 +105191,7 @@ class PhotosUploadProfilePhoto extends TlMethod {
     this.video,
     this.videoStartTs,
     this.videoEmojiMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosUploadProfilePhoto.deserialize(BinaryReader reader) {
@@ -105219,7 +105226,7 @@ class PhotosUploadProfilePhoto extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: fallback,
       b05: bot != null,
       b00: file != null,
@@ -105308,7 +105315,7 @@ class PhotosDeletePhotos extends TlMethod {
   /// Photos Delete Photos constructor.
   const PhotosDeletePhotos({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosDeletePhotos.deserialize(BinaryReader reader) {
@@ -105362,7 +105369,7 @@ class UploadSaveFilePart extends TlMethod {
     required this.fileId,
     required this.filePart,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadSaveFilePart.deserialize(BinaryReader reader) {
@@ -105436,7 +105443,7 @@ class UploadGetFile extends TlMethod {
     required this.location,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadGetFile.deserialize(BinaryReader reader) {
@@ -105463,7 +105470,7 @@ class UploadGetFile extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: precise,
       b01: cdnSupported,
     );
@@ -105529,7 +105536,7 @@ class UploadGetFile extends TlMethod {
 /// ID: `c4f9186b`.
 class HelpGetConfig extends TlMethod {
   /// Help Get Config constructor.
-  const HelpGetConfig() : super._();
+  const HelpGetConfig() ;
 
   /// Deserialize.
   factory HelpGetConfig.deserialize(BinaryReader reader) {
@@ -105567,7 +105574,7 @@ class HelpGetConfig extends TlMethod {
 /// ID: `1fb33026`.
 class HelpGetNearestDc extends TlMethod {
   /// Help Get Nearest Dc constructor.
-  const HelpGetNearestDc() : super._();
+  const HelpGetNearestDc() ;
 
   /// Deserialize.
   factory HelpGetNearestDc.deserialize(BinaryReader reader) {
@@ -105607,7 +105614,7 @@ class HelpGetAppUpdate extends TlMethod {
   /// Help Get App Update constructor.
   const HelpGetAppUpdate({
     required this.source,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetAppUpdate.deserialize(BinaryReader reader) {
@@ -105657,7 +105664,7 @@ class HelpGetAppUpdate extends TlMethod {
 /// ID: `4d392343`.
 class HelpGetInviteText extends TlMethod {
   /// Help Get Invite Text constructor.
-  const HelpGetInviteText() : super._();
+  const HelpGetInviteText() ;
 
   /// Deserialize.
   factory HelpGetInviteText.deserialize(BinaryReader reader) {
@@ -105700,7 +105707,7 @@ class PhotosGetUserPhotos extends TlMethod {
     required this.offset,
     required this.maxId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosGetUserPhotos.deserialize(BinaryReader reader) {
@@ -105780,7 +105787,7 @@ class MessagesGetDhConfig extends TlMethod {
   const MessagesGetDhConfig({
     required this.version,
     required this.randomLength,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetDhConfig.deserialize(BinaryReader reader) {
@@ -105845,7 +105852,7 @@ class MessagesRequestEncryption extends TlMethod {
     required this.userId,
     required this.randomId,
     required this.gA,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestEncryption.deserialize(BinaryReader reader) {
@@ -105915,7 +105922,7 @@ class MessagesAcceptEncryption extends TlMethod {
     required this.peer,
     required this.gB,
     required this.keyFingerprint,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAcceptEncryption.deserialize(BinaryReader reader) {
@@ -105984,7 +105991,7 @@ class MessagesDiscardEncryption extends TlMethod {
   const MessagesDiscardEncryption({
     required this.deleteHistory,
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDiscardEncryption.deserialize(BinaryReader reader) {
@@ -106005,7 +106012,7 @@ class MessagesDiscardEncryption extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: deleteHistory,
     );
 
@@ -106057,7 +106064,7 @@ class MessagesSetEncryptedTyping extends TlMethod {
   const MessagesSetEncryptedTyping({
     required this.peer,
     required this.typing,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetEncryptedTyping.deserialize(BinaryReader reader) {
@@ -106117,7 +106124,7 @@ class MessagesReadEncryptedHistory extends TlMethod {
   const MessagesReadEncryptedHistory({
     required this.peer,
     required this.maxDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadEncryptedHistory.deserialize(BinaryReader reader) {
@@ -106179,7 +106186,7 @@ class MessagesSendEncrypted extends TlMethod {
     required this.peer,
     required this.randomId,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendEncrypted.deserialize(BinaryReader reader) {
@@ -106204,7 +106211,7 @@ class MessagesSendEncrypted extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: silent,
     );
 
@@ -106269,7 +106276,7 @@ class MessagesSendEncryptedFile extends TlMethod {
     required this.randomId,
     required this.data,
     required this.file,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendEncryptedFile.deserialize(BinaryReader reader) {
@@ -106296,7 +106303,7 @@ class MessagesSendEncryptedFile extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: silent,
     );
 
@@ -106364,7 +106371,7 @@ class MessagesSendEncryptedService extends TlMethod {
     required this.peer,
     required this.randomId,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendEncryptedService.deserialize(BinaryReader reader) {
@@ -106432,7 +106439,7 @@ class MessagesReceivedQueue extends TlMethod {
   /// Messages Received Queue constructor.
   const MessagesReceivedQueue({
     required this.maxQts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReceivedQueue.deserialize(BinaryReader reader) {
@@ -106486,7 +106493,7 @@ class MessagesReportEncryptedSpam extends TlMethod {
   /// Messages Report Encrypted Spam constructor.
   const MessagesReportEncryptedSpam({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReportEncryptedSpam.deserialize(BinaryReader reader) {
@@ -106541,7 +106548,7 @@ class UploadSaveBigFilePart extends TlMethod {
     required this.filePart,
     required this.fileTotalParts,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadSaveBigFilePart.deserialize(BinaryReader reader) {
@@ -106629,7 +106636,7 @@ class InitConnection extends TlMethod {
     this.proxy,
     this.params,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InitConnection.deserialize(BinaryReader reader) {
@@ -106669,7 +106676,7 @@ class InitConnection extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: proxy != null,
       b01: params != null,
     );
@@ -106766,7 +106773,7 @@ class InitConnection extends TlMethod {
 /// ID: `9cdf08cd`.
 class HelpGetSupport extends TlMethod {
   /// Help Get Support constructor.
-  const HelpGetSupport() : super._();
+  const HelpGetSupport() ;
 
   /// Deserialize.
   factory HelpGetSupport.deserialize(BinaryReader reader) {
@@ -106806,7 +106813,7 @@ class MessagesReadMessageContents extends TlMethod {
   /// Messages Read Message Contents constructor.
   const MessagesReadMessageContents({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadMessageContents.deserialize(BinaryReader reader) {
@@ -106858,7 +106865,7 @@ class AccountCheckUsername extends TlMethod {
   /// Account Check Username constructor.
   const AccountCheckUsername({
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountCheckUsername.deserialize(BinaryReader reader) {
@@ -106910,7 +106917,7 @@ class AccountUpdateUsername extends TlMethod {
   /// Account Update Username constructor.
   const AccountUpdateUsername({
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateUsername.deserialize(BinaryReader reader) {
@@ -106963,7 +106970,7 @@ class ContactsSearch extends TlMethod {
   const ContactsSearch({
     required this.q,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsSearch.deserialize(BinaryReader reader) {
@@ -107024,7 +107031,7 @@ class AccountGetPrivacy extends TlMethod {
   /// Account Get Privacy constructor.
   const AccountGetPrivacy({
     required this.key,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetPrivacy.deserialize(BinaryReader reader) {
@@ -107077,7 +107084,7 @@ class AccountSetPrivacy extends TlMethod {
   const AccountSetPrivacy({
     required this.key,
     required this.rules,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetPrivacy.deserialize(BinaryReader reader) {
@@ -107137,7 +107144,7 @@ class AccountDeleteAccount extends TlMethod {
   const AccountDeleteAccount({
     required this.reason,
     this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountDeleteAccount.deserialize(BinaryReader reader) {
@@ -107161,7 +107168,7 @@ class AccountDeleteAccount extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: password != null,
     );
 
@@ -107212,7 +107219,7 @@ class AccountDeleteAccount extends TlMethod {
 /// ID: `08fc711d`.
 class AccountGetAccountTTL extends TlMethod {
   /// Account Get Account T T L constructor.
-  const AccountGetAccountTTL() : super._();
+  const AccountGetAccountTTL() ;
 
   /// Deserialize.
   factory AccountGetAccountTTL.deserialize(BinaryReader reader) {
@@ -107252,7 +107259,7 @@ class AccountSetAccountTTL extends TlMethod {
   /// Account Set Account T T L constructor.
   const AccountSetAccountTTL({
     required this.ttl,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetAccountTTL.deserialize(BinaryReader reader) {
@@ -107305,7 +107312,7 @@ class InvokeWithLayer extends TlMethod {
   const InvokeWithLayer({
     required this.layer,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithLayer.deserialize(BinaryReader reader) {
@@ -107367,7 +107374,7 @@ class ContactsResolveUsername extends TlMethod {
   const ContactsResolveUsername({
     required this.username,
     this.referer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsResolveUsername.deserialize(BinaryReader reader) {
@@ -107389,7 +107396,7 @@ class ContactsResolveUsername extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: referer != null,
     );
 
@@ -107443,7 +107450,7 @@ class AccountSendChangePhoneCode extends TlMethod {
   const AccountSendChangePhoneCode({
     required this.phoneNumber,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSendChangePhoneCode.deserialize(BinaryReader reader) {
@@ -107504,7 +107511,7 @@ class AccountChangePhone extends TlMethod {
     required this.phoneNumber,
     required this.phoneCodeHash,
     required this.phoneCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountChangePhone.deserialize(BinaryReader reader) {
@@ -107571,7 +107578,7 @@ class MessagesGetStickers extends TlMethod {
   const MessagesGetStickers({
     required this.emoticon,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetStickers.deserialize(BinaryReader reader) {
@@ -107632,7 +107639,7 @@ class MessagesGetAllStickers extends TlMethod {
   /// Messages Get All Stickers constructor.
   const MessagesGetAllStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAllStickers.deserialize(BinaryReader reader) {
@@ -107686,7 +107693,7 @@ class AccountUpdateDeviceLocked extends TlMethod {
   /// Account Update Device Locked constructor.
   const AccountUpdateDeviceLocked({
     required this.period,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateDeviceLocked.deserialize(BinaryReader reader) {
@@ -107743,7 +107750,7 @@ class AuthImportBotAuthorization extends TlMethod {
     required this.apiId,
     required this.apiHash,
     required this.botAuthToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthImportBotAuthorization.deserialize(BinaryReader reader) {
@@ -107821,7 +107828,7 @@ class MessagesGetWebPagePreview extends TlMethod {
   const MessagesGetWebPagePreview({
     required this.message,
     this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetWebPagePreview.deserialize(BinaryReader reader) {
@@ -107844,7 +107851,7 @@ class MessagesGetWebPagePreview extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: entities != null,
     );
 
@@ -107895,7 +107902,7 @@ class MessagesGetWebPagePreview extends TlMethod {
 /// ID: `e320c158`.
 class AccountGetAuthorizations extends TlMethod {
   /// Account Get Authorizations constructor.
-  const AccountGetAuthorizations() : super._();
+  const AccountGetAuthorizations() ;
 
   /// Deserialize.
   factory AccountGetAuthorizations.deserialize(BinaryReader reader) {
@@ -107935,7 +107942,7 @@ class AccountResetAuthorization extends TlMethod {
   /// Account Reset Authorization constructor.
   const AccountResetAuthorization({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResetAuthorization.deserialize(BinaryReader reader) {
@@ -107987,7 +107994,7 @@ class AccountResetAuthorization extends TlMethod {
 /// ID: `548a30f5`.
 class AccountGetPassword extends TlMethod {
   /// Account Get Password constructor.
-  const AccountGetPassword() : super._();
+  const AccountGetPassword() ;
 
   /// Deserialize.
   factory AccountGetPassword.deserialize(BinaryReader reader) {
@@ -108027,7 +108034,7 @@ class AccountGetPasswordSettings extends TlMethod {
   /// Account Get Password Settings constructor.
   const AccountGetPasswordSettings({
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetPasswordSettings.deserialize(BinaryReader reader) {
@@ -108080,7 +108087,7 @@ class AccountUpdatePasswordSettings extends TlMethod {
   const AccountUpdatePasswordSettings({
     required this.password,
     required this.newSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdatePasswordSettings.deserialize(BinaryReader reader) {
@@ -108139,7 +108146,7 @@ class AuthCheckPassword extends TlMethod {
   /// Auth Check Password constructor.
   const AuthCheckPassword({
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthCheckPassword.deserialize(BinaryReader reader) {
@@ -108189,7 +108196,7 @@ class AuthCheckPassword extends TlMethod {
 /// ID: `d897bc66`.
 class AuthRequestPasswordRecovery extends TlMethod {
   /// Auth Request Password Recovery constructor.
-  const AuthRequestPasswordRecovery() : super._();
+  const AuthRequestPasswordRecovery() ;
 
   /// Deserialize.
   factory AuthRequestPasswordRecovery.deserialize(BinaryReader reader) {
@@ -108230,7 +108237,7 @@ class AuthRecoverPassword extends TlMethod {
   const AuthRecoverPassword({
     required this.code,
     this.newSettings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthRecoverPassword.deserialize(BinaryReader reader) {
@@ -108254,7 +108261,7 @@ class AuthRecoverPassword extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: newSettings != null,
     );
 
@@ -108307,7 +108314,7 @@ class InvokeWithoutUpdates extends TlMethod {
   /// Invoke Without Updates constructor.
   const InvokeWithoutUpdates({
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithoutUpdates.deserialize(BinaryReader reader) {
@@ -108365,7 +108372,7 @@ class MessagesExportChatInvite extends TlMethod {
     this.usageLimit,
     this.title,
     this.subscriptionPricing,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesExportChatInvite.deserialize(BinaryReader reader) {
@@ -108402,7 +108409,7 @@ class MessagesExportChatInvite extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: legacyRevokePermanent,
       b03: requestNeeded,
       b00: expireDate != null,
@@ -108492,7 +108499,7 @@ class MessagesCheckChatInvite extends TlMethod {
   /// Messages Check Chat Invite constructor.
   const MessagesCheckChatInvite({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCheckChatInvite.deserialize(BinaryReader reader) {
@@ -108544,7 +108551,7 @@ class MessagesImportChatInvite extends TlMethod {
   /// Messages Import Chat Invite constructor.
   const MessagesImportChatInvite({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesImportChatInvite.deserialize(BinaryReader reader) {
@@ -108597,7 +108604,7 @@ class MessagesGetStickerSet extends TlMethod {
   const MessagesGetStickerSet({
     required this.stickerset,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetStickerSet.deserialize(BinaryReader reader) {
@@ -108659,7 +108666,7 @@ class MessagesInstallStickerSet extends TlMethod {
   const MessagesInstallStickerSet({
     required this.stickerset,
     required this.archived,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesInstallStickerSet.deserialize(BinaryReader reader) {
@@ -108718,7 +108725,7 @@ class MessagesUninstallStickerSet extends TlMethod {
   /// Messages Uninstall Sticker Set constructor.
   const MessagesUninstallStickerSet({
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUninstallStickerSet.deserialize(BinaryReader reader) {
@@ -108773,7 +108780,7 @@ class MessagesStartBot extends TlMethod {
     required this.peer,
     required this.randomId,
     required this.startParam,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesStartBot.deserialize(BinaryReader reader) {
@@ -108850,7 +108857,7 @@ class MessagesGetMessagesViews extends TlMethod {
     required this.peer,
     required this.id,
     required this.increment,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessagesViews.deserialize(BinaryReader reader) {
@@ -108917,7 +108924,7 @@ class ChannelsReadHistory extends TlMethod {
   const ChannelsReadHistory({
     required this.channel,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReadHistory.deserialize(BinaryReader reader) {
@@ -108979,7 +108986,7 @@ class ChannelsDeleteMessages extends TlMethod {
   const ChannelsDeleteMessages({
     required this.channel,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeleteMessages.deserialize(BinaryReader reader) {
@@ -109040,7 +109047,7 @@ class ChannelsReportSpam extends TlMethod {
     required this.channel,
     required this.participant,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReportSpam.deserialize(BinaryReader reader) {
@@ -109107,7 +109114,7 @@ class ChannelsGetMessages extends TlMethod {
   const ChannelsGetMessages({
     required this.channel,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetMessages.deserialize(BinaryReader reader) {
@@ -109170,7 +109177,7 @@ class ChannelsGetParticipants extends TlMethod {
     required this.offset,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetParticipants.deserialize(BinaryReader reader) {
@@ -109257,7 +109264,7 @@ class ChannelsGetParticipant extends TlMethod {
   const ChannelsGetParticipant({
     required this.channel,
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetParticipant.deserialize(BinaryReader reader) {
@@ -109316,7 +109323,7 @@ class ChannelsGetChannels extends TlMethod {
   /// Channels Get Channels constructor.
   const ChannelsGetChannels({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetChannels.deserialize(BinaryReader reader) {
@@ -109368,7 +109375,7 @@ class ChannelsGetFullChannel extends TlMethod {
   /// Channels Get Full Channel constructor.
   const ChannelsGetFullChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetFullChannel.deserialize(BinaryReader reader) {
@@ -109428,7 +109435,7 @@ class ChannelsCreateChannel extends TlMethod {
     this.geoPoint,
     this.address,
     this.ttlPeriod,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsCreateChannel.deserialize(BinaryReader reader) {
@@ -109467,7 +109474,7 @@ class ChannelsCreateChannel extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: broadcast,
       b01: megagroup,
       b03: forImport,
@@ -109565,7 +109572,7 @@ class ChannelsEditAdmin extends TlMethod {
     required this.userId,
     required this.adminRights,
     required this.rank,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditAdmin.deserialize(BinaryReader reader) {
@@ -109639,7 +109646,7 @@ class ChannelsEditTitle extends TlMethod {
   const ChannelsEditTitle({
     required this.channel,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditTitle.deserialize(BinaryReader reader) {
@@ -109699,7 +109706,7 @@ class ChannelsEditPhoto extends TlMethod {
   const ChannelsEditPhoto({
     required this.channel,
     required this.photo,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditPhoto.deserialize(BinaryReader reader) {
@@ -109759,7 +109766,7 @@ class ChannelsCheckUsername extends TlMethod {
   const ChannelsCheckUsername({
     required this.channel,
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsCheckUsername.deserialize(BinaryReader reader) {
@@ -109819,7 +109826,7 @@ class ChannelsUpdateUsername extends TlMethod {
   const ChannelsUpdateUsername({
     required this.channel,
     required this.username,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsUpdateUsername.deserialize(BinaryReader reader) {
@@ -109878,7 +109885,7 @@ class ChannelsJoinChannel extends TlMethod {
   /// Channels Join Channel constructor.
   const ChannelsJoinChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsJoinChannel.deserialize(BinaryReader reader) {
@@ -109930,7 +109937,7 @@ class ChannelsLeaveChannel extends TlMethod {
   /// Channels Leave Channel constructor.
   const ChannelsLeaveChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsLeaveChannel.deserialize(BinaryReader reader) {
@@ -109983,7 +109990,7 @@ class ChannelsInviteToChannel extends TlMethod {
   const ChannelsInviteToChannel({
     required this.channel,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsInviteToChannel.deserialize(BinaryReader reader) {
@@ -110042,7 +110049,7 @@ class ChannelsDeleteChannel extends TlMethod {
   /// Channels Delete Channel constructor.
   const ChannelsDeleteChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeleteChannel.deserialize(BinaryReader reader) {
@@ -110098,7 +110105,7 @@ class UpdatesGetChannelDifference extends TlMethod {
     required this.filter,
     required this.pts,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UpdatesGetChannelDifference.deserialize(BinaryReader reader) {
@@ -110125,7 +110132,7 @@ class UpdatesGetChannelDifference extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: force,
     );
 
@@ -110195,7 +110202,7 @@ class MessagesEditChatAdmin extends TlMethod {
     required this.chatId,
     required this.userId,
     required this.isAdmin,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditChatAdmin.deserialize(BinaryReader reader) {
@@ -110263,7 +110270,7 @@ class MessagesMigrateChat extends TlMethod {
   /// Messages Migrate Chat constructor.
   const MessagesMigrateChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMigrateChat.deserialize(BinaryReader reader) {
@@ -110328,7 +110335,7 @@ class MessagesSearchGlobal extends TlMethod {
     required this.offsetPeer,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchGlobal.deserialize(BinaryReader reader) {
@@ -110370,7 +110377,7 @@ class MessagesSearchGlobal extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: broadcastsOnly,
       b02: groupsOnly,
       b03: usersOnly,
@@ -110481,7 +110488,7 @@ class MessagesReorderStickerSets extends TlMethod {
     required this.masks,
     required this.emojis,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReorderStickerSets.deserialize(BinaryReader reader) {
@@ -110504,7 +110511,7 @@ class MessagesReorderStickerSets extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b01: emojis,
     );
@@ -110560,7 +110567,7 @@ class MessagesGetDocumentByHash extends TlMethod {
     required this.sha256,
     required this.size,
     required this.mimeType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetDocumentByHash.deserialize(BinaryReader reader) {
@@ -110628,7 +110635,7 @@ class MessagesGetSavedGifs extends TlMethod {
   /// Messages Get Saved Gifs constructor.
   const MessagesGetSavedGifs({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSavedGifs.deserialize(BinaryReader reader) {
@@ -110683,7 +110690,7 @@ class MessagesSaveGif extends TlMethod {
   const MessagesSaveGif({
     required this.id,
     required this.unsave,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSaveGif.deserialize(BinaryReader reader) {
@@ -110746,7 +110753,7 @@ class MessagesGetInlineBotResults extends TlMethod {
     this.geoPoint,
     required this.query,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetInlineBotResults.deserialize(BinaryReader reader) {
@@ -110775,7 +110782,7 @@ class MessagesGetInlineBotResults extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: geoPoint != null,
     );
 
@@ -110850,7 +110857,7 @@ class MessagesSetInlineBotResults extends TlMethod {
     this.nextOffset,
     this.switchPm,
     this.switchWebview,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetInlineBotResults.deserialize(BinaryReader reader) {
@@ -110889,7 +110896,7 @@ class MessagesSetInlineBotResults extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: gallery,
       b01: private,
       b02: nextOffset != null,
@@ -110995,7 +111002,7 @@ class MessagesSendInlineBotResult extends TlMethod {
     this.scheduleDate,
     this.sendAs,
     this.quickReplyShortcut,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendInlineBotResult.deserialize(BinaryReader reader) {
@@ -111043,7 +111050,7 @@ class MessagesSendInlineBotResult extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: silent,
       b06: background,
       b07: clearDraft,
@@ -111165,7 +111172,7 @@ class ChannelsExportMessageLink extends TlMethod {
     required this.thread,
     required this.channel,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsExportMessageLink.deserialize(BinaryReader reader) {
@@ -111190,7 +111197,7 @@ class ChannelsExportMessageLink extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: grouped,
       b01: thread,
     );
@@ -111253,7 +111260,7 @@ class ChannelsToggleSignatures extends TlMethod {
     required this.signaturesEnabled,
     required this.profilesEnabled,
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleSignatures.deserialize(BinaryReader reader) {
@@ -111276,7 +111283,7 @@ class ChannelsToggleSignatures extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: signaturesEnabled,
       b01: profilesEnabled,
     );
@@ -111332,7 +111339,7 @@ class AuthResendCode extends TlMethod {
     required this.phoneNumber,
     required this.phoneCodeHash,
     this.reason,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthResendCode.deserialize(BinaryReader reader) {
@@ -111356,7 +111363,7 @@ class AuthResendCode extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: reason != null,
     );
 
@@ -111415,7 +111422,7 @@ class AuthCancelCode extends TlMethod {
   const AuthCancelCode({
     required this.phoneNumber,
     required this.phoneCodeHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthCancelCode.deserialize(BinaryReader reader) {
@@ -111475,7 +111482,7 @@ class MessagesGetMessageEditData extends TlMethod {
   const MessagesGetMessageEditData({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessageEditData.deserialize(BinaryReader reader) {
@@ -111545,7 +111552,7 @@ class MessagesEditMessage extends TlMethod {
     this.entities,
     this.scheduleDate,
     this.quickReplyShortcutId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditMessage.deserialize(BinaryReader reader) {
@@ -111591,7 +111598,7 @@ class MessagesEditMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: noWebpage,
       b16: invertMedia,
       b11: message != null,
@@ -111712,7 +111719,7 @@ class MessagesEditInlineBotMessage extends TlMethod {
     this.media,
     this.replyMarkup,
     this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditInlineBotMessage.deserialize(BinaryReader reader) {
@@ -111749,7 +111756,7 @@ class MessagesEditInlineBotMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: noWebpage,
       b16: invertMedia,
       b11: message != null,
@@ -111843,7 +111850,7 @@ class MessagesGetBotCallbackAnswer extends TlMethod {
     required this.msgId,
     this.data,
     this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetBotCallbackAnswer.deserialize(BinaryReader reader) {
@@ -111874,7 +111881,7 @@ class MessagesGetBotCallbackAnswer extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: game,
       b00: data != null,
       b02: password != null,
@@ -111952,7 +111959,7 @@ class MessagesSetBotCallbackAnswer extends TlMethod {
     this.message,
     this.url,
     required this.cacheTime,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetBotCallbackAnswer.deserialize(BinaryReader reader) {
@@ -111981,7 +111988,7 @@ class MessagesSetBotCallbackAnswer extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: alert,
       b00: message != null,
       b02: url != null,
@@ -112068,7 +112075,7 @@ class ContactsGetTopPeers extends TlMethod {
     required this.offset,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsGetTopPeers.deserialize(BinaryReader reader) {
@@ -112109,7 +112116,7 @@ class ContactsGetTopPeers extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: correspondents,
       b01: botsPm,
       b02: botsInline,
@@ -112215,7 +112222,7 @@ class ContactsResetTopPeerRating extends TlMethod {
   const ContactsResetTopPeerRating({
     required this.category,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsResetTopPeerRating.deserialize(BinaryReader reader) {
@@ -112274,7 +112281,7 @@ class MessagesGetPeerDialogs extends TlMethod {
   /// Messages Get Peer Dialogs constructor.
   const MessagesGetPeerDialogs({
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPeerDialogs.deserialize(BinaryReader reader) {
@@ -112333,7 +112340,7 @@ class MessagesSaveDraft extends TlMethod {
     this.entities,
     this.media,
     this.effect,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSaveDraft.deserialize(BinaryReader reader) {
@@ -112372,7 +112379,7 @@ class MessagesSaveDraft extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: noWebpage,
       b06: invertMedia,
       b04: replyTo != null,
@@ -112465,7 +112472,7 @@ class MessagesSaveDraft extends TlMethod {
 /// ID: `6a3f8d65`.
 class MessagesGetAllDrafts extends TlMethod {
   /// Messages Get All Drafts constructor.
-  const MessagesGetAllDrafts() : super._();
+  const MessagesGetAllDrafts() ;
 
   /// Deserialize.
   factory MessagesGetAllDrafts.deserialize(BinaryReader reader) {
@@ -112505,7 +112512,7 @@ class MessagesGetFeaturedStickers extends TlMethod {
   /// Messages Get Featured Stickers constructor.
   const MessagesGetFeaturedStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetFeaturedStickers.deserialize(BinaryReader reader) {
@@ -112559,7 +112566,7 @@ class MessagesReadFeaturedStickers extends TlMethod {
   /// Messages Read Featured Stickers constructor.
   const MessagesReadFeaturedStickers({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadFeaturedStickers.deserialize(BinaryReader reader) {
@@ -112612,7 +112619,7 @@ class MessagesGetRecentStickers extends TlMethod {
   const MessagesGetRecentStickers({
     required this.attached,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetRecentStickers.deserialize(BinaryReader reader) {
@@ -112633,7 +112640,7 @@ class MessagesGetRecentStickers extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: attached,
     );
 
@@ -112686,7 +112693,7 @@ class MessagesSaveRecentSticker extends TlMethod {
     required this.attached,
     required this.id,
     required this.unsave,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSaveRecentSticker.deserialize(BinaryReader reader) {
@@ -112709,7 +112716,7 @@ class MessagesSaveRecentSticker extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: attached,
     );
 
@@ -112763,7 +112770,7 @@ class MessagesClearRecentStickers extends TlMethod {
   /// Messages Clear Recent Stickers constructor.
   const MessagesClearRecentStickers({
     required this.attached,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesClearRecentStickers.deserialize(BinaryReader reader) {
@@ -112782,7 +112789,7 @@ class MessagesClearRecentStickers extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: attached,
     );
 
@@ -112829,7 +112836,7 @@ class MessagesGetArchivedStickers extends TlMethod {
     required this.emojis,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetArchivedStickers.deserialize(BinaryReader reader) {
@@ -112854,7 +112861,7 @@ class MessagesGetArchivedStickers extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b01: emojis,
     );
@@ -112918,7 +112925,7 @@ class AccountSendConfirmPhoneCode extends TlMethod {
   const AccountSendConfirmPhoneCode({
     required this.hash,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSendConfirmPhoneCode.deserialize(BinaryReader reader) {
@@ -112978,7 +112985,7 @@ class AccountConfirmPhone extends TlMethod {
   const AccountConfirmPhone({
     required this.phoneCodeHash,
     required this.phoneCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountConfirmPhone.deserialize(BinaryReader reader) {
@@ -113039,7 +113046,7 @@ class ChannelsGetAdminedPublicChannels extends TlMethod {
     required this.byLocation,
     required this.checkLimit,
     required this.forPersonal,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetAdminedPublicChannels.deserialize(BinaryReader reader) {
@@ -113062,7 +113069,7 @@ class ChannelsGetAdminedPublicChannels extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: byLocation,
       b01: checkLimit,
       b02: forPersonal,
@@ -113116,7 +113123,7 @@ class MessagesGetMaskStickers extends TlMethod {
   /// Messages Get Mask Stickers constructor.
   const MessagesGetMaskStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMaskStickers.deserialize(BinaryReader reader) {
@@ -113170,7 +113177,7 @@ class MessagesGetAttachedStickers extends TlMethod {
   /// Messages Get Attached Stickers constructor.
   const MessagesGetAttachedStickers({
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAttachedStickers.deserialize(BinaryReader reader) {
@@ -113222,7 +113229,7 @@ class AuthDropTempAuthKeys extends TlMethod {
   /// Auth Drop Temp Auth Keys constructor.
   const AuthDropTempAuthKeys({
     required this.exceptAuthKeys,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthDropTempAuthKeys.deserialize(BinaryReader reader) {
@@ -113279,7 +113286,7 @@ class MessagesSetGameScore extends TlMethod {
     required this.id,
     required this.userId,
     required this.score,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetGameScore.deserialize(BinaryReader reader) {
@@ -113308,7 +113315,7 @@ class MessagesSetGameScore extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: editMessage,
       b01: force,
     );
@@ -113385,7 +113392,7 @@ class MessagesSetInlineGameScore extends TlMethod {
     required this.id,
     required this.userId,
     required this.score,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetInlineGameScore.deserialize(BinaryReader reader) {
@@ -113412,7 +113419,7 @@ class MessagesSetInlineGameScore extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: editMessage,
       b01: force,
     );
@@ -113480,7 +113487,7 @@ class MessagesGetGameHighScores extends TlMethod {
     required this.peer,
     required this.id,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetGameHighScores.deserialize(BinaryReader reader) {
@@ -113549,7 +113556,7 @@ class MessagesGetInlineGameHighScores extends TlMethod {
   const MessagesGetInlineGameHighScores({
     required this.id,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetInlineGameHighScores.deserialize(BinaryReader reader) {
@@ -113610,7 +113617,7 @@ class MessagesGetCommonChats extends TlMethod {
     required this.userId,
     required this.maxId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetCommonChats.deserialize(BinaryReader reader) {
@@ -113681,7 +113688,7 @@ class HelpSetBotUpdatesStatus extends TlMethod {
   const HelpSetBotUpdatesStatus({
     required this.pendingUpdatesCount,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpSetBotUpdatesStatus.deserialize(BinaryReader reader) {
@@ -113743,7 +113750,7 @@ class MessagesGetWebPage extends TlMethod {
   const MessagesGetWebPage({
     required this.url,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetWebPage.deserialize(BinaryReader reader) {
@@ -113805,7 +113812,7 @@ class MessagesToggleDialogPin extends TlMethod {
   const MessagesToggleDialogPin({
     required this.pinned,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleDialogPin.deserialize(BinaryReader reader) {
@@ -113826,7 +113833,7 @@ class MessagesToggleDialogPin extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -113877,7 +113884,7 @@ class MessagesReorderPinnedDialogs extends TlMethod {
     required this.force,
     required this.folderId,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReorderPinnedDialogs.deserialize(BinaryReader reader) {
@@ -113900,7 +113907,7 @@ class MessagesReorderPinnedDialogs extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: force,
     );
 
@@ -113956,7 +113963,7 @@ class MessagesGetPinnedDialogs extends TlMethod {
   /// Messages Get Pinned Dialogs constructor.
   const MessagesGetPinnedDialogs({
     required this.folderId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPinnedDialogs.deserialize(BinaryReader reader) {
@@ -114011,7 +114018,7 @@ class BotsSendCustomRequest extends TlMethod {
   const BotsSendCustomRequest({
     required this.customMethod,
     required this.params,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSendCustomRequest.deserialize(BinaryReader reader) {
@@ -114071,7 +114078,7 @@ class BotsAnswerWebhookJSONQuery extends TlMethod {
   const BotsAnswerWebhookJSONQuery({
     required this.queryId,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsAnswerWebhookJSONQuery.deserialize(BinaryReader reader) {
@@ -114134,7 +114141,7 @@ class UploadGetWebFile extends TlMethod {
     required this.location,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadGetWebFile.deserialize(BinaryReader reader) {
@@ -114205,7 +114212,7 @@ class PaymentsGetPaymentForm extends TlMethod {
   const PaymentsGetPaymentForm({
     required this.invoice,
     this.themeParams,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetPaymentForm.deserialize(BinaryReader reader) {
@@ -114228,7 +114235,7 @@ class PaymentsGetPaymentForm extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: themeParams != null,
     );
 
@@ -114282,7 +114289,7 @@ class PaymentsGetPaymentReceipt extends TlMethod {
   const PaymentsGetPaymentReceipt({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetPaymentReceipt.deserialize(BinaryReader reader) {
@@ -114345,7 +114352,7 @@ class PaymentsValidateRequestedInfo extends TlMethod {
     required this.save,
     required this.invoice,
     required this.info,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsValidateRequestedInfo.deserialize(BinaryReader reader) {
@@ -114368,7 +114375,7 @@ class PaymentsValidateRequestedInfo extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: save,
     );
 
@@ -114427,7 +114434,7 @@ class PaymentsSendPaymentForm extends TlMethod {
     this.shippingOptionId,
     required this.credentials,
     this.tipAmount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsSendPaymentForm.deserialize(BinaryReader reader) {
@@ -114461,7 +114468,7 @@ class PaymentsSendPaymentForm extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requestedInfoId != null,
       b01: shippingOptionId != null,
       b02: tipAmount != null,
@@ -114545,7 +114552,7 @@ class AccountGetTmpPassword extends TlMethod {
   const AccountGetTmpPassword({
     required this.password,
     required this.period,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetTmpPassword.deserialize(BinaryReader reader) {
@@ -114604,7 +114611,7 @@ class AccountGetTmpPassword extends TlMethod {
 /// ID: `227d824b`.
 class PaymentsGetSavedInfo extends TlMethod {
   /// Payments Get Saved Info constructor.
-  const PaymentsGetSavedInfo() : super._();
+  const PaymentsGetSavedInfo() ;
 
   /// Deserialize.
   factory PaymentsGetSavedInfo.deserialize(BinaryReader reader) {
@@ -114645,7 +114652,7 @@ class PaymentsClearSavedInfo extends TlMethod {
   const PaymentsClearSavedInfo({
     required this.credentials,
     required this.info,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsClearSavedInfo.deserialize(BinaryReader reader) {
@@ -114666,7 +114673,7 @@ class PaymentsClearSavedInfo extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: credentials,
       b01: info,
     );
@@ -114717,7 +114724,7 @@ class MessagesSetBotShippingResults extends TlMethod {
     required this.queryId,
     this.error,
     this.shippingOptions,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetBotShippingResults.deserialize(BinaryReader reader) {
@@ -114744,7 +114751,7 @@ class MessagesSetBotShippingResults extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: error != null,
       b01: shippingOptions != null,
     );
@@ -114810,7 +114817,7 @@ class MessagesSetBotPrecheckoutResults extends TlMethod {
     required this.success,
     required this.queryId,
     this.error,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetBotPrecheckoutResults.deserialize(BinaryReader reader) {
@@ -114834,7 +114841,7 @@ class MessagesSetBotPrecheckoutResults extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: success,
       b00: error != null,
     );
@@ -114902,7 +114909,7 @@ class StickersCreateStickerSet extends TlMethod {
     this.thumb,
     required this.stickers,
     this.software,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersCreateStickerSet.deserialize(BinaryReader reader) {
@@ -114940,7 +114947,7 @@ class StickersCreateStickerSet extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: masks,
       b05: emojis,
       b06: textColor,
@@ -115032,7 +115039,7 @@ class StickersRemoveStickerFromSet extends TlMethod {
   /// Stickers Remove Sticker From Set constructor.
   const StickersRemoveStickerFromSet({
     required this.sticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersRemoveStickerFromSet.deserialize(BinaryReader reader) {
@@ -115085,7 +115092,7 @@ class StickersChangeStickerPosition extends TlMethod {
   const StickersChangeStickerPosition({
     required this.sticker,
     required this.position,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersChangeStickerPosition.deserialize(BinaryReader reader) {
@@ -115147,7 +115154,7 @@ class StickersAddStickerToSet extends TlMethod {
   const StickersAddStickerToSet({
     required this.stickerset,
     required this.sticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersAddStickerToSet.deserialize(BinaryReader reader) {
@@ -115208,7 +115215,7 @@ class MessagesUploadMedia extends TlMethod {
     this.businessConnectionId,
     required this.peer,
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUploadMedia.deserialize(BinaryReader reader) {
@@ -115233,7 +115240,7 @@ class MessagesUploadMedia extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: businessConnectionId != null,
     );
 
@@ -115289,7 +115296,7 @@ class MessagesUploadMedia extends TlMethod {
 /// ID: `55451fa9`.
 class PhoneGetCallConfig extends TlMethod {
   /// Phone Get Call Config constructor.
-  const PhoneGetCallConfig() : super._();
+  const PhoneGetCallConfig() ;
 
   /// Deserialize.
   factory PhoneGetCallConfig.deserialize(BinaryReader reader) {
@@ -115333,7 +115340,7 @@ class PhoneRequestCall extends TlMethod {
     required this.randomId,
     required this.gAHash,
     required this.protocol,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneRequestCall.deserialize(BinaryReader reader) {
@@ -115360,7 +115367,7 @@ class PhoneRequestCall extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: video,
     );
 
@@ -115428,7 +115435,7 @@ class PhoneAcceptCall extends TlMethod {
     required this.peer,
     required this.gB,
     required this.protocol,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneAcceptCall.deserialize(BinaryReader reader) {
@@ -115497,7 +115504,7 @@ class PhoneConfirmCall extends TlMethod {
     required this.gA,
     required this.keyFingerprint,
     required this.protocol,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneConfirmCall.deserialize(BinaryReader reader) {
@@ -115572,7 +115579,7 @@ class PhoneReceivedCall extends TlMethod {
   /// Phone Received Call constructor.
   const PhoneReceivedCall({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneReceivedCall.deserialize(BinaryReader reader) {
@@ -115628,7 +115635,7 @@ class PhoneDiscardCall extends TlMethod {
     required this.duration,
     required this.reason,
     required this.connectionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneDiscardCall.deserialize(BinaryReader reader) {
@@ -115655,7 +115662,7 @@ class PhoneDiscardCall extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: video,
     );
 
@@ -115726,7 +115733,7 @@ class PhoneSetCallRating extends TlMethod {
     required this.peer,
     required this.rating,
     required this.comment,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneSetCallRating.deserialize(BinaryReader reader) {
@@ -115751,7 +115758,7 @@ class PhoneSetCallRating extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: userInitiative,
     );
 
@@ -115813,7 +115820,7 @@ class PhoneSaveCallDebug extends TlMethod {
   const PhoneSaveCallDebug({
     required this.peer,
     required this.debug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneSaveCallDebug.deserialize(BinaryReader reader) {
@@ -115874,7 +115881,7 @@ class UploadGetCdnFile extends TlMethod {
     required this.fileToken,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadGetCdnFile.deserialize(BinaryReader reader) {
@@ -115945,7 +115952,7 @@ class UploadReuploadCdnFile extends TlMethod {
   const UploadReuploadCdnFile({
     required this.fileToken,
     required this.requestToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadReuploadCdnFile.deserialize(BinaryReader reader) {
@@ -116002,7 +116009,7 @@ class UploadReuploadCdnFile extends TlMethod {
 /// ID: `52029342`.
 class HelpGetCdnConfig extends TlMethod {
   /// Help Get Cdn Config constructor.
-  const HelpGetCdnConfig() : super._();
+  const HelpGetCdnConfig() ;
 
   /// Deserialize.
   factory HelpGetCdnConfig.deserialize(BinaryReader reader) {
@@ -116043,7 +116050,7 @@ class LangpackGetLangPack extends TlMethod {
   const LangpackGetLangPack({
     required this.langPack,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangpackGetLangPack.deserialize(BinaryReader reader) {
@@ -116104,7 +116111,7 @@ class LangpackGetStrings extends TlMethod {
     required this.langPack,
     required this.langCode,
     required this.keys,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangpackGetStrings.deserialize(BinaryReader reader) {
@@ -116172,7 +116179,7 @@ class LangpackGetDifference extends TlMethod {
     required this.langPack,
     required this.langCode,
     required this.fromVersion,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangpackGetDifference.deserialize(BinaryReader reader) {
@@ -116240,7 +116247,7 @@ class LangpackGetLanguages extends TlMethod {
   /// Langpack Get Languages constructor.
   const LangpackGetLanguages({
     required this.langPack,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangpackGetLanguages.deserialize(BinaryReader reader) {
@@ -116294,7 +116301,7 @@ class ChannelsEditBanned extends TlMethod {
     required this.channel,
     required this.participant,
     required this.bannedRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditBanned.deserialize(BinaryReader reader) {
@@ -116366,7 +116373,7 @@ class ChannelsGetAdminLog extends TlMethod {
     required this.maxId,
     required this.minId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetAdminLog.deserialize(BinaryReader reader) {
@@ -116402,7 +116409,7 @@ class ChannelsGetAdminLog extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: eventsFilter != null,
       b01: admins != null,
     );
@@ -116491,7 +116498,7 @@ class UploadGetCdnFileHashes extends TlMethod {
   const UploadGetCdnFileHashes({
     required this.fileToken,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadGetCdnFileHashes.deserialize(BinaryReader reader) {
@@ -116554,7 +116561,7 @@ class MessagesSendScreenshotNotification extends TlMethod {
     required this.peer,
     required this.replyTo,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendScreenshotNotification.deserialize(BinaryReader reader) {
@@ -116623,7 +116630,7 @@ class ChannelsSetStickers extends TlMethod {
   const ChannelsSetStickers({
     required this.channel,
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSetStickers.deserialize(BinaryReader reader) {
@@ -116682,7 +116689,7 @@ class MessagesGetFavedStickers extends TlMethod {
   /// Messages Get Faved Stickers constructor.
   const MessagesGetFavedStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetFavedStickers.deserialize(BinaryReader reader) {
@@ -116737,7 +116744,7 @@ class MessagesFaveSticker extends TlMethod {
   const MessagesFaveSticker({
     required this.id,
     required this.unfave,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesFaveSticker.deserialize(BinaryReader reader) {
@@ -116797,7 +116804,7 @@ class ChannelsReadMessageContents extends TlMethod {
   const ChannelsReadMessageContents({
     required this.channel,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReadMessageContents.deserialize(BinaryReader reader) {
@@ -116854,7 +116861,7 @@ class ChannelsReadMessageContents extends TlMethod {
 /// ID: `879537f1`.
 class ContactsResetSaved extends TlMethod {
   /// Contacts Reset Saved constructor.
-  const ContactsResetSaved() : super._();
+  const ContactsResetSaved() ;
 
   /// Deserialize.
   factory ContactsResetSaved.deserialize(BinaryReader reader) {
@@ -116900,7 +116907,7 @@ class MessagesGetUnreadMentions extends TlMethod {
     required this.limit,
     required this.maxId,
     required this.minId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetUnreadMentions.deserialize(BinaryReader reader) {
@@ -116932,7 +116939,7 @@ class MessagesGetUnreadMentions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -117022,7 +117029,7 @@ class ChannelsDeleteHistory extends TlMethod {
     required this.forEveryone,
     required this.channel,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeleteHistory.deserialize(BinaryReader reader) {
@@ -117045,7 +117052,7 @@ class ChannelsDeleteHistory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: forEveryone,
     );
 
@@ -117101,7 +117108,7 @@ class HelpGetRecentMeUrls extends TlMethod {
   /// Help Get Recent Me Urls constructor.
   const HelpGetRecentMeUrls({
     required this.referer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetRecentMeUrls.deserialize(BinaryReader reader) {
@@ -117154,7 +117161,7 @@ class ChannelsTogglePreHistoryHidden extends TlMethod {
   const ChannelsTogglePreHistoryHidden({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsTogglePreHistoryHidden.deserialize(BinaryReader reader) {
@@ -117214,7 +117221,7 @@ class MessagesReadMentions extends TlMethod {
   const MessagesReadMentions({
     required this.peer,
     this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadMentions.deserialize(BinaryReader reader) {
@@ -117236,7 +117243,7 @@ class MessagesReadMentions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -117291,7 +117298,7 @@ class MessagesGetRecentLocations extends TlMethod {
     required this.peer,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetRecentLocations.deserialize(BinaryReader reader) {
@@ -117374,7 +117381,7 @@ class MessagesSendMultiMedia extends TlMethod {
     this.sendAs,
     this.quickReplyShortcut,
     this.effect,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendMultiMedia.deserialize(BinaryReader reader) {
@@ -117427,7 +117434,7 @@ class MessagesSendMultiMedia extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: silent,
       b06: background,
       b07: clearDraft,
@@ -117557,7 +117564,7 @@ class MessagesUploadEncryptedFile extends TlMethod {
   const MessagesUploadEncryptedFile({
     required this.peer,
     required this.file,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUploadEncryptedFile.deserialize(BinaryReader reader) {
@@ -117614,7 +117621,7 @@ class MessagesUploadEncryptedFile extends TlMethod {
 /// ID: `182e6d6f`.
 class AccountGetWebAuthorizations extends TlMethod {
   /// Account Get Web Authorizations constructor.
-  const AccountGetWebAuthorizations() : super._();
+  const AccountGetWebAuthorizations() ;
 
   /// Deserialize.
   factory AccountGetWebAuthorizations.deserialize(BinaryReader reader) {
@@ -117654,7 +117661,7 @@ class AccountResetWebAuthorization extends TlMethod {
   /// Account Reset Web Authorization constructor.
   const AccountResetWebAuthorization({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResetWebAuthorization.deserialize(BinaryReader reader) {
@@ -117706,7 +117713,7 @@ class AccountResetWebAuthorization extends TlMethod {
 /// ID: `682d2594`.
 class AccountResetWebAuthorizations extends TlMethod {
   /// Account Reset Web Authorizations constructor.
-  const AccountResetWebAuthorizations() : super._();
+  const AccountResetWebAuthorizations() ;
 
   /// Deserialize.
   factory AccountResetWebAuthorizations.deserialize(BinaryReader reader) {
@@ -117748,7 +117755,7 @@ class MessagesSearchStickerSets extends TlMethod {
     required this.excludeFeatured,
     required this.q,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchStickerSets.deserialize(BinaryReader reader) {
@@ -117771,7 +117778,7 @@ class MessagesSearchStickerSets extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: excludeFeatured,
     );
 
@@ -117828,7 +117835,7 @@ class UploadGetFileHashes extends TlMethod {
   const UploadGetFileHashes({
     required this.location,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UploadGetFileHashes.deserialize(BinaryReader reader) {
@@ -117887,7 +117894,7 @@ class UploadGetFileHashes extends TlMethod {
 /// ID: `2ca51fd1`.
 class HelpGetTermsOfServiceUpdate extends TlMethod {
   /// Help Get Terms Of Service Update constructor.
-  const HelpGetTermsOfServiceUpdate() : super._();
+  const HelpGetTermsOfServiceUpdate() ;
 
   /// Deserialize.
   factory HelpGetTermsOfServiceUpdate.deserialize(BinaryReader reader) {
@@ -117927,7 +117934,7 @@ class HelpAcceptTermsOfService extends TlMethod {
   /// Help Accept Terms Of Service constructor.
   const HelpAcceptTermsOfService({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpAcceptTermsOfService.deserialize(BinaryReader reader) {
@@ -117977,7 +117984,7 @@ class HelpAcceptTermsOfService extends TlMethod {
 /// ID: `b288bc7d`.
 class AccountGetAllSecureValues extends TlMethod {
   /// Account Get All Secure Values constructor.
-  const AccountGetAllSecureValues() : super._();
+  const AccountGetAllSecureValues() ;
 
   /// Deserialize.
   factory AccountGetAllSecureValues.deserialize(BinaryReader reader) {
@@ -118017,7 +118024,7 @@ class AccountGetSecureValue extends TlMethod {
   /// Account Get Secure Value constructor.
   const AccountGetSecureValue({
     required this.types,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetSecureValue.deserialize(BinaryReader reader) {
@@ -118070,7 +118077,7 @@ class AccountSaveSecureValue extends TlMethod {
   const AccountSaveSecureValue({
     required this.value,
     required this.secureSecretId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveSecureValue.deserialize(BinaryReader reader) {
@@ -118131,7 +118138,7 @@ class AccountDeleteSecureValue extends TlMethod {
   /// Account Delete Secure Value constructor.
   const AccountDeleteSecureValue({
     required this.types,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountDeleteSecureValue.deserialize(BinaryReader reader) {
@@ -118184,7 +118191,7 @@ class UsersSetSecureValueErrors extends TlMethod {
   const UsersSetSecureValueErrors({
     required this.id,
     required this.errors,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UsersSetSecureValueErrors.deserialize(BinaryReader reader) {
@@ -118245,7 +118252,7 @@ class AccountGetAuthorizationForm extends TlMethod {
     required this.botId,
     required this.scope,
     required this.publicKey,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetAuthorizationForm.deserialize(BinaryReader reader) {
@@ -118317,7 +118324,7 @@ class AccountAcceptAuthorization extends TlMethod {
     required this.publicKey,
     required this.valueHashes,
     required this.credentials,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountAcceptAuthorization.deserialize(BinaryReader reader) {
@@ -118400,7 +118407,7 @@ class AccountSendVerifyPhoneCode extends TlMethod {
   const AccountSendVerifyPhoneCode({
     required this.phoneNumber,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSendVerifyPhoneCode.deserialize(BinaryReader reader) {
@@ -118461,7 +118468,7 @@ class AccountVerifyPhone extends TlMethod {
     required this.phoneNumber,
     required this.phoneCodeHash,
     required this.phoneCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountVerifyPhone.deserialize(BinaryReader reader) {
@@ -118528,7 +118535,7 @@ class AccountSendVerifyEmailCode extends TlMethod {
   const AccountSendVerifyEmailCode({
     required this.purpose,
     required this.email,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSendVerifyEmailCode.deserialize(BinaryReader reader) {
@@ -118588,7 +118595,7 @@ class AccountVerifyEmail extends TlMethod {
   const AccountVerifyEmail({
     required this.purpose,
     required this.verification,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountVerifyEmail.deserialize(BinaryReader reader) {
@@ -118647,7 +118654,7 @@ class HelpGetDeepLinkInfo extends TlMethod {
   /// Help Get Deep Link Info constructor.
   const HelpGetDeepLinkInfo({
     required this.path,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetDeepLinkInfo.deserialize(BinaryReader reader) {
@@ -118697,7 +118704,7 @@ class HelpGetDeepLinkInfo extends TlMethod {
 /// ID: `82f1e39f`.
 class ContactsGetSaved extends TlMethod {
   /// Contacts Get Saved constructor.
-  const ContactsGetSaved() : super._();
+  const ContactsGetSaved() ;
 
   /// Deserialize.
   factory ContactsGetSaved.deserialize(BinaryReader reader) {
@@ -118737,7 +118744,7 @@ class ChannelsGetLeftChannels extends TlMethod {
   /// Channels Get Left Channels constructor.
   const ChannelsGetLeftChannels({
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetLeftChannels.deserialize(BinaryReader reader) {
@@ -118797,7 +118804,7 @@ class AccountInitTakeoutSession extends TlMethod {
     required this.messageChannels,
     required this.files,
     this.fileMaxSize,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountInitTakeoutSession.deserialize(BinaryReader reader) {
@@ -118829,7 +118836,7 @@ class AccountInitTakeoutSession extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: contacts,
       b01: messageUsers,
       b02: messageChats,
@@ -118906,7 +118913,7 @@ class AccountFinishTakeoutSession extends TlMethod {
   /// Account Finish Takeout Session constructor.
   const AccountFinishTakeoutSession({
     required this.success,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountFinishTakeoutSession.deserialize(BinaryReader reader) {
@@ -118925,7 +118932,7 @@ class AccountFinishTakeoutSession extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: success,
     );
 
@@ -118967,7 +118974,7 @@ class AccountFinishTakeoutSession extends TlMethod {
 /// ID: `1cff7e08`.
 class MessagesGetSplitRanges extends TlMethod {
   /// Messages Get Split Ranges constructor.
-  const MessagesGetSplitRanges() : super._();
+  const MessagesGetSplitRanges() ;
 
   /// Deserialize.
   factory MessagesGetSplitRanges.deserialize(BinaryReader reader) {
@@ -119008,7 +119015,7 @@ class InvokeWithMessagesRange extends TlMethod {
   const InvokeWithMessagesRange({
     required this.range,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithMessagesRange.deserialize(BinaryReader reader) {
@@ -119068,7 +119075,7 @@ class InvokeWithTakeout extends TlMethod {
   const InvokeWithTakeout({
     required this.takeoutId,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithTakeout.deserialize(BinaryReader reader) {
@@ -119130,7 +119137,7 @@ class MessagesMarkDialogUnread extends TlMethod {
   const MessagesMarkDialogUnread({
     required this.unread,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesMarkDialogUnread.deserialize(BinaryReader reader) {
@@ -119151,7 +119158,7 @@ class MessagesMarkDialogUnread extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: unread,
     );
 
@@ -119198,7 +119205,7 @@ class MessagesMarkDialogUnread extends TlMethod {
 /// ID: `22e24e22`.
 class MessagesGetDialogUnreadMarks extends TlMethod {
   /// Messages Get Dialog Unread Marks constructor.
-  const MessagesGetDialogUnreadMarks() : super._();
+  const MessagesGetDialogUnreadMarks() ;
 
   /// Deserialize.
   factory MessagesGetDialogUnreadMarks.deserialize(BinaryReader reader) {
@@ -119238,7 +119245,7 @@ class ContactsToggleTopPeers extends TlMethod {
   /// Contacts Toggle Top Peers constructor.
   const ContactsToggleTopPeers({
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsToggleTopPeers.deserialize(BinaryReader reader) {
@@ -119288,7 +119295,7 @@ class ContactsToggleTopPeers extends TlMethod {
 /// ID: `7e58ee9c`.
 class MessagesClearAllDrafts extends TlMethod {
   /// Messages Clear All Drafts constructor.
-  const MessagesClearAllDrafts() : super._();
+  const MessagesClearAllDrafts() ;
 
   /// Deserialize.
   factory MessagesClearAllDrafts.deserialize(BinaryReader reader) {
@@ -119328,7 +119335,7 @@ class HelpGetAppConfig extends TlMethod {
   /// Help Get App Config constructor.
   const HelpGetAppConfig({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetAppConfig.deserialize(BinaryReader reader) {
@@ -119382,7 +119389,7 @@ class HelpSaveAppLog extends TlMethod {
   /// Help Save App Log constructor.
   const HelpSaveAppLog({
     required this.events,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpSaveAppLog.deserialize(BinaryReader reader) {
@@ -119434,7 +119441,7 @@ class HelpGetPassportConfig extends TlMethod {
   /// Help Get Passport Config constructor.
   const HelpGetPassportConfig({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetPassportConfig.deserialize(BinaryReader reader) {
@@ -119489,7 +119496,7 @@ class LangpackGetLanguage extends TlMethod {
   const LangpackGetLanguage({
     required this.langPack,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory LangpackGetLanguage.deserialize(BinaryReader reader) {
@@ -119552,7 +119559,7 @@ class MessagesUpdatePinnedMessage extends TlMethod {
     required this.pmOneside,
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUpdatePinnedMessage.deserialize(BinaryReader reader) {
@@ -119579,7 +119586,7 @@ class MessagesUpdatePinnedMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: silent,
       b01: unpin,
       b02: pmOneside,
@@ -119645,7 +119652,7 @@ class AccountConfirmPasswordEmail extends TlMethod {
   /// Account Confirm Password Email constructor.
   const AccountConfirmPasswordEmail({
     required this.code,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountConfirmPasswordEmail.deserialize(BinaryReader reader) {
@@ -119695,7 +119702,7 @@ class AccountConfirmPasswordEmail extends TlMethod {
 /// ID: `7a7f2a15`.
 class AccountResendPasswordEmail extends TlMethod {
   /// Account Resend Password Email constructor.
-  const AccountResendPasswordEmail() : super._();
+  const AccountResendPasswordEmail() ;
 
   /// Deserialize.
   factory AccountResendPasswordEmail.deserialize(BinaryReader reader) {
@@ -119733,7 +119740,7 @@ class AccountResendPasswordEmail extends TlMethod {
 /// ID: `c1cbd5b6`.
 class AccountCancelPasswordEmail extends TlMethod {
   /// Account Cancel Password Email constructor.
-  const AccountCancelPasswordEmail() : super._();
+  const AccountCancelPasswordEmail() ;
 
   /// Deserialize.
   factory AccountCancelPasswordEmail.deserialize(BinaryReader reader) {
@@ -119771,7 +119778,7 @@ class AccountCancelPasswordEmail extends TlMethod {
 /// ID: `d360e72c`.
 class HelpGetSupportName extends TlMethod {
   /// Help Get Support Name constructor.
-  const HelpGetSupportName() : super._();
+  const HelpGetSupportName() ;
 
   /// Deserialize.
   factory HelpGetSupportName.deserialize(BinaryReader reader) {
@@ -119811,7 +119818,7 @@ class HelpGetUserInfo extends TlMethod {
   /// Help Get User Info constructor.
   const HelpGetUserInfo({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetUserInfo.deserialize(BinaryReader reader) {
@@ -119865,7 +119872,7 @@ class HelpEditUserInfo extends TlMethod {
     required this.userId,
     required this.message,
     required this.entities,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpEditUserInfo.deserialize(BinaryReader reader) {
@@ -119929,7 +119936,7 @@ class HelpEditUserInfo extends TlMethod {
 /// ID: `9f07c728`.
 class AccountGetContactSignUpNotification extends TlMethod {
   /// Account Get Contact Sign Up Notification constructor.
-  const AccountGetContactSignUpNotification() : super._();
+  const AccountGetContactSignUpNotification() ;
 
   /// Deserialize.
   factory AccountGetContactSignUpNotification.deserialize(BinaryReader reader) {
@@ -119969,7 +119976,7 @@ class AccountSetContactSignUpNotification extends TlMethod {
   /// Account Set Contact Sign Up Notification constructor.
   const AccountSetContactSignUpNotification({
     required this.silent,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetContactSignUpNotification.deserialize(BinaryReader reader) {
@@ -120023,7 +120030,7 @@ class AccountGetNotifyExceptions extends TlMethod {
     required this.compareSound,
     required this.compareStories,
     this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetNotifyExceptions.deserialize(BinaryReader reader) {
@@ -120048,7 +120055,7 @@ class AccountGetNotifyExceptions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: compareSound,
       b02: compareStories,
       b00: peer != null,
@@ -120108,7 +120115,7 @@ class MessagesSendVote extends TlMethod {
     required this.peer,
     required this.msgId,
     required this.options,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendVote.deserialize(BinaryReader reader) {
@@ -120177,7 +120184,7 @@ class MessagesGetPollResults extends TlMethod {
   const MessagesGetPollResults({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPollResults.deserialize(BinaryReader reader) {
@@ -120238,7 +120245,7 @@ class MessagesGetOnlines extends TlMethod {
   /// Messages Get Onlines constructor.
   const MessagesGetOnlines({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetOnlines.deserialize(BinaryReader reader) {
@@ -120291,7 +120298,7 @@ class MessagesEditChatAbout extends TlMethod {
   const MessagesEditChatAbout({
     required this.peer,
     required this.about,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditChatAbout.deserialize(BinaryReader reader) {
@@ -120351,7 +120358,7 @@ class MessagesEditChatDefaultBannedRights extends TlMethod {
   const MessagesEditChatDefaultBannedRights({
     required this.peer,
     required this.bannedRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditChatDefaultBannedRights.deserialize(BinaryReader reader) {
@@ -120410,7 +120417,7 @@ class AccountGetWallPaper extends TlMethod {
   /// Account Get Wall Paper constructor.
   const AccountGetWallPaper({
     required this.wallpaper,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetWallPaper.deserialize(BinaryReader reader) {
@@ -120465,7 +120472,7 @@ class AccountUploadWallPaper extends TlMethod {
     required this.file,
     required this.mimeType,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUploadWallPaper.deserialize(BinaryReader reader) {
@@ -120490,7 +120497,7 @@ class AccountUploadWallPaper extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: forChat,
     );
 
@@ -120551,7 +120558,7 @@ class AccountSaveWallPaper extends TlMethod {
     required this.wallpaper,
     required this.unsave,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveWallPaper.deserialize(BinaryReader reader) {
@@ -120618,7 +120625,7 @@ class AccountInstallWallPaper extends TlMethod {
   const AccountInstallWallPaper({
     required this.wallpaper,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountInstallWallPaper.deserialize(BinaryReader reader) {
@@ -120675,7 +120682,7 @@ class AccountInstallWallPaper extends TlMethod {
 /// ID: `bb3b9804`.
 class AccountResetWallPapers extends TlMethod {
   /// Account Reset Wall Papers constructor.
-  const AccountResetWallPapers() : super._();
+  const AccountResetWallPapers() ;
 
   /// Deserialize.
   factory AccountResetWallPapers.deserialize(BinaryReader reader) {
@@ -120713,7 +120720,7 @@ class AccountResetWallPapers extends TlMethod {
 /// ID: `56da0b3f`.
 class AccountGetAutoDownloadSettings extends TlMethod {
   /// Account Get Auto Download Settings constructor.
-  const AccountGetAutoDownloadSettings() : super._();
+  const AccountGetAutoDownloadSettings() ;
 
   /// Deserialize.
   factory AccountGetAutoDownloadSettings.deserialize(BinaryReader reader) {
@@ -120755,7 +120762,7 @@ class AccountSaveAutoDownloadSettings extends TlMethod {
     required this.low,
     required this.high,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveAutoDownloadSettings.deserialize(BinaryReader reader) {
@@ -120778,7 +120785,7 @@ class AccountSaveAutoDownloadSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: low,
       b01: high,
     );
@@ -120832,7 +120839,7 @@ class MessagesGetEmojiKeywords extends TlMethod {
   /// Messages Get Emoji Keywords constructor.
   const MessagesGetEmojiKeywords({
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiKeywords.deserialize(BinaryReader reader) {
@@ -120885,7 +120892,7 @@ class MessagesGetEmojiKeywordsDifference extends TlMethod {
   const MessagesGetEmojiKeywordsDifference({
     required this.langCode,
     required this.fromVersion,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiKeywordsDifference.deserialize(BinaryReader reader) {
@@ -120946,7 +120953,7 @@ class MessagesGetEmojiKeywordsLanguages extends TlMethod {
   /// Messages Get Emoji Keywords Languages constructor.
   const MessagesGetEmojiKeywordsLanguages({
     required this.langCodes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiKeywordsLanguages.deserialize(BinaryReader reader) {
@@ -120998,7 +121005,7 @@ class MessagesGetEmojiURL extends TlMethod {
   /// Messages Get Emoji U R L constructor.
   const MessagesGetEmojiURL({
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiURL.deserialize(BinaryReader reader) {
@@ -121050,7 +121057,7 @@ class FoldersEditPeerFolders extends TlMethod {
   /// Folders Edit Peer Folders constructor.
   const FoldersEditPeerFolders({
     required this.folderPeers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FoldersEditPeerFolders.deserialize(BinaryReader reader) {
@@ -121105,7 +121112,7 @@ class MessagesGetSearchCounters extends TlMethod {
     this.savedPeerId,
     this.topMsgId,
     required this.filters,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSearchCounters.deserialize(BinaryReader reader) {
@@ -121133,7 +121140,7 @@ class MessagesGetSearchCounters extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: savedPeerId != null,
       b00: topMsgId != null,
     );
@@ -121198,7 +121205,7 @@ class MessagesGetSearchCounters extends TlMethod {
 /// ID: `f5dad378`.
 class ChannelsGetGroupsForDiscussion extends TlMethod {
   /// Channels Get Groups For Discussion constructor.
-  const ChannelsGetGroupsForDiscussion() : super._();
+  const ChannelsGetGroupsForDiscussion() ;
 
   /// Deserialize.
   factory ChannelsGetGroupsForDiscussion.deserialize(BinaryReader reader) {
@@ -121239,7 +121246,7 @@ class ChannelsSetDiscussionGroup extends TlMethod {
   const ChannelsSetDiscussionGroup({
     required this.broadcast,
     required this.group,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSetDiscussionGroup.deserialize(BinaryReader reader) {
@@ -121301,7 +121308,7 @@ class MessagesRequestUrlAuth extends TlMethod {
     this.msgId,
     this.buttonId,
     this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestUrlAuth.deserialize(BinaryReader reader) {
@@ -121330,7 +121337,7 @@ class MessagesRequestUrlAuth extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: peer != null || msgId != null || buttonId != null,
       b02: url != null,
     );
@@ -121407,7 +121414,7 @@ class MessagesAcceptUrlAuth extends TlMethod {
     this.msgId,
     this.buttonId,
     this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesAcceptUrlAuth.deserialize(BinaryReader reader) {
@@ -121438,7 +121445,7 @@ class MessagesAcceptUrlAuth extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: writeAllowed,
       b01: peer != null || msgId != null || buttonId != null,
       b02: url != null,
@@ -121516,7 +121523,7 @@ class MessagesHidePeerSettingsBar extends TlMethod {
   /// Messages Hide Peer Settings Bar constructor.
   const MessagesHidePeerSettingsBar({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHidePeerSettingsBar.deserialize(BinaryReader reader) {
@@ -121572,7 +121579,7 @@ class ContactsAddContact extends TlMethod {
     required this.firstName,
     required this.lastName,
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsAddContact.deserialize(BinaryReader reader) {
@@ -121599,7 +121606,7 @@ class ContactsAddContact extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: addPhonePrivacyException,
     );
 
@@ -121663,7 +121670,7 @@ class ContactsAcceptContact extends TlMethod {
   /// Contacts Accept Contact constructor.
   const ContactsAcceptContact({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsAcceptContact.deserialize(BinaryReader reader) {
@@ -121717,7 +121724,7 @@ class ChannelsEditCreator extends TlMethod {
     required this.channel,
     required this.userId,
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditCreator.deserialize(BinaryReader reader) {
@@ -121785,7 +121792,7 @@ class ContactsGetLocated extends TlMethod {
     required this.background,
     required this.geoPoint,
     this.selfExpires,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsGetLocated.deserialize(BinaryReader reader) {
@@ -121809,7 +121816,7 @@ class ContactsGetLocated extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: background,
       b00: selfExpires != null,
     );
@@ -121869,7 +121876,7 @@ class ChannelsEditLocation extends TlMethod {
     required this.channel,
     required this.geoPoint,
     required this.address,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditLocation.deserialize(BinaryReader reader) {
@@ -121936,7 +121943,7 @@ class ChannelsToggleSlowMode extends TlMethod {
   const ChannelsToggleSlowMode({
     required this.channel,
     required this.seconds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleSlowMode.deserialize(BinaryReader reader) {
@@ -121998,7 +122005,7 @@ class MessagesGetScheduledHistory extends TlMethod {
   const MessagesGetScheduledHistory({
     required this.peer,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetScheduledHistory.deserialize(BinaryReader reader) {
@@ -122060,7 +122067,7 @@ class MessagesGetScheduledMessages extends TlMethod {
   const MessagesGetScheduledMessages({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetScheduledMessages.deserialize(BinaryReader reader) {
@@ -122120,7 +122127,7 @@ class MessagesSendScheduledMessages extends TlMethod {
   const MessagesSendScheduledMessages({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendScheduledMessages.deserialize(BinaryReader reader) {
@@ -122180,7 +122187,7 @@ class MessagesDeleteScheduledMessages extends TlMethod {
   const MessagesDeleteScheduledMessages({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteScheduledMessages.deserialize(BinaryReader reader) {
@@ -122242,7 +122249,7 @@ class AccountUploadTheme extends TlMethod {
     this.thumb,
     required this.fileName,
     required this.mimeType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUploadTheme.deserialize(BinaryReader reader) {
@@ -122268,7 +122275,7 @@ class AccountUploadTheme extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: thumb != null,
     );
 
@@ -122334,7 +122341,7 @@ class AccountCreateTheme extends TlMethod {
     required this.title,
     this.document,
     this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountCreateTheme.deserialize(BinaryReader reader) {
@@ -122364,7 +122371,7 @@ class AccountCreateTheme extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: document != null,
       b03: settings != null,
     );
@@ -122436,7 +122443,7 @@ class AccountUpdateTheme extends TlMethod {
     this.title,
     this.document,
     this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateTheme.deserialize(BinaryReader reader) {
@@ -122472,7 +122479,7 @@ class AccountUpdateTheme extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: slug != null,
       b01: title != null,
       b02: document != null,
@@ -122558,7 +122565,7 @@ class AccountSaveTheme extends TlMethod {
   const AccountSaveTheme({
     required this.theme,
     required this.unsave,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveTheme.deserialize(BinaryReader reader) {
@@ -122620,7 +122627,7 @@ class AccountInstallTheme extends TlMethod {
     this.theme,
     this.format,
     this.baseTheme,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountInstallTheme.deserialize(BinaryReader reader) {
@@ -122649,7 +122656,7 @@ class AccountInstallTheme extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
       b01: theme != null,
       b02: format != null,
@@ -122721,7 +122728,7 @@ class AccountGetTheme extends TlMethod {
   const AccountGetTheme({
     required this.format,
     required this.theme,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetTheme.deserialize(BinaryReader reader) {
@@ -122781,7 +122788,7 @@ class AccountGetThemes extends TlMethod {
   const AccountGetThemes({
     required this.format,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetThemes.deserialize(BinaryReader reader) {
@@ -122844,7 +122851,7 @@ class AuthExportLoginToken extends TlMethod {
     required this.apiId,
     required this.apiHash,
     required this.exceptIds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthExportLoginToken.deserialize(BinaryReader reader) {
@@ -122912,7 +122919,7 @@ class AuthImportLoginToken extends TlMethod {
   /// Auth Import Login Token constructor.
   const AuthImportLoginToken({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthImportLoginToken.deserialize(BinaryReader reader) {
@@ -122964,7 +122971,7 @@ class AuthAcceptLoginToken extends TlMethod {
   /// Auth Accept Login Token constructor.
   const AuthAcceptLoginToken({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthAcceptLoginToken.deserialize(BinaryReader reader) {
@@ -123016,7 +123023,7 @@ class AccountSetContentSettings extends TlMethod {
   /// Account Set Content Settings constructor.
   const AccountSetContentSettings({
     required this.sensitiveEnabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetContentSettings.deserialize(BinaryReader reader) {
@@ -123035,7 +123042,7 @@ class AccountSetContentSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: sensitiveEnabled,
     );
 
@@ -123077,7 +123084,7 @@ class AccountSetContentSettings extends TlMethod {
 /// ID: `8b9b4dae`.
 class AccountGetContentSettings extends TlMethod {
   /// Account Get Content Settings constructor.
-  const AccountGetContentSettings() : super._();
+  const AccountGetContentSettings() ;
 
   /// Deserialize.
   factory AccountGetContentSettings.deserialize(BinaryReader reader) {
@@ -123115,7 +123122,7 @@ class AccountGetContentSettings extends TlMethod {
 /// ID: `11e831ee`.
 class ChannelsGetInactiveChannels extends TlMethod {
   /// Channels Get Inactive Channels constructor.
-  const ChannelsGetInactiveChannels() : super._();
+  const ChannelsGetInactiveChannels() ;
 
   /// Deserialize.
   factory ChannelsGetInactiveChannels.deserialize(BinaryReader reader) {
@@ -123155,7 +123162,7 @@ class AccountGetMultiWallPapers extends TlMethod {
   /// Account Get Multi Wall Papers constructor.
   const AccountGetMultiWallPapers({
     required this.wallpapers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetMultiWallPapers.deserialize(BinaryReader reader) {
@@ -123211,7 +123218,7 @@ class MessagesGetPollVotes extends TlMethod {
     this.option,
     this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPollVotes.deserialize(BinaryReader reader) {
@@ -123240,7 +123247,7 @@ class MessagesGetPollVotes extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: option != null,
       b01: offset != null,
     );
@@ -123319,7 +123326,7 @@ class MessagesToggleStickerSets extends TlMethod {
     required this.archive,
     required this.unarchive,
     required this.stickersets,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleStickerSets.deserialize(BinaryReader reader) {
@@ -123344,7 +123351,7 @@ class MessagesToggleStickerSets extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: uninstall,
       b01: archive,
       b02: unarchive,
@@ -123403,7 +123410,7 @@ class PaymentsGetBankCardData extends TlMethod {
   /// Payments Get Bank Card Data constructor.
   const PaymentsGetBankCardData({
     required this.number,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetBankCardData.deserialize(BinaryReader reader) {
@@ -123453,7 +123460,7 @@ class PaymentsGetBankCardData extends TlMethod {
 /// ID: `efd48c89`.
 class MessagesGetDialogFilters extends TlMethod {
   /// Messages Get Dialog Filters constructor.
-  const MessagesGetDialogFilters() : super._();
+  const MessagesGetDialogFilters() ;
 
   /// Deserialize.
   factory MessagesGetDialogFilters.deserialize(BinaryReader reader) {
@@ -123491,7 +123498,7 @@ class MessagesGetDialogFilters extends TlMethod {
 /// ID: `a29cd42c`.
 class MessagesGetSuggestedDialogFilters extends TlMethod {
   /// Messages Get Suggested Dialog Filters constructor.
-  const MessagesGetSuggestedDialogFilters() : super._();
+  const MessagesGetSuggestedDialogFilters() ;
 
   /// Deserialize.
   factory MessagesGetSuggestedDialogFilters.deserialize(BinaryReader reader) {
@@ -123532,7 +123539,7 @@ class MessagesUpdateDialogFilter extends TlMethod {
   const MessagesUpdateDialogFilter({
     required this.id,
     this.filter,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUpdateDialogFilter.deserialize(BinaryReader reader) {
@@ -123555,7 +123562,7 @@ class MessagesUpdateDialogFilter extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: filter != null,
     );
 
@@ -123610,7 +123617,7 @@ class MessagesUpdateDialogFiltersOrder extends TlMethod {
   /// Messages Update Dialog Filters Order constructor.
   const MessagesUpdateDialogFiltersOrder({
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUpdateDialogFiltersOrder.deserialize(BinaryReader reader) {
@@ -123663,7 +123670,7 @@ class StatsGetBroadcastStats extends TlMethod {
   const StatsGetBroadcastStats({
     required this.dark,
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetBroadcastStats.deserialize(BinaryReader reader) {
@@ -123684,7 +123691,7 @@ class StatsGetBroadcastStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -123734,7 +123741,7 @@ class StatsLoadAsyncGraph extends TlMethod {
   const StatsLoadAsyncGraph({
     required this.token,
     this.x,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsLoadAsyncGraph.deserialize(BinaryReader reader) {
@@ -123756,7 +123763,7 @@ class StatsLoadAsyncGraph extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: x != null,
     );
 
@@ -123811,7 +123818,7 @@ class StickersSetStickerSetThumb extends TlMethod {
     required this.stickerset,
     this.thumb,
     this.thumbDocumentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersSetStickerSetThumb.deserialize(BinaryReader reader) {
@@ -123837,7 +123844,7 @@ class StickersSetStickerSetThumb extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: thumb != null,
       b01: thumbDocumentId != null,
     );
@@ -123901,7 +123908,7 @@ class BotsSetBotCommands extends TlMethod {
     required this.scope,
     required this.langCode,
     required this.commands,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSetBotCommands.deserialize(BinaryReader reader) {
@@ -123969,7 +123976,7 @@ class MessagesGetOldFeaturedStickers extends TlMethod {
     required this.offset,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetOldFeaturedStickers.deserialize(BinaryReader reader) {
@@ -124039,7 +124046,7 @@ class MessagesGetOldFeaturedStickers extends TlMethod {
 /// ID: `c0977421`.
 class HelpGetPromoData extends TlMethod {
   /// Help Get Promo Data constructor.
-  const HelpGetPromoData() : super._();
+  const HelpGetPromoData() ;
 
   /// Deserialize.
   factory HelpGetPromoData.deserialize(BinaryReader reader) {
@@ -124079,7 +124086,7 @@ class HelpHidePromoData extends TlMethod {
   /// Help Hide Promo Data constructor.
   const HelpHidePromoData({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpHidePromoData.deserialize(BinaryReader reader) {
@@ -124132,7 +124139,7 @@ class PhoneSendSignalingData extends TlMethod {
   const PhoneSendSignalingData({
     required this.peer,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneSendSignalingData.deserialize(BinaryReader reader) {
@@ -124192,7 +124199,7 @@ class StatsGetMegagroupStats extends TlMethod {
   const StatsGetMegagroupStats({
     required this.dark,
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetMegagroupStats.deserialize(BinaryReader reader) {
@@ -124213,7 +124220,7 @@ class StatsGetMegagroupStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -124260,7 +124267,7 @@ class StatsGetMegagroupStats extends TlMethod {
 /// ID: `eb2b4cf6`.
 class AccountGetGlobalPrivacySettings extends TlMethod {
   /// Account Get Global Privacy Settings constructor.
-  const AccountGetGlobalPrivacySettings() : super._();
+  const AccountGetGlobalPrivacySettings() ;
 
   /// Deserialize.
   factory AccountGetGlobalPrivacySettings.deserialize(BinaryReader reader) {
@@ -124300,7 +124307,7 @@ class AccountSetGlobalPrivacySettings extends TlMethod {
   /// Account Set Global Privacy Settings constructor.
   const AccountSetGlobalPrivacySettings({
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetGlobalPrivacySettings.deserialize(BinaryReader reader) {
@@ -124353,7 +124360,7 @@ class HelpDismissSuggestion extends TlMethod {
   const HelpDismissSuggestion({
     required this.peer,
     required this.suggestion,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpDismissSuggestion.deserialize(BinaryReader reader) {
@@ -124413,7 +124420,7 @@ class HelpGetCountriesList extends TlMethod {
   const HelpGetCountriesList({
     required this.langCode,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetCountriesList.deserialize(BinaryReader reader) {
@@ -124482,7 +124489,7 @@ class MessagesGetReplies extends TlMethod {
     required this.maxId,
     required this.minId,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetReplies.deserialize(BinaryReader reader) {
@@ -124605,7 +124612,7 @@ class MessagesGetDiscussionMessage extends TlMethod {
   const MessagesGetDiscussionMessage({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetDiscussionMessage.deserialize(BinaryReader reader) {
@@ -124668,7 +124675,7 @@ class MessagesReadDiscussion extends TlMethod {
     required this.peer,
     required this.msgId,
     required this.readMaxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadDiscussion.deserialize(BinaryReader reader) {
@@ -124741,7 +124748,7 @@ class ContactsBlockFromReplies extends TlMethod {
     required this.deleteHistory,
     required this.reportSpam,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsBlockFromReplies.deserialize(BinaryReader reader) {
@@ -124766,7 +124773,7 @@ class ContactsBlockFromReplies extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: deleteMessage,
       b01: deleteHistory,
       b02: reportSpam,
@@ -124830,7 +124837,7 @@ class StatsGetMessagePublicForwards extends TlMethod {
     required this.msgId,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetMessagePublicForwards.deserialize(BinaryReader reader) {
@@ -124909,7 +124916,7 @@ class StatsGetMessageStats extends TlMethod {
     required this.dark,
     required this.channel,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetMessageStats.deserialize(BinaryReader reader) {
@@ -124932,7 +124939,7 @@ class StatsGetMessageStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -124989,7 +124996,7 @@ class MessagesUnpinAllMessages extends TlMethod {
   const MessagesUnpinAllMessages({
     required this.peer,
     this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUnpinAllMessages.deserialize(BinaryReader reader) {
@@ -125011,7 +125018,7 @@ class MessagesUnpinAllMessages extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -125068,7 +125075,7 @@ class PhoneCreateGroupCall extends TlMethod {
     required this.randomId,
     this.title,
     this.scheduleDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCreateGroupCall.deserialize(BinaryReader reader) {
@@ -125097,7 +125104,7 @@ class PhoneCreateGroupCall extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: rtmpStream,
       b00: title != null,
       b01: scheduleDate != null,
@@ -125176,7 +125183,7 @@ class PhoneJoinGroupCall extends TlMethod {
     required this.joinAs,
     this.inviteHash,
     required this.params,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneJoinGroupCall.deserialize(BinaryReader reader) {
@@ -125206,7 +125213,7 @@ class PhoneJoinGroupCall extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: muted,
       b02: videoStopped,
       b01: inviteHash != null,
@@ -125280,7 +125287,7 @@ class PhoneLeaveGroupCall extends TlMethod {
   const PhoneLeaveGroupCall({
     required this.call,
     required this.source,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneLeaveGroupCall.deserialize(BinaryReader reader) {
@@ -125342,7 +125349,7 @@ class PhoneInviteToGroupCall extends TlMethod {
   const PhoneInviteToGroupCall({
     required this.call,
     required this.users,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneInviteToGroupCall.deserialize(BinaryReader reader) {
@@ -125401,7 +125408,7 @@ class PhoneDiscardGroupCall extends TlMethod {
   /// Phone Discard Group Call constructor.
   const PhoneDiscardGroupCall({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneDiscardGroupCall.deserialize(BinaryReader reader) {
@@ -125455,7 +125462,7 @@ class PhoneToggleGroupCallSettings extends TlMethod {
     required this.resetInviteHash,
     required this.call,
     this.joinMuted,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneToggleGroupCallSettings.deserialize(BinaryReader reader) {
@@ -125478,7 +125485,7 @@ class PhoneToggleGroupCallSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: resetInviteHash,
       b00: (joinMuted != null),
     );
@@ -125537,7 +125544,7 @@ class PhoneGetGroupCall extends TlMethod {
   const PhoneGetGroupCall({
     required this.call,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGetGroupCall.deserialize(BinaryReader reader) {
@@ -125602,7 +125609,7 @@ class PhoneGetGroupParticipants extends TlMethod {
     required this.sources,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGetGroupParticipants.deserialize(BinaryReader reader) {
@@ -125685,7 +125692,7 @@ class PhoneCheckGroupCall extends TlMethod {
   const PhoneCheckGroupCall({
     required this.call,
     required this.sources,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneCheckGroupCall.deserialize(BinaryReader reader) {
@@ -125744,7 +125751,7 @@ class MessagesDeleteChat extends TlMethod {
   /// Messages Delete Chat constructor.
   const MessagesDeleteChat({
     required this.chatId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteChat.deserialize(BinaryReader reader) {
@@ -125798,7 +125805,7 @@ class MessagesDeletePhoneCallHistory extends TlMethod {
   /// Messages Delete Phone Call History constructor.
   const MessagesDeletePhoneCallHistory({
     required this.revoke,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeletePhoneCallHistory.deserialize(BinaryReader reader) {
@@ -125817,7 +125824,7 @@ class MessagesDeletePhoneCallHistory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: revoke,
     );
 
@@ -125861,7 +125868,7 @@ class MessagesCheckHistoryImport extends TlMethod {
   /// Messages Check History Import constructor.
   const MessagesCheckHistoryImport({
     required this.importHead,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCheckHistoryImport.deserialize(BinaryReader reader) {
@@ -125915,7 +125922,7 @@ class MessagesInitHistoryImport extends TlMethod {
     required this.peer,
     required this.file,
     required this.mediaCount,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesInitHistoryImport.deserialize(BinaryReader reader) {
@@ -125986,7 +125993,7 @@ class MessagesUploadImportedMedia extends TlMethod {
     required this.importId,
     required this.fileName,
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUploadImportedMedia.deserialize(BinaryReader reader) {
@@ -126062,7 +126069,7 @@ class MessagesStartHistoryImport extends TlMethod {
   const MessagesStartHistoryImport({
     required this.peer,
     required this.importId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesStartHistoryImport.deserialize(BinaryReader reader) {
@@ -126128,7 +126135,7 @@ class MessagesGetExportedChatInvites extends TlMethod {
     this.offsetDate,
     this.offsetLink,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetExportedChatInvites.deserialize(BinaryReader reader) {
@@ -126159,7 +126166,7 @@ class MessagesGetExportedChatInvites extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: revoked,
       b02: offsetDate != null || offsetLink != null,
     );
@@ -126238,7 +126245,7 @@ class MessagesGetExportedChatInvite extends TlMethod {
   const MessagesGetExportedChatInvite({
     required this.peer,
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetExportedChatInvite.deserialize(BinaryReader reader) {
@@ -126303,7 +126310,7 @@ class MessagesEditExportedChatInvite extends TlMethod {
     this.usageLimit,
     this.requestNeeded,
     this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditExportedChatInvite.deserialize(BinaryReader reader) {
@@ -126337,7 +126344,7 @@ class MessagesEditExportedChatInvite extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: revoked,
       b00: expireDate != null,
       b01: usageLimit != null,
@@ -126428,7 +126435,7 @@ class MessagesDeleteRevokedExportedChatInvites extends TlMethod {
   const MessagesDeleteRevokedExportedChatInvites({
     required this.peer,
     required this.adminId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteRevokedExportedChatInvites.deserialize(
@@ -126489,7 +126496,7 @@ class MessagesDeleteExportedChatInvite extends TlMethod {
   const MessagesDeleteExportedChatInvite({
     required this.peer,
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteExportedChatInvite.deserialize(BinaryReader reader) {
@@ -126548,7 +126555,7 @@ class MessagesGetAdminsWithInvites extends TlMethod {
   /// Messages Get Admins With Invites constructor.
   const MessagesGetAdminsWithInvites({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAdminsWithInvites.deserialize(BinaryReader reader) {
@@ -126607,7 +126614,7 @@ class MessagesGetChatInviteImporters extends TlMethod {
     required this.offsetDate,
     required this.offsetUser,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetChatInviteImporters.deserialize(BinaryReader reader) {
@@ -126642,7 +126649,7 @@ class MessagesGetChatInviteImporters extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: requested,
       b03: subscriptionExpired,
       b01: link != null,
@@ -126732,7 +126739,7 @@ class MessagesSetHistoryTTL extends TlMethod {
   const MessagesSetHistoryTTL({
     required this.peer,
     required this.period,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetHistoryTTL.deserialize(BinaryReader reader) {
@@ -126796,7 +126803,7 @@ class AccountReportProfilePhoto extends TlMethod {
     required this.photoId,
     required this.reason,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountReportProfilePhoto.deserialize(BinaryReader reader) {
@@ -126869,7 +126876,7 @@ class ChannelsConvertToGigagroup extends TlMethod {
   /// Channels Convert To Gigagroup constructor.
   const ChannelsConvertToGigagroup({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsConvertToGigagroup.deserialize(BinaryReader reader) {
@@ -126921,7 +126928,7 @@ class MessagesCheckHistoryImportPeer extends TlMethod {
   /// Messages Check History Import Peer constructor.
   const MessagesCheckHistoryImportPeer({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCheckHistoryImportPeer.deserialize(BinaryReader reader) {
@@ -126977,7 +126984,7 @@ class PhoneToggleGroupCallRecord extends TlMethod {
     required this.call,
     this.title,
     this.videoPortrait,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneToggleGroupCallRecord.deserialize(BinaryReader reader) {
@@ -127005,7 +127012,7 @@ class PhoneToggleGroupCallRecord extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: start,
       b02: video || (videoPortrait != null),
       b01: title != null,
@@ -127083,7 +127090,7 @@ class PhoneEditGroupCallParticipant extends TlMethod {
     this.videoStopped,
     this.videoPaused,
     this.presentationPaused,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneEditGroupCallParticipant.deserialize(BinaryReader reader) {
@@ -127117,7 +127124,7 @@ class PhoneEditGroupCallParticipant extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (muted != null),
       b01: volume != null,
       b02: (raiseHand != null),
@@ -127221,7 +127228,7 @@ class PhoneEditGroupCallTitle extends TlMethod {
   const PhoneEditGroupCallTitle({
     required this.call,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneEditGroupCallTitle.deserialize(BinaryReader reader) {
@@ -127280,7 +127287,7 @@ class PhoneGetGroupCallJoinAs extends TlMethod {
   /// Phone Get Group Call Join As constructor.
   const PhoneGetGroupCallJoinAs({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGetGroupCallJoinAs.deserialize(BinaryReader reader) {
@@ -127333,7 +127340,7 @@ class PhoneExportGroupCallInvite extends TlMethod {
   const PhoneExportGroupCallInvite({
     required this.canSelfUnmute,
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneExportGroupCallInvite.deserialize(BinaryReader reader) {
@@ -127354,7 +127361,7 @@ class PhoneExportGroupCallInvite extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canSelfUnmute,
     );
 
@@ -127404,7 +127411,7 @@ class PhoneToggleGroupCallStartSubscription extends TlMethod {
   const PhoneToggleGroupCallStartSubscription({
     required this.call,
     required this.subscribed,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneToggleGroupCallStartSubscription.deserialize(
@@ -127464,7 +127471,7 @@ class PhoneStartScheduledGroupCall extends TlMethod {
   /// Phone Start Scheduled Group Call constructor.
   const PhoneStartScheduledGroupCall({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneStartScheduledGroupCall.deserialize(BinaryReader reader) {
@@ -127517,7 +127524,7 @@ class PhoneSaveDefaultGroupCallJoinAs extends TlMethod {
   const PhoneSaveDefaultGroupCallJoinAs({
     required this.peer,
     required this.joinAs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneSaveDefaultGroupCallJoinAs.deserialize(BinaryReader reader) {
@@ -127577,7 +127584,7 @@ class PhoneJoinGroupCallPresentation extends TlMethod {
   const PhoneJoinGroupCallPresentation({
     required this.call,
     required this.params,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneJoinGroupCallPresentation.deserialize(BinaryReader reader) {
@@ -127636,7 +127643,7 @@ class PhoneLeaveGroupCallPresentation extends TlMethod {
   /// Phone Leave Group Call Presentation constructor.
   const PhoneLeaveGroupCallPresentation({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneLeaveGroupCallPresentation.deserialize(BinaryReader reader) {
@@ -127688,7 +127695,7 @@ class StickersCheckShortName extends TlMethod {
   /// Stickers Check Short Name constructor.
   const StickersCheckShortName({
     required this.shortName,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersCheckShortName.deserialize(BinaryReader reader) {
@@ -127740,7 +127747,7 @@ class StickersSuggestShortName extends TlMethod {
   /// Stickers Suggest Short Name constructor.
   const StickersSuggestShortName({
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersSuggestShortName.deserialize(BinaryReader reader) {
@@ -127793,7 +127800,7 @@ class BotsResetBotCommands extends TlMethod {
   const BotsResetBotCommands({
     required this.scope,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsResetBotCommands.deserialize(BinaryReader reader) {
@@ -127853,7 +127860,7 @@ class BotsGetBotCommands extends TlMethod {
   const BotsGetBotCommands({
     required this.scope,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetBotCommands.deserialize(BinaryReader reader) {
@@ -127910,7 +127917,7 @@ class BotsGetBotCommands extends TlMethod {
 /// ID: `9308ce1b`.
 class AccountResetPassword extends TlMethod {
   /// Account Reset Password constructor.
-  const AccountResetPassword() : super._();
+  const AccountResetPassword() ;
 
   /// Deserialize.
   factory AccountResetPassword.deserialize(BinaryReader reader) {
@@ -127948,7 +127955,7 @@ class AccountResetPassword extends TlMethod {
 /// ID: `4c9409f6`.
 class AccountDeclinePasswordReset extends TlMethod {
   /// Account Decline Password Reset constructor.
-  const AccountDeclinePasswordReset() : super._();
+  const AccountDeclinePasswordReset() ;
 
   /// Deserialize.
   factory AccountDeclinePasswordReset.deserialize(BinaryReader reader) {
@@ -127988,7 +127995,7 @@ class AuthCheckRecoveryPassword extends TlMethod {
   /// Auth Check Recovery Password constructor.
   const AuthCheckRecoveryPassword({
     required this.code,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthCheckRecoveryPassword.deserialize(BinaryReader reader) {
@@ -128040,7 +128047,7 @@ class AccountGetChatThemes extends TlMethod {
   /// Account Get Chat Themes constructor.
   const AccountGetChatThemes({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetChatThemes.deserialize(BinaryReader reader) {
@@ -128095,7 +128102,7 @@ class MessagesSetChatTheme extends TlMethod {
   const MessagesSetChatTheme({
     required this.peer,
     required this.emoticon,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetChatTheme.deserialize(BinaryReader reader) {
@@ -128155,7 +128162,7 @@ class MessagesGetMessageReadParticipants extends TlMethod {
   const MessagesGetMessageReadParticipants({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessageReadParticipants.deserialize(BinaryReader reader) {
@@ -128220,7 +128227,7 @@ class MessagesGetSearchResultsCalendar extends TlMethod {
     required this.filter,
     required this.offsetId,
     required this.offsetDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSearchResultsCalendar.deserialize(BinaryReader reader) {
@@ -128249,7 +128256,7 @@ class MessagesGetSearchResultsCalendar extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: savedPeerId != null,
     );
 
@@ -128323,7 +128330,7 @@ class MessagesGetSearchResultsPositions extends TlMethod {
     required this.filter,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSearchResultsPositions.deserialize(BinaryReader reader) {
@@ -128352,7 +128359,7 @@ class MessagesGetSearchResultsPositions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: savedPeerId != null,
     );
 
@@ -128426,7 +128433,7 @@ class MessagesHideChatJoinRequest extends TlMethod {
     required this.approved,
     required this.peer,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHideChatJoinRequest.deserialize(BinaryReader reader) {
@@ -128449,7 +128456,7 @@ class MessagesHideChatJoinRequest extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: approved,
     );
 
@@ -128505,7 +128512,7 @@ class MessagesHideAllChatJoinRequests extends TlMethod {
     required this.approved,
     required this.peer,
     this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesHideAllChatJoinRequests.deserialize(BinaryReader reader) {
@@ -128529,7 +128536,7 @@ class MessagesHideAllChatJoinRequests extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: approved,
       b01: link != null,
     );
@@ -128588,7 +128595,7 @@ class MessagesToggleNoForwards extends TlMethod {
   const MessagesToggleNoForwards({
     required this.peer,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleNoForwards.deserialize(BinaryReader reader) {
@@ -128648,7 +128655,7 @@ class MessagesSaveDefaultSendAs extends TlMethod {
   const MessagesSaveDefaultSendAs({
     required this.peer,
     required this.sendAs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSaveDefaultSendAs.deserialize(BinaryReader reader) {
@@ -128707,7 +128714,7 @@ class ChannelsGetSendAs extends TlMethod {
   /// Channels Get Send As constructor.
   const ChannelsGetSendAs({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetSendAs.deserialize(BinaryReader reader) {
@@ -128759,7 +128766,7 @@ class AccountSetAuthorizationTTL extends TlMethod {
   /// Account Set Authorization T T L constructor.
   const AccountSetAuthorizationTTL({
     required this.authorizationTtlDays,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetAuthorizationTTL.deserialize(BinaryReader reader) {
@@ -128816,7 +128823,7 @@ class AccountChangeAuthorizationSettings extends TlMethod {
     required this.hash,
     this.encryptedRequestsDisabled,
     this.callRequestsDisabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountChangeAuthorizationSettings.deserialize(BinaryReader reader) {
@@ -128842,7 +128849,7 @@ class AccountChangeAuthorizationSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: confirmed,
       b00: (encryptedRequestsDisabled != null),
       b01: (callRequestsDisabled != null),
@@ -128912,7 +128919,7 @@ class ChannelsDeleteParticipantHistory extends TlMethod {
   const ChannelsDeleteParticipantHistory({
     required this.channel,
     required this.participant,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeleteParticipantHistory.deserialize(BinaryReader reader) {
@@ -128975,7 +128982,7 @@ class MessagesSendReaction extends TlMethod {
     required this.peer,
     required this.msgId,
     this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendReaction.deserialize(BinaryReader reader) {
@@ -129004,7 +129011,7 @@ class MessagesSendReaction extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: big,
       b02: addToRecent,
       b00: reaction != null,
@@ -129016,7 +129023,7 @@ class MessagesSendReaction extends TlMethod {
   /// big: bit 1 of flags.1?true
   final bool big;
 
-  /// add_to_recent: bit 2 of flags.2?true
+  /// addto_recent: bit 2 of flags.2?true
   final bool addToRecent;
 
   /// Peer.
@@ -129075,7 +129082,7 @@ class MessagesGetMessagesReactions extends TlMethod {
   const MessagesGetMessagesReactions({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessagesReactions.deserialize(BinaryReader reader) {
@@ -129138,7 +129145,7 @@ class MessagesGetMessageReactionsList extends TlMethod {
     this.reaction,
     this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMessageReactionsList.deserialize(BinaryReader reader) {
@@ -129168,7 +129175,7 @@ class MessagesGetMessageReactionsList extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: reaction != null,
       b01: offset != null,
     );
@@ -129247,7 +129254,7 @@ class MessagesSetChatAvailableReactions extends TlMethod {
     required this.availableReactions,
     this.reactionsLimit,
     this.paidEnabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetChatAvailableReactions.deserialize(BinaryReader reader) {
@@ -129273,7 +129280,7 @@ class MessagesSetChatAvailableReactions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: reactionsLimit != null,
       b01: (paidEnabled != null),
     );
@@ -129340,7 +129347,7 @@ class MessagesGetAvailableReactions extends TlMethod {
   /// Messages Get Available Reactions constructor.
   const MessagesGetAvailableReactions({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAvailableReactions.deserialize(BinaryReader reader) {
@@ -129394,7 +129401,7 @@ class MessagesSetDefaultReaction extends TlMethod {
   /// Messages Set Default Reaction constructor.
   const MessagesSetDefaultReaction({
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetDefaultReaction.deserialize(BinaryReader reader) {
@@ -129449,7 +129456,7 @@ class MessagesTranslateText extends TlMethod {
     this.id,
     this.text,
     required this.toLang,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTranslateText.deserialize(BinaryReader reader) {
@@ -129478,7 +129485,7 @@ class MessagesTranslateText extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: peer != null || id != null,
       b01: text != null,
     );
@@ -129554,7 +129561,7 @@ class MessagesGetUnreadReactions extends TlMethod {
     required this.limit,
     required this.maxId,
     required this.minId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetUnreadReactions.deserialize(BinaryReader reader) {
@@ -129586,7 +129593,7 @@ class MessagesGetUnreadReactions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -129675,7 +129682,7 @@ class MessagesReadReactions extends TlMethod {
   const MessagesReadReactions({
     required this.peer,
     this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReadReactions.deserialize(BinaryReader reader) {
@@ -129697,7 +129704,7 @@ class MessagesReadReactions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: topMsgId != null,
     );
 
@@ -129750,7 +129757,7 @@ class ContactsResolvePhone extends TlMethod {
   /// Contacts Resolve Phone constructor.
   const ContactsResolvePhone({
     required this.phone,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsResolvePhone.deserialize(BinaryReader reader) {
@@ -129802,7 +129809,7 @@ class PhoneGetGroupCallStreamChannels extends TlMethod {
   /// Phone Get Group Call Stream Channels constructor.
   const PhoneGetGroupCallStreamChannels({
     required this.call,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGetGroupCallStreamChannels.deserialize(BinaryReader reader) {
@@ -129855,7 +129862,7 @@ class PhoneGetGroupCallStreamRtmpUrl extends TlMethod {
   const PhoneGetGroupCallStreamRtmpUrl({
     required this.peer,
     required this.revoke,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneGetGroupCallStreamRtmpUrl.deserialize(BinaryReader reader) {
@@ -129916,7 +129923,7 @@ class MessagesSearchSentMedia extends TlMethod {
     required this.q,
     required this.filter,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchSentMedia.deserialize(BinaryReader reader) {
@@ -129984,7 +129991,7 @@ class MessagesGetAttachMenuBots extends TlMethod {
   /// Messages Get Attach Menu Bots constructor.
   const MessagesGetAttachMenuBots({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAttachMenuBots.deserialize(BinaryReader reader) {
@@ -130038,7 +130045,7 @@ class MessagesGetAttachMenuBot extends TlMethod {
   /// Messages Get Attach Menu Bot constructor.
   const MessagesGetAttachMenuBot({
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAttachMenuBot.deserialize(BinaryReader reader) {
@@ -130092,7 +130099,7 @@ class MessagesToggleBotInAttachMenu extends TlMethod {
     required this.writeAllowed,
     required this.bot,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleBotInAttachMenu.deserialize(BinaryReader reader) {
@@ -130115,7 +130122,7 @@ class MessagesToggleBotInAttachMenu extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: writeAllowed,
     );
 
@@ -130180,7 +130187,7 @@ class MessagesRequestWebView extends TlMethod {
     required this.platform,
     this.replyTo,
     this.sendAs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestWebView.deserialize(BinaryReader reader) {
@@ -130228,7 +130235,7 @@ class MessagesRequestWebView extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b04: fromBotMenu,
       b05: silent,
       b07: compact,
@@ -130352,7 +130359,7 @@ class MessagesProlongWebView extends TlMethod {
     required this.queryId,
     this.replyTo,
     this.sendAs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesProlongWebView.deserialize(BinaryReader reader) {
@@ -130384,7 +130391,7 @@ class MessagesProlongWebView extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b05: silent,
       b00: replyTo != null,
       b13: sendAs != null,
@@ -130471,7 +130478,7 @@ class MessagesRequestSimpleWebView extends TlMethod {
     this.startParam,
     this.themeParams,
     required this.platform,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestSimpleWebView.deserialize(BinaryReader reader) {
@@ -130510,7 +130517,7 @@ class MessagesRequestSimpleWebView extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: fromSwitchWebview,
       b02: fromSideMenu,
       b07: compact,
@@ -130607,7 +130614,7 @@ class MessagesSendWebViewResultMessage extends TlMethod {
   const MessagesSendWebViewResultMessage({
     required this.botQueryId,
     required this.result,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendWebViewResultMessage.deserialize(BinaryReader reader) {
@@ -130669,7 +130676,7 @@ class MessagesSendWebViewData extends TlMethod {
     required this.randomId,
     required this.buttonText,
     required this.data,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendWebViewData.deserialize(BinaryReader reader) {
@@ -130745,7 +130752,7 @@ class BotsSetBotMenuButton extends TlMethod {
   const BotsSetBotMenuButton({
     required this.userId,
     required this.button,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSetBotMenuButton.deserialize(BinaryReader reader) {
@@ -130804,7 +130811,7 @@ class BotsGetBotMenuButton extends TlMethod {
   /// Bots Get Bot Menu Button constructor.
   const BotsGetBotMenuButton({
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetBotMenuButton.deserialize(BinaryReader reader) {
@@ -130856,7 +130863,7 @@ class AccountGetSavedRingtones extends TlMethod {
   /// Account Get Saved Ringtones constructor.
   const AccountGetSavedRingtones({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetSavedRingtones.deserialize(BinaryReader reader) {
@@ -130911,7 +130918,7 @@ class AccountSaveRingtone extends TlMethod {
   const AccountSaveRingtone({
     required this.id,
     required this.unsave,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveRingtone.deserialize(BinaryReader reader) {
@@ -130972,7 +130979,7 @@ class AccountUploadRingtone extends TlMethod {
     required this.file,
     required this.fileName,
     required this.mimeType,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUploadRingtone.deserialize(BinaryReader reader) {
@@ -131038,7 +131045,7 @@ class BotsSetBotBroadcastDefaultAdminRights extends TlMethod {
   /// Bots Set Bot Broadcast Default Admin Rights constructor.
   const BotsSetBotBroadcastDefaultAdminRights({
     required this.adminRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSetBotBroadcastDefaultAdminRights.deserialize(
@@ -131091,7 +131098,7 @@ class BotsSetBotGroupDefaultAdminRights extends TlMethod {
   /// Bots Set Bot Group Default Admin Rights constructor.
   const BotsSetBotGroupDefaultAdminRights({
     required this.adminRights,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSetBotGroupDefaultAdminRights.deserialize(BinaryReader reader) {
@@ -131144,7 +131151,7 @@ class PhoneSaveCallLog extends TlMethod {
   const PhoneSaveCallLog({
     required this.peer,
     required this.file,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhoneSaveCallLog.deserialize(BinaryReader reader) {
@@ -131204,7 +131211,7 @@ class ChannelsToggleJoinToSend extends TlMethod {
   const ChannelsToggleJoinToSend({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleJoinToSend.deserialize(BinaryReader reader) {
@@ -131264,7 +131271,7 @@ class ChannelsToggleJoinRequest extends TlMethod {
   const ChannelsToggleJoinRequest({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleJoinRequest.deserialize(BinaryReader reader) {
@@ -131323,7 +131330,7 @@ class PaymentsExportInvoice extends TlMethod {
   /// Payments Export Invoice constructor.
   const PaymentsExportInvoice({
     required this.invoiceMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsExportInvoice.deserialize(BinaryReader reader) {
@@ -131376,7 +131383,7 @@ class MessagesTranscribeAudio extends TlMethod {
   const MessagesTranscribeAudio({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTranscribeAudio.deserialize(BinaryReader reader) {
@@ -131440,7 +131447,7 @@ class MessagesRateTranscribedAudio extends TlMethod {
     required this.msgId,
     required this.transcriptionId,
     required this.good,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRateTranscribedAudio.deserialize(BinaryReader reader) {
@@ -131518,7 +131525,7 @@ class PaymentsAssignAppStoreTransaction extends TlMethod {
   const PaymentsAssignAppStoreTransaction({
     required this.receipt,
     required this.purpose,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsAssignAppStoreTransaction.deserialize(BinaryReader reader) {
@@ -131578,7 +131585,7 @@ class PaymentsAssignPlayMarketTransaction extends TlMethod {
   const PaymentsAssignPlayMarketTransaction({
     required this.receipt,
     required this.purpose,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsAssignPlayMarketTransaction.deserialize(BinaryReader reader) {
@@ -131637,7 +131644,7 @@ class PaymentsCanPurchasePremium extends TlMethod {
   /// Payments Can Purchase Premium constructor.
   const PaymentsCanPurchasePremium({
     required this.purpose,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsCanPurchasePremium.deserialize(BinaryReader reader) {
@@ -131687,7 +131694,7 @@ class PaymentsCanPurchasePremium extends TlMethod {
 /// ID: `b81b93d4`.
 class HelpGetPremiumPromo extends TlMethod {
   /// Help Get Premium Promo constructor.
-  const HelpGetPremiumPromo() : super._();
+  const HelpGetPremiumPromo() ;
 
   /// Deserialize.
   factory HelpGetPremiumPromo.deserialize(BinaryReader reader) {
@@ -131727,7 +131734,7 @@ class MessagesGetCustomEmojiDocuments extends TlMethod {
   /// Messages Get Custom Emoji Documents constructor.
   const MessagesGetCustomEmojiDocuments({
     required this.documentId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetCustomEmojiDocuments.deserialize(BinaryReader reader) {
@@ -131779,7 +131786,7 @@ class MessagesGetEmojiStickers extends TlMethod {
   /// Messages Get Emoji Stickers constructor.
   const MessagesGetEmojiStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiStickers.deserialize(BinaryReader reader) {
@@ -131833,7 +131840,7 @@ class MessagesGetFeaturedEmojiStickers extends TlMethod {
   /// Messages Get Featured Emoji Stickers constructor.
   const MessagesGetFeaturedEmojiStickers({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetFeaturedEmojiStickers.deserialize(BinaryReader reader) {
@@ -131887,7 +131894,7 @@ class AccountUpdateEmojiStatus extends TlMethod {
   /// Account Update Emoji Status constructor.
   const AccountUpdateEmojiStatus({
     required this.emojiStatus,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateEmojiStatus.deserialize(BinaryReader reader) {
@@ -131939,7 +131946,7 @@ class AccountGetDefaultEmojiStatuses extends TlMethod {
   /// Account Get Default Emoji Statuses constructor.
   const AccountGetDefaultEmojiStatuses({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetDefaultEmojiStatuses.deserialize(BinaryReader reader) {
@@ -131993,7 +132000,7 @@ class AccountGetRecentEmojiStatuses extends TlMethod {
   /// Account Get Recent Emoji Statuses constructor.
   const AccountGetRecentEmojiStatuses({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetRecentEmojiStatuses.deserialize(BinaryReader reader) {
@@ -132045,7 +132052,7 @@ class AccountGetRecentEmojiStatuses extends TlMethod {
 /// ID: `18201aae`.
 class AccountClearRecentEmojiStatuses extends TlMethod {
   /// Account Clear Recent Emoji Statuses constructor.
-  const AccountClearRecentEmojiStatuses() : super._();
+  const AccountClearRecentEmojiStatuses() ;
 
   /// Deserialize.
   factory AccountClearRecentEmojiStatuses.deserialize(BinaryReader reader) {
@@ -132087,7 +132094,7 @@ class MessagesReportReaction extends TlMethod {
     required this.peer,
     required this.id,
     required this.reactionPeer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReportReaction.deserialize(BinaryReader reader) {
@@ -132156,7 +132163,7 @@ class MessagesGetTopReactions extends TlMethod {
   const MessagesGetTopReactions({
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetTopReactions.deserialize(BinaryReader reader) {
@@ -132220,7 +132227,7 @@ class MessagesGetRecentReactions extends TlMethod {
   const MessagesGetRecentReactions({
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetRecentReactions.deserialize(BinaryReader reader) {
@@ -132281,7 +132288,7 @@ class MessagesGetRecentReactions extends TlMethod {
 /// ID: `9dfeefb4`.
 class MessagesClearRecentReactions extends TlMethod {
   /// Messages Clear Recent Reactions constructor.
-  const MessagesClearRecentReactions() : super._();
+  const MessagesClearRecentReactions() ;
 
   /// Deserialize.
   factory MessagesClearRecentReactions.deserialize(BinaryReader reader) {
@@ -132322,7 +132329,7 @@ class MessagesGetExtendedMedia extends TlMethod {
   const MessagesGetExtendedMedia({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetExtendedMedia.deserialize(BinaryReader reader) {
@@ -132383,7 +132390,7 @@ class AuthImportWebTokenAuthorization extends TlMethod {
     required this.apiId,
     required this.apiHash,
     required this.webAuthToken,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthImportWebTokenAuthorization.deserialize(BinaryReader reader) {
@@ -132451,7 +132458,7 @@ class AccountReorderUsernames extends TlMethod {
   /// Account Reorder Usernames constructor.
   const AccountReorderUsernames({
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountReorderUsernames.deserialize(BinaryReader reader) {
@@ -132504,7 +132511,7 @@ class AccountToggleUsername extends TlMethod {
   const AccountToggleUsername({
     required this.username,
     required this.active,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountToggleUsername.deserialize(BinaryReader reader) {
@@ -132564,7 +132571,7 @@ class ChannelsReorderUsernames extends TlMethod {
   const ChannelsReorderUsernames({
     required this.channel,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReorderUsernames.deserialize(BinaryReader reader) {
@@ -132625,7 +132632,7 @@ class ChannelsToggleUsername extends TlMethod {
     required this.channel,
     required this.username,
     required this.active,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleUsername.deserialize(BinaryReader reader) {
@@ -132691,7 +132698,7 @@ class ChannelsDeactivateAllUsernames extends TlMethod {
   /// Channels Deactivate All Usernames constructor.
   const ChannelsDeactivateAllUsernames({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeactivateAllUsernames.deserialize(BinaryReader reader) {
@@ -132744,7 +132751,7 @@ class ChannelsToggleForum extends TlMethod {
   const ChannelsToggleForum({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleForum.deserialize(BinaryReader reader) {
@@ -132808,7 +132815,7 @@ class ChannelsCreateForumTopic extends TlMethod {
     this.iconEmojiId,
     required this.randomId,
     this.sendAs,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsCreateForumTopic.deserialize(BinaryReader reader) {
@@ -132840,7 +132847,7 @@ class ChannelsCreateForumTopic extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: iconColor != null,
       b03: iconEmojiId != null,
       b02: sendAs != null,
@@ -132928,7 +132935,7 @@ class ChannelsGetForumTopics extends TlMethod {
     required this.offsetId,
     required this.offsetTopic,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetForumTopics.deserialize(BinaryReader reader) {
@@ -132958,7 +132965,7 @@ class ChannelsGetForumTopics extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: q != null,
     );
 
@@ -133038,7 +133045,7 @@ class ChannelsGetForumTopicsByID extends TlMethod {
   const ChannelsGetForumTopicsByID({
     required this.channel,
     required this.topics,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetForumTopicsByID.deserialize(BinaryReader reader) {
@@ -133102,7 +133109,7 @@ class ChannelsEditForumTopic extends TlMethod {
     this.iconEmojiId,
     this.closed,
     this.hidden,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsEditForumTopic.deserialize(BinaryReader reader) {
@@ -133133,7 +133140,7 @@ class ChannelsEditForumTopic extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
       b01: iconEmojiId != null,
       b02: (closed != null),
@@ -133222,7 +133229,7 @@ class ChannelsUpdatePinnedForumTopic extends TlMethod {
     required this.channel,
     required this.topicId,
     required this.pinned,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsUpdatePinnedForumTopic.deserialize(BinaryReader reader) {
@@ -133291,7 +133298,7 @@ class ChannelsDeleteTopicHistory extends TlMethod {
   const ChannelsDeleteTopicHistory({
     required this.channel,
     required this.topMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsDeleteTopicHistory.deserialize(BinaryReader reader) {
@@ -133354,7 +133361,7 @@ class ChannelsReorderPinnedForumTopics extends TlMethod {
     required this.force,
     required this.channel,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReorderPinnedForumTopics.deserialize(BinaryReader reader) {
@@ -133377,7 +133384,7 @@ class ChannelsReorderPinnedForumTopics extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: force,
     );
 
@@ -133432,7 +133439,7 @@ class ChannelsToggleAntiSpam extends TlMethod {
   const ChannelsToggleAntiSpam({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleAntiSpam.deserialize(BinaryReader reader) {
@@ -133492,7 +133499,7 @@ class ChannelsReportAntiSpamFalsePositive extends TlMethod {
   const ChannelsReportAntiSpamFalsePositive({
     required this.channel,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsReportAntiSpamFalsePositive.deserialize(BinaryReader reader) {
@@ -133553,7 +133560,7 @@ class MessagesSetDefaultHistoryTTL extends TlMethod {
   /// Messages Set Default History T T L constructor.
   const MessagesSetDefaultHistoryTTL({
     required this.period,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetDefaultHistoryTTL.deserialize(BinaryReader reader) {
@@ -133605,7 +133612,7 @@ class MessagesSetDefaultHistoryTTL extends TlMethod {
 /// ID: `658b7188`.
 class MessagesGetDefaultHistoryTTL extends TlMethod {
   /// Messages Get Default History T T L constructor.
-  const MessagesGetDefaultHistoryTTL() : super._();
+  const MessagesGetDefaultHistoryTTL() ;
 
   /// Deserialize.
   factory MessagesGetDefaultHistoryTTL.deserialize(BinaryReader reader) {
@@ -133643,7 +133650,7 @@ class MessagesGetDefaultHistoryTTL extends TlMethod {
 /// ID: `f8654027`.
 class ContactsExportContactToken extends TlMethod {
   /// Contacts Export Contact Token constructor.
-  const ContactsExportContactToken() : super._();
+  const ContactsExportContactToken() ;
 
   /// Deserialize.
   factory ContactsExportContactToken.deserialize(BinaryReader reader) {
@@ -133683,7 +133690,7 @@ class ContactsImportContactToken extends TlMethod {
   /// Contacts Import Contact Token constructor.
   const ContactsImportContactToken({
     required this.token,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsImportContactToken.deserialize(BinaryReader reader) {
@@ -133741,7 +133748,7 @@ class PhotosUploadContactProfilePhoto extends TlMethod {
     this.video,
     this.videoStartTs,
     this.videoEmojiMarkup,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PhotosUploadContactProfilePhoto.deserialize(BinaryReader reader) {
@@ -133777,7 +133784,7 @@ class PhotosUploadContactProfilePhoto extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: suggest,
       b04: save,
       b00: file != null,
@@ -133868,7 +133875,7 @@ class ChannelsToggleParticipantsHidden extends TlMethod {
   const ChannelsToggleParticipantsHidden({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleParticipantsHidden.deserialize(BinaryReader reader) {
@@ -133930,7 +133937,7 @@ class MessagesSendBotRequestedPeer extends TlMethod {
     required this.msgId,
     required this.buttonId,
     required this.requestedPeers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendBotRequestedPeer.deserialize(BinaryReader reader) {
@@ -134007,7 +134014,7 @@ class AccountGetDefaultProfilePhotoEmojis extends TlMethod {
   /// Account Get Default Profile Photo Emojis constructor.
   const AccountGetDefaultProfilePhotoEmojis({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetDefaultProfilePhotoEmojis.deserialize(BinaryReader reader) {
@@ -134061,7 +134068,7 @@ class AccountGetDefaultGroupPhotoEmojis extends TlMethod {
   /// Account Get Default Group Photo Emojis constructor.
   const AccountGetDefaultGroupPhotoEmojis({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetDefaultGroupPhotoEmojis.deserialize(BinaryReader reader) {
@@ -134119,7 +134126,7 @@ class AuthRequestFirebaseSms extends TlMethod {
     this.safetyNetToken,
     this.playIntegrityToken,
     this.iosPushSecret,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthRequestFirebaseSms.deserialize(BinaryReader reader) {
@@ -134150,7 +134157,7 @@ class AuthRequestFirebaseSms extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: safetyNetToken != null,
       b02: playIntegrityToken != null,
       b01: iosPushSecret != null,
@@ -134226,7 +134233,7 @@ class MessagesGetEmojiGroups extends TlMethod {
   /// Messages Get Emoji Groups constructor.
   const MessagesGetEmojiGroups({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiGroups.deserialize(BinaryReader reader) {
@@ -134280,7 +134287,7 @@ class MessagesGetEmojiStatusGroups extends TlMethod {
   /// Messages Get Emoji Status Groups constructor.
   const MessagesGetEmojiStatusGroups({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiStatusGroups.deserialize(BinaryReader reader) {
@@ -134334,7 +134341,7 @@ class MessagesGetEmojiProfilePhotoGroups extends TlMethod {
   /// Messages Get Emoji Profile Photo Groups constructor.
   const MessagesGetEmojiProfilePhotoGroups({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiProfilePhotoGroups.deserialize(BinaryReader reader) {
@@ -134389,7 +134396,7 @@ class MessagesSearchCustomEmoji extends TlMethod {
   const MessagesSearchCustomEmoji({
     required this.emoticon,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchCustomEmoji.deserialize(BinaryReader reader) {
@@ -134451,7 +134458,7 @@ class MessagesTogglePeerTranslations extends TlMethod {
   const MessagesTogglePeerTranslations({
     required this.disabled,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTogglePeerTranslations.deserialize(BinaryReader reader) {
@@ -134472,7 +134479,7 @@ class MessagesTogglePeerTranslations extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: disabled,
     );
 
@@ -134519,7 +134526,7 @@ class MessagesTogglePeerTranslations extends TlMethod {
 /// ID: `adcbbcda`.
 class AccountGetAutoSaveSettings extends TlMethod {
   /// Account Get Auto Save Settings constructor.
-  const AccountGetAutoSaveSettings() : super._();
+  const AccountGetAutoSaveSettings() ;
 
   /// Deserialize.
   factory AccountGetAutoSaveSettings.deserialize(BinaryReader reader) {
@@ -134563,7 +134570,7 @@ class AccountSaveAutoSaveSettings extends TlMethod {
     required this.broadcasts,
     this.peer,
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSaveAutoSaveSettings.deserialize(BinaryReader reader) {
@@ -134591,7 +134598,7 @@ class AccountSaveAutoSaveSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: users,
       b01: chats,
       b02: broadcasts,
@@ -134657,7 +134664,7 @@ class AccountSaveAutoSaveSettings extends TlMethod {
 /// ID: `53bc0020`.
 class AccountDeleteAutoSaveExceptions extends TlMethod {
   /// Account Delete Auto Save Exceptions constructor.
-  const AccountDeleteAutoSaveExceptions() : super._();
+  const AccountDeleteAutoSaveExceptions() ;
 
   /// Deserialize.
   factory AccountDeleteAutoSaveExceptions.deserialize(BinaryReader reader) {
@@ -134700,7 +134707,7 @@ class StickersChangeSticker extends TlMethod {
     this.emoji,
     this.maskCoords,
     this.keywords,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersChangeSticker.deserialize(BinaryReader reader) {
@@ -134729,7 +134736,7 @@ class StickersChangeSticker extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: emoji != null,
       b01: maskCoords != null,
       b02: keywords != null,
@@ -134801,7 +134808,7 @@ class StickersRenameStickerSet extends TlMethod {
   const StickersRenameStickerSet({
     required this.stickerset,
     required this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersRenameStickerSet.deserialize(BinaryReader reader) {
@@ -134860,7 +134867,7 @@ class StickersDeleteStickerSet extends TlMethod {
   /// Stickers Delete Sticker Set constructor.
   const StickersDeleteStickerSet({
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersDeleteStickerSet.deserialize(BinaryReader reader) {
@@ -134913,7 +134920,7 @@ class MessagesGetBotApp extends TlMethod {
   const MessagesGetBotApp({
     required this.app,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetBotApp.deserialize(BinaryReader reader) {
@@ -134981,7 +134988,7 @@ class MessagesRequestAppWebView extends TlMethod {
     this.startParam,
     this.themeParams,
     required this.platform,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestAppWebView.deserialize(BinaryReader reader) {
@@ -135017,7 +135024,7 @@ class MessagesRequestAppWebView extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: writeAllowed,
       b07: compact,
       b08: fullscreen,
@@ -135108,7 +135115,7 @@ class BotsSetBotInfo extends TlMethod {
     this.name,
     this.about,
     this.description,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsSetBotInfo.deserialize(BinaryReader reader) {
@@ -135139,7 +135146,7 @@ class BotsSetBotInfo extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: bot != null,
       b03: name != null,
       b00: about != null,
@@ -135220,7 +135227,7 @@ class BotsGetBotInfo extends TlMethod {
   const BotsGetBotInfo({
     this.bot,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetBotInfo.deserialize(BinaryReader reader) {
@@ -135242,7 +135249,7 @@ class BotsGetBotInfo extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: bot != null,
     );
 
@@ -135296,7 +135303,7 @@ class AuthResetLoginEmail extends TlMethod {
   const AuthResetLoginEmail({
     required this.phoneNumber,
     required this.phoneCodeHash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthResetLoginEmail.deserialize(BinaryReader reader) {
@@ -135357,7 +135364,7 @@ class ChatlistsExportChatlistInvite extends TlMethod {
     required this.chatlist,
     required this.title,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsExportChatlistInvite.deserialize(BinaryReader reader) {
@@ -135424,7 +135431,7 @@ class ChatlistsDeleteExportedInvite extends TlMethod {
   const ChatlistsDeleteExportedInvite({
     required this.chatlist,
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsDeleteExportedInvite.deserialize(BinaryReader reader) {
@@ -135486,7 +135493,7 @@ class ChatlistsEditExportedInvite extends TlMethod {
     required this.slug,
     this.title,
     this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsEditExportedInvite.deserialize(BinaryReader reader) {
@@ -135514,7 +135521,7 @@ class ChatlistsEditExportedInvite extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: title != null,
       b02: peers != null,
     );
@@ -135581,7 +135588,7 @@ class ChatlistsGetExportedInvites extends TlMethod {
   /// Chatlists Get Exported Invites constructor.
   const ChatlistsGetExportedInvites({
     required this.chatlist,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsGetExportedInvites.deserialize(BinaryReader reader) {
@@ -135633,7 +135640,7 @@ class ChatlistsCheckChatlistInvite extends TlMethod {
   /// Chatlists Check Chatlist Invite constructor.
   const ChatlistsCheckChatlistInvite({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsCheckChatlistInvite.deserialize(BinaryReader reader) {
@@ -135686,7 +135693,7 @@ class ChatlistsJoinChatlistInvite extends TlMethod {
   const ChatlistsJoinChatlistInvite({
     required this.slug,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsJoinChatlistInvite.deserialize(BinaryReader reader) {
@@ -135745,7 +135752,7 @@ class ChatlistsGetChatlistUpdates extends TlMethod {
   /// Chatlists Get Chatlist Updates constructor.
   const ChatlistsGetChatlistUpdates({
     required this.chatlist,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsGetChatlistUpdates.deserialize(BinaryReader reader) {
@@ -135798,7 +135805,7 @@ class ChatlistsJoinChatlistUpdates extends TlMethod {
   const ChatlistsJoinChatlistUpdates({
     required this.chatlist,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsJoinChatlistUpdates.deserialize(BinaryReader reader) {
@@ -135857,7 +135864,7 @@ class ChatlistsHideChatlistUpdates extends TlMethod {
   /// Chatlists Hide Chatlist Updates constructor.
   const ChatlistsHideChatlistUpdates({
     required this.chatlist,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsHideChatlistUpdates.deserialize(BinaryReader reader) {
@@ -135909,7 +135916,7 @@ class ChatlistsGetLeaveChatlistSuggestions extends TlMethod {
   /// Chatlists Get Leave Chatlist Suggestions constructor.
   const ChatlistsGetLeaveChatlistSuggestions({
     required this.chatlist,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsGetLeaveChatlistSuggestions.deserialize(
@@ -135963,7 +135970,7 @@ class ChatlistsLeaveChatlist extends TlMethod {
   const ChatlistsLeaveChatlist({
     required this.chatlist,
     required this.peers,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChatlistsLeaveChatlist.deserialize(BinaryReader reader) {
@@ -136023,7 +136030,7 @@ class BotsReorderUsernames extends TlMethod {
   const BotsReorderUsernames({
     required this.bot,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsReorderUsernames.deserialize(BinaryReader reader) {
@@ -136084,7 +136091,7 @@ class BotsToggleUsername extends TlMethod {
     required this.bot,
     required this.username,
     required this.active,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsToggleUsername.deserialize(BinaryReader reader) {
@@ -136155,7 +136162,7 @@ class MessagesSetChatWallPaper extends TlMethod {
     this.wallpaper,
     this.settings,
     this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSetChatWallPaper.deserialize(BinaryReader reader) {
@@ -136189,7 +136196,7 @@ class MessagesSetChatWallPaper extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b03: forBoth,
       b04: revert,
       b00: wallpaper != null,
@@ -136270,7 +136277,7 @@ class AccountInvalidateSignInCodes extends TlMethod {
   /// Account Invalidate Sign In Codes constructor.
   const AccountInvalidateSignInCodes({
     required this.codes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountInvalidateSignInCodes.deserialize(BinaryReader reader) {
@@ -136322,7 +136329,7 @@ class ContactsEditCloseFriends extends TlMethod {
   /// Contacts Edit Close Friends constructor.
   const ContactsEditCloseFriends({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsEditCloseFriends.deserialize(BinaryReader reader) {
@@ -136374,7 +136381,7 @@ class StoriesCanSendStory extends TlMethod {
   /// Stories Can Send Story constructor.
   const StoriesCanSendStory({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesCanSendStory.deserialize(BinaryReader reader) {
@@ -136438,7 +136445,7 @@ class StoriesSendStory extends TlMethod {
     this.period,
     this.fwdFromId,
     this.fwdFromStory,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesSendStory.deserialize(BinaryReader reader) {
@@ -136490,7 +136497,7 @@ class StoriesSendStory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: pinned,
       b04: noforwards,
       b07: fwdModified,
@@ -136625,7 +136632,7 @@ class StoriesEditStory extends TlMethod {
     this.caption,
     this.entities,
     this.privacyRules,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesEditStory.deserialize(BinaryReader reader) {
@@ -136665,7 +136672,7 @@ class StoriesEditStory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: media != null,
       b03: mediaAreas != null,
       b01: caption != null || entities != null,
@@ -136761,7 +136768,7 @@ class StoriesDeleteStories extends TlMethod {
   const StoriesDeleteStories({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesDeleteStories.deserialize(BinaryReader reader) {
@@ -136822,7 +136829,7 @@ class StoriesTogglePinned extends TlMethod {
     required this.peer,
     required this.id,
     required this.pinned,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesTogglePinned.deserialize(BinaryReader reader) {
@@ -136890,7 +136897,7 @@ class StoriesGetAllStories extends TlMethod {
     required this.next,
     required this.hidden,
     this.state,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetAllStories.deserialize(BinaryReader reader) {
@@ -136914,7 +136921,7 @@ class StoriesGetAllStories extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: next,
       b02: hidden,
       b00: state != null,
@@ -136974,7 +136981,7 @@ class StoriesGetPinnedStories extends TlMethod {
     required this.peer,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetPinnedStories.deserialize(BinaryReader reader) {
@@ -137046,7 +137053,7 @@ class StoriesGetStoriesArchive extends TlMethod {
     required this.peer,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetStoriesArchive.deserialize(BinaryReader reader) {
@@ -137117,7 +137124,7 @@ class StoriesGetStoriesByID extends TlMethod {
   const StoriesGetStoriesByID({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetStoriesByID.deserialize(BinaryReader reader) {
@@ -137176,7 +137183,7 @@ class StoriesToggleAllStoriesHidden extends TlMethod {
   /// Stories Toggle All Stories Hidden constructor.
   const StoriesToggleAllStoriesHidden({
     required this.hidden,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesToggleAllStoriesHidden.deserialize(BinaryReader reader) {
@@ -137229,7 +137236,7 @@ class StoriesReadStories extends TlMethod {
   const StoriesReadStories({
     required this.peer,
     required this.maxId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesReadStories.deserialize(BinaryReader reader) {
@@ -137291,7 +137298,7 @@ class StoriesIncrementStoryViews extends TlMethod {
   const StoriesIncrementStoryViews({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesIncrementStoryViews.deserialize(BinaryReader reader) {
@@ -137357,7 +137364,7 @@ class StoriesGetStoryViewsList extends TlMethod {
     required this.id,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetStoryViewsList.deserialize(BinaryReader reader) {
@@ -137391,7 +137398,7 @@ class StoriesGetStoryViewsList extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: justContacts,
       b02: reactionsFirst,
       b03: forwardsFirst,
@@ -137479,7 +137486,7 @@ class StoriesGetStoriesViews extends TlMethod {
   const StoriesGetStoriesViews({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetStoriesViews.deserialize(BinaryReader reader) {
@@ -137539,7 +137546,7 @@ class StoriesExportStoryLink extends TlMethod {
   const StoriesExportStoryLink({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesExportStoryLink.deserialize(BinaryReader reader) {
@@ -137603,7 +137610,7 @@ class StoriesReport extends TlMethod {
     required this.id,
     required this.option,
     required this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesReport.deserialize(BinaryReader reader) {
@@ -137677,7 +137684,7 @@ class StoriesActivateStealthMode extends TlMethod {
   const StoriesActivateStealthMode({
     required this.past,
     required this.future,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesActivateStealthMode.deserialize(BinaryReader reader) {
@@ -137698,7 +137705,7 @@ class StoriesActivateStealthMode extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: past,
       b01: future,
     );
@@ -137749,7 +137756,7 @@ class ContactsSetBlocked extends TlMethod {
     required this.myStoriesFrom,
     required this.id,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ContactsSetBlocked.deserialize(BinaryReader reader) {
@@ -137772,7 +137779,7 @@ class ContactsSetBlocked extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: myStoriesFrom,
     );
 
@@ -137831,7 +137838,7 @@ class StoriesSendReaction extends TlMethod {
     required this.peer,
     required this.storyId,
     required this.reaction,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesSendReaction.deserialize(BinaryReader reader) {
@@ -137856,14 +137863,14 @@ class StoriesSendReaction extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: addToRecent,
     );
 
     return v;
   }
 
-  /// add_to_recent: bit 0 of flags.0?true
+  /// addto_recent: bit 0 of flags.0?true
   final bool addToRecent;
 
   /// Peer.
@@ -137917,7 +137924,7 @@ class BotsCanSendMessage extends TlMethod {
   /// Bots Can Send Message constructor.
   const BotsCanSendMessage({
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsCanSendMessage.deserialize(BinaryReader reader) {
@@ -137969,7 +137976,7 @@ class BotsAllowSendMessage extends TlMethod {
   /// Bots Allow Send Message constructor.
   const BotsAllowSendMessage({
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsAllowSendMessage.deserialize(BinaryReader reader) {
@@ -138023,7 +138030,7 @@ class BotsInvokeWebViewCustomMethod extends TlMethod {
     required this.bot,
     required this.customMethod,
     required this.params,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsInvokeWebViewCustomMethod.deserialize(BinaryReader reader) {
@@ -138089,7 +138096,7 @@ class StoriesGetPeerStories extends TlMethod {
   /// Stories Get Peer Stories constructor.
   const StoriesGetPeerStories({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetPeerStories.deserialize(BinaryReader reader) {
@@ -138139,7 +138146,7 @@ class StoriesGetPeerStories extends TlMethod {
 /// ID: `9b5ae7f9`.
 class StoriesGetAllReadPeerStories extends TlMethod {
   /// Stories Get All Read Peer Stories constructor.
-  const StoriesGetAllReadPeerStories() : super._();
+  const StoriesGetAllReadPeerStories() ;
 
   /// Deserialize.
   factory StoriesGetAllReadPeerStories.deserialize(BinaryReader reader) {
@@ -138179,7 +138186,7 @@ class StoriesGetPeerMaxIDs extends TlMethod {
   /// Stories Get Peer Max I Ds constructor.
   const StoriesGetPeerMaxIDs({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetPeerMaxIDs.deserialize(BinaryReader reader) {
@@ -138229,7 +138236,7 @@ class StoriesGetPeerMaxIDs extends TlMethod {
 /// ID: `a56a8b60`.
 class StoriesGetChatsToSend extends TlMethod {
   /// Stories Get Chats To Send constructor.
-  const StoriesGetChatsToSend() : super._();
+  const StoriesGetChatsToSend() ;
 
   /// Deserialize.
   factory StoriesGetChatsToSend.deserialize(BinaryReader reader) {
@@ -138270,7 +138277,7 @@ class StoriesTogglePeerStoriesHidden extends TlMethod {
   const StoriesTogglePeerStoriesHidden({
     required this.peer,
     required this.hidden,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesTogglePeerStoriesHidden.deserialize(BinaryReader reader) {
@@ -138329,7 +138336,7 @@ class PaymentsGetPremiumGiftCodeOptions extends TlMethod {
   /// Payments Get Premium Gift Code Options constructor.
   const PaymentsGetPremiumGiftCodeOptions({
     this.boostPeer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetPremiumGiftCodeOptions.deserialize(BinaryReader reader) {
@@ -138350,7 +138357,7 @@ class PaymentsGetPremiumGiftCodeOptions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: boostPeer != null,
     );
 
@@ -138398,7 +138405,7 @@ class PaymentsCheckGiftCode extends TlMethod {
   /// Payments Check Gift Code constructor.
   const PaymentsCheckGiftCode({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsCheckGiftCode.deserialize(BinaryReader reader) {
@@ -138450,7 +138457,7 @@ class PaymentsApplyGiftCode extends TlMethod {
   /// Payments Apply Gift Code constructor.
   const PaymentsApplyGiftCode({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsApplyGiftCode.deserialize(BinaryReader reader) {
@@ -138503,7 +138510,7 @@ class PaymentsGetGiveawayInfo extends TlMethod {
   const PaymentsGetGiveawayInfo({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetGiveawayInfo.deserialize(BinaryReader reader) {
@@ -138566,7 +138573,7 @@ class PaymentsLaunchPrepaidGiveaway extends TlMethod {
     required this.peer,
     required this.giveawayId,
     required this.purpose,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsLaunchPrepaidGiveaway.deserialize(BinaryReader reader) {
@@ -138636,7 +138643,7 @@ class AccountUpdateColor extends TlMethod {
     required this.forProfile,
     this.color,
     this.backgroundEmojiId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateColor.deserialize(BinaryReader reader) {
@@ -138662,7 +138669,7 @@ class AccountUpdateColor extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: forProfile,
       b02: color != null,
       b00: backgroundEmojiId != null,
@@ -138727,7 +138734,7 @@ class ChannelsUpdateColor extends TlMethod {
     required this.channel,
     this.color,
     this.backgroundEmojiId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsUpdateColor.deserialize(BinaryReader reader) {
@@ -138755,7 +138762,7 @@ class ChannelsUpdateColor extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: forProfile,
       b02: color != null,
       b00: backgroundEmojiId != null,
@@ -138822,7 +138829,7 @@ class AccountGetDefaultBackgroundEmojis extends TlMethod {
   /// Account Get Default Background Emojis constructor.
   const AccountGetDefaultBackgroundEmojis({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetDefaultBackgroundEmojis.deserialize(BinaryReader reader) {
@@ -138879,7 +138886,7 @@ class PremiumGetBoostsList extends TlMethod {
     required this.peer,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumGetBoostsList.deserialize(BinaryReader reader) {
@@ -138904,7 +138911,7 @@ class PremiumGetBoostsList extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: gifts,
     );
 
@@ -138963,7 +138970,7 @@ class PremiumGetBoostsList extends TlMethod {
 /// ID: `0be77b4a`.
 class PremiumGetMyBoosts extends TlMethod {
   /// Premium Get My Boosts constructor.
-  const PremiumGetMyBoosts() : super._();
+  const PremiumGetMyBoosts() ;
 
   /// Deserialize.
   factory PremiumGetMyBoosts.deserialize(BinaryReader reader) {
@@ -139004,7 +139011,7 @@ class PremiumApplyBoost extends TlMethod {
   const PremiumApplyBoost({
     this.slots,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumApplyBoost.deserialize(BinaryReader reader) {
@@ -139026,7 +139033,7 @@ class PremiumApplyBoost extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: slots != null,
     );
 
@@ -139079,7 +139086,7 @@ class PremiumGetBoostsStatus extends TlMethod {
   /// Premium Get Boosts Status constructor.
   const PremiumGetBoostsStatus({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumGetBoostsStatus.deserialize(BinaryReader reader) {
@@ -139132,7 +139139,7 @@ class PremiumGetUserBoosts extends TlMethod {
   const PremiumGetUserBoosts({
     required this.peer,
     required this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PremiumGetUserBoosts.deserialize(BinaryReader reader) {
@@ -139192,7 +139199,7 @@ class ChannelsToggleViewForumAsMessages extends TlMethod {
   const ChannelsToggleViewForumAsMessages({
     required this.channel,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsToggleViewForumAsMessages.deserialize(BinaryReader reader) {
@@ -139253,7 +139260,7 @@ class MessagesSearchEmojiStickerSets extends TlMethod {
     required this.excludeFeatured,
     required this.q,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchEmojiStickerSets.deserialize(BinaryReader reader) {
@@ -139276,7 +139283,7 @@ class MessagesSearchEmojiStickerSets extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: excludeFeatured,
     );
 
@@ -139332,7 +139339,7 @@ class ChannelsGetChannelRecommendations extends TlMethod {
   /// Channels Get Channel Recommendations constructor.
   const ChannelsGetChannelRecommendations({
     this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsGetChannelRecommendations.deserialize(BinaryReader reader) {
@@ -139353,7 +139360,7 @@ class ChannelsGetChannelRecommendations extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: channel != null,
     );
 
@@ -139403,7 +139410,7 @@ class StatsGetStoryStats extends TlMethod {
     required this.dark,
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetStoryStats.deserialize(BinaryReader reader) {
@@ -139426,7 +139433,7 @@ class StatsGetStoryStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -139485,7 +139492,7 @@ class StatsGetStoryPublicForwards extends TlMethod {
     required this.id,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetStoryPublicForwards.deserialize(BinaryReader reader) {
@@ -139562,7 +139569,7 @@ class HelpGetPeerColors extends TlMethod {
   /// Help Get Peer Colors constructor.
   const HelpGetPeerColors({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetPeerColors.deserialize(BinaryReader reader) {
@@ -139616,7 +139623,7 @@ class HelpGetPeerProfileColors extends TlMethod {
   /// Help Get Peer Profile Colors constructor.
   const HelpGetPeerProfileColors({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetPeerProfileColors.deserialize(BinaryReader reader) {
@@ -139675,7 +139682,7 @@ class StoriesGetStoryReactionsList extends TlMethod {
     this.reaction,
     this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesGetStoryReactionsList.deserialize(BinaryReader reader) {
@@ -139707,7 +139714,7 @@ class StoriesGetStoryReactionsList extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: forwardsFirst,
       b00: reaction != null,
       b01: offset != null,
@@ -139789,7 +139796,7 @@ class ChannelsUpdateEmojiStatus extends TlMethod {
   const ChannelsUpdateEmojiStatus({
     required this.channel,
     required this.emojiStatus,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsUpdateEmojiStatus.deserialize(BinaryReader reader) {
@@ -139848,7 +139855,7 @@ class AccountGetChannelDefaultEmojiStatuses extends TlMethod {
   /// Account Get Channel Default Emoji Statuses constructor.
   const AccountGetChannelDefaultEmojiStatuses({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetChannelDefaultEmojiStatuses.deserialize(
@@ -139903,7 +139910,7 @@ class AccountGetChannelRestrictedStatusEmojis extends TlMethod {
   /// Account Get Channel Restricted Status Emojis constructor.
   const AccountGetChannelRestrictedStatusEmojis({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetChannelRestrictedStatusEmojis.deserialize(
@@ -139963,7 +139970,7 @@ class MessagesGetSavedDialogs extends TlMethod {
     required this.offsetPeer,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSavedDialogs.deserialize(BinaryReader reader) {
@@ -139992,7 +139999,7 @@ class MessagesGetSavedDialogs extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: excludePinned,
     );
 
@@ -140074,7 +140081,7 @@ class MessagesGetSavedHistory extends TlMethod {
     required this.maxId,
     required this.minId,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSavedHistory.deserialize(BinaryReader reader) {
@@ -140190,7 +140197,7 @@ class MessagesDeleteSavedHistory extends TlMethod {
     required this.maxId,
     this.minDate,
     this.maxDate,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteSavedHistory.deserialize(BinaryReader reader) {
@@ -140217,7 +140224,7 @@ class MessagesDeleteSavedHistory extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: minDate != null,
       b03: maxDate != null,
     );
@@ -140284,7 +140291,7 @@ class MessagesDeleteSavedHistory extends TlMethod {
 /// ID: `d63d94e0`.
 class MessagesGetPinnedSavedDialogs extends TlMethod {
   /// Messages Get Pinned Saved Dialogs constructor.
-  const MessagesGetPinnedSavedDialogs() : super._();
+  const MessagesGetPinnedSavedDialogs() ;
 
   /// Deserialize.
   factory MessagesGetPinnedSavedDialogs.deserialize(BinaryReader reader) {
@@ -140325,7 +140332,7 @@ class MessagesToggleSavedDialogPin extends TlMethod {
   const MessagesToggleSavedDialogPin({
     required this.pinned,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleSavedDialogPin.deserialize(BinaryReader reader) {
@@ -140346,7 +140353,7 @@ class MessagesToggleSavedDialogPin extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: pinned,
     );
 
@@ -140396,7 +140403,7 @@ class MessagesReorderPinnedSavedDialogs extends TlMethod {
   const MessagesReorderPinnedSavedDialogs({
     required this.force,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReorderPinnedSavedDialogs.deserialize(BinaryReader reader) {
@@ -140417,7 +140424,7 @@ class MessagesReorderPinnedSavedDialogs extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: force,
     );
 
@@ -140467,7 +140474,7 @@ class MessagesGetSavedReactionTags extends TlMethod {
   const MessagesGetSavedReactionTags({
     this.peer,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSavedReactionTags.deserialize(BinaryReader reader) {
@@ -140489,7 +140496,7 @@ class MessagesGetSavedReactionTags extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: peer != null,
     );
 
@@ -140545,7 +140552,7 @@ class MessagesUpdateSavedReactionTag extends TlMethod {
   const MessagesUpdateSavedReactionTag({
     required this.reaction,
     this.title,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesUpdateSavedReactionTag.deserialize(BinaryReader reader) {
@@ -140567,7 +140574,7 @@ class MessagesUpdateSavedReactionTag extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: title != null,
     );
 
@@ -140620,7 +140627,7 @@ class MessagesGetDefaultTagReactions extends TlMethod {
   /// Messages Get Default Tag Reactions constructor.
   const MessagesGetDefaultTagReactions({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetDefaultTagReactions.deserialize(BinaryReader reader) {
@@ -140675,7 +140682,7 @@ class MessagesGetOutboxReadDate extends TlMethod {
   const MessagesGetOutboxReadDate({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetOutboxReadDate.deserialize(BinaryReader reader) {
@@ -140736,7 +140743,7 @@ class UsersGetIsPremiumRequiredToContact extends TlMethod {
   /// Users Get Is Premium Required To Contact constructor.
   const UsersGetIsPremiumRequiredToContact({
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory UsersGetIsPremiumRequiredToContact.deserialize(BinaryReader reader) {
@@ -140789,7 +140796,7 @@ class ChannelsSetBoostsToUnblockRestrictions extends TlMethod {
   const ChannelsSetBoostsToUnblockRestrictions({
     required this.channel,
     required this.boosts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSetBoostsToUnblockRestrictions.deserialize(
@@ -140852,7 +140859,7 @@ class ChannelsSetEmojiStickers extends TlMethod {
   const ChannelsSetEmojiStickers({
     required this.channel,
     required this.stickerset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSetEmojiStickers.deserialize(BinaryReader reader) {
@@ -140909,7 +140916,7 @@ class ChannelsSetEmojiStickers extends TlMethod {
 /// ID: `0edc39d0`.
 class SmsjobsIsEligibleToJoin extends TlMethod {
   /// Smsjobs Is Eligible To Join constructor.
-  const SmsjobsIsEligibleToJoin() : super._();
+  const SmsjobsIsEligibleToJoin() ;
 
   /// Deserialize.
   factory SmsjobsIsEligibleToJoin.deserialize(BinaryReader reader) {
@@ -140947,7 +140954,7 @@ class SmsjobsIsEligibleToJoin extends TlMethod {
 /// ID: `a74ece2d`.
 class SmsjobsJoin extends TlMethod {
   /// Smsjobs Join constructor.
-  const SmsjobsJoin() : super._();
+  const SmsjobsJoin() ;
 
   /// Deserialize.
   factory SmsjobsJoin.deserialize(BinaryReader reader) {
@@ -140985,7 +140992,7 @@ class SmsjobsJoin extends TlMethod {
 /// ID: `9898ad73`.
 class SmsjobsLeave extends TlMethod {
   /// Smsjobs Leave constructor.
-  const SmsjobsLeave() : super._();
+  const SmsjobsLeave() ;
 
   /// Deserialize.
   factory SmsjobsLeave.deserialize(BinaryReader reader) {
@@ -141025,7 +141032,7 @@ class SmsjobsUpdateSettings extends TlMethod {
   /// Smsjobs Update Settings constructor.
   const SmsjobsUpdateSettings({
     required this.allowInternational,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsjobsUpdateSettings.deserialize(BinaryReader reader) {
@@ -141044,7 +141051,7 @@ class SmsjobsUpdateSettings extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: allowInternational,
     );
 
@@ -141086,7 +141093,7 @@ class SmsjobsUpdateSettings extends TlMethod {
 /// ID: `10a698e8`.
 class SmsjobsGetStatus extends TlMethod {
   /// Smsjobs Get Status constructor.
-  const SmsjobsGetStatus() : super._();
+  const SmsjobsGetStatus() ;
 
   /// Deserialize.
   factory SmsjobsGetStatus.deserialize(BinaryReader reader) {
@@ -141126,7 +141133,7 @@ class SmsjobsGetSmsJob extends TlMethod {
   /// Smsjobs Get Sms Job constructor.
   const SmsjobsGetSmsJob({
     required this.jobId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsjobsGetSmsJob.deserialize(BinaryReader reader) {
@@ -141179,7 +141186,7 @@ class SmsjobsFinishJob extends TlMethod {
   const SmsjobsFinishJob({
     required this.jobId,
     this.error,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SmsjobsFinishJob.deserialize(BinaryReader reader) {
@@ -141201,7 +141208,7 @@ class SmsjobsFinishJob extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: error != null,
     );
 
@@ -141254,7 +141261,7 @@ class HelpGetTimezonesList extends TlMethod {
   /// Help Get Timezones List constructor.
   const HelpGetTimezonesList({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HelpGetTimezonesList.deserialize(BinaryReader reader) {
@@ -141308,7 +141315,7 @@ class AccountUpdateBusinessWorkHours extends TlMethod {
   /// Account Update Business Work Hours constructor.
   const AccountUpdateBusinessWorkHours({
     this.businessWorkHours,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBusinessWorkHours.deserialize(BinaryReader reader) {
@@ -141330,7 +141337,7 @@ class AccountUpdateBusinessWorkHours extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: businessWorkHours != null,
     );
 
@@ -141379,7 +141386,7 @@ class AccountUpdateBusinessLocation extends TlMethod {
   const AccountUpdateBusinessLocation({
     this.geoPoint,
     this.address,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBusinessLocation.deserialize(BinaryReader reader) {
@@ -141403,7 +141410,7 @@ class AccountUpdateBusinessLocation extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b01: geoPoint != null,
       b00: address != null,
     );
@@ -141460,7 +141467,7 @@ class AccountUpdateBusinessGreetingMessage extends TlMethod {
   /// Account Update Business Greeting Message constructor.
   const AccountUpdateBusinessGreetingMessage({
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBusinessGreetingMessage.deserialize(
@@ -141483,7 +141490,7 @@ class AccountUpdateBusinessGreetingMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: message != null,
     );
 
@@ -141531,7 +141538,7 @@ class AccountUpdateBusinessAwayMessage extends TlMethod {
   /// Account Update Business Away Message constructor.
   const AccountUpdateBusinessAwayMessage({
     this.message,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBusinessAwayMessage.deserialize(BinaryReader reader) {
@@ -141553,7 +141560,7 @@ class AccountUpdateBusinessAwayMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: message != null,
     );
 
@@ -141601,7 +141608,7 @@ class MessagesGetQuickReplies extends TlMethod {
   /// Messages Get Quick Replies constructor.
   const MessagesGetQuickReplies({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetQuickReplies.deserialize(BinaryReader reader) {
@@ -141655,7 +141662,7 @@ class MessagesReorderQuickReplies extends TlMethod {
   /// Messages Reorder Quick Replies constructor.
   const MessagesReorderQuickReplies({
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReorderQuickReplies.deserialize(BinaryReader reader) {
@@ -141707,7 +141714,7 @@ class MessagesCheckQuickReplyShortcut extends TlMethod {
   /// Messages Check Quick Reply Shortcut constructor.
   const MessagesCheckQuickReplyShortcut({
     required this.shortcut,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesCheckQuickReplyShortcut.deserialize(BinaryReader reader) {
@@ -141760,7 +141767,7 @@ class MessagesEditQuickReplyShortcut extends TlMethod {
   const MessagesEditQuickReplyShortcut({
     required this.shortcutId,
     required this.shortcut,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditQuickReplyShortcut.deserialize(BinaryReader reader) {
@@ -141821,7 +141828,7 @@ class MessagesDeleteQuickReplyShortcut extends TlMethod {
   /// Messages Delete Quick Reply Shortcut constructor.
   const MessagesDeleteQuickReplyShortcut({
     required this.shortcutId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteQuickReplyShortcut.deserialize(BinaryReader reader) {
@@ -141877,7 +141884,7 @@ class MessagesGetQuickReplyMessages extends TlMethod {
     required this.shortcutId,
     this.id,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetQuickReplyMessages.deserialize(BinaryReader reader) {
@@ -141901,7 +141908,7 @@ class MessagesGetQuickReplyMessages extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: id != null,
     );
 
@@ -141966,7 +141973,7 @@ class MessagesSendQuickReplyMessages extends TlMethod {
     required this.shortcutId,
     required this.id,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendQuickReplyMessages.deserialize(BinaryReader reader) {
@@ -142042,7 +142049,7 @@ class MessagesDeleteQuickReplyMessages extends TlMethod {
   const MessagesDeleteQuickReplyMessages({
     required this.shortcutId,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteQuickReplyMessages.deserialize(BinaryReader reader) {
@@ -142106,7 +142113,7 @@ class AccountUpdateConnectedBot extends TlMethod {
     required this.deleted,
     required this.bot,
     required this.recipients,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateConnectedBot.deserialize(BinaryReader reader) {
@@ -142131,7 +142138,7 @@ class AccountUpdateConnectedBot extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: canReply,
       b01: deleted,
     );
@@ -142188,7 +142195,7 @@ class AccountUpdateConnectedBot extends TlMethod {
 /// ID: `4ea4c80f`.
 class AccountGetConnectedBots extends TlMethod {
   /// Account Get Connected Bots constructor.
-  const AccountGetConnectedBots() : super._();
+  const AccountGetConnectedBots() ;
 
   /// Deserialize.
   factory AccountGetConnectedBots.deserialize(BinaryReader reader) {
@@ -142228,7 +142235,7 @@ class MessagesToggleDialogFilterTags extends TlMethod {
   /// Messages Toggle Dialog Filter Tags constructor.
   const MessagesToggleDialogFilterTags({
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesToggleDialogFilterTags.deserialize(BinaryReader reader) {
@@ -142281,7 +142288,7 @@ class InvokeWithBusinessConnection extends TlMethod {
   const InvokeWithBusinessConnection({
     required this.connectionId,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithBusinessConnection.deserialize(BinaryReader reader) {
@@ -142340,7 +142347,7 @@ class AccountGetBotBusinessConnection extends TlMethod {
   /// Account Get Bot Business Connection constructor.
   const AccountGetBotBusinessConnection({
     required this.connectionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountGetBotBusinessConnection.deserialize(BinaryReader reader) {
@@ -142392,7 +142399,7 @@ class AccountUpdateBusinessIntro extends TlMethod {
   /// Account Update Business Intro constructor.
   const AccountUpdateBusinessIntro({
     this.intro,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBusinessIntro.deserialize(BinaryReader reader) {
@@ -142413,7 +142420,7 @@ class AccountUpdateBusinessIntro extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: intro != null,
     );
 
@@ -142462,7 +142469,7 @@ class StickersReplaceSticker extends TlMethod {
   const StickersReplaceSticker({
     required this.sticker,
     required this.newSticker,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StickersReplaceSticker.deserialize(BinaryReader reader) {
@@ -142522,7 +142529,7 @@ class MessagesGetMyStickers extends TlMethod {
   const MessagesGetMyStickers({
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetMyStickers.deserialize(BinaryReader reader) {
@@ -142585,7 +142592,7 @@ class FragmentGetCollectibleInfo extends TlMethod {
   /// Fragment Get Collectible Info constructor.
   const FragmentGetCollectibleInfo({
     required this.collectible,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FragmentGetCollectibleInfo.deserialize(BinaryReader reader) {
@@ -142638,7 +142645,7 @@ class AccountToggleConnectedBotPaused extends TlMethod {
   const AccountToggleConnectedBotPaused({
     required this.peer,
     required this.paused,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountToggleConnectedBotPaused.deserialize(BinaryReader reader) {
@@ -142697,7 +142704,7 @@ class AccountDisablePeerConnectedBot extends TlMethod {
   /// Account Disable Peer Connected Bot constructor.
   const AccountDisablePeerConnectedBot({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountDisablePeerConnectedBot.deserialize(BinaryReader reader) {
@@ -142749,7 +142756,7 @@ class AccountUpdateBirthday extends TlMethod {
   /// Account Update Birthday constructor.
   const AccountUpdateBirthday({
     this.birthday,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdateBirthday.deserialize(BinaryReader reader) {
@@ -142770,7 +142777,7 @@ class AccountUpdateBirthday extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: birthday != null,
     );
 
@@ -142816,7 +142823,7 @@ class AccountUpdateBirthday extends TlMethod {
 /// ID: `daeda864`.
 class ContactsGetBirthdays extends TlMethod {
   /// Contacts Get Birthdays constructor.
-  const ContactsGetBirthdays() : super._();
+  const ContactsGetBirthdays() ;
 
   /// Deserialize.
   factory ContactsGetBirthdays.deserialize(BinaryReader reader) {
@@ -142856,7 +142863,7 @@ class AccountCreateBusinessChatLink extends TlMethod {
   /// Account Create Business Chat Link constructor.
   const AccountCreateBusinessChatLink({
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountCreateBusinessChatLink.deserialize(BinaryReader reader) {
@@ -142909,7 +142916,7 @@ class AccountEditBusinessChatLink extends TlMethod {
   const AccountEditBusinessChatLink({
     required this.slug,
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountEditBusinessChatLink.deserialize(BinaryReader reader) {
@@ -142968,7 +142975,7 @@ class AccountDeleteBusinessChatLink extends TlMethod {
   /// Account Delete Business Chat Link constructor.
   const AccountDeleteBusinessChatLink({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountDeleteBusinessChatLink.deserialize(BinaryReader reader) {
@@ -143018,7 +143025,7 @@ class AccountDeleteBusinessChatLink extends TlMethod {
 /// ID: `6f70dde1`.
 class AccountGetBusinessChatLinks extends TlMethod {
   /// Account Get Business Chat Links constructor.
-  const AccountGetBusinessChatLinks() : super._();
+  const AccountGetBusinessChatLinks() ;
 
   /// Deserialize.
   factory AccountGetBusinessChatLinks.deserialize(BinaryReader reader) {
@@ -143058,7 +143065,7 @@ class AccountResolveBusinessChatLink extends TlMethod {
   /// Account Resolve Business Chat Link constructor.
   const AccountResolveBusinessChatLink({
     required this.slug,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountResolveBusinessChatLink.deserialize(BinaryReader reader) {
@@ -143110,7 +143117,7 @@ class AccountUpdatePersonalChannel extends TlMethod {
   /// Account Update Personal Channel constructor.
   const AccountUpdatePersonalChannel({
     required this.channel,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountUpdatePersonalChannel.deserialize(BinaryReader reader) {
@@ -143163,7 +143170,7 @@ class StatsGetBroadcastRevenueStats extends TlMethod {
   const StatsGetBroadcastRevenueStats({
     required this.dark,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetBroadcastRevenueStats.deserialize(BinaryReader reader) {
@@ -143184,7 +143191,7 @@ class StatsGetBroadcastRevenueStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -143234,7 +143241,7 @@ class StatsGetBroadcastRevenueWithdrawalUrl extends TlMethod {
   const StatsGetBroadcastRevenueWithdrawalUrl({
     required this.peer,
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetBroadcastRevenueWithdrawalUrl.deserialize(
@@ -143296,7 +143303,7 @@ class StatsGetBroadcastRevenueTransactions extends TlMethod {
     required this.peer,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StatsGetBroadcastRevenueTransactions.deserialize(
@@ -143368,7 +143375,7 @@ class ChannelsRestrictSponsoredMessages extends TlMethod {
   const ChannelsRestrictSponsoredMessages({
     required this.channel,
     required this.restricted,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsRestrictSponsoredMessages.deserialize(BinaryReader reader) {
@@ -143427,7 +143434,7 @@ class AccountToggleSponsoredMessages extends TlMethod {
   /// Account Toggle Sponsored Messages constructor.
   const AccountToggleSponsoredMessages({
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountToggleSponsoredMessages.deserialize(BinaryReader reader) {
@@ -143480,7 +143487,7 @@ class StoriesTogglePinnedToTop extends TlMethod {
   const StoriesTogglePinnedToTop({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesTogglePinnedToTop.deserialize(BinaryReader reader) {
@@ -143537,7 +143544,7 @@ class StoriesTogglePinnedToTop extends TlMethod {
 /// ID: `06dd654c`.
 class AccountGetReactionsNotifySettings extends TlMethod {
   /// Account Get Reactions Notify Settings constructor.
-  const AccountGetReactionsNotifySettings() : super._();
+  const AccountGetReactionsNotifySettings() ;
 
   /// Deserialize.
   factory AccountGetReactionsNotifySettings.deserialize(BinaryReader reader) {
@@ -143577,7 +143584,7 @@ class AccountSetReactionsNotifySettings extends TlMethod {
   /// Account Set Reactions Notify Settings constructor.
   const AccountSetReactionsNotifySettings({
     required this.settings,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AccountSetReactionsNotifySettings.deserialize(BinaryReader reader) {
@@ -143631,7 +143638,7 @@ class AuthReportMissingCode extends TlMethod {
     required this.phoneNumber,
     required this.phoneCodeHash,
     required this.mnc,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory AuthReportMissingCode.deserialize(BinaryReader reader) {
@@ -143697,7 +143704,7 @@ class MessagesGetEmojiStickerGroups extends TlMethod {
   /// Messages Get Emoji Sticker Groups constructor.
   const MessagesGetEmojiStickerGroups({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetEmojiStickerGroups.deserialize(BinaryReader reader) {
@@ -143753,7 +143760,7 @@ class InvokeWithGooglePlayIntegrity extends TlMethod {
     required this.nonce,
     required this.token,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithGooglePlayIntegrity.deserialize(BinaryReader reader) {
@@ -143821,7 +143828,7 @@ class InvokeWithApnsSecret extends TlMethod {
     required this.nonce,
     required this.secret,
     required this.query,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory InvokeWithApnsSecret.deserialize(BinaryReader reader) {
@@ -143887,7 +143894,7 @@ class MessagesGetAvailableEffects extends TlMethod {
   /// Messages Get Available Effects constructor.
   const MessagesGetAvailableEffects({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetAvailableEffects.deserialize(BinaryReader reader) {
@@ -143945,7 +143952,7 @@ class ChannelsSearchPosts extends TlMethod {
     required this.offsetPeer,
     required this.offsetId,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ChannelsSearchPosts.deserialize(BinaryReader reader) {
@@ -144033,7 +144040,7 @@ class MessagesEditFactCheck extends TlMethod {
     required this.peer,
     required this.msgId,
     required this.text,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesEditFactCheck.deserialize(BinaryReader reader) {
@@ -144102,7 +144109,7 @@ class MessagesDeleteFactCheck extends TlMethod {
   const MessagesDeleteFactCheck({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesDeleteFactCheck.deserialize(BinaryReader reader) {
@@ -144164,7 +144171,7 @@ class MessagesGetFactCheck extends TlMethod {
   const MessagesGetFactCheck({
     required this.peer,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetFactCheck.deserialize(BinaryReader reader) {
@@ -144221,7 +144228,7 @@ class MessagesGetFactCheck extends TlMethod {
 /// ID: `c00ec7d3`.
 class PaymentsGetStarsTopupOptions extends TlMethod {
   /// Payments Get Stars Topup Options constructor.
-  const PaymentsGetStarsTopupOptions() : super._();
+  const PaymentsGetStarsTopupOptions() ;
 
   /// Deserialize.
   factory PaymentsGetStarsTopupOptions.deserialize(BinaryReader reader) {
@@ -144261,7 +144268,7 @@ class PaymentsGetStarsStatus extends TlMethod {
   /// Payments Get Stars Status constructor.
   const PaymentsGetStarsStatus({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsStatus.deserialize(BinaryReader reader) {
@@ -144319,7 +144326,7 @@ class PaymentsGetStarsTransactions extends TlMethod {
     required this.peer,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsTransactions.deserialize(BinaryReader reader) {
@@ -144351,7 +144358,7 @@ class PaymentsGetStarsTransactions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: inbound,
       b01: outbound,
       b02: ascending,
@@ -144432,7 +144439,7 @@ class PaymentsSendStarsForm extends TlMethod {
   const PaymentsSendStarsForm({
     required this.formId,
     required this.invoice,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsSendStarsForm.deserialize(BinaryReader reader) {
@@ -144494,7 +144501,7 @@ class PaymentsRefundStarsCharge extends TlMethod {
   const PaymentsRefundStarsCharge({
     required this.userId,
     required this.chargeId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsRefundStarsCharge.deserialize(BinaryReader reader) {
@@ -144557,7 +144564,7 @@ class StoriesSearchPosts extends TlMethod {
     this.peer,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory StoriesSearchPosts.deserialize(BinaryReader reader) {
@@ -144587,7 +144594,7 @@ class StoriesSearchPosts extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: hashtag != null,
       b01: area != null,
       b02: peer != null,
@@ -144666,7 +144673,7 @@ class PaymentsGetStarsRevenueStats extends TlMethod {
   const PaymentsGetStarsRevenueStats({
     required this.dark,
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsRevenueStats.deserialize(BinaryReader reader) {
@@ -144687,7 +144694,7 @@ class PaymentsGetStarsRevenueStats extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: dark,
     );
 
@@ -144738,7 +144745,7 @@ class PaymentsGetStarsRevenueWithdrawalUrl extends TlMethod {
     required this.peer,
     required this.stars,
     required this.password,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsRevenueWithdrawalUrl.deserialize(
@@ -144807,7 +144814,7 @@ class PaymentsGetStarsRevenueAdsAccountUrl extends TlMethod {
   /// Payments Get Stars Revenue Ads Account Url constructor.
   const PaymentsGetStarsRevenueAdsAccountUrl({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsRevenueAdsAccountUrl.deserialize(
@@ -144861,7 +144868,7 @@ class PaymentsGetStarsTransactionsByID extends TlMethod {
   const PaymentsGetStarsTransactionsByID({
     required this.peer,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsTransactionsByID.deserialize(BinaryReader reader) {
@@ -144920,7 +144927,7 @@ class PaymentsGetStarsGiftOptions extends TlMethod {
   /// Payments Get Stars Gift Options constructor.
   const PaymentsGetStarsGiftOptions({
     this.userId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsGiftOptions.deserialize(BinaryReader reader) {
@@ -144940,7 +144947,7 @@ class PaymentsGetStarsGiftOptions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: userId != null,
     );
 
@@ -144989,7 +144996,7 @@ class BotsGetPopularAppBots extends TlMethod {
   const BotsGetPopularAppBots({
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetPopularAppBots.deserialize(BinaryReader reader) {
@@ -145052,7 +145059,7 @@ class BotsAddPreviewMedia extends TlMethod {
     required this.bot,
     required this.langCode,
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsAddPreviewMedia.deserialize(BinaryReader reader) {
@@ -145121,7 +145128,7 @@ class BotsEditPreviewMedia extends TlMethod {
     required this.langCode,
     required this.media,
     required this.newMedia,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsEditPreviewMedia.deserialize(BinaryReader reader) {
@@ -145196,7 +145203,7 @@ class BotsDeletePreviewMedia extends TlMethod {
     required this.bot,
     required this.langCode,
     required this.media,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsDeletePreviewMedia.deserialize(BinaryReader reader) {
@@ -145264,7 +145271,7 @@ class BotsReorderPreviewMedias extends TlMethod {
     required this.bot,
     required this.langCode,
     required this.order,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsReorderPreviewMedias.deserialize(BinaryReader reader) {
@@ -145331,7 +145338,7 @@ class BotsGetPreviewInfo extends TlMethod {
   const BotsGetPreviewInfo({
     required this.bot,
     required this.langCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetPreviewInfo.deserialize(BinaryReader reader) {
@@ -145390,7 +145397,7 @@ class BotsGetPreviewMedias extends TlMethod {
   /// Bots Get Preview Medias constructor.
   const BotsGetPreviewMedias({
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsGetPreviewMedias.deserialize(BinaryReader reader) {
@@ -145448,7 +145455,7 @@ class MessagesRequestMainWebView extends TlMethod {
     this.startParam,
     this.themeParams,
     required this.platform,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesRequestMainWebView.deserialize(BinaryReader reader) {
@@ -145482,7 +145489,7 @@ class MessagesRequestMainWebView extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b07: compact,
       b08: fullscreen,
       b01: startParam != null,
@@ -145566,7 +145573,7 @@ class PaymentsGetStarsSubscriptions extends TlMethod {
     required this.missingBalance,
     required this.peer,
     required this.offset,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarsSubscriptions.deserialize(BinaryReader reader) {
@@ -145589,7 +145596,7 @@ class PaymentsGetStarsSubscriptions extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: missingBalance,
     );
 
@@ -145645,7 +145652,7 @@ class PaymentsChangeStarsSubscription extends TlMethod {
     required this.peer,
     required this.subscriptionId,
     this.canceled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsChangeStarsSubscription.deserialize(BinaryReader reader) {
@@ -145668,7 +145675,7 @@ class PaymentsChangeStarsSubscription extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (canceled != null),
     );
 
@@ -145727,7 +145734,7 @@ class PaymentsFulfillStarsSubscription extends TlMethod {
   const PaymentsFulfillStarsSubscription({
     required this.peer,
     required this.subscriptionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsFulfillStarsSubscription.deserialize(BinaryReader reader) {
@@ -145790,7 +145797,7 @@ class MessagesSendPaidReaction extends TlMethod {
     required this.count,
     required this.randomId,
     this.private,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSendPaidReaction.deserialize(BinaryReader reader) {
@@ -145817,7 +145824,7 @@ class MessagesSendPaidReaction extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: (private != null),
     );
 
@@ -145893,7 +145900,7 @@ class MessagesTogglePaidReactionPrivacy extends TlMethod {
     required this.peer,
     required this.msgId,
     required this.private,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesTogglePaidReactionPrivacy.deserialize(BinaryReader reader) {
@@ -145959,7 +145966,7 @@ class MessagesTogglePaidReactionPrivacy extends TlMethod {
 /// ID: `bd1efd3e`.
 class PaymentsGetStarsGiveawayOptions extends TlMethod {
   /// Payments Get Stars Giveaway Options constructor.
-  const PaymentsGetStarsGiveawayOptions() : super._();
+  const PaymentsGetStarsGiveawayOptions() ;
 
   /// Deserialize.
   factory PaymentsGetStarsGiveawayOptions.deserialize(BinaryReader reader) {
@@ -145997,7 +146004,7 @@ class PaymentsGetStarsGiveawayOptions extends TlMethod {
 /// ID: `472455aa`.
 class MessagesGetPaidReactionPrivacy extends TlMethod {
   /// Messages Get Paid Reaction Privacy constructor.
-  const MessagesGetPaidReactionPrivacy() : super._();
+  const MessagesGetPaidReactionPrivacy() ;
 
   /// Deserialize.
   factory MessagesGetPaidReactionPrivacy.deserialize(BinaryReader reader) {
@@ -146037,7 +146044,7 @@ class PaymentsGetStarGifts extends TlMethod {
   /// Payments Get Star Gifts constructor.
   const PaymentsGetStarGifts({
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetStarGifts.deserialize(BinaryReader reader) {
@@ -146093,7 +146100,7 @@ class PaymentsGetUserStarGifts extends TlMethod {
     required this.userId,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetUserStarGifts.deserialize(BinaryReader reader) {
@@ -146163,7 +146170,7 @@ class PaymentsSaveStarGift extends TlMethod {
     required this.unsave,
     required this.userId,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsSaveStarGift.deserialize(BinaryReader reader) {
@@ -146186,7 +146193,7 @@ class PaymentsSaveStarGift extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: unsave,
     );
 
@@ -146243,7 +146250,7 @@ class PaymentsConvertStarGift extends TlMethod {
   const PaymentsConvertStarGift({
     required this.userId,
     required this.msgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsConvertStarGift.deserialize(BinaryReader reader) {
@@ -146305,7 +146312,7 @@ class MessagesViewSponsoredMessage extends TlMethod {
   const MessagesViewSponsoredMessage({
     required this.peer,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesViewSponsoredMessage.deserialize(BinaryReader reader) {
@@ -146367,7 +146374,7 @@ class MessagesClickSponsoredMessage extends TlMethod {
     required this.fullscreen,
     required this.peer,
     required this.randomId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesClickSponsoredMessage.deserialize(BinaryReader reader) {
@@ -146392,7 +146399,7 @@ class MessagesClickSponsoredMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: media,
       b01: fullscreen,
     );
@@ -146453,7 +146460,7 @@ class MessagesReportSponsoredMessage extends TlMethod {
     required this.peer,
     required this.randomId,
     required this.option,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesReportSponsoredMessage.deserialize(BinaryReader reader) {
@@ -146519,7 +146526,7 @@ class MessagesGetSponsoredMessages extends TlMethod {
   /// Messages Get Sponsored Messages constructor.
   const MessagesGetSponsoredMessages({
     required this.peer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetSponsoredMessages.deserialize(BinaryReader reader) {
@@ -146573,7 +146580,7 @@ class MessagesSavePreparedInlineMessage extends TlMethod {
     required this.result,
     required this.userId,
     this.peerTypes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSavePreparedInlineMessage.deserialize(BinaryReader reader) {
@@ -146599,7 +146606,7 @@ class MessagesSavePreparedInlineMessage extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: peerTypes != null,
     );
 
@@ -146658,7 +146665,7 @@ class MessagesGetPreparedInlineMessage extends TlMethod {
   const MessagesGetPreparedInlineMessage({
     required this.bot,
     required this.id,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesGetPreparedInlineMessage.deserialize(BinaryReader reader) {
@@ -146718,7 +146725,7 @@ class BotsUpdateUserEmojiStatus extends TlMethod {
   const BotsUpdateUserEmojiStatus({
     required this.userId,
     required this.emojiStatus,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsUpdateUserEmojiStatus.deserialize(BinaryReader reader) {
@@ -146778,7 +146785,7 @@ class BotsToggleUserEmojiStatusPermission extends TlMethod {
   const BotsToggleUserEmojiStatusPermission({
     required this.bot,
     required this.enabled,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsToggleUserEmojiStatusPermission.deserialize(BinaryReader reader) {
@@ -146839,7 +146846,7 @@ class BotsCheckDownloadFileParams extends TlMethod {
     required this.bot,
     required this.fileName,
     required this.url,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsCheckDownloadFileParams.deserialize(BinaryReader reader) {
@@ -146907,7 +146914,7 @@ class PaymentsBotCancelStarsSubscription extends TlMethod {
     required this.restore,
     required this.userId,
     required this.chargeId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsBotCancelStarsSubscription.deserialize(BinaryReader reader) {
@@ -146930,7 +146937,7 @@ class PaymentsBotCancelStarsSubscription extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: restore,
     );
 
@@ -146982,7 +146989,7 @@ class PaymentsBotCancelStarsSubscription extends TlMethod {
 /// ID: `b0711d83`.
 class BotsGetAdminedBots extends TlMethod {
   /// Bots Get Admined Bots constructor.
-  const BotsGetAdminedBots() : super._();
+  const BotsGetAdminedBots() ;
 
   /// Deserialize.
   factory BotsGetAdminedBots.deserialize(BinaryReader reader) {
@@ -147024,7 +147031,7 @@ class BotsUpdateStarRefProgram extends TlMethod {
     required this.bot,
     required this.commissionPermille,
     this.durationMonths,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BotsUpdateStarRefProgram.deserialize(BinaryReader reader) {
@@ -147048,7 +147055,7 @@ class BotsUpdateStarRefProgram extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: durationMonths != null,
     );
 
@@ -147111,7 +147118,7 @@ class PaymentsGetConnectedStarRefBots extends TlMethod {
     this.offsetDate,
     this.offsetLink,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetConnectedStarRefBots.deserialize(BinaryReader reader) {
@@ -147138,7 +147145,7 @@ class PaymentsGetConnectedStarRefBots extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b02: offsetDate != null || offsetLink != null,
     );
 
@@ -147207,7 +147214,7 @@ class PaymentsGetConnectedStarRefBot extends TlMethod {
   const PaymentsGetConnectedStarRefBot({
     required this.peer,
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetConnectedStarRefBot.deserialize(BinaryReader reader) {
@@ -147270,7 +147277,7 @@ class PaymentsGetSuggestedStarRefBots extends TlMethod {
     required this.peer,
     required this.offset,
     required this.limit,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsGetSuggestedStarRefBots.deserialize(BinaryReader reader) {
@@ -147297,7 +147304,7 @@ class PaymentsGetSuggestedStarRefBots extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: orderByRevenue,
       b01: orderByDate,
     );
@@ -147364,7 +147371,7 @@ class PaymentsConnectStarRefBot extends TlMethod {
   const PaymentsConnectStarRefBot({
     required this.peer,
     required this.bot,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsConnectStarRefBot.deserialize(BinaryReader reader) {
@@ -147425,7 +147432,7 @@ class PaymentsEditConnectedStarRefBot extends TlMethod {
     required this.revoked,
     required this.peer,
     required this.link,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PaymentsEditConnectedStarRefBot.deserialize(BinaryReader reader) {
@@ -147448,7 +147455,7 @@ class PaymentsEditConnectedStarRefBot extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: revoked,
     );
 
@@ -147508,7 +147515,7 @@ class MessagesSearchStickers extends TlMethod {
     required this.offset,
     required this.limit,
     required this.hash,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MessagesSearchStickers.deserialize(BinaryReader reader) {
@@ -147539,7 +147546,7 @@ class MessagesSearchStickers extends TlMethod {
 
   /// Flags.
   int get flags {
-    final v = _flag(
+    final v = toFlag(
       b00: emojis,
     );
 

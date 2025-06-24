@@ -1,11 +1,17 @@
-part of '../../t.dart';
 
-TlObject _readObject(BinaryReader reader) {
+
+import 'package:t/src/binary_reader.dart';
+import 'package:t/src/core.dart';
+import 'package:t/src/g/end_to_end.dart';
+import 'package:t/src/g/mtproto.dart';
+import 'package:t/src/g/schema.dart';
+
+TlObject readTlObject(BinaryReader reader) {
   final id = reader.readInt32();
   // From mtproto.tl
 
-  if (id == _vectorCtor) {
-    return reader._readVectorObjectNoCtor();
+  if (id == vectorCtor) {
+    return reader.readVectorObjectNoCtor();
   }
 
   if (id == 0x05162463) {
@@ -210,8 +216,8 @@ TlObject _readObject(BinaryReader reader) {
     return True.deserialize(reader);
   }
 
-  if (id == _vectorCtor) {
-    return reader._readVectorObjectNoCtor();
+  if (id == vectorCtor) {
+    return reader.readVectorObjectNoCtor();
   }
 
   if (id == 0xc4b9f9bb) {

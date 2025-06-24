@@ -1,4 +1,10 @@
-part of '../../t.dart';
+
+import 'dart:typed_data';
+
+import 'package:t/src/binary_reader.dart';
+import 'package:t/src/binary_writer.dart';
+import 'package:t/src/core.dart';
+import 'package:t/src/g/base.dart';
 
 /// Res P Q.
 ///
@@ -10,7 +16,7 @@ class ResPQ extends ResPQBase {
     required this.serverNonce,
     required this.pq,
     required this.serverPublicKeyFingerprints,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ResPQ.deserialize(BinaryReader reader) {
@@ -88,7 +94,7 @@ class PQInnerDataDc extends PQInnerDataBase {
     required this.serverNonce,
     required this.newNonce,
     required this.dc,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PQInnerDataDc.deserialize(BinaryReader reader) {
@@ -190,7 +196,7 @@ class PQInnerDataTempDc extends PQInnerDataBase {
     required this.newNonce,
     required this.dc,
     required this.expiresIn,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PQInnerDataTempDc.deserialize(BinaryReader reader) {
@@ -296,7 +302,7 @@ class ServerDHParamsOk extends ServerDHParamsBase {
     required this.nonce,
     required this.serverNonce,
     required this.encryptedAnswer,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ServerDHParamsOk.deserialize(BinaryReader reader) {
@@ -366,7 +372,7 @@ class ServerDHInnerData extends ServerDHInnerDataBase {
     required this.dhPrime,
     required this.gA,
     required this.serverTime,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ServerDHInnerData.deserialize(BinaryReader reader) {
@@ -457,7 +463,7 @@ class ClientDHInnerData extends ClientDHInnerDataBase {
     required this.serverNonce,
     required this.retryId,
     required this.gB,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ClientDHInnerData.deserialize(BinaryReader reader) {
@@ -533,7 +539,7 @@ class DhGenOk extends SetClientDHParamsAnswerBase {
     required this.nonce,
     required this.serverNonce,
     required this.newNonceHash1,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DhGenOk.deserialize(BinaryReader reader) {
@@ -600,7 +606,7 @@ class DhGenRetry extends SetClientDHParamsAnswerBase {
     required this.nonce,
     required this.serverNonce,
     required this.newNonceHash2,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DhGenRetry.deserialize(BinaryReader reader) {
@@ -667,7 +673,7 @@ class DhGenFail extends SetClientDHParamsAnswerBase {
     required this.nonce,
     required this.serverNonce,
     required this.newNonceHash3,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DhGenFail.deserialize(BinaryReader reader) {
@@ -736,7 +742,7 @@ class BindAuthKeyInner extends BindAuthKeyInnerBase {
     required this.permAuthKeyId,
     required this.tempSessionId,
     required this.expiresAt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BindAuthKeyInner.deserialize(BinaryReader reader) {
@@ -824,7 +830,7 @@ class RpcResult extends RpcResultBase {
   const RpcResult({
     required this.reqMsgId,
     required this.result,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RpcResult.deserialize(BinaryReader reader) {
@@ -885,7 +891,7 @@ class RpcError extends RpcErrorBase {
   const RpcError({
     required this.errorCode,
     required this.errorMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RpcError.deserialize(BinaryReader reader) {
@@ -943,7 +949,7 @@ class RpcError extends RpcErrorBase {
 /// ID: `5e2ad36e`.
 class RpcAnswerUnknown extends RpcDropAnswerBase {
   /// Rpc Answer Unknown constructor.
-  const RpcAnswerUnknown() : super._();
+  const RpcAnswerUnknown() ;
 
   /// Deserialize.
   factory RpcAnswerUnknown.deserialize(BinaryReader reader) {
@@ -980,7 +986,7 @@ class RpcAnswerUnknown extends RpcDropAnswerBase {
 /// ID: `cd78e586`.
 class RpcAnswerDroppedRunning extends RpcDropAnswerBase {
   /// Rpc Answer Dropped Running constructor.
-  const RpcAnswerDroppedRunning() : super._();
+  const RpcAnswerDroppedRunning() ;
 
   /// Deserialize.
   factory RpcAnswerDroppedRunning.deserialize(BinaryReader reader) {
@@ -1021,7 +1027,7 @@ class RpcAnswerDropped extends RpcDropAnswerBase {
     required this.msgId,
     required this.seqNo,
     required this.bytes,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RpcAnswerDropped.deserialize(BinaryReader reader) {
@@ -1094,7 +1100,7 @@ class FutureSalt extends FutureSaltBase {
     required this.validSince,
     required this.validUntil,
     required this.salt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FutureSalt.deserialize(BinaryReader reader) {
@@ -1167,7 +1173,7 @@ class FutureSalts extends FutureSaltsBase {
     required this.reqMsgId,
     required this.now,
     required this.salts,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory FutureSalts.deserialize(BinaryReader reader) {
@@ -1237,7 +1243,7 @@ class Pong extends PongBase {
   const Pong({
     required this.msgId,
     required this.pingId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Pong.deserialize(BinaryReader reader) {
@@ -1299,7 +1305,7 @@ class DestroySessionOk extends DestroySessionResBase {
   /// Destroy Session Ok constructor.
   const DestroySessionOk({
     required this.sessionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DestroySessionOk.deserialize(BinaryReader reader) {
@@ -1352,7 +1358,7 @@ class DestroySessionNone extends DestroySessionResBase {
   /// Destroy Session None constructor.
   const DestroySessionNone({
     required this.sessionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DestroySessionNone.deserialize(BinaryReader reader) {
@@ -1407,7 +1413,7 @@ class NewSessionCreated extends NewSessionBase {
     required this.firstMsgId,
     required this.uniqueId,
     required this.serverSalt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory NewSessionCreated.deserialize(BinaryReader reader) {
@@ -1478,7 +1484,7 @@ class MsgContainer extends MessageContainerBase {
   /// Msg Container constructor.
   const MsgContainer({
     required this.messages,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgContainer.deserialize(BinaryReader reader) {
@@ -1533,7 +1539,7 @@ class Msg extends TlConstructor {
     required this.seqno,
     required this.bytes,
     required this.body,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Msg.deserialize(BinaryReader reader) {
@@ -1611,7 +1617,7 @@ class MsgCopy extends MessageCopyBase {
   /// Msg Copy constructor.
   const MsgCopy({
     required this.origMessage,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgCopy.deserialize(BinaryReader reader) {
@@ -1662,7 +1668,7 @@ class GzipPacked extends TlObject {
   /// Gzip Packed constructor.
   const GzipPacked({
     required this.packedData,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GzipPacked.deserialize(BinaryReader reader) {
@@ -1713,7 +1719,7 @@ class MsgsAck extends MsgsAckBase {
   /// Msgs Ack constructor.
   const MsgsAck({
     required this.msgIds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgsAck.deserialize(BinaryReader reader) {
@@ -1766,7 +1772,7 @@ class BadMsgNotification extends BadMsgNotificationBase {
     required this.badMsgId,
     required this.badMsgSeqno,
     required this.errorCode,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BadMsgNotification.deserialize(BinaryReader reader) {
@@ -1840,7 +1846,7 @@ class BadServerSalt extends BadMsgNotificationBase {
     required this.badMsgSeqno,
     required this.errorCode,
     required this.newServerSalt,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory BadServerSalt.deserialize(BinaryReader reader) {
@@ -1920,7 +1926,7 @@ class MsgResendReq extends MsgResendReqBase {
   /// Msg Resend Req constructor.
   const MsgResendReq({
     required this.msgIds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgResendReq.deserialize(BinaryReader reader) {
@@ -1971,7 +1977,7 @@ class MsgsStateReq extends MsgsStateReqBase {
   /// Msgs State Req constructor.
   const MsgsStateReq({
     required this.msgIds,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgsStateReq.deserialize(BinaryReader reader) {
@@ -2023,7 +2029,7 @@ class MsgsStateInfo extends MsgsStateInfoBase {
   const MsgsStateInfo({
     required this.reqMsgId,
     required this.info,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgsStateInfo.deserialize(BinaryReader reader) {
@@ -2084,7 +2090,7 @@ class MsgsAllInfo extends MsgsAllInfoBase {
   const MsgsAllInfo({
     required this.msgIds,
     required this.info,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgsAllInfo.deserialize(BinaryReader reader) {
@@ -2145,7 +2151,7 @@ class MsgDetailedInfo extends MsgDetailedInfoBase {
     required this.answerMsgId,
     required this.bytes,
     required this.status,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgDetailedInfo.deserialize(BinaryReader reader) {
@@ -2227,7 +2233,7 @@ class MsgNewDetailedInfo extends MsgDetailedInfoBase {
     required this.answerMsgId,
     required this.bytes,
     required this.status,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory MsgNewDetailedInfo.deserialize(BinaryReader reader) {
@@ -2296,7 +2302,7 @@ class MsgNewDetailedInfo extends MsgDetailedInfoBase {
 /// ID: `f660e1d4`.
 class DestroyAuthKeyOk extends DestroyAuthKeyResBase {
   /// Destroy Auth Key Ok constructor.
-  const DestroyAuthKeyOk() : super._();
+  const DestroyAuthKeyOk() ;
 
   /// Deserialize.
   factory DestroyAuthKeyOk.deserialize(BinaryReader reader) {
@@ -2333,7 +2339,7 @@ class DestroyAuthKeyOk extends DestroyAuthKeyResBase {
 /// ID: `0a9f2259`.
 class DestroyAuthKeyNone extends DestroyAuthKeyResBase {
   /// Destroy Auth Key None constructor.
-  const DestroyAuthKeyNone() : super._();
+  const DestroyAuthKeyNone() ;
 
   /// Deserialize.
   factory DestroyAuthKeyNone.deserialize(BinaryReader reader) {
@@ -2370,7 +2376,7 @@ class DestroyAuthKeyNone extends DestroyAuthKeyResBase {
 /// ID: `ea109b13`.
 class DestroyAuthKeyFail extends DestroyAuthKeyResBase {
   /// Destroy Auth Key Fail constructor.
-  const DestroyAuthKeyFail() : super._();
+  const DestroyAuthKeyFail() ;
 
   /// Deserialize.
   factory DestroyAuthKeyFail.deserialize(BinaryReader reader) {
@@ -2410,7 +2416,7 @@ class ReqPqMulti extends TlMethod {
   /// Req Pq Multi constructor.
   const ReqPqMulti({
     required this.nonce,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReqPqMulti.deserialize(BinaryReader reader) {
@@ -2467,7 +2473,7 @@ class ReqDHParams extends TlMethod {
     required this.q,
     required this.publicKeyFingerprint,
     required this.encryptedData,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory ReqDHParams.deserialize(BinaryReader reader) {
@@ -2558,7 +2564,7 @@ class SetClientDHParams extends TlMethod {
     required this.nonce,
     required this.serverNonce,
     required this.encryptedData,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory SetClientDHParams.deserialize(BinaryReader reader) {
@@ -2624,7 +2630,7 @@ class RpcDropAnswer extends TlMethod {
   /// Rpc Drop Answer constructor.
   const RpcDropAnswer({
     required this.reqMsgId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory RpcDropAnswer.deserialize(BinaryReader reader) {
@@ -2678,7 +2684,7 @@ class GetFutureSalts extends TlMethod {
   /// Get Future Salts constructor.
   const GetFutureSalts({
     required this.num,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory GetFutureSalts.deserialize(BinaryReader reader) {
@@ -2732,7 +2738,7 @@ class Ping extends TlMethod {
   /// Ping constructor.
   const Ping({
     required this.pingId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory Ping.deserialize(BinaryReader reader) {
@@ -2787,7 +2793,7 @@ class PingDelayDisconnect extends TlMethod {
   const PingDelayDisconnect({
     required this.pingId,
     required this.disconnectDelay,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory PingDelayDisconnect.deserialize(BinaryReader reader) {
@@ -2850,7 +2856,7 @@ class DestroySession extends TlMethod {
   /// Destroy Session constructor.
   const DestroySession({
     required this.sessionId,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory DestroySession.deserialize(BinaryReader reader) {
@@ -2906,7 +2912,7 @@ class HttpWait extends TlMethod {
     required this.maxDelay,
     required this.waitAfter,
     required this.maxWait,
-  }) : super._();
+  }) ;
 
   /// Deserialize.
   factory HttpWait.deserialize(BinaryReader reader) {
@@ -2976,7 +2982,7 @@ class HttpWait extends TlMethod {
 /// ID: `d1435160`.
 class DestroyAuthKey extends TlMethod {
   /// Destroy Auth Key constructor.
-  const DestroyAuthKey() : super._();
+  const DestroyAuthKey() ;
 
   /// Deserialize.
   factory DestroyAuthKey.deserialize(BinaryReader reader) {

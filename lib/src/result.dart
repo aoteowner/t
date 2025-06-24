@@ -1,4 +1,6 @@
-part of '../t.dart';
+
+import 'package:t/src/core.dart';
+import 'package:t/src/g/mtproto.dart';
 
 /// RPC Result.
 class Result<T extends TlObject> {
@@ -16,7 +18,7 @@ class Result<T extends TlObject> {
   /// Error.
   final RpcError? error;
 
-  Result<S> _to<S extends TlObject>() {
+  Result<S> to<S extends TlObject>() {
     if (result == null) {
       return Result<S>._(null, error);
     } else {
@@ -24,14 +26,14 @@ class Result<T extends TlObject> {
     }
   }
 
-  Result<Vector<S>> _toVector<S>() {
+  Result<Vector<S>> toVector<S>() {
     final r = result;
 
     if (r == null) {
       return Result<Vector<S>>._(null, error);
     } else if (r is Vector) {
       final s = r.items.map((e) => e as S);
-      final v = Vector._(s.toList());
+      final v = Vector(s.toList());
       return Result<Vector<S>>._(v, null);
     }
 

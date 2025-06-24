@@ -1,9 +1,9 @@
-part of '../t.dart';
+part of 'core.dart';
 
 /// Telegram API Layer.
 const int layer = 195;
 
-const _vectorCtor = 0x1CB5C415;
+const vectorCtor = 0x1CB5C415;
 // const _nullCtor = 0x56730BCC;
 // const _rpcResultCtor = 0xF35C6D01;
 // const _rpcErrorCtor = 0x2144CA19;
