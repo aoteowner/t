@@ -1,12 +1,15 @@
-import 'package:characters/characters.dart';
 import 'package:file/file.dart';
 
 import 'type.dart';
 
+final _vecReg = RegExp('[Vv]ector<(.*)>');
+
 class TgContext {
   TgContext(this.name);
+  final _all = <String, TgType>{};
   final _parents = <String, List<TgType>>{};
   final _children = <String, TgContext>{};
+  final _fns = <TgFunction>[];
   final String name;
 
   Map<String, TgContext> get children => _children;
@@ -19,31 +22,93 @@ class TgContext {
     }
 
     context._parents.putIfAbsent(type.parent, () => []).add(type);
+    context._all[type.name] = type;
   }
 
-  void write(Directory dir) {
+  void addFn(String? filePrefix, TgFunction fn) {
+    var context = this;
+    if (filePrefix != null) {
+      context = _children.putIfAbsent(filePrefix, () => TgContext(filePrefix));
+    }
+
+    context._fns.add(fn);
+  }
+
+  TgType? _getType(String? prefix, String name) {
+    var context = this;
+    if (_children[prefix] case var v?) {
+      context = v;
+    }
+
+    return context._all[name];
+  }
+
+  BaseType? getType(String name) {
+    final match = _vecReg.allMatches(name).firstOrNull;
+    var isList = false;
+    if (match != null) {
+      isList = true;
+      name = match[1]!;
+    }
+    final list = name.split('.');
+    String? prefix;
+    if (list.length == 2) {
+      prefix = list[0];
+      name = list[1];
+    }
+    name = name.dartClassName;
+
+    final type = _getType(prefix, name);
+    final t = type ?? Constructor(name: name, prefix: prefix);
+    if (isList) {
+      return VectorObjectType(t);
+    }
+    return t;
+  }
+
+  void write(Directory dir, {int level = 0}) {
     final nextDir = dir.childDirectory(name);
+    final temp = StringBuffer();
+    final list = <String>[];
+
     for (var entry in _parents.entries) {
-      _writeList(nextDir, entry.key, entry.value);
+      _writeList(nextDir, entry.key, entry.value, temp, level, list);
+    }
+
+    if (_fns.isNotEmpty || temp.isNotEmpty) {
+      final buffer = StringBuffer();
+      buffer.writeln("import 'package:t/base.dart';");
+      for (var fn in _fns) {
+        fn.getAllImports(level, name, list);
+        temp.writeln(fn.code);
+      }
+
+      buffer.writeAll(list.toSet());
+      buffer.write(temp);
+
+      final file = nextDir.childFile('$name.dart');
+      file.createSync(recursive: true);
+      file.writeAsStringSync(buffer.toString());
     }
 
     for (var child in _children.values) {
-      child.write(nextDir);
+      child.write(nextDir, level: level + 1);
     }
   }
 
-  void _writeList(Directory dir, String base, List<TgType> list) {
+  void _writeList(Directory dir, String base, List<TgType> list,
+      StringBuffer fBuffer, int level, List<String> importsE) {
     base = base.split('.').last;
 
-    final file = dir.childFile('${base.dartFileName}.dart');
     final buffer = StringBuffer();
-    buffer.writeln("import 'dart:typed_data';");
-    buffer.writeln("import 'package:t/t.dart';");
+
     var parent = 'TlConstructor';
 
-    if (list.length != 1) {
-      final sameName = list.any((e) => e.className == base);
-      final name = sameName ? '${base}Base' : base;
+    final imports = <String>[];
+    final baseClassName = base.dartClassName;
+    if (list.length > 1 || (list.isNotEmpty && list[0].name != baseClassName)) {
+      final sameName = list.any((e) => e.name == base);
+      final name = sameName ? '${baseClassName}Base' : baseClassName;
       buffer.write('''
 sealed class $name extends $parent {
 const $name();
@@ -54,8 +119,9 @@ const $name();
     }
 
     for (var t in list) {
-      buffer.write('''class ${t.className} extends $parent {
-const ${t.className}(${t.fields.argsCode});
+      t.getAllImports(level, name, imports);
+      buffer.write('''class ${t.name} extends $parent {
+const ${t.name}(${t.fields.argsCode});
 ${t.fields.defineCode}
   @override
   void serialize(List<int> buffer) {
@@ -70,72 +136,22 @@ ${t.fields.defineCode}
 }
 ''');
     }
+
+    final n = base.dartFileName;
+
+    if (n == name.dartFileName) {
+      importsE.addAll(imports);
+      fBuffer.write(buffer);
+      return;
+    }
+
+    final b = StringBuffer();
+    b.writeln("import 'package:t/base.dart';");
+    b.writeAll(imports.toSet());
+    b.write(buffer);
+
+    final file = dir.childFile('$n.dart');
     file.createSync(recursive: true);
-    file.writeAsStringSync(buffer.toString());
-  }
-}
-
-extension on List<Field> {
-  String get argsCode {
-    final buffer = StringBuffer();
-    for (var field in this) {
-      buffer.write(field.argCode());
-      buffer.write(',');
-    }
-    if (buffer.isNotEmpty) {
-      return '{$buffer}';
-    }
-
-    return buffer.toString();
-  }
-
-  String get defineCode {
-    final buffer = StringBuffer();
-    for (var field in this) {
-      buffer.write(field.defineCode());
-      buffer.writeln(';');
-    }
-
-    return buffer.toString();
-  }
-
-  String get jsonCode {
-    final buffer = StringBuffer();
-    for (var field in this) {
-      buffer.write('"');
-      buffer.write(field.name);
-      buffer.write('": ');
-      buffer.write(field.toJsonCode());
-      buffer.writeln(',');
-    }
-
-    return buffer.toString();
-  }
-}
-
-final _upperReg = RegExp('[A-Z]');
-
-extension on String {
-  String get dartFileName {
-    final buffer = StringBuffer();
-    final pc = characters.iterator;
-
-    while (pc.moveNext()) {
-      final current = pc.current;
-      if (buffer.isEmpty) {
-        buffer.write(current.toLowerCase());
-        continue;
-      }
-
-      if (_upperReg.hasMatch(current)) {
-        buffer.write('_');
-        buffer.write(current.toLowerCase());
-        continue;
-      }
-
-      buffer.write(current);
-    }
-
-    return buffer.toString();
+    file.writeAsStringSync(b.toString());
   }
 }

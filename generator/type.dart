@@ -1,5 +1,7 @@
 import 'package:characters/characters.dart';
 
+import 'context.dart';
+
 abstract class BaseType {
   String readerCode(String name);
   String writerCode(String name);
@@ -7,18 +9,26 @@ abstract class BaseType {
 
   String get className;
 
+  String importPath(int level, String prefix) => '';
+
   String defineCode(String name) {
     return 'final $className $name';
   }
 }
 
 final class LabelType extends BaseType {
-  LabelType._(this.label, this.className) : writeLabel = label;
-  LabelType._write(this.label, this.writeLabel, this.className);
+  LabelType._(this.label, this.className, {this.imports = ''})
+      : writeLabel = label;
+  LabelType._write(this.label, this.writeLabel, this.className) : imports = '';
   final String label;
   final String writeLabel;
   @override
   final String className;
+  final String imports;
+  @override
+  String importPath(int level, String prefix) {
+    return imports;
+  }
 
   @override
   String readerCode(String name) => 'reader.read$label()';
@@ -36,35 +46,112 @@ final int128Type = LabelType._('Int128', 'Int128');
 final int256Type = LabelType._('Int256', 'Int256');
 final stringType = LabelType._('String', 'String');
 final float64Type = LabelType._write('Float64', 'Double', 'double');
-final boolType = LabelType._('Bool', 'bool');
+final boolType = LabelType._('Bool', 'Boolean');
 final dateTimeType = LabelType._('DateTime', 'DateTime');
-final bytesType = LabelType._('Bytes', 'Uint8List');
-final vectorInt32Type = LabelType._('VectorInt32', 'List<int>');
-final vectorInt64Type = LabelType._('VectorInt64', 'List<int>');
-final vectorStringType = LabelType._('VectorString', 'List<String>');
-final vectorBytesType = LabelType._('VectorBytes', 'List<Uint8List>');
+final bytesType = LabelType._(
+  'Bytes',
+  'Uint8List',
+  imports: "import 'dart:typed_data';",
+);
+final vectorInt32Type = LabelType._('VectorInt32', 'Vector<int>');
+final vectorInt64Type = LabelType._('VectorInt64', 'Vector<int>');
+final vectorStringType = LabelType._('VectorString', 'Vector<String>');
+final vectorBytesType = LabelType._(
+  'VectorBytes',
+  'Vector<Uint8List>',
+  imports: "import 'dart:typed_data';",
+);
+final tlObjectType = LabelType._('Object', 'TlObject');
+final tlObjectdType = LabelType._('Object', 'TlMethod');
 
+final _vecReg = RegExp('[Vv]ector<(.*)>');
 BaseType? getBaseTypeFrom(String type) {
-  return switch (type) {
+  final t = switch (type) {
     'Int' || 'int' || 'Long' || 'long' => int32Type,
     'Double' || 'double' => float64Type,
     'String' || 'string' => stringType,
     'Bytes' || 'bytes' => bytesType,
     'int256' || 'Int256' => int256Type,
+    'int128' || 'Int128' => int128Type,
     'true' || 'True ' || 'boolFalse' || 'boolTrue' || 'Bool' => boolType,
+    "X" => tlObjectType,
+    "!X" => tlObjectdType,
     _ => null,
   };
+  if (t != null) return t;
+  final match = _vecReg.allMatches(type).firstOrNull;
+  if (match != null) {
+    final name = getBaseTypeFrom(match[1]!);
+    if (name == int32Type) {
+      return vectorInt32Type;
+    } else if (name == int64Type) {
+      return vectorInt64Type;
+    } else if (name == stringType) {
+      return vectorStringType;
+    } else if (name == bytesType) {
+      return vectorBytesType;
+    }
+  }
+
+  return null;
+}
+
+class Constructor extends BaseType {
+  Constructor({required this.name, this.prefix});
+  final String name;
+  final String? prefix;
+  @override
+  String get className {
+    final prefix = this.prefix ?? '\$e';
+    return '$prefix.$name';
+  }
+
+  @override
+  String importPath(int level, String prefix) {
+    var pre = '';
+    final filePrefix = this.prefix;
+    if (filePrefix == prefix) {
+      level -= 1;
+    } else if (filePrefix != null) {
+      pre = '$filePrefix/';
+    }
+
+    var asPre = 'as ${filePrefix ?? '\$e'}';
+
+    if (level < 0) {
+      level = 0;
+    }
+
+    final p = '../' * level;
+    return 'import "$p$pre${name.dartFileName}.dart"$asPre;';
+  }
+
+  @override
+  String readerCode(String name) => 'reader.readObject()';
+
+  @override
+  String toJsonCode(String name) => name;
+
+  @override
+  String writerCode(String name) => 'buffer.writeObject($name)';
 }
 
 class VectorObjectType extends BaseType {
   VectorObjectType(this.childType);
 
-  final TgType childType;
+  final BaseType childType;
+
   @override
-  String get className => 'List<${childType.className}>';
+  String get className => 'Vector<${childType.className}>';
+
+  @override
+  String importPath(int level, String prefix) {
+    return childType.importPath(level, prefix);
+  }
+
   @override
   String readerCode(String name) {
-    return 'reader.readVectorObject<${childType._className}>()';
+    return 'reader.readVectorObject<${childType.className}>()';
   }
 
   @override
@@ -80,22 +167,54 @@ class VectorObjectType extends BaseType {
 
 class TgType extends BaseType {
   TgType({
-    required this.baseName,
+    required String baseName,
     this.hash,
     required this.fields,
     required this.parent,
-  });
+    this.filePrefix,
+  }) : baseName = baseName.dartClassName;
 
   final String parent;
   final String baseName;
   final String? hash;
   final List<Field> fields;
+  final String? filePrefix;
+
+  @override
+  String importPath(int level, String prefix) {
+    var pre = '';
+    if (filePrefix == prefix) {
+      level -= 1;
+    } else if (filePrefix != null) {
+      pre = '$filePrefix/';
+    }
+
+    var asPre = 'as ${filePrefix ?? '\$e'}';
+
+    if (level < 0) {
+      level = 0;
+    }
+
+    final p = '../' * level;
+    return 'import "$p$pre${baseName.dartFileName}.dart"$asPre;';
+  }
+
+  void getAllImports(int level, String prefix, List<String> buffer) {
+    for (var field in fields) {
+      field.getAllImports(level, prefix, buffer);
+    }
+  }
 
   late final _className =
       baseName.replaceFirst(baseName[0], baseName[0].toUpperCase());
 
+  String get name => _className;
+
   @override
-  String get className => _className;
+  String get className {
+    final prefix = filePrefix ?? '\$e';
+    return '$prefix.$_className';
+  }
 
   @override
   String readerCode(String name) {
@@ -113,7 +232,7 @@ class TgType extends BaseType {
   }
 }
 
-const _keys = ['default', 'final'];
+const _keys = ['default', 'final', 'int', 'bool', 'double', 'string'];
 
 String _fieldName(String name) {
   if (_keys.contains(name)) {
@@ -124,28 +243,63 @@ String _fieldName(String name) {
 }
 
 class Field {
-  Field({required String name, required this.type})
+  Field(
+      {required String name,
+      required this.type,
+      this.position = -1,
+      this.flagName = ''})
       : name = _fieldName(name.dartMemberName),
         flags = const [];
   Field.flags({
     required this.flags,
     required this.name,
     required this.type,
-  });
+  })  : position = -1,
+        flagName = '';
   final String name;
-  final BaseType type;
+  final PathTy type;
   final List<(int, Field)> flags;
+
+  final int position;
+  final String flagName;
 
   String argCode() {
     return 'required this.$name';
   }
 
+  String argFnCode() {
+    return 'required ${type.className} $name';
+  }
+
   String defineCode() {
-    return type.defineCode(name);
+    return type.type?.defineCode(name) ?? '';
   }
 
   String toJsonCode() {
-    return type.toJsonCode(name);
+    return type.type?.toJsonCode(name) ?? '';
+  }
+
+  void getAllImports(int level, String prefix, List<String> buffer) {
+    if (type.type case var type?) {
+      buffer.add(type.importPath(level, prefix));
+    }
+  }
+}
+
+final class PathTy {
+  PathTy(this.context, this.name);
+  final TgContext context;
+  final String name;
+
+  BaseType? _type;
+
+  BaseType? get type {
+    if (_type != null) return _type;
+    return _type = getBaseTypeFrom(name) ?? context.getType(name);
+  }
+
+  String get className {
+    return type?.className ?? '';
   }
 }
 
@@ -156,25 +310,65 @@ class TgFunction {
     required this.fields,
     this.hash,
   });
-
   final String baseName;
   final String? hash;
   final List<Field> fields;
-  final BaseType retType;
+  final PathTy retType;
+
+  void getAllImports(int level, String prefix, List<String> buffer) {
+    final type = retType.type;
+    if (type != null) {
+      buffer.add(type.importPath(level, prefix));
+    }
+
+    for (var field in fields) {
+      field.getAllImports(level, prefix, buffer);
+    }
+  }
 
   String get code {
     return '''
-Future<Result<${retType.className}>> $baseName({
-${fields.map((e) => e.argCode()).join(',')}
-}) {
+Future<Result<${retType.className}>> ${baseName.dartMemberName}(${fields.argFnCode}) {
 
-
+   throw "";
 }
 ''';
   }
 }
 
-extension on String {
+final _upperReg = RegExp('[A-Z]');
+
+extension StringExt on String {
+  String get dartFileName {
+    final buffer = StringBuffer();
+    final pc = characters.iterator;
+
+    var islow = false;
+    while (pc.moveNext()) {
+      final current = pc.current;
+
+      if (buffer.isEmpty) {
+        islow = current == '_';
+        buffer.write(current.toLowerCase());
+        continue;
+      }
+
+      if (_upperReg.hasMatch(current)) {
+        if (!islow) {
+          buffer.write('_');
+        }
+        islow = false;
+        buffer.write(current.toLowerCase());
+        continue;
+      }
+
+      islow = current == '_';
+      buffer.write(current);
+    }
+
+    return buffer.toString();
+  }
+
   String get dartMemberName {
     final buffer = StringBuffer();
     final pc = characters.iterator;
@@ -202,5 +396,78 @@ extension on String {
     }
 
     return buffer.toString();
+  }
+
+  String get dartClassName {
+    final buffer = StringBuffer();
+    final pc = characters.iterator;
+    var shouldUpper = false;
+
+    while (pc.moveNext()) {
+      final current = pc.current;
+      if (current == '_') {
+        shouldUpper = true;
+        continue;
+      }
+
+      if (buffer.isEmpty) {
+        buffer.write(current.toUpperCase());
+        shouldUpper = false;
+        continue;
+      }
+
+      if (shouldUpper) {
+        buffer.write(current.toUpperCase());
+        shouldUpper = false;
+        continue;
+      }
+
+      buffer.write(current);
+    }
+
+    return buffer.toString();
+  }
+}
+
+extension ListFieldExt on List<Field> {
+  String get argsCode {
+    final buffer = StringBuffer();
+    for (var field in this) {
+      buffer.write(field.argCode());
+      buffer.write(',');
+    }
+    if (buffer.isNotEmpty) {
+      return '{$buffer}';
+    }
+
+    return buffer.toString();
+  }
+
+  String get defineCode {
+    final buffer = StringBuffer();
+    for (var field in this) {
+      buffer.write(field.defineCode());
+      buffer.writeln(';');
+    }
+
+    return buffer.toString();
+  }
+
+  String get jsonCode {
+    final buffer = StringBuffer();
+    for (var field in this) {
+      buffer.write('"');
+      buffer.write(field.name);
+      buffer.write('": ');
+      buffer.write(field.toJsonCode());
+      buffer.writeln(',');
+    }
+
+    return buffer.toString();
+  }
+
+  String get argFnCode {
+    if (isEmpty) return '';
+    return '{${map((e) => e.argFnCode()).join(',')},}';
   }
 }

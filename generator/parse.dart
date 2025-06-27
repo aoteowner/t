@@ -3,21 +3,25 @@ import 'package:nop/utils.dart';
 import 'context.dart';
 import 'type.dart';
 
-const _w = '[A-Za-z_\\-#0-9\\\\.]+';
+const _w = '[A-Za-z_\\-#0-9\\\\.<>]+';
 
-final _baseReg = RegExp('($_w) (.*)= ($_w);');
+final _baseReg = RegExp('($_w) ({X:Type})?(.*)= ($_w);');
 final _sectionReg = RegExp('---(\\w+)---');
 
+final _flagReg = RegExp('($_w)\\.([0-9]+)\\?($_w)');
+
 void parse(List<String> lines, TgContext context) {
-  var section = '';
+  var section = 'types';
   for (var line in lines) {
+    if (line.startsWith('//')) continue;
+
     final sec = _sectionReg.allMatches(line).toList();
     if (sec case [var first]) {
       section = first[1]!;
       continue;
     }
 
-    if (section != 'types') continue;
+    if (section != 'types' && section != 'functions') continue;
 
     final matches = _baseReg.allMatches(line);
     for (var match in matches) {
@@ -37,9 +41,9 @@ void parse(List<String> lines, TgContext context) {
 
       final hash = nameL.elementAtOrNull(1);
 
-      final fieldSplit = match[2]!.split(' ').where((e) => e.isNotEmpty);
+      final fieldSplit = match[3]!.split(' ').where((e) => e.isNotEmpty);
       final fields = <Field>[];
-      // Field? _flag;
+      final flags = <String, Field>{};
       for (var span in fieldSplit) {
         final list = span.split(':');
         final name = list.first;
@@ -49,20 +53,54 @@ void parse(List<String> lines, TgContext context) {
           continue;
         }
 
-        final field =
-            Field(name: name, type: getBaseTypeFrom(name) ?? int32Type);
+        if (second == '#') {
+          final f =
+              Field.flags(flags: [], name: name, type: PathTy(context, 'int'));
+          flags[name] = f;
+          fields.add(f);
+          continue;
+        }
 
-        fields.add(field);
-        // if (second == '#') {
-        //   final flag = Field.flags(flags: [], name: name, type: );
-        // }
+        final flagMatch = _flagReg.allMatches(second).firstOrNull;
+
+        if (flagMatch != null) {
+          final flagName = flagMatch[1]!;
+          final position = int.parse(flagMatch[2]!);
+          final type = flagMatch[3]!;
+          final field = Field(
+            name: name,
+            type: PathTy(context, type),
+            position: position,
+            flagName: flagName,
+          );
+          flags[flagName]?.flags.add((position, field));
+          fields.add(field);
+        } else {
+          final field = Field(name: name, type: PathTy(context, second));
+
+          fields.add(field);
+        }
       }
 
-      final parent = match[3]!;
-
-      final type =
-          TgType(baseName: name, hash: hash, fields: fields, parent: parent);
-      context.addType(filePrefix, type);
+      final parent = match[4]!;
+      if (section == 'types') {
+        final type = TgType(
+          baseName: name,
+          hash: hash,
+          fields: fields,
+          parent: parent,
+          filePrefix: filePrefix,
+        );
+        context.addType(filePrefix, type);
+      } else {
+        final fn = TgFunction(
+          retType: PathTy(context, parent),
+          baseName: name,
+          fields: fields,
+          hash: hash,
+        );
+        context.addFn(filePrefix, fn);
+      }
     }
   }
 }
