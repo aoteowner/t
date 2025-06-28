@@ -5,6 +5,7 @@ import 'package:nop/utils.dart';
 import 'package:path/path.dart';
 
 import 'context.dart';
+import 'gen_exp.dart';
 import 'parse.dart';
 
 const fs = LocalFileSystem();
@@ -27,9 +28,15 @@ void main() async {
     parse(lines, context);
   }
 
-  final temp = fs.currentDirectory.childDirectory('temp');
+  final temp =
+      fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
+  final src = temp.childDirectory('src');
   for (var context in contexts.values) {
-    context.write(temp);
+    context.write(src);
+    context.writeReadTlObject(src);
   }
+
   Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
+
+  genExport(src);
 }

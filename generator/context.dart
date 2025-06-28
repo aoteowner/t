@@ -1,4 +1,5 @@
 import 'package:file/file.dart';
+import 'package:path/path.dart';
 
 import 'type.dart';
 
@@ -66,9 +67,26 @@ class TgContext {
     return t;
   }
 
-  void write(Directory dir, {int level = 0}) {
+  void write(Directory dir,
+      {int level = 0, bool hasClient = true, String? baseName}) {
     final nextDir = dir.childDirectory(name);
+    final buffer = StringBuffer();
+    baseName ??= name;
     final temp = StringBuffer();
+    final clients = StringBuffer();
+
+    for (var child in _children.values) {
+      child.write(nextDir,
+          hasClient: _fns.isNotEmpty, level: level + 1, baseName: baseName);
+      if (child._fns.isNotEmpty) {
+        final name = child.name;
+        buffer.writeln(
+            'import "${name.dartFileName}/${name.dartFileName}.dart" as \$${name.dartMemberName};');
+        clients.writeln(
+            'late final  ${name.dartMemberName} = \$${name.dartMemberName}.${name.dartClassName}Client(this);');
+      }
+    }
+
     final list = <String>[];
 
     for (var entry in _parents.entries) {
@@ -76,23 +94,54 @@ class TgContext {
     }
 
     if (_fns.isNotEmpty || temp.isNotEmpty) {
-      final buffer = StringBuffer();
-      buffer.writeln("import 'package:t/base.dart';");
+      final fnsMethod = StringBuffer();
+
+      if (level == 0 || !hasClient) {
+        temp.write('abstract ');
+      }
+
+      temp.write('''
+class ${name.dartClassName}Client {
+$clients
+''');
+
+      if (level == 0) {
+        temp.write('''
+Future<Result<TlObject>> invoke(TlMethod method);
+
+''');
+      } else if (hasClient) {
+        final p = '../' * level;
+        buffer.writeln('import "$p${baseName.dartFileName}.dart";');
+        temp.write('''
+const ${name.dartClassName}Client(this.client);
+final ${baseName.dartClassName}Client client;
+''');
+      }
+
       for (var fn in _fns) {
-        fn.getAllImports(level, name, list);
-        temp.writeln(fn.code);
+        if (fn.hash != null) {
+          fnsMethod.writeln(fn.methodCode);
+          fn.getAllImports(level, name, list);
+          temp.writeln(fn.code(level == 0 ? '' : 'client.'));
+        }
+      }
+
+      temp.write('}');
+
+      if (fnsMethod.isNotEmpty) {
+        buffer.writeln("import 'package:tg_api/src/base.dart';");
       }
 
       buffer.writeAll(list.toSet());
+
+      buffer.write(fnsMethod);
+
       buffer.write(temp);
 
       final file = nextDir.childFile('$name.dart');
       file.createSync(recursive: true);
       file.writeAsStringSync(buffer.toString());
-    }
-
-    for (var child in _children.values) {
-      child.write(nextDir, level: level + 1);
     }
   }
 
@@ -123,13 +172,23 @@ const $name();
       buffer.write('''class ${t.name} extends $parent {
 const ${t.name}(${t.fields.argsCode});
 ${t.fields.defineCode}
+
+  factory ${t.name}.deserialize(BinaryReader reader) {
+  ${t.fields.readCode}
+
+    return ${t.name}(${t.fields.named});
+  }
   @override
   void serialize(List<int> buffer) {
+    buffer.writeInt32(0x${t.hash ?? '0'});
+  ${t.fields.writeCode}
   }
   
   @override
   Map<String, dynamic> toJson() {
     return {
+      "\\\$hash": "{t.hash ?? '0'}",
+      "\\\$name": "${t.name}",
       ${t.fields.jsonCode}
     };
   }
@@ -146,12 +205,77 @@ ${t.fields.defineCode}
     }
 
     final b = StringBuffer();
-    b.writeln("import 'package:t/base.dart';");
+    b.writeln("import 'package:tg_api/src/base.dart';");
     b.writeAll(imports.toSet());
     b.write(buffer);
 
     final file = dir.childFile('$n.dart');
     file.createSync(recursive: true);
     file.writeAsStringSync(b.toString());
+  }
+
+  void writeReadTlObject(Directory dir) {
+    final file = dir.childFile('$name.read.dart');
+    file.createSync(recursive: true);
+    final buf = StringBuffer();
+
+    for (var all in _parents.entries) {
+      for (var type in all.value) {
+        if (type.hash == null) continue;
+        buf.writeln('0x${type.hash} => ${type.className}.deserialize(reader),');
+      }
+    }
+
+    for (var child in _children.values) {
+      for (var all in child._parents.entries) {
+        for (var type in all.value) {
+          if (type.hash == null) continue;
+
+          buf.writeln(
+              '0x${type.hash} => ${type.className}.deserialize(reader),');
+        }
+      }
+    }
+
+    final buffer = StringBuffer();
+
+    final list = dir.parent.listSync(recursive: false);
+    for (var file in list) {
+      if (file case File file) {
+        final n = withoutExtension(file.basename);
+
+        if (n == name) {
+          buffer.writeln('import "../${file.basename}" as \$e;');
+          continue;
+        }
+
+        if (_children[n] case var v when v == null || v._all.isEmpty) {
+          continue;
+        }
+        buffer.writeln(
+            'import "../${file.basename}" as \$${withoutExtension(file.basename)};');
+      }
+    }
+
+    buffer.write('''
+import "base/binary_reader.dart";
+import "base/core.dart";
+
+TlObject readTlObject(BinaryReader reader) {
+  final id = reader.readInt32();
+
+  if (id == vectorCtor) {
+    return reader.readVectorObjectNoCtor();
+  }
+
+  return switch(id) {
+  $buf
+  _ => throw Exception(
+      'This is a bug. Please report at https://github.com/telegramflutter/tg/issues.'),
+  };
+}
+''');
+
+    file.writeAsStringSync(buffer.toString());
   }
 }
