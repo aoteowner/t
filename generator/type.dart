@@ -15,17 +15,25 @@ abstract class BaseType {
   String defineCode(String name, {String optional = ''}) {
     return 'final $defineType$optional $name';
   }
+
+  bool get isBool => false;
 }
 
 final class LabelType extends BaseType {
   LabelType._(this.label, this.className,
-      {String? defineType, this.suf = '', this.imports = ''})
+      {String? defineType,
+      this.suf = '',
+      this.imports = '',
+      this.jsonValue = '',
+      this.isBool = false})
       : writeLabel = label,
         _defineType = defineType;
   LabelType._write(this.label, this.writeLabel, this.className,
       {String? defineType})
       : imports = '',
         suf = '',
+        isBool = false,
+        jsonValue = '',
         _defineType = defineType;
   final String label;
   final String writeLabel;
@@ -33,8 +41,11 @@ final class LabelType extends BaseType {
   final String className;
 
   final String? _defineType;
+  final String jsonValue;
 
   final String suf;
+  @override
+  final bool isBool;
   @override
   String get defineType => _defineType ?? className;
   final String imports;
@@ -47,7 +58,12 @@ final class LabelType extends BaseType {
   String readerCode(String name) => 'reader.read$label()$suf';
 
   @override
-  String toJsonCode(String name, {String optional = ''}) => name;
+  String toJsonCode(String name, {String optional = ''}) {
+    if (jsonValue.isNotEmpty) {
+      return '$name$optional$jsonValue';
+    }
+    return name;
+  }
 
   @override
   String writerCode(String name) => 'buffer.write$writeLabel($name)';
@@ -59,8 +75,16 @@ final int128Type = LabelType._('Int128', 'Int128');
 final int256Type = LabelType._('Int256', 'Int256');
 final stringType = LabelType._('String', 'String');
 final float64Type = LabelType._write('Float64', 'Double', 'double');
-final boolType = LabelType._('Bool', 'Boolean', defineType: "bool");
-final dateTimeType = LabelType._('DateTime', 'DateTime');
+
+final boolType =
+    LabelType._('Bool', 'Boolean', defineType: "bool", isBool: true);
+final trueType =
+    LabelType._('Bool', 'Boolean', defineType: "bool", isBool: true);
+final boolFalseType =
+    LabelType._('Bool', 'Boolean', defineType: "bool", isBool: true);
+
+final dateTimeType =
+    LabelType._('DateTime', 'DateTime', jsonValue: '.millisecondsSinceEpoch');
 final bytesType = LabelType._(
   'Bytes',
   'Uint8List',
@@ -89,8 +113,11 @@ BaseType? getBaseTypeFrom(String type) {
     'Bytes' || 'bytes' => bytesType,
     'int256' || 'Int256' => int256Type,
     'int128' || 'Int128' => int128Type,
-    'true' || 'True ' || 'boolFalse' || 'boolTrue' || 'Bool' => boolType,
+    'true' || 'True ' || 'boolTrue' => trueType,
+    'boolFalse' => boolFalseType,
+    'Bool' => boolType,
     "X" || "TlObject" => tlObjectType,
+    "DateTime" => dateTimeType,
     "!X" => tlObjectdType,
     _ => null,
   };
@@ -166,17 +193,25 @@ class VectorObjectType extends BaseType {
   }
 
   @override
+  String get defineType {
+    return 'List<${childType.defineType}>';
+  }
+
+  @override
   String readerCode(String name) {
     if (isC) {
-      return '''reader.readVectorObjectFn<${childType.className}>((reader) {
+      return '''reader.readVectorObjectFn<${childType.defineType}>((reader) {
     return ${childType.className}.deserialize(reader);
     }).items''';
     }
-    return 'reader.readVectorObject<${childType.className}>().items';
+    return 'reader.readVectorObject<${childType.defineType}>().items';
   }
 
   @override
   String toJsonCode(String name, {String optional = ''}) {
+    if (childType case TgType()) {
+      return '$name$optional.map((e) => e.toJson()).toList()';
+    }
     return name;
   }
 
@@ -203,6 +238,7 @@ class TgType extends BaseType {
   final String? hash;
   final List<Field> fields;
   final String? filePrefix;
+  List<TgType>? parents;
 
   String useHash = '';
 
@@ -237,6 +273,21 @@ class TgType extends BaseType {
   String get name => '$_className$useHash';
 
   @override
+  String get defineType {
+    if (parents case var list? when list.isNotEmpty) {
+      // if (parent.split('.').last == 'Message') {
+      //  Log.w('.....${list}');
+      // }
+      if (list.length > 1 ||
+          (list.isNotEmpty &&
+              list[0].name != parent.split('.').last.dartClassName)) {
+        return '$className${useHash}Base';
+      }
+    }
+    return "$className$useHash";
+  }
+
+  @override
   String get className {
     final prefix = filePrefix ?? 'e';
     return '\$$prefix.$_className$useHash';
@@ -244,7 +295,7 @@ class TgType extends BaseType {
 
   @override
   String readerCode(String name) {
-    return 'reader.readObject() as $className$useHash';
+    return 'reader.readObject() as $defineType';
   }
 
   @override
@@ -295,14 +346,14 @@ class Field {
     var req = 'required ';
     if (position != -1) {
       req = '';
-      if (type.type == boolType) {
+      if (type.type?.isBool == true) {
         suf = ' = false';
       }
     }
     return '$req this.$name$suf,';
   }
 
-  bool get isOptional => position != -1 && type.type != boolType;
+  bool get isOptional => position != -1 && type.type != trueType;
 
   String argFnCode() {
     if (flags.isNotEmpty) return '';
@@ -312,7 +363,7 @@ class Field {
     if (position != -1) {
       optinal = '?';
       req = '';
-      if (type.type == boolType) {
+      if (type.type == trueType) {
         optinal = '';
         suf = ' = false';
       }
@@ -325,7 +376,13 @@ class Field {
       final map = <int, List<String>>{};
       for (var f in flags) {
         var v = f.$2.name;
-        if (f.$2.type.type != boolType) {
+        final t = f.$2.type.type;
+
+        if (t?.isBool == true) {
+          if (t != trueType) {
+            v = '$v == true';
+          }
+        } else {
           v = '$v != null';
         }
         map.putIfAbsent(f.$1, () => []).add(v);
@@ -347,7 +404,7 @@ $args
     }
     var optional = '';
 
-    if (position != -1 && type.type != boolType) {
+    if (isOptional) {
       optional = '?';
     }
 
@@ -359,7 +416,7 @@ $args
   String toJsonCode() {
     var optional = '';
 
-    if (position != -1 && type.type != boolType) {
+    if (isOptional) {
       optional = '?';
     }
 
@@ -373,14 +430,14 @@ $args
       return 'final $name = $right;';
     }
     final mask = 1 << position;
-    if (type.type == boolType) {
+    if (type.type == trueType) {
       final mask = 1 << position;
       return 'final $name = ($flagName & $mask) != 0;';
     }
     final has = 'has${name.dartClassName}Flag';
     return '''
 final $has =  ($flagName & $mask) != 0;
-final $name = !$has ? null : ${type.type?.readerCode(name)};
+final $name = $has ? ${type.type?.readerCode(name)} : null;
 ''';
   }
 
@@ -390,7 +447,7 @@ final $name = !$has ? null : ${type.type?.readerCode(name)};
       return '$code;';
     }
 
-    if (type.type == boolType) {
+    if (type.type == trueType) {
       return '';
     }
     return '''
@@ -488,7 +545,11 @@ ${fields.defineCode}
   String code(String client) {
     var ret = retType.className.replaceAll('List<', 'Vector<');
 
-    if (ret == 'invokeWithLayer') {
+    if (retType.type case TgType t) {
+      ret = t.defineType;
+    }
+
+    if (baseName == 'initConnection') {
       return '''
 /// $hash
 Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) {

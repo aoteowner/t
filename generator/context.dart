@@ -27,14 +27,15 @@ class TgContext {
     final list = context._parents.putIfAbsent(type.parent, () => []);
     final same = list.firstWhereOrNull((e) => e.name == type.name);
     if (same != null) {
-      if (same.hash != type.hash) {
-        list.add(type);
-        type.useHash = 'Hash${type.hash}';
+      if (same.hash == type.hash) {
+        return;
       }
-      return;
+
+      type.useHash = 'Hash${type.hash}';
     }
 
     list.add(type);
+    type.parents = list;
     context._all[type.name] = type;
   }
 

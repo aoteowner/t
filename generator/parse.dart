@@ -13,7 +13,7 @@ final _flagReg = RegExp('($_w)\\.([0-9]+)\\?($_w)');
 void parse(List<String> lines, TgContext context, bool stringToBytes) {
   var section = 'types';
   for (var line in lines) {
-    final stringOrObject =  line.startsWith('//') ? 'TlObject' : 'bytes';
+    final stringOrObject = line.startsWith('//') ? 'TlObject' : 'bytes';
 
     final sec = _sectionReg.allMatches(line).toList();
     if (sec case [var first]) {
@@ -67,8 +67,12 @@ void parse(List<String> lines, TgContext context, bool stringToBytes) {
           final flagName = flagMatch[1]!;
           final position = int.parse(flagMatch[2]!);
           var type = flagMatch[3]!;
-          if (stringToBytes) {
+          if (stringToBytes && name != 'error_message') {
             type = type.replaceAll('string', stringOrObject);
+          }
+
+          if (name.endsWith('date')) {
+            type = 'DateTime';
           }
           final field = Field(
             name: name,
@@ -80,8 +84,11 @@ void parse(List<String> lines, TgContext context, bool stringToBytes) {
           fields.add(field);
         } else {
           var type = second;
-          if (stringToBytes) {
+          if (stringToBytes && name != 'error_message') {
             type = type.replaceAll('string', stringOrObject);
+          }
+          if (name.endsWith('date')) {
+            type = 'DateTime';
           }
           final field = Field(name: name, type: PathTy(context, type));
 
