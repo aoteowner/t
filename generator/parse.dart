@@ -39,7 +39,7 @@ void parse(List<String> lines, TgContext context) {
         filePrefix = namep[0];
       }
 
-      final hash = nameL.elementAtOrNull(1);
+      final hash = nameL.elementAtOrNull(1)?.padLeft(8, '0');
 
       final fieldSplit = match[3]!.split(' ').where((e) => e.isNotEmpty);
       final fields = <Field>[];

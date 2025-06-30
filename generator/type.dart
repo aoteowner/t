@@ -281,21 +281,70 @@ class Field {
   final String flagName;
 
   String argCode() {
-    return 'required this.$name';
+    if (flags.isNotEmpty) return '';
+    var suf = '';
+    var req = 'required ';
+    if (position != -1) {
+      req = '';
+      if (type.type == boolType) {
+        suf = ' = false';
+      }
+    }
+    return '$req this.$name$suf,';
   }
 
+  bool get isOptional => position != -1 && type.type != boolType;
+
   String argFnCode() {
-    return 'required ${type.defineType} $name';
+    if (flags.isNotEmpty) return '';
+    var suf = '';
+    var req = 'required ';
+    var optinal = '';
+    if (position != -1) {
+      optinal = '?';
+      req = '';
+      if (type.type == boolType) {
+        optinal = '';
+        suf = ' = false';
+      }
+    }
+    return '$req ${type.defineType}$optinal $name$suf,';
   }
 
   String defineCode() {
+    if (flags.isNotEmpty) {
+      final map = <int, List<String>>{};
+      for (var f in flags) {
+        var v = f.$2.name;
+        if (f.$2.type.type != boolType) {
+          v = '$v != null';
+        }
+        map.putIfAbsent(f.$1, () => []).add(v);
+      }
+      final args = map.entries
+          .map((e) =>
+              'b${e.key.toString().padLeft(2, '0')}: ${e.value.join('||')},')
+          .join();
+      return '''
+int get ${name.dartMemberName} {
+return toFlag(
+$args
+);
+
+
+}
+
+''';
+    }
     var optional = '';
 
     if (position != -1 && type.type != boolType) {
       optional = '?';
     }
 
-    return type.type?.defineCode(name, optional: optional) ?? '';
+    final v = type.type?.defineCode(name, optional: optional) ?? '';
+
+    return '$v;';
   }
 
   String toJsonCode() {
@@ -305,7 +354,8 @@ class Field {
       optional = '?';
     }
 
-    return type.type?.toJsonCode(name, optional: optional) ?? '';
+    final v = type.type?.toJsonCode(name, optional: optional) ?? '';
+    return '$v,';
   }
 
   String readCode() {
@@ -546,7 +596,6 @@ extension ListFieldExt on List<Field> {
     final buffer = StringBuffer();
     for (var field in this) {
       buffer.write(field.argCode());
-      buffer.write(',');
     }
     if (buffer.isNotEmpty) {
       return '{$buffer}';
@@ -559,7 +608,6 @@ extension ListFieldExt on List<Field> {
     final buffer = StringBuffer();
     for (var field in this) {
       buffer.write(field.defineCode());
-      buffer.writeln(';');
     }
 
     return buffer.toString();
@@ -572,7 +620,6 @@ extension ListFieldExt on List<Field> {
       buffer.write(field.name);
       buffer.write('": ');
       buffer.write(field.toJsonCode());
-      buffer.writeln(',');
     }
 
     return buffer.toString();
@@ -590,6 +637,7 @@ extension ListFieldExt on List<Field> {
   String get named {
     final buffer = StringBuffer();
     for (var field in this) {
+      if (field.flags.isNotEmpty) continue;
       buffer.write(field.name);
       buffer.write(': ');
       buffer.write(field.name);
@@ -610,6 +658,6 @@ extension ListFieldExt on List<Field> {
 
   String get argFnCode {
     if (isEmpty) return '';
-    return '{${map((e) => e.argFnCode()).join(',')},}';
+    return '{${map((e) => e.argFnCode()).join()}}';
   }
 }
