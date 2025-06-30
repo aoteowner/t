@@ -10,10 +10,10 @@ final _sectionReg = RegExp('---(\\w+)---');
 
 final _flagReg = RegExp('($_w)\\.([0-9]+)\\?($_w)');
 
-void parse(List<String> lines, TgContext context) {
+void parse(List<String> lines, TgContext context, bool stringToBytes) {
   var section = 'types';
   for (var line in lines) {
-    if (line.startsWith('//')) continue;
+    final stringOrObject =  line.startsWith('//') ? 'TlObject' : 'bytes';
 
     final sec = _sectionReg.allMatches(line).toList();
     if (sec case [var first]) {
@@ -66,7 +66,10 @@ void parse(List<String> lines, TgContext context) {
         if (flagMatch != null) {
           final flagName = flagMatch[1]!;
           final position = int.parse(flagMatch[2]!);
-          final type = flagMatch[3]!;
+          var type = flagMatch[3]!;
+          if (stringToBytes) {
+            type = type.replaceAll('string', stringOrObject);
+          }
           final field = Field(
             name: name,
             type: PathTy(context, type),
@@ -76,7 +79,11 @@ void parse(List<String> lines, TgContext context) {
           flags[flagName]?.flags.add((position, field));
           fields.add(field);
         } else {
-          final field = Field(name: name, type: PathTy(context, second));
+          var type = second;
+          if (stringToBytes) {
+            type = type.replaceAll('string', stringOrObject);
+          }
+          final field = Field(name: name, type: PathTy(context, type));
 
           fields.add(field);
         }

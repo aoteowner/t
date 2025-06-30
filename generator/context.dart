@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'type.dart';
 
 final _vecReg = RegExp('[Vv]ector<(.*)>');
+final _vecCReg = RegExp('[Vv]ector<%(.*)>');
 
 class TgContext {
   TgContext(this.name);
@@ -31,10 +32,9 @@ class TgContext {
         type.useHash = 'Hash${type.hash}';
       }
       return;
-    } else {
-      list.add(type);
     }
 
+    list.add(type);
     context._all[type.name] = type;
   }
 
@@ -57,7 +57,10 @@ class TgContext {
   }
 
   BaseType? getType(String name) {
-    final match = _vecReg.allMatches(name).firstOrNull;
+    var match = _vecCReg.allMatches(name).firstOrNull;
+    final isC = match != null;
+    match ??= _vecReg.allMatches(name).firstOrNull;
+
     var isList = false;
     if (match != null) {
       isList = true;
@@ -71,10 +74,10 @@ class TgContext {
     }
     name = name.dartClassName;
 
-    final type = _getType(prefix, name);
+    final type = getBaseTypeFrom(name) ?? _getType(prefix, name);
     final t = type ?? Constructor(name: name, prefix: prefix);
     if (isList) {
-      return VectorObjectType(t);
+      return VectorObjectType(t, isC);
     }
     return t;
   }
@@ -231,11 +234,19 @@ ${t.fields.defineCode}
     file.createSync(recursive: true);
     final buf = StringBuffer();
 
+    final fnBuffer = StringBuffer();
+
     for (var all in _parents.entries) {
       for (var type in all.value) {
         if (type.hash == null) continue;
         buf.writeln('0x${type.hash} => ${type.className}.deserialize(reader),');
       }
+    }
+
+    for (var fn in _fns) {
+      if (fn.hash == null) continue;
+      fnBuffer.writeln(
+          '0x${fn.hash} => \$e.${fn.baseName.dartClassName}Method.deserialize(reader),');
     }
 
     for (var child in _children.values) {
@@ -245,6 +256,12 @@ ${t.fields.defineCode}
 
           buf.writeln(
               '0x${type.hash} => ${type.className}.deserialize(reader),');
+        }
+
+        for (var fn in child._fns) {
+          if (fn.hash == null) continue;
+          fnBuffer.writeln(
+              '0x${fn.hash} => \$${child.name.dartMemberName}.${fn.baseName.dartClassName}Method.deserialize(reader),');
         }
       }
     }
@@ -261,7 +278,8 @@ ${t.fields.defineCode}
           continue;
         }
 
-        if (_children[n] case var v when v == null || v._all.isEmpty) {
+        if (_children[n] case var v
+            when v == null || (v._all.isEmpty && v._fns.isEmpty)) {
           continue;
         }
         buffer.writeln(
@@ -276,14 +294,19 @@ import "base/core.dart";
 TlObject readTlObject(BinaryReader reader) {
   final id = reader.readInt32();
 
-  if (id == vectorCtor) {
-    return reader.readVectorObjectNoCtor();
-  }
 
-  return switch(id) {
+  final value = switch(id) {
+  vectorCtor => reader.readVectorObjectNoCtor(),
   $buf
+  _ => null,
+  };
+
+  if (value != null) return value;
+  /// method
+  return switch(id) {
+  $fnBuffer
   _ => throw Exception(
-      'This is a bug. Please report at https://github.com/telegramflutter/tg/issues.'),
+      'id: \${id.toRadixString(16)}. This is a bug. Please report at https://github.com/telegramflutter/tg/issues.'),
   };
 }
 ''');

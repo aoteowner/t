@@ -90,7 +90,7 @@ BaseType? getBaseTypeFrom(String type) {
     'int256' || 'Int256' => int256Type,
     'int128' || 'Int128' => int128Type,
     'true' || 'True ' || 'boolFalse' || 'boolTrue' || 'Bool' => boolType,
-    "X" => tlObjectType,
+    "X" || "TlObject" => tlObjectType,
     "!X" => tlObjectdType,
     _ => null,
   };
@@ -152,9 +152,10 @@ class Constructor extends BaseType {
 }
 
 class VectorObjectType extends BaseType {
-  VectorObjectType(this.childType);
+  VectorObjectType(this.childType, [this.isC = false]);
 
   final BaseType childType;
+  final bool isC;
 
   @override
   String get className => 'List<${childType.className}>';
@@ -166,6 +167,11 @@ class VectorObjectType extends BaseType {
 
   @override
   String readerCode(String name) {
+    if (isC) {
+      return '''reader.readVectorObjectFn<${childType.className}>((reader) {
+    return ${childType.className}.deserialize(reader);
+    }).items''';
+    }
     return 'reader.readVectorObject<${childType.className}>().items';
   }
 
@@ -176,6 +182,9 @@ class VectorObjectType extends BaseType {
 
   @override
   String writerCode(String name) {
+    if (isC) {
+      return 'buffer.writeVectorObjectNoCtor($name)';
+    }
     return 'buffer.writeVectorObject($name)';
   }
 }
@@ -477,7 +486,20 @@ ${fields.defineCode}
   }
 
   String code(String client) {
-    final ret = retType.className.replaceAll('List<', 'Vector<');
+    var ret = retType.className.replaceAll('List<', 'Vector<');
+
+    if (ret == 'invokeWithLayer') {
+      return '''
+/// $hash
+Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) {
+   return ${client}invokeWithLayer(
+   layer: layer,
+   query: ${baseName.dartClassName}Method(${fields.named}),
+   );
+}
+''';
+    }
+
     if (ret == 'TlObject') {
       return '''
 /// $hash
@@ -487,12 +509,20 @@ Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) {
 }
 ''';
     }
+
+    var res = 'to<$ret>()';
+
+    if (retType.type case VectorObjectType t) {
+      ret = 'Vector<${t.childType.defineType}>';
+      res = 'toVector<${t.childType.defineType}>()';
+    }
+
     return '''
 /// $hash
 Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) async {
   final res = await ${client}invoke(${baseName.dartClassName}Method(${fields.named}));
 
-  return res as Result<$ret>;
+  return res.$res;
 }
 ''';
   }

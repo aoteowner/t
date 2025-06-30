@@ -18,12 +18,13 @@ void main() async {
   final files = genFiles.map((e) => dir.childFile(e)).toList();
   final context = TgContext('api');
   for (var file in files) {
+    final stringToBytes = file.basename == genFiles.first;
     if (!file.existsSync()) {
       Log.w('file not found: ${file.path}');
       return;
     }
     final lines = file.readAsLinesSync();
-    parse(lines, context);
+    parse(lines, context, stringToBytes);
   }
 
   final temp =
@@ -32,7 +33,6 @@ void main() async {
   context.write(src);
   context.writeReadTlObject(src);
 
-  Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
-
   genExport(src);
+  Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
 }
