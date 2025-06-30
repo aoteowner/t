@@ -346,7 +346,7 @@ class Field {
     var req = 'required ';
     if (position != -1) {
       req = '';
-      if (type.type?.isBool == true) {
+      if (type.type == trueType) {
         suf = ' = false';
       }
     }
@@ -447,8 +447,19 @@ final $name = $has ? ${type.type?.readerCode(name)} : null;
       return '$code;';
     }
 
+
+
     if (type.type == trueType) {
       return '';
+    }
+    if (type.type?.isBool == true) {
+
+      return '''
+if ($name case var $name? when $name) {
+$code;
+}
+
+''';
     }
     return '''
 if ($name case var $name?) {
