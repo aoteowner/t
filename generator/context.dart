@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:file/file.dart';
+import 'package:nop/utils.dart';
 import 'package:path/path.dart';
 
 import 'type.dart';
@@ -57,6 +58,8 @@ class TgContext {
     return context._all[name];
   }
 
+  Iterable<TgFunction> get availableFns => _fns.where((e) => e.hash != null);
+
   BaseType? getType(String name) {
     var match = _vecCReg.allMatches(name).firstOrNull;
     final isC = match != null;
@@ -94,7 +97,7 @@ class TgContext {
     for (var child in _children.values) {
       child.write(nextDir,
           hasClient: _fns.isNotEmpty, level: level + 1, baseName: baseName);
-      if (child._fns.isNotEmpty) {
+      if (child.availableFns.isNotEmpty) {
         final name = child.name;
         buffer.writeln(
             'import "${name.dartFileName}/${name.dartFileName}.dart" as \$${name.dartMemberName};');
@@ -109,7 +112,11 @@ class TgContext {
       _writeList(nextDir, entry.key, entry.value, temp, level, list);
     }
 
-    if (_fns.isNotEmpty || temp.isNotEmpty) {
+    if (availableFns.isNotEmpty || temp.isNotEmpty) {
+      if (name.dartClassName == 'Test') {
+        Log.w(
+            '....${_fns.map((e) => e.baseName).logPretty()} ${temp.isNotEmpty}');
+      }
       final fnsMethod = StringBuffer();
 
       if (level == 0 || !hasClient) {
@@ -146,7 +153,8 @@ final ${baseName.dartClassName}Client client;
       temp.write('}');
 
       if (fnsMethod.isNotEmpty) {
-        buffer.writeln("import 'package:tg_api/src/base.dart';");
+        final p = '../' * (level +1);
+        buffer.writeln("import '${p}base.dart';");
       }
 
       buffer.writeAll(list.toSet());
@@ -185,7 +193,9 @@ const $name();
 
     for (var t in list) {
       t.getAllImports(level, name, imports);
-      buffer.write('''class ${t.name} extends $parent {
+      buffer.write('''
+/// ${t.hash}
+class ${t.name} extends $parent {
 const ${t.name}(${t.fields.argsCode});
 ${t.fields.defineCode}
 
@@ -221,7 +231,8 @@ ${t.fields.defineCode}
     }
 
     final b = StringBuffer();
-    b.writeln("import 'package:tg_api/src/base.dart';");
+    final p = '../' * (level + 1);
+    b.writeln("import '${p}base.dart';");
     b.writeAll(imports.toSet());
     b.write(buffer);
 
@@ -258,12 +269,11 @@ ${t.fields.defineCode}
           buf.writeln(
               '0x${type.hash} => ${type.className}.deserialize(reader),');
         }
-
-        for (var fn in child._fns) {
-          if (fn.hash == null) continue;
-          fnBuffer.writeln(
-              '0x${fn.hash} => \$${child.name.dartMemberName}.${fn.baseName.dartClassName}Method.deserialize(reader),');
-        }
+      }
+      for (var fn in child._fns) {
+        if (fn.hash == null) continue;
+        fnBuffer.writeln(
+            '0x${fn.hash} => \$${child.name.dartMemberName}.${fn.baseName.dartClassName}Method.deserialize(reader),');
       }
     }
 
@@ -280,7 +290,8 @@ ${t.fields.defineCode}
         }
 
         if (_children[n] case var v
-            when v == null || (v._all.isEmpty && v._fns.isEmpty)) {
+            when v == null ||
+                (v._all.isEmpty && v._fns.every((e) => e.hash == null))) {
           continue;
         }
         buffer.writeln(

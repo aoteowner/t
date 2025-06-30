@@ -31,8 +31,9 @@ void main() async {
       fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
   final src = temp.childDirectory('src');
   context.write(src);
+  
+  genExport(src);
   context.writeReadTlObject(src);
 
-  genExport(src);
   Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
 }
