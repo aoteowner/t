@@ -16,10 +16,8 @@ void main() async {
       .childDirectory(join('td', 'td', 'generate', 'scheme'));
 
   final files = genFiles.map((e) => dir.childFile(e)).toList();
-  final contexts = <String, TgContext>{};
+  final context = TgContext('api');
   for (var file in files) {
-    final context = contexts.putIfAbsent(
-        file.path, () => TgContext(withoutExtension(file.basename)));
     if (!file.existsSync()) {
       Log.w('file not found: ${file.path}');
       return;
@@ -31,10 +29,8 @@ void main() async {
   final temp =
       fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
   final src = temp.childDirectory('src');
-  for (var context in contexts.values) {
-    context.write(src);
-    context.writeReadTlObject(src);
-  }
+  context.write(src);
+  context.writeReadTlObject(src);
 
   Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
 

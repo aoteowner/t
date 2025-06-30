@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:file/file.dart';
 import 'package:path/path.dart';
 
@@ -22,7 +23,18 @@ class TgContext {
       context = _children.putIfAbsent(filePrefix, () => TgContext(filePrefix));
     }
 
-    context._parents.putIfAbsent(type.parent, () => []).add(type);
+    final list = context._parents.putIfAbsent(type.parent, () => []);
+    final same = list.firstWhereOrNull((e) => e.name == type.name);
+    if (same != null) {
+      if (same.hash != type.hash) {
+        list.add(type);
+        type.useHash = 'Hash${type.hash}';
+      }
+      return;
+    } else {
+      list.add(type);
+    }
+
     context._all[type.name] = type;
   }
 
@@ -187,7 +199,7 @@ ${t.fields.defineCode}
   @override
   Map<String, dynamic> toJson() {
     return {
-      "\\\$hash": "{t.hash ?? '0'}",
+      ${t.hash == null ? '' : '"\\\$hash": "${t.hash}",'}
       "\\\$name": "${t.name}",
       ${t.fields.jsonCode}
     };
@@ -215,7 +227,7 @@ ${t.fields.defineCode}
   }
 
   void writeReadTlObject(Directory dir) {
-    final file = dir.childFile('$name.read.dart');
+    final file = dir.childFile('${name}_read.dart');
     file.createSync(recursive: true);
     final buf = StringBuffer();
 

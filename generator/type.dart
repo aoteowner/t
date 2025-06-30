@@ -195,6 +195,8 @@ class TgType extends BaseType {
   final List<Field> fields;
   final String? filePrefix;
 
+  String useHash = '';
+
   @override
   String importPath(int level, String prefix) {
     var pre = '';
@@ -223,17 +225,17 @@ class TgType extends BaseType {
   late final _className =
       baseName.replaceFirst(baseName[0], baseName[0].toUpperCase());
 
-  String get name => _className;
+  String get name => '$_className$useHash';
 
   @override
   String get className {
     final prefix = filePrefix ?? 'e';
-    return '\$$prefix.$_className';
+    return '\$$prefix.$_className$useHash';
   }
 
   @override
   String readerCode(String name) {
-    return 'reader.readObject() as $className';
+    return 'reader.readObject() as $className$useHash';
   }
 
   @override
