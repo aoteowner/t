@@ -120,7 +120,7 @@ class TgContext {
       final fnsMethod = StringBuffer();
 
       if (level == 0 || !hasClient) {
-        temp.write('abstract ');
+        temp.write('abstract mixin ');
       }
 
       temp.write('''

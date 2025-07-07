@@ -27,6 +27,8 @@ void main() async {
     parse(lines, context, stringToBytes);
   }
 
+  // final temp =
+  //     fs.currentDirectory.childDirectory(join('temp', 'test_tg_api')).childDirectory('lib');
   final temp =
       fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
   final src = temp.childDirectory('src');

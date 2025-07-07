@@ -560,17 +560,17 @@ ${fields.defineCode}
       ret = t.defineType;
     }
 
-    if (baseName == 'initConnection') {
-      return '''
-/// $hash
-Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) {
-   return ${client}invokeWithLayer(
-   layer: layer,
-   query: ${baseName.dartClassName}Method(${fields.named}),
-   );
-}
-''';
-    }
+//     if (baseName == 'initConnection') {
+//       return '''
+// /// $hash
+// Future<Result<$ret>> ${baseName.dartMemberName}(${fields.argFnCode}) {
+//    return ${client}invokeWithLayer(
+//    layer: layer,
+//    query: ${baseName.dartClassName}Method(${fields.named}),
+//    );
+// }
+// ''';
+//     }
 
     if (ret == 'TlObject') {
       return '''
