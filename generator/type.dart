@@ -206,7 +206,7 @@ class VectorObjectType extends BaseType {
   String readerCode(String name) {
     if (isC) {
       return '''reader.readVectorObjectFn<${childType.defineType}>((reader) {
-    return ${childType.className}.deserialize(reader);
+    return ${childType.defineType}.deserialize(reader);
     }).items''';
     }
     return 'reader.readVectorObject<${childType.defineType}>().items';
@@ -275,9 +275,10 @@ class TgType extends BaseType {
   late final _className =
       baseName.replaceFirst(baseName[0], baseName[0].toUpperCase());
 
-  String get name => '$_className$useHash';
+  String get name => _className;
 
   String get nameHash => '${_className}Hash_${hash ?? ''}';
+  String get nameHashC => '${_className}Hash${hash ?? ''}';
 
   @override
   String get defineType {
@@ -292,13 +293,15 @@ class TgType extends BaseType {
     //   }
     // }
     // return "$className$useHash";
-    return '$className${useHash}Base';
+    // return '$className$useHash';
+    final prefix = filePrefix ?? 'e';
+    return '\$$prefix.$nameHashC';
   }
 
   @override
   String get className {
     final prefix = filePrefix ?? 'e';
-    return '\$$prefix.$_className$useHash';
+    return '\$$prefix.$nameHashC';
   }
 
   @override
@@ -562,11 +565,13 @@ ${fields.defineCode}
   }
 
   String code(String client) {
-    var ret = retType.defineType.replaceAll('List<', 'Vector<').replaceAll('bool', 'Boolean');
+    var ret = retType.defineType
+        .replaceAll('List<', 'Vector<')
+        .replaceAll('bool', 'Boolean');
 
     if (retType.type case TgType t) {
       ret = t.defineType;
-    } 
+    }
 
 //     if (baseName == 'initConnection') {
 //       return '''

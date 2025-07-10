@@ -32,7 +32,7 @@ class TgContext {
         return;
       }
 
-      type.useHash = 'Hash${type.hash}';
+      // type.useHash = 'Hash${type.hash}';
     }
 
     list.add(type);
@@ -153,10 +153,15 @@ final ${baseName.dartClassName}Client client;
       temp.write('}');
 
       if (fnsMethod.isNotEmpty) {
+        final p2 = '../' * (level + 2);
+        final res = list.any((e) => e.endsWith('as \$e;'));
+        list.removeWhere((e) => e.endsWith("as \$e;"));
+        if (res) {
+          buffer.writeln("import '${p2}api.dart' as \$e;");
+        }
         final p = '../' * (level + 1);
         buffer.writeln("import '${p}base.dart';");
       }
-
       buffer.writeAll(list.toSet());
 
       buffer.write(fnsMethod);
@@ -194,17 +199,22 @@ const $name();
     for (var t in list) {
       final buffer = StringBuffer();
       t.getAllImports(level, name, imports);
+      if (t.hash != null) {
+        buffer.write('''
+/// case 0x${t.hash} => ${t.className}.deserialize(reader),
+''');
+      }
       buffer.write('''
 part of "../${n}_e.dart";
 /// ${t.hash}
-class ${t.name} extends $parent {
-const ${t.name}(${t.fields.argsCode});
+class ${t.nameHashC} extends $parent {
+const ${t.nameHashC}(${t.fields.argsCode});
 ${t.fields.defineCode}
 
-  factory ${t.name}.deserialize(BinaryReader reader) {
+  factory ${t.nameHashC}.deserialize(BinaryReader reader) {
   ${t.fields.readCode}
 
-    return ${t.name}(${t.fields.named});
+    return ${t.nameHashC}(${t.fields.named});
   }
   @override
   void serialize(List<int> buffer) {
@@ -216,7 +226,7 @@ ${t.fields.defineCode}
   Map<String, dynamic> toJson() {
     return {
       ${t.hash == null ? '' : '"\\\$hash": "${t.hash}",'}
-      "\\\$name": "${t.name}",
+      "\\\$name": "${t.nameHashC}",
       ${t.fields.jsonCode}
     };
   }
@@ -239,6 +249,13 @@ ${t.fields.defineCode}
 
     final b = StringBuffer();
     final p = '../' * (level + 1);
+    final p2 = '../' * (level + 2);
+    final res = imports.any((e) => e.endsWith('as \$e;'));
+    imports.removeWhere((e) => e.endsWith("as \$e;"));
+    if (res) {
+      b.writeln("import '${p2}api.dart' as \$e;");
+    }
+
     b.writeln("import '${p}base.dart';");
     b.writeAll(imports.toSet());
 
@@ -262,36 +279,36 @@ ${t.fields.defineCode}
     file.createSync(recursive: true);
     final buf = StringBuffer();
 
-    final fnBuffer = StringBuffer();
+    // final fnBuffer = StringBuffer();
 
-    for (var all in _parents.entries) {
-      for (var type in all.value) {
-        if (type.hash == null) continue;
-        buf.writeln('0x${type.hash} => ${type.className}.deserialize(reader),');
-      }
-    }
+    // // for (var all in _parents.entries) {
+    // //   for (var type in all.value) {
+    // //     if (type.hash == null) continue;
+    // //     buf.writeln('0x${type.hash} => ${type.className}.deserialize(reader),');
+    // //   }
+    // // }
 
-    for (var fn in _fns) {
-      if (fn.hash == null) continue;
-      fnBuffer.writeln(
-          '0x${fn.hash} => \$e.${fn.baseName.dartClassName}Method.deserialize(reader),');
-    }
+    // for (var fn in _fns) {
+    //   if (fn.hash == null) continue;
+    //   fnBuffer.writeln(
+    //       '0x${fn.hash} => \$e.${fn.baseName.dartClassName}Method.deserialize(reader),');
+    // }
 
-    for (var child in _children.values) {
-      for (var all in child._parents.entries) {
-        for (var type in all.value) {
-          if (type.hash == null) continue;
+    // for (var child in _children.values) {
+    //   // for (var all in child._parents.entries) {
+    //   //   for (var type in all.value) {
+    //   //     if (type.hash == null) continue;
 
-          buf.writeln(
-              '0x${type.hash} => ${type.className}.deserialize(reader),');
-        }
-      }
-      for (var fn in child._fns) {
-        if (fn.hash == null) continue;
-        fnBuffer.writeln(
-            '0x${fn.hash} => \$${child.name.dartMemberName}.${fn.baseName.dartClassName}Method.deserialize(reader),');
-      }
-    }
+    //   //     buf.writeln(
+    //   //         '0x${type.hash} => ${type.className}.deserialize(reader),');
+    //   //   }
+    //   // }
+    //   for (var fn in child._fns) {
+    //     if (fn.hash == null) continue;
+    //     fnBuffer.writeln(
+    //         '0x${fn.hash} => \$${child.name.dartMemberName}.${fn.baseName.dartClassName}Method.deserialize(reader),');
+    //   }
+    // }
 
     final buffer = StringBuffer();
 
@@ -300,7 +317,7 @@ ${t.fields.defineCode}
       if (file case File file) {
         final n = withoutExtension(file.basename);
 
-        if (n == name || n == '$name.e') {
+        if (n == name) {
           buffer.writeln('import "../${file.basename}" as \$e;');
           continue;
         }
@@ -312,6 +329,17 @@ ${t.fields.defineCode}
         }
         buffer.writeln(
             'import "../${file.basename}" as \$${withoutExtension(file.basename)};');
+      }
+    }
+
+    final allFiles = dir.childDirectory('api').listSync(recursive: true);
+    for (var file in allFiles) {
+      if (file case File file) {
+        final first = file.readAsLinesSync().firstOrNull ?? '';
+        if (first.startsWith('/// case ')) {
+          final casePat = first.replaceFirst('/// case ', '');
+          buf.writeln(casePat);
+        }
       }
     }
 
@@ -330,15 +358,17 @@ TlObject readTlObject(BinaryReader reader) {
   };
 
   if (value != null) return value;
-  /// method
-  return switch(id) {
-  $fnBuffer
-  _ => throw Exception(
-      'id: \${id.toRadixString(16)}. This is a bug. Please report at https://github.com/telegramflutter/tg/issues.'),
-  };
+
+   throw Exception(
+      'id: \${id.toRadixString(16)}. This is a bug. Please report at https://github.com/telegramflutter/tg/issues.');
 }
 ''');
 
+    // /// method
+    // return switch(id) {
+    // $fnBuffer
+    // _ =>
+    // };
     file.writeAsStringSync(buffer.toString());
   }
 }
