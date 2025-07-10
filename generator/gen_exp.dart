@@ -13,6 +13,7 @@ void genExport(Directory src) {
 
     for (var file in files) {
       if (file case Directory dir) {
+        if (dir.basename.endsWith('_e')) continue;
         genExports(dir);
         continue;
       }

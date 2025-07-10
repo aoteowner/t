@@ -150,6 +150,11 @@ class Constructor extends BaseType {
   }
 
   @override
+  String get defineType {
+    return '${className}Base';
+  }
+
+  @override
   String importPath(int level, String prefix) {
     var pre = '';
     final filePrefix = this.prefix;
@@ -165,11 +170,11 @@ class Constructor extends BaseType {
     }
 
     final p = '../' * level;
-    return 'import "$p$pre${name.dartFileName}.dart"$asPre;';
+    return 'import "$p$pre${name.dartFileName}_e.dart"$asPre;';
   }
 
   @override
-  String readerCode(String name) => 'reader.readObject() as $className';
+  String readerCode(String name) => 'reader.readObject() as $defineType';
 
   @override
   String toJsonCode(String name, {String optional = ''}) => name;
@@ -258,7 +263,7 @@ class TgType extends BaseType {
     }
 
     final p = '../' * level;
-    return 'import "$p$pre${baseName.dartFileName}.dart"$asPre;';
+    return 'import "$p$pre${baseName.dartFileName}_e.dart"$asPre;';
   }
 
   void getAllImports(int level, String prefix, List<String> buffer) {
@@ -272,19 +277,22 @@ class TgType extends BaseType {
 
   String get name => '$_className$useHash';
 
+  String get nameHash => '${_className}Hash_${hash ?? ''}';
+
   @override
   String get defineType {
-    if (parents case var list? when list.isNotEmpty) {
-      // if (parent.split('.').last == 'Message') {
-      //  Log.w('.....${list}');
-      // }
-      if (list.length > 1 ||
-          (list.isNotEmpty &&
-              list[0].name != parent.split('.').last.dartClassName)) {
-        return '$className${useHash}Base';
-      }
-    }
-    return "$className$useHash";
+    // if (parents case var list? when list.isNotEmpty) {
+    //   // if (parent.split('.').last == 'Message') {
+    //   //  Log.w('.....${list}');
+    //   // }
+    //   if (list.length > 1 ||
+    //       (list.isNotEmpty &&
+    //           list[0].name != parent.split('.').last.dartClassName)) {
+    //     return '$className${useHash}Base';
+    //   }
+    // }
+    // return "$className$useHash";
+    return '$className${useHash}Base';
   }
 
   @override
@@ -447,13 +455,10 @@ final $name = $has ? ${type.type?.readerCode(name)} : null;
       return '$code;';
     }
 
-
-
     if (type.type == trueType) {
       return '';
     }
     if (type.type?.isBool == true) {
-
       return '''
 if ($name case var $name? when $name) {
 $code;
@@ -549,16 +554,19 @@ ${fields.defineCode}
       ${fields.jsonCode}
     };
   }
+
+  @override
+  List<Object?> get props => ${fields.propsCode};
 }
 ''';
   }
 
   String code(String client) {
-    var ret = retType.className.replaceAll('List<', 'Vector<');
+    var ret = retType.defineType.replaceAll('List<', 'Vector<').replaceAll('bool', 'Boolean');
 
     if (retType.type case TgType t) {
       ret = t.defineType;
-    }
+    } 
 
 //     if (baseName == 'initConnection') {
 //       return '''
@@ -761,5 +769,11 @@ extension ListFieldExt on List<Field> {
   String get argFnCode {
     if (isEmpty) return '';
     return '{${map((e) => e.argFnCode()).join()}}';
+  }
+
+  String get propsCode {
+    if (isEmpty) return '[]';
+
+    return '[${map((e) => e.name).join(",")}]';
   }
 }

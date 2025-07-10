@@ -102,14 +102,14 @@ class TgContext {
         buffer.writeln(
             'import "${name.dartFileName}/${name.dartFileName}.dart" as \$${name.dartMemberName};');
         clients.writeln(
-            'late final  ${name.dartMemberName} = \$${name.dartMemberName}.${name.dartClassName}Client(this);');
+            'late final  ${name.dartMemberName}Api = \$${name.dartMemberName}.${name.dartClassName}Client(this);');
       }
     }
 
     final list = <String>[];
 
     for (var entry in _parents.entries) {
-      _writeList(nextDir, entry.key, entry.value, temp, level, list);
+      _writeList(nextDir, entry.key, entry.value, level);
     }
 
     if (availableFns.isNotEmpty || temp.isNotEmpty) {
@@ -153,7 +153,7 @@ final ${baseName.dartClassName}Client client;
       temp.write('}');
 
       if (fnsMethod.isNotEmpty) {
-        final p = '../' * (level +1);
+        final p = '../' * (level + 1);
         buffer.writeln("import '${p}base.dart';");
       }
 
@@ -169,8 +169,7 @@ final ${baseName.dartClassName}Client client;
     }
   }
 
-  void _writeList(Directory dir, String base, List<TgType> list,
-      StringBuffer fBuffer, int level, List<String> importsE) {
+  void _writeList(Directory dir, String base, List<TgType> list, int level) {
     base = base.split('.').last;
 
     final buffer = StringBuffer();
@@ -179,21 +178,24 @@ final ${baseName.dartClassName}Client client;
 
     final imports = <String>[];
     final baseClassName = base.dartClassName;
-    if (list.length > 1 || (list.isNotEmpty && list[0].name != baseClassName)) {
-      final sameName = list.any((e) => e.name == base);
-      final name = sameName ? '${baseClassName}Base' : baseClassName;
-      buffer.write('''
+
+    final name = '${baseClassName}Base';
+    buffer.write('''
 sealed class $name extends $parent {
 const $name();
 }
 
 ''');
-      parent = name;
-    }
+    parent = name;
+    // }
+    final n = base.dartFileName;
+    final childDir = dir.childDirectory('${n}_e');
 
     for (var t in list) {
+      final buffer = StringBuffer();
       t.getAllImports(level, name, imports);
       buffer.write('''
+part of "../${n}_e.dart";
 /// ${t.hash}
 class ${t.name} extends $parent {
 const ${t.name}(${t.fields.argsCode});
@@ -218,25 +220,39 @@ ${t.fields.defineCode}
       ${t.fields.jsonCode}
     };
   }
+  
+  @override
+  List<Object?> get props => ${t.fields.propsCode};
 }
 ''');
+
+      final file = childDir.childFile('${t.nameHash.dartFileName}.dart');
+      file.createSync(recursive: true);
+      file.writeAsStringSync(buffer.toString());
     }
 
-    final n = base.dartFileName;
-
-    if (n == name.dartFileName) {
-      importsE.addAll(imports);
-      fBuffer.write(buffer);
-      return;
-    }
+    // if (n == name.dartFileName) {
+    //   importsE.addAll(imports);
+    //   fBuffer.write(buffer);
+    //   return;
+    // }
 
     final b = StringBuffer();
     final p = '../' * (level + 1);
     b.writeln("import '${p}base.dart';");
     b.writeAll(imports.toSet());
+
+    if (childDir.existsSync()) {
+      final list = childDir.listSync(recursive: false);
+      for (var item in list) {
+        if (item case File item) {
+          b.write('part "${childDir.basename}/${item.basename}";');
+        }
+      }
+    }
     b.write(buffer);
 
-    final file = dir.childFile('$n.dart');
+    final file = dir.childFile('${childDir.basename}.dart');
     file.createSync(recursive: true);
     file.writeAsStringSync(b.toString());
   }
@@ -284,7 +300,7 @@ ${t.fields.defineCode}
       if (file case File file) {
         final n = withoutExtension(file.basename);
 
-        if (n == name) {
+        if (n == name || n == '$name.e') {
           buffer.writeln('import "../${file.basename}" as \$e;');
           continue;
         }
