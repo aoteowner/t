@@ -37,6 +37,7 @@ void genExport(Directory src) {
     final current = parent.childFile('${basename(name)}.dart');
     current.createSync(recursive: true);
     final buf = StringBuffer();
+    buf.writeln('export "dart:typed_data";');
     for (var file in files) {
       final relativeName = relative(file, from: parent.path);
       buf.writeln('export "${relativeName.replaceAll('\\', '/')}";');

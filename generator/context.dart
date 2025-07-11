@@ -153,12 +153,8 @@ final ${baseName.dartClassName}Client client;
       temp.write('}');
 
       if (fnsMethod.isNotEmpty) {
-        final p2 = '../' * (level + 2);
-        final res = list.any((e) => e.endsWith('as \$e;'));
-        list.removeWhere((e) => e.endsWith("as \$e;"));
-        if (res) {
-          buffer.writeln("import '${p2}api.dart' as \$e;");
-        }
+        // final p2 = '../' * (level + 2);
+        // buffer.writeln("import '${p2}api.dart';");
         final p = '../' * (level + 1);
         buffer.writeln("import '${p}base.dart';");
       }
@@ -191,6 +187,7 @@ const $name();
 }
 
 ''');
+
     parent = name;
     // }
     final n = base.dartFileName;
@@ -199,9 +196,11 @@ const $name();
     for (var t in list) {
       final buffer = StringBuffer();
       t.getAllImports(level, name, imports);
+      imports.removeWhere((e) => e.isEmpty);
       if (t.hash != null) {
         buffer.write('''
 /// case 0x${t.hash} => ${t.className}.deserialize(reader),
+${imports.toSet().map((e) => '///#$e').join('\n')}
 ''');
       }
       buffer.write('''
@@ -249,27 +248,39 @@ ${t.fields.defineCode}
 
     final b = StringBuffer();
     final p = '../' * (level + 1);
-    final p2 = '../' * (level + 2);
-    final res = imports.any((e) => e.endsWith('as \$e;'));
-    imports.removeWhere((e) => e.endsWith("as \$e;"));
-    if (res) {
-      b.writeln("import '${p2}api.dart' as \$e;");
-    }
+    // final p2 = '../' * (level + 2);
+
+    // b.writeln("import '${p2}api.dart';");
 
     b.writeln("import '${p}base.dart';");
-    b.writeAll(imports.toSet());
 
+    final part = StringBuffer();
     if (childDir.existsSync()) {
       final list = childDir.listSync(recursive: false);
+      final reg = RegExp('///#(.*)');
       for (var item in list) {
         if (item case File item) {
-          b.write('part "${childDir.basename}/${item.basename}";');
+          part.write('part "${childDir.basename}/${item.basename}";');
+          final list = item.readAsLinesSync();
+          for (var i = 1; i < list.length; i++) {
+            final line = list[i];
+            final match = reg.allMatches(line).firstOrNull;
+            if (match != null) {
+              imports.add(match[1] ?? '');
+            } else {
+              break;
+            }
+          }
         }
       }
     }
-    b.write(buffer);
 
     final file = dir.childFile('${childDir.basename}.dart');
+    imports.removeWhere((e) => e.endsWith('"${file.basename}";'));
+    b.writeAll(imports.toSet());
+    b.write(part);
+    b.write(buffer);
+
     file.createSync(recursive: true);
     file.writeAsStringSync(b.toString());
   }
@@ -318,7 +329,7 @@ ${t.fields.defineCode}
         final n = withoutExtension(file.basename);
 
         if (n == name) {
-          buffer.writeln('import "../${file.basename}" as \$e;');
+          buffer.writeln('import "../${file.basename}";');
           continue;
         }
 

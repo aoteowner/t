@@ -145,7 +145,7 @@ class Constructor extends BaseType {
   final String? prefix;
   @override
   String get className {
-    final prefix = this.prefix ?? 'e';
+    if (prefix == null) return name;
     return '\$$prefix.$name';
   }
 
@@ -164,7 +164,7 @@ class Constructor extends BaseType {
       pre = '$filePrefix/';
     }
 
-    var asPre = 'as \$${filePrefix ?? 'e'}';
+    var asPre = filePrefix == null ? '' : 'as \$$filePrefix';
     if (level < 0) {
       level = 0;
     }
@@ -256,7 +256,7 @@ class TgType extends BaseType {
       pre = '$filePrefix/';
     }
 
-    var asPre = 'as \$${filePrefix ?? 'e'}';
+    var asPre = filePrefix == null ? '' : 'as \$$filePrefix';
 
     if (level < 0) {
       level = 0;
@@ -294,14 +294,22 @@ class TgType extends BaseType {
     // }
     // return "$className$useHash";
     // return '$className$useHash';
-    final prefix = filePrefix ?? 'e';
-    return '\$$prefix.$nameHashC';
+    if (filePrefix == null) {
+      return '${_className}Base';
+    }
+
+    return '\$$filePrefix.${_className}Base';
   }
 
   @override
   String get className {
-    final prefix = filePrefix ?? 'e';
-    return '\$$prefix.$nameHashC';
+    if (filePrefix == null) {
+      return nameHashC;
+    }
+
+    return '\$$filePrefix.$nameHashC';
+    // final prefix = filePrefix ?? 'e';
+    // return '\$$prefix.$nameHashC';
   }
 
   @override
