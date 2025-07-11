@@ -447,13 +447,10 @@ final $name = $has ? ${type.type?.readerCode(name)} : null;
       return '$code;';
     }
 
-
-
     if (type.type == trueType) {
       return '';
     }
     if (type.type?.isBool == true) {
-
       return '''
 if ($name case var $name? when $name) {
 $code;
@@ -549,6 +546,9 @@ ${fields.defineCode}
       ${fields.jsonCode}
     };
   }
+
+  @override
+  List<Object?> get props => ${fields.propsCode};
 }
 ''';
   }
@@ -761,5 +761,14 @@ extension ListFieldExt on List<Field> {
   String get argFnCode {
     if (isEmpty) return '';
     return '{${map((e) => e.argFnCode()).join()}}';
+  }
+
+  String get propsCode {
+    if (isEmpty) return '[]';
+    final buf = StringBuffer();
+    buf.write('[');
+    buf.write(map((e) => e.name).join(','));
+    buf.write(']');
+    return buf.toString();
   }
 }

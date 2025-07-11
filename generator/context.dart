@@ -102,7 +102,7 @@ class TgContext {
         buffer.writeln(
             'import "${name.dartFileName}/${name.dartFileName}.dart" as \$${name.dartMemberName};');
         clients.writeln(
-            'late final  ${name.dartMemberName} = \$${name.dartMemberName}.${name.dartClassName}Client(this);');
+            'late final  ${name.dartMemberName}Api = \$${name.dartMemberName}.${name.dartClassName}Client(this);');
       }
     }
 
@@ -218,6 +218,8 @@ ${t.fields.defineCode}
       ${t.fields.jsonCode}
     };
   }
+  @override
+  List<Object?> get props => ${t.fields.propsCode};
 }
 ''');
     }
