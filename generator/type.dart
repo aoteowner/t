@@ -194,14 +194,17 @@ class VectorObjectType extends BaseType {
 
   @override
   String get defineType {
+    if (isC) {
+      return 'List<${childType.className}UnHash>';
+    }
     return 'List<${childType.defineType}>';
   }
 
   @override
   String readerCode(String name) {
     if (isC) {
-      return '''reader.readVectorObjectFn<${childType.defineType}>((reader) {
-    return ${childType.className}.deserialize(reader);
+      return '''reader.readVectorObjectFn<${childType.className}UnHash>((reader) {
+    return ${childType.className}UnHash.deserialize(reader);
     }).items''';
     }
     return 'reader.readVectorObject<${childType.defineType}>().items';
@@ -371,8 +374,9 @@ class Field {
     return '$req ${type.defineType}$optinal $name$suf,';
   }
 
-  String defineCode() {
+  String defineCode({String prefix = ''}) {
     if (flags.isNotEmpty) {
+      if (prefix.isNotEmpty) return '';
       final map = <int, List<String>>{};
       for (var f in flags) {
         var v = f.$2.name;
@@ -410,7 +414,7 @@ $args
 
     final v = type.type?.defineCode(name, optional: optional) ?? '';
 
-    return '$v;';
+    return '$prefix$v;';
   }
 
   String toJsonCode() {
@@ -710,6 +714,15 @@ extension ListFieldExt on List<Field> {
     final buffer = StringBuffer();
     for (var field in this) {
       buffer.write(field.defineCode());
+    }
+
+    return buffer.toString();
+  }
+
+  String get absDefineCode {
+    final buffer = StringBuffer();
+    for (var field in this) {
+      buffer.write(field.defineCode(prefix: 'abstract '));
     }
 
     return buffer.toString();

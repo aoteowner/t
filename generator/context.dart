@@ -38,6 +38,10 @@ class TgContext {
     list.add(type);
     type.parents = list;
     context._all[type.name] = type;
+
+    if (type.hash == null) {
+      type.useHash = 'UnHash';
+    }
   }
 
   void addFn(String? filePrefix, TgFunction fn) {
@@ -153,7 +157,7 @@ final ${baseName.dartClassName}Client client;
       temp.write('}');
 
       if (fnsMethod.isNotEmpty) {
-        final p = '../' * (level +1);
+        final p = '../' * (level + 1);
         buffer.writeln("import '${p}base.dart';");
       }
 
@@ -182,9 +186,21 @@ final ${baseName.dartClassName}Client client;
     if (list.length > 1 || (list.isNotEmpty && list[0].name != baseClassName)) {
       final sameName = list.any((e) => e.name == base);
       final name = sameName ? '${baseClassName}Base' : baseClassName;
+
+      final hashList = list.where((e) => e.hash != null).toList();
+      final fields = <Field>[...?hashList.firstOrNull?.fields];
+      if (fields.isNotEmpty) {
+        for (var t in hashList) {
+          final current = t.fields;
+          fields.removeWhere((e) => current
+              .every((v) => v.name != e.name || v.type.name != e.type.name));
+        }
+      }
+
       buffer.write('''
 sealed class $name extends $parent {
 const $name();
+${fields.absDefineCode}
 }
 
 ''');
@@ -192,10 +208,12 @@ const $name();
     }
 
     for (var t in list) {
+      final parentName = t.hash == null ? 'TlConstructor' : parent;
+
       t.getAllImports(level, name, imports);
       buffer.write('''
 /// ${t.hash}
-class ${t.name} extends $parent {
+class ${t.name} extends $parentName {
 const ${t.name}(${t.fields.argsCode});
 ${t.fields.defineCode}
 
