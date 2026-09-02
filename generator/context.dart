@@ -176,19 +176,42 @@ final ${baseName.dartClassName}Client client;
     final buffer = StringBuffer();
 
     var parent = 'TlConstructor';
-
-    final imports = <String>[];
     final baseClassName = base.dartClassName;
 
-    final name = '${baseClassName}Base';
-    buffer.write('''
+    final imports = <String>[];
+    // final hashNamed = list.where((e) => e.hash != null).toList();
+
+    if (list.length > 1) {
+      final baseClassName = base.dartClassName;
+
+      final name = '${baseClassName}Base';
+      buffer.write('''
+typedef $baseClassName = $name;
+
 sealed class $name extends $parent {
 const $name();
 }
 
 ''');
+      parent = name;
+    } else {
+      // final first = list.first;
+      // final firstName = first.baseName;
+      buffer.write('''
+typedef $baseClassName = ${list.first.nameHashC};
+typedef ${baseClassName}Base = ${list.first.nameHashC};
+''');
+//       if (firstName != baseClassName) {
+//         buffer.write('''
+// typedef $firstName = ${list.first.nameHashC};
+// ''');
+//       }
+//       if (hashNamed.length < list.length) {
+//         buffer.write('''
+// ''');
+//       }
+    }
 
-    parent = name;
     // }
     final n = base.dartFileName;
     final childDir = dir.childDirectory('${n}_e');
@@ -197,7 +220,15 @@ const $name();
       final buffer = StringBuffer();
       t.getAllImports(level, name, imports);
       imports.removeWhere((e) => e.isEmpty);
+      var typeDef = '';
       if (t.hash != null) {
+        final write = list
+            .where((e) => !identical(e, t))
+            .every((e) => e.baseName != t.baseName);
+        if (baseClassName != t.baseName && write) {
+          typeDef = 'typedef ${t.baseName} = ${t.nameHashC};';
+        }
+
         buffer.write('''
 /// case 0x${t.hash} => ${t.className}.deserialize(reader),
 ${imports.toSet().map((e) => '///#$e').join('\n')}
@@ -205,6 +236,9 @@ ${imports.toSet().map((e) => '///#$e').join('\n')}
       }
       buffer.write('''
 part of "../${n}_e.dart";
+
+$typeDef
+
 /// ${t.hash}
 class ${t.nameHashC} extends $parent {
 const ${t.nameHashC}(${t.fields.argsCode});
@@ -333,19 +367,19 @@ ${t.fields.defineCode}
           continue;
         }
 
-        if (_children[n] case var v
-            when v == null ||
-                (v._all.isEmpty && v._fns.every((e) => e.hash == null))) {
-          continue;
-        }
+        // if (_children[n] case var v
+        //     when v == null ||
+        //         (v._all.isEmpty && v._fns.every((e) => e.hash == null))) {
+        //   continue;
+        // }
         buffer.writeln(
             'import "../${file.basename}" as \$${withoutExtension(file.basename)};');
       }
     }
 
-    final allFiles = dir.childDirectory('api').listSync(recursive: true);
+    final allFiles = dir.childDirectory(name).listSync(recursive: true);
     for (var file in allFiles) {
-      if (file case File file) {
+      if (file case File file when !file.basename.contains('DS_Store')) {
         final first = file.readAsLinesSync().firstOrNull ?? '';
         if (first.startsWith('/// case ')) {
           final casePat = first.replaceFirst('/// case ', '');
@@ -358,22 +392,18 @@ ${t.fields.defineCode}
 import "base/binary_reader.dart";
 import "base/core.dart";
 
-TlObject readTlObject(BinaryReader reader) {
-  final id = reader.readInt32();
-
-
+TlObject? readTlObject(int id, BinaryReader reader) {
   final value = switch(id) {
   vectorCtor => reader.readVectorObjectNoCtor(),
   $buf
   _ => null,
   };
 
-  if (value != null) return value;
-
-   throw Exception(
-      'id: \${id.toRadixString(16)}. This is a bug. Please report at https://github.com/telegramflutter/tg/issues.');
+  return value;
 }
 ''');
+//    throw Exception(
+//       'id: \${id.toRadixString(16)}. This is a bug. Please report at https://github.com/telegramflutter/tg/issues.');
 
     // /// method
     // return switch(id) {

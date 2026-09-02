@@ -16,7 +16,8 @@ void main() async {
       .childDirectory(join('td', 'td', 'generate', 'scheme'));
 
   final files = genFiles.map((e) => dir.childFile(e)).toList();
-  final context = TgContext('api');
+  // final context = TgContext('tg');
+  final contexts = <TgContext>[];
   for (var file in files) {
     final stringToBytes = file.basename == genFiles.first;
     if (!file.existsSync()) {
@@ -24,18 +25,26 @@ void main() async {
       return;
     }
     final lines = file.readAsLinesSync();
+    final context = TgContext(withoutExtension(file.basename));
+    contexts.add(context);
     parse(lines, context, stringToBytes);
   }
 
   // final temp =
   //     fs.currentDirectory.childDirectory(join('temp', 'test_tg_api')).childDirectory('lib');
-  final temp =
-      fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
+  final temp = fs.currentDirectory.parent
+      .childDirectory('tg_api2')
+      .childDirectory('lib');
+  temp.createSync(recursive: true);
   final src = temp.childDirectory('src');
-  context.write(src);
-  
+  for (var context in contexts) {
+    context.write(src);
+  }
+
   genExport(src);
-  context.writeReadTlObject(src);
+  for (var context in contexts) {
+    context.writeReadTlObject(src);
+  }
 
   Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
 }

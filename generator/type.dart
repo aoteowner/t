@@ -145,8 +145,8 @@ class Constructor extends BaseType {
   final String? prefix;
   @override
   String get className {
-    if (prefix == null) return name;
-    return '\$$prefix.$name';
+    // if (prefix == null) return name;
+    return '\$${prefix ?? 'e'}.$name';
   }
 
   @override
@@ -164,7 +164,7 @@ class Constructor extends BaseType {
       pre = '$filePrefix/';
     }
 
-    var asPre = filePrefix == null ? '' : 'as \$$filePrefix';
+    var asPre = filePrefix == null ? 'as \$e' : 'as \$$filePrefix';
     if (level < 0) {
       level = 0;
     }
@@ -177,7 +177,9 @@ class Constructor extends BaseType {
   String readerCode(String name) => 'reader.readObject() as $defineType';
 
   @override
-  String toJsonCode(String name, {String optional = ''}) => name;
+  String toJsonCode(String name, {String optional = ''}) {
+        return '$name$optional.toJson()';
+  }
 
   @override
   String writerCode(String name) => 'buffer.writeObject($name)';
@@ -202,8 +204,13 @@ class VectorObjectType extends BaseType {
     return 'List<${childType.defineType}>';
   }
 
+  // return ${childType.defineType}.deserialize(reader);
+
   @override
   String readerCode(String name) {
+    if (childType.defineType.endsWith('MessageBase')) {
+      return readerCode2(name);
+    }
     if (isC) {
       return '''reader.readVectorObjectFn<${childType.defineType}>((reader) {
     return ${childType.defineType}.deserialize(reader);
@@ -212,9 +219,18 @@ class VectorObjectType extends BaseType {
     return 'reader.readVectorObject<${childType.defineType}>().items';
   }
 
+  String readerCode2(String name) {
+    if (isC) {
+      return '''reader.readVectorObjectFn<${childType.defineType}>((reader) {
+    return \$e.MessageHash.deserialize(reader);
+    }).items''';
+    }
+    return 'reader.readVectorObject<${childType.defineType}>().items';
+  }
+
   @override
   String toJsonCode(String name, {String optional = ''}) {
-    if (childType case TgType()) {
+    if (childType case TgType() || Constructor()) {
       return '$name$optional.map((e) => e.toJson()).toList()';
     }
     return name;
@@ -256,7 +272,7 @@ class TgType extends BaseType {
       pre = '$filePrefix/';
     }
 
-    var asPre = filePrefix == null ? '' : 'as \$$filePrefix';
+    var asPre = filePrefix == null ? ' as \$e' : 'as \$$filePrefix';
 
     if (level < 0) {
       level = 0;
@@ -295,7 +311,7 @@ class TgType extends BaseType {
     // return "$className$useHash";
     // return '$className$useHash';
     if (filePrefix == null) {
-      return '${_className}Base';
+      return '\$e.${_className}Base';
     }
 
     return '\$$filePrefix.${_className}Base';
