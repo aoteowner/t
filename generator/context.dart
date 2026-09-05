@@ -130,7 +130,7 @@ $clients
 
       if (level == 0) {
         temp.write('''
-Future<Result<TlObject>> invoke(TlMethod method);
+Future<Result<TlObject>> invoke(TlMethod method, {int? position = 0});
 
 ''');
       } else if (hasClient) {
