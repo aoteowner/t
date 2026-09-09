@@ -32,9 +32,8 @@ void main() async {
 
   // final temp =
   //     fs.currentDirectory.childDirectory(join('temp', 'test_tg_api')).childDirectory('lib');
-  final temp = fs.currentDirectory.parent
-      .childDirectory('tg_api')
-      .childDirectory('lib');
+  final temp =
+      fs.currentDirectory.parent.childDirectory('tg_api').childDirectory('lib');
   temp.createSync(recursive: true);
   final src = temp.childDirectory('src');
   for (var context in contexts) {

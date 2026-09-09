@@ -254,7 +254,12 @@ ${t.fields.defineCode}
     buffer.writeInt32(0x${t.hash ?? '0'});
   ${t.fields.writeCode}
   }
-  
+
+  factory ${t.nameHashC}.fromJson(Map<String,dynamic> json) {
+  return ${t.nameHashC}(
+    ${t.fields.namedJson}
+  );
+  }
   @override
   Map<String, dynamic> toJson() {
     return {

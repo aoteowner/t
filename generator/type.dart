@@ -6,7 +6,9 @@ abstract class BaseType {
   String readerCode(String name);
   String writerCode(String name);
   String toJsonCode(String name, {String optional = ''});
-
+  String fromJsonCode(String name) {
+    return 'json["$name"]';
+  }
   String get className;
 
   String get defineType => className;
@@ -56,6 +58,14 @@ final class LabelType extends BaseType {
 
   @override
   String readerCode(String name) => 'reader.read$label()$suf';
+
+  @override
+  String fromJsonCode(String name) {
+    if (this  == dateTimeType) {
+      return 'json["$name"] is int ? DateTime.fromMillisecondsSinceEpoch(json["$name"]): DateTime.now()';
+    }
+    return 'json["$name"]';
+  }
 
   @override
   String toJsonCode(String name, {String optional = ''}) {
@@ -780,6 +790,18 @@ extension ListFieldExt on List<Field> {
       buffer.write(field.name);
       buffer.write(': ');
       buffer.write(field.name);
+      buffer.writeln(',');
+    }
+
+    return buffer.toString();
+  }
+  String get namedJson {
+    final buffer = StringBuffer();
+    for (var field in this) {
+      if (field.flags.isNotEmpty) continue;
+      buffer.write(field.name);
+      buffer.write(': ');
+      buffer.write(field.type.type?.fromJsonCode(field.name));
       buffer.writeln(',');
     }
 
