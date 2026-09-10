@@ -46,4 +46,5 @@ void main() async {
   }
 
   Process.runSync('dart', ['format', '.'], workingDirectory: temp.path);
+  Process.runSync('dart', ['fix', '--apply'], workingDirectory: temp.path);
 }
